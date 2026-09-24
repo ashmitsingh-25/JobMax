@@ -44,9 +44,14 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`=============================================`);
-  console.log(`🚀 JobMax Backend Server running on http://localhost:${PORT}`);
-  console.log(`🎯 AI Skill Gap Analyzer & Candidate Sourcing active`);
-  console.log(`=============================================`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`=============================================`);
+    console.log(`🚀 JobMax Backend Server running on http://localhost:${PORT}`);
+    console.log(`🎯 AI Skill Gap Analyzer & Candidate Sourcing active`);
+    console.log(`=============================================`);
+  });
+}
+
+export default app;
+

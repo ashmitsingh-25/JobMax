@@ -27,5 +27,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
-Thumbs.db
+# Vercel
+.vercel/
+
