@@ -1,0 +1,13 @@
+{
+  "name": "jobmax",
+  "version": "1.0.0",
+  "description": "JobMax - AI Skill-Gap Analyzer & Hiring Platform",
+  "scripts": {
+    "server": "node server/index.js",
+    "client": "npm.cmd --prefix client run dev",
+    "start": "node server/index.js"
+  },
+  "keywords": ["ai", "skill-gap", "hackerrank", "placements", "hiring", "sde"],
+  "author": "Antigravity Team",
+  "license": "ISC"
+}
