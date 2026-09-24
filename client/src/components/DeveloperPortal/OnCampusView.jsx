@@ -26,12 +26,23 @@ import { api } from '../../services/api';
 import confetti from 'canvas-confetti';
 import CompanyDetailModal from './CompanyDetailModal';
 
+const DEFAULT_COLLEGES = [
+  { id: "iit-delhi", name: "Indian Institute of Technology (IIT) Delhi", location: "New Delhi", tier: "Tier 1" },
+  { id: "bits-pilani", name: "BITS Pilani (Main Campus)", location: "Pilani, Rajasthan", tier: "Tier 1" },
+  { id: "nit-trichy", name: "National Institute of Technology (NIT) Trichy", location: "Tiruchirappalli, Tamil Nadu", tier: "Tier 1" },
+  { id: "dtu", name: "Delhi Technological University (DTU)", location: "New Delhi", tier: "Tier 1.5" },
+  { id: "vit-vellore", name: "Vellore Institute of Technology (VIT)", location: "Vellore, Tamil Nadu", tier: "Tier 2" },
+  { id: "iiit-hyderabad", name: "International Institute of Information Technology (IIIT-H)", location: "Hyderabad", tier: "Tier 1" },
+  { id: "rvce-bangalore", name: "RV College of Engineering (RVCE)", location: "Bengaluru, Karnataka", tier: "Tier 2" },
+  { id: "other", name: "All India / Custom College Pool", location: "National", tier: "General" }
+];
+
 export default function OnCampusView({
   currentUser,
   onOpenResumeModal,
   onOpenContributeModal
 }) {
-  const [colleges, setColleges] = useState([]);
+  const [colleges, setColleges] = useState(DEFAULT_COLLEGES);
   const [selectedCollegeId, setSelectedCollegeId] = useState(currentUser?.collegeId || 'iit-delhi');
   const [records, setRecords] = useState([]);
   const [isLoadingRecords, setIsLoadingRecords] = useState(true);
@@ -45,23 +56,32 @@ export default function OnCampusView({
 
   // 1. Fetch colleges
   useEffect(() => {
-    api.getColleges().then(res => {
-      if (res && res.colleges) {
-        setColleges(res.colleges);
-      }
-    });
+    let isMounted = true;
+    api.getColleges()
+      .then(res => {
+        if (isMounted && res && res.colleges && Array.isArray(res.colleges) && res.colleges.length > 0) {
+          setColleges(res.colleges);
+        }
+      })
+      .catch(err => console.warn("Failed fetching colleges, using defaults:", err));
+    return () => { isMounted = false; };
   }, []);
 
   // 2. Fetch placement records whenever college or search changes
   useEffect(() => {
+    let isMounted = true;
     setIsLoadingRecords(true);
     api.getPlacementRecords(selectedCollegeId, searchQuery)
       .then(res => {
-        if (res && res.records) {
+        if (isMounted && res && res.records) {
           setRecords(res.records);
         }
       })
-      .finally(() => setIsLoadingRecords(false));
+      .catch(err => console.warn("Failed fetching placement records:", err))
+      .finally(() => {
+        if (isMounted) setIsLoadingRecords(false);
+      });
+    return () => { isMounted = false; };
   }, [selectedCollegeId, searchQuery]);
 
   // 3. Trigger AI Placement Readiness Analyzer
@@ -97,7 +117,10 @@ export default function OnCampusView({
     }
   };
 
-  const selectedCollegeObj = colleges.find(c => c.id === selectedCollegeId) || colleges[0];
+  const selectedCollegeObj = (colleges && colleges.length > 0)
+    ? (colleges.find(c => c && c.id === selectedCollegeId) || colleges[0])
+    : DEFAULT_COLLEGES[0];
+
 
   return (
     <div className="space-y-8 animate-in fade-in">
@@ -393,7 +416,7 @@ export default function OnCampusView({
           <div>
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
               <Layers className="w-5 h-5 text-brand-green" />
-              {selectedCollegeObj.name} · Historical Placement Records
+              {selectedCollegeObj?.name || 'Campus'} · Historical Placement Records
             </h3>
             <p className="text-xs text-slate-400 font-mono mt-0.5">
               Verified campus hiring records and skill frequency demands
@@ -450,18 +473,19 @@ export default function OnCampusView({
 
                     <td className="py-3 px-4">
                       <div className="flex flex-wrap gap-1.5 max-w-sm">
-                        {rec.demandedSkills.map(sk => {
+                        {(rec.demandedSkills || []).map(sk => {
+                          const skName = typeof sk === 'string' ? sk : (sk?.name || '');
                           const isStudentHave = currentUser?.skills?.some(s => 
-                            s.toLowerCase() === sk.name.toLowerCase()
+                            s.toLowerCase() === skName.toLowerCase()
                           );
                           return (
                             <span 
-                              key={sk.name} 
+                              key={skName} 
                               className={isStudentHave ? "badge-matched text-[10px]" : "badge-code text-[10px]"}
-                              title={`Demanded in ${sk.frequency}% of interviews`}
+                              title={`Demanded in ${sk.frequency || 80}% of interviews`}
                             >
-                              {sk.name}
-                              <span className="text-[9px] opacity-70">({sk.frequency}%)</span>
+                              {skName}
+                              <span className="text-[9px] opacity-70">({sk.frequency || 80}%)</span>
                             </span>
                           );
                         })}
@@ -470,9 +494,9 @@ export default function OnCampusView({
 
                     <td className="py-3 px-4">
                       <div className="space-y-1">
-                        {rec.rounds.slice(0, 2).map((r, ri) => (
+                        {(rec.rounds || []).slice(0, 2).map((r, ri) => (
                           <div key={ri} className="text-[11px] text-slate-300 font-mono">
-                            <span className="text-brand-green">R{ri+1}:</span> {r.name}
+                            <span className="text-brand-green">R{ri+1}:</span> {typeof r === 'string' ? r : (r?.name || '')}
                           </div>
                         ))}
                       </div>

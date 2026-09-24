@@ -25,19 +25,22 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
   const missingList = [];
 
   demanded.forEach(sk => {
+    const skName = typeof sk === 'string' ? sk : (sk?.name || '');
     const isMatched = studentSkills.some(s => 
-      s === sk.name.toLowerCase() || s.includes(sk.name.toLowerCase()) || sk.name.toLowerCase().includes(s)
+      s === skName.toLowerCase() || s.includes(skName.toLowerCase()) || skName.toLowerCase().includes(s)
     );
+    const item = typeof sk === 'object' ? sk : { name: skName };
     if (isMatched) {
-      matchedList.push(sk);
+      matchedList.push(item);
     } else {
-      missingList.push(sk);
+      missingList.push(item);
     }
   });
 
   const matchPercentage = demanded.length > 0 
     ? Math.round((matchedList.length / demanded.length) * 100) 
     : 70;
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
@@ -96,9 +99,9 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {matchedList.length > 0 ? (
-                  matchedList.map(m => (
-                    <span key={m.name} className="badge-matched text-[11px]">
-                      ✓ {m.name}
+                  matchedList.map((m, idx) => (
+                    <span key={idx} className="badge-matched text-[11px]">
+                      ✓ {m?.name || m}
                     </span>
                   ))
                 ) : (
@@ -115,9 +118,9 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {missingList.length > 0 ? (
-                  missingList.map(m => (
-                    <span key={m.name} className="badge-missing text-[11px]">
-                      ✗ {m.name} ({m.frequency || 80}%)
+                  missingList.map((m, idx) => (
+                    <span key={idx} className="badge-missing text-[11px]">
+                      ✗ {m?.name || m} ({m?.frequency || 80}%)
                     </span>
                   ))
                 ) : (
@@ -144,8 +147,8 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
                     R{ri + 1}
                   </div>
                   <div>
-                    <h5 className="font-semibold text-white text-xs">{round.name}</h5>
-                    <p className="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">{round.description}</p>
+                    <h5 className="font-semibold text-white text-xs">{round?.name || (typeof round === 'string' ? round : `Round ${ri+1}`)}</h5>
+                    <p className="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">{round?.description || ''}</p>
                   </div>
                 </div>
               ))}
