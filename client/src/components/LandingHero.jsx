@@ -283,8 +283,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
                   <input
                     type="email"
-                    required
-                    placeholder={selectedRoleForAuth === 'developer' ? "student@iitd.ac.in" : "recruiter@microsoft.com"}
+                    placeholder={selectedRoleForAuth === 'developer' ? "student@iitd.ac.in (or click Demo below)" : "recruiter@microsoft.com"}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="input-hr w-full pl-9"
@@ -316,6 +315,18 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
+              {/* Dedicated 1-Click Instant Demo Login Button */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => onQuickLogin(selectedRoleForAuth === 'developer' ? 'user-fresher-1' : 'user-company-1')}
+                  className="w-full bg-dark-750 hover:bg-dark-700 border border-brand-green/60 hover:border-brand-green text-brand-green hover:text-white font-mono text-xs font-semibold py-2.5 rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm"
+                >
+                  <Zap className="w-4 h-4 text-brand-amber" />
+                  ⚡ 1-Click Instant Demo Login ({selectedRoleForAuth === 'developer' ? "Fresher Aarav" : "Recruiter Sarah"})
+                </button>
+              </div>
+
               <div className="flex items-center justify-between text-xs text-slate-400 pt-2 font-mono">
                 <button
                   type="button"
@@ -327,8 +338,9 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 <button
                   type="button"
                   onClick={() => onQuickLogin(selectedRoleForAuth === 'developer' ? 'user-fresher-1' : 'user-company-1')}
-                  className="text-brand-green hover:underline"
+                  className="text-brand-green hover:underline flex items-center gap-1"
                 >
+                  <Zap className="w-3 h-3 text-brand-amber" />
                   Instant Demo Login
                 </button>
               </div>

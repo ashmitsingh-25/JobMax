@@ -4,7 +4,7 @@ import LandingHero from './components/LandingHero';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
-import { api } from './services/api';
+import { api, FALLBACK_DEMO_USERS } from './services/api';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -18,10 +18,16 @@ export default function App() {
       if (res && res.success && res.user) {
         setCurrentUser(res.user);
         setCurrentPortal(res.user.role || 'developer');
+        return;
       }
     } catch (err) {
-      console.error("Login error:", err);
+      console.warn("API switchDemoUser warning, using client fallback:", err);
     }
+
+    // Instant local fallback
+    const fallbackUser = (FALLBACK_DEMO_USERS && FALLBACK_DEMO_USERS.find(u => u.id === userId)) || FALLBACK_DEMO_USERS[0];
+    setCurrentUser(fallbackUser);
+    setCurrentPortal(fallbackUser.role || 'developer');
   };
 
   // Custom role selection & registration from landing hero
