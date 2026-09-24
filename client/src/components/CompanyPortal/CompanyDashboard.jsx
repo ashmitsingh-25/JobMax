@@ -65,14 +65,15 @@ export default function CompanyDashboard({ currentUser }) {
     }
   }, [selectedRoleId, tierFilter]);
 
-  const selectedRole = roles.find(r => r.id === selectedRoleId) || roles[0];
+  const selectedRole = (roles && roles.find(r => r && r.id === selectedRoleId)) || (roles && roles[0]) || { title: 'Software Engineer', requiredSkills: [] };
 
-  const filteredCandidates = candidates.filter(c => {
+  const filteredCandidates = (candidates || []).filter(c => {
+    if (!c) return false;
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
-    return c.name.toLowerCase().includes(q) ||
-      c.college.toLowerCase().includes(q) ||
-      (c.skills || []).some(s => s.toLowerCase().includes(q));
+    return (c?.name && c.name.toLowerCase().includes(q)) ||
+      (c?.college && c.college.toLowerCase().includes(q)) ||
+      (c?.skills || []).some(s => s && s.toLowerCase().includes(q));
   });
 
   const handleRoleCreated = (newRole) => {
@@ -276,10 +277,10 @@ export default function CompanyDashboard({ currentUser }) {
                         <span className="font-mono text-xs font-bold text-slate-500 w-5">
                           #{idx + 1}
                         </span>
-                        <img src={cand.avatar} alt={cand.name} className="w-8 h-8 rounded-full object-cover border border-dark-600" />
+                        <img src={cand.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"} alt={cand?.name || "Candidate"} className="w-8 h-8 rounded-full object-cover border border-dark-600" />
                         <div>
-                          <p className="font-bold text-white text-sm">{cand.name}</p>
-                          <p className="text-[10px] text-slate-400 font-mono truncate max-w-[160px]">{cand.email}</p>
+                          <p className="font-bold text-white text-sm">{cand?.name || "Candidate"}</p>
+                          <p className="text-[10px] text-slate-400 font-mono truncate max-w-[160px]">{cand?.email || ""}</p>
                         </div>
                       </div>
                     </td>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, Users, Building2, ChevronDown, Sparkles, LogOut, CheckCircle, Code, Briefcase, GraduationCap } from 'lucide-react';
-import { api } from '../services/api';
+import { api, FALLBACK_DEMO_USERS } from '../services/api';
 
 export default function Navbar({
   currentUser,
@@ -10,16 +10,21 @@ export default function Navbar({
   onLogout,
   onOpenOnboarding
 }) {
-  const [demoUsers, setDemoUsers] = useState([]);
+  const [demoUsers, setDemoUsers] = useState(FALLBACK_DEMO_USERS);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   useEffect(() => {
-    api.getDemoUsers().then(res => {
-      if (res && res.users) {
-        setDemoUsers(res.users);
-      }
-    }).catch(err => console.error("Error loading demo users:", err));
+    let isMounted = true;
+    api.getDemoUsers()
+      .then(res => {
+        if (isMounted && res && res.users && Array.isArray(res.users) && res.users.length > 0) {
+          setDemoUsers(res.users);
+        }
+      })
+      .catch(err => console.warn("Error loading demo users:", err));
+    return () => { isMounted = false; };
   }, []);
+
 
   return (
     <header className="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-dark-700/80">
@@ -114,14 +119,14 @@ export default function Navbar({
                     className="flex items-center gap-2 bg-dark-800 hover:bg-dark-750 border border-dark-700 hover:border-dark-600 px-3 py-1.5 rounded-lg text-xs transition-all"
                   >
                     <img
-                      src={currentUser.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
-                      alt={currentUser.name}
+                      src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
+                      alt={currentUser?.name || "User"}
                       className="w-6 h-6 rounded-full object-cover border border-brand-green/40"
                     />
                     <div className="text-left hidden sm:block">
-                      <p className="font-medium text-slate-200 leading-none">{currentUser.name}</p>
+                      <p className="font-medium text-slate-200 leading-none">{currentUser?.name || "User"}</p>
                       <p className="text-[10px] text-slate-400 font-mono mt-0.5 capitalize">
-                        {currentUser.role === 'company' ? (currentUser.companyName || 'Recruiter') : currentUser.role}
+                        {currentUser?.role === 'company' ? (currentUser?.companyName || 'Recruiter') : (currentUser?.role || 'Developer')}
                       </p>
                     </div>
                     <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -138,34 +143,38 @@ export default function Navbar({
                       </div>
 
                       <div className="space-y-1 max-h-60 overflow-y-auto">
-                        {demoUsers.map(user => (
-                          <button
-                            key={user.id}
-                            onClick={() => {
-                              onSwitchUser(user);
-                              setShowUserDropdown(false);
-                            }}
-                            className={`w-full flex items-center justify-between p-2 rounded-lg text-xs text-left transition-colors ${
-                              currentUser.id === user.id
-                                ? 'bg-dark-700 text-brand-green border border-brand-green/20'
-                                : 'text-slate-300 hover:bg-dark-750'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2.5">
-                              <img src={user.avatar} alt={user.name} className="w-6 h-6 rounded-full object-cover" />
-                              <div>
-                                <p className="font-medium text-slate-100">{user.name}</p>
-                                <p className="text-[10px] text-slate-400 font-mono">
-                                  {user.role === 'company' ? `${user.companyName} Recruiter` : `${user.track} (${user.subTrack || user.currentRole || 'Dev'})`}
-                                </p>
+                        {(demoUsers || []).map(user => {
+                          if (!user) return null;
+                          return (
+                            <button
+                              key={user.id || Math.random()}
+                              onClick={() => {
+                                onSwitchUser(user);
+                                setShowUserDropdown(false);
+                              }}
+                              className={`w-full flex items-center justify-between p-2 rounded-lg text-xs text-left transition-colors ${
+                                currentUser?.id === user.id
+                                  ? 'bg-dark-700 text-brand-green border border-brand-green/20'
+                                  : 'text-slate-300 hover:bg-dark-750'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <img src={user.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"} alt={user.name || "User"} className="w-6 h-6 rounded-full object-cover" />
+                                <div>
+                                  <p className="font-medium text-slate-100">{user.name || "User"}</p>
+                                  <p className="text-[10px] text-slate-400 font-mono">
+                                    {user.role === 'company' ? `${user.companyName || 'Company'} Recruiter` : `${user.track || 'Fresher'} (${user.subTrack || user.currentRole || 'Dev'})`}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                            {currentUser.id === user.id && (
-                              <CheckCircle className="w-4 h-4 text-brand-green" />
-                            )}
-                          </button>
-                        ))}
+                              {currentUser?.id === user.id && (
+                                <CheckCircle className="w-4 h-4 text-brand-green" />
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
+
 
                       <div className="border-t border-dark-700/80 mt-2 pt-1">
                         <button

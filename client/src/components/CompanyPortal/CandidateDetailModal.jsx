@@ -45,22 +45,22 @@ export default function CandidateDetailModal({ isOpen, onClose, candidate, roleT
         <div className="flex items-start justify-between pb-4 mb-5 border-b border-dark-700">
           <div className="flex items-center gap-4">
             <img
-              src={candidate.avatar}
-              alt={candidate.name}
+              src={candidate?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
+              alt={candidate?.name || "Candidate"}
               className="w-14 h-14 rounded-full object-cover border-2 border-brand-cyan"
             />
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-xl text-white">{candidate.name}</h3>
+                <h3 className="font-bold text-xl text-white">{candidate?.name || "Candidate"}</h3>
                 <span className="text-xs font-mono bg-dark-700 text-brand-green px-2 py-0.5 rounded border border-brand-green/30">
-                  {candidate.fitScore}% Fit Score
+                  {candidate?.fitScore || 85}% Fit Score
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-mono mt-0.5">{candidate.headline}</p>
+              <p className="text-xs text-slate-300 font-mono mt-0.5">{candidate?.headline || ""}</p>
               <div className="flex items-center gap-3 text-[11px] text-slate-400 font-mono mt-1">
-                <span>{candidate.college}</span>
+                <span>{candidate?.college || "Engineering"}</span>
                 <span>•</span>
-                <span>{candidate.cgpa ? `${candidate.cgpa} CGPA` : `${candidate.yearsOfExperience} YoE`}</span>
+                <span>{candidate?.cgpa ? `${candidate.cgpa} CGPA` : `${candidate?.yearsOfExperience || 2} YoE`}</span>
               </div>
             </div>
           </div>

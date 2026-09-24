@@ -140,9 +140,9 @@ export default function OnCampusView({
               onChange={(e) => setSelectedCollegeId(e.target.value)}
               className="bg-transparent font-bold text-white text-base sm:text-lg focus:outline-none cursor-pointer hover:text-brand-green transition-colors"
             >
-              {colleges.map(col => (
-                <option key={col.id} value={col.id} className="bg-dark-850 text-slate-100 font-sans">
-                  {col.name} ({col.tier})
+              {(colleges || []).map(col => (
+                <option key={col?.id || Math.random()} value={col?.id} className="bg-dark-850 text-slate-100 font-sans">
+                  {col?.name || col?.id} ({col?.tier || 'General'})
                 </option>
               ))}
             </select>
@@ -224,18 +224,22 @@ export default function OnCampusView({
           </div>
 
           {/* Missing Skills Warning Bar */}
-          {analysisReport.topGapsToClose.length > 0 && (
+          {analysisReport?.topGapsToClose && analysisReport.topGapsToClose.length > 0 && (
             <div className="mt-5 pt-4 border-t border-dark-700/80 flex flex-wrap items-center gap-2">
               <span className="text-xs font-mono text-rose-400 flex items-center gap-1">
                 <AlertTriangle className="w-3.5 h-3.5" />
                 Critical Priority Gaps to Close:
               </span>
-              {analysisReport.topGapsToClose.map(gap => (
-                <span key={gap.name} className="badge-missing text-xs">
-                  <XCircle className="w-3 h-3" />
-                  {gap.name} ({gap.marketDemandFrequency}% campus demand)
-                </span>
-              ))}
+              {analysisReport.topGapsToClose.map((gap, gIdx) => {
+                const gName = typeof gap === 'string' ? gap : (gap?.name || `Gap ${gIdx + 1}`);
+                const gFreq = typeof gap === 'object' && gap?.marketDemandFrequency ? gap.marketDemandFrequency : 85;
+                return (
+                  <span key={gIdx} className="badge-missing text-xs">
+                    <XCircle className="w-3 h-3" />
+                    {gName} ({gFreq}% campus demand)
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>
@@ -318,22 +322,26 @@ export default function OnCampusView({
               </div>
 
               {/* Curated Resources */}
-              {planBlock.suggestedResources && (
+              {planBlock?.suggestedResources && Array.isArray(planBlock.suggestedResources) && (
                 <div className="pt-2 flex flex-wrap items-center gap-2">
                   <span className="text-[11px] font-mono text-slate-400">Curated Prep Sheets:</span>
-                  {planBlock.suggestedResources.map(res => (
-                    <a
-                      key={res.name}
-                      href={res.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-xs font-mono bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
-                    >
-                      <BookOpen className="w-3 h-3" />
-                      {res.name}
-                      <ExternalLink className="w-2.5 h-2.5" />
-                    </a>
-                  ))}
+                  {planBlock.suggestedResources.map((res, rIdx) => {
+                    const rName = typeof res === 'string' ? res : (res?.name || `Resource ${rIdx + 1}`);
+                    const rUrl = typeof res === 'object' && res?.url ? res.url : 'https://takeuforward.org';
+                    return (
+                      <a
+                        key={rIdx}
+                        href={rUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
+                      >
+                        <BookOpen className="w-3 h-3" />
+                        {rName}
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -357,14 +365,14 @@ export default function OnCampusView({
           <div className="space-y-3">
             {analysisReport?.companyFitBreakdown?.map(comp => (
               <div
-                key={comp.companyId}
+                key={comp.companyId || Math.random()}
                 onClick={() => setSelectedCompanyDetail(comp)}
                 className="card-hr-interactive p-4 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
-                      <img src={comp.companyLogo} alt={comp.company} className="w-7 h-7 rounded-md object-cover border border-dark-600" />
+                      <img src={comp.companyLogo} alt={comp.company || 'Company'} className="w-7 h-7 rounded-md object-cover border border-dark-600" />
                       <div>
                         <h4 className="font-bold text-white text-sm">{comp.company}</h4>
                         <p className="text-[11px] text-slate-400 font-mono">{comp.role}</p>
@@ -390,11 +398,14 @@ export default function OnCampusView({
                   {/* Missing tags preview */}
                   {comp.missingSkills && comp.missingSkills.length > 0 && (
                     <div className="flex flex-wrap gap-1">
-                      {comp.missingSkills.slice(0, 2).map(ms => (
-                        <span key={ms.name} className="badge-missing text-[10px]">
-                          -{ms.name}
-                        </span>
-                      ))}
+                      {comp.missingSkills.slice(0, 2).map((ms, msIdx) => {
+                        const msName = typeof ms === 'string' ? ms : (ms?.name || '');
+                        return (
+                          <span key={msIdx} className="badge-missing text-[10px]">
+                            -{msName}
+                          </span>
+                        );
+                      })}
                       {comp.missingSkills.length > 2 && (
                         <span className="text-[10px] text-slate-500 font-mono self-center">
                           +{comp.missingSkills.length - 2} more

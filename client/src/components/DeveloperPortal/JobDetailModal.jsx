@@ -28,19 +28,22 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
   const missing = [];
 
   required.forEach(sk => {
+    const skName = typeof sk === 'string' ? sk : (sk?.name || '');
     const isMatched = studentSkills.some(s => 
-      s === sk.name.toLowerCase() || s.includes(sk.name.toLowerCase()) || sk.name.toLowerCase().includes(s)
+      s === skName.toLowerCase() || s.includes(skName.toLowerCase()) || skName.toLowerCase().includes(s)
     );
+    const item = typeof sk === 'object' ? sk : { name: skName };
     if (isMatched) {
-      matched.push(sk);
+      matched.push(item);
     } else {
-      missing.push(sk);
+      missing.push(item);
     }
   });
 
   const fitPercent = required.length > 0 
     ? Math.round((matched.length / required.length) * 100) 
     : 75;
+
 
   const handleApply = () => {
     setApplied(true);
@@ -128,11 +131,18 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
                 Verified Matching Skills:
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {matched.map(m => (
-                  <span key={m.name} className="badge-matched text-[11px]">
-                    ✓ {m.name}
-                  </span>
-                ))}
+                {matched.length > 0 ? (
+                  matched.map((m, idx) => {
+                    const mName = typeof m === 'string' ? m : (m?.name || '');
+                    return (
+                      <span key={idx} className="badge-matched text-[11px]">
+                        ✓ {mName}
+                      </span>
+                    );
+                  })
+                ) : (
+                  <span className="text-xs text-slate-500 font-mono">No direct matches</span>
+                )}
               </div>
             </div>
 
@@ -143,11 +153,14 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {missing.length > 0 ? (
-                  missing.map(m => (
-                    <span key={m.name} className="badge-missing text-[11px]">
-                      ✗ {m.name}
-                    </span>
-                  ))
+                  missing.map((m, idx) => {
+                    const mName = typeof m === 'string' ? m : (m?.name || '');
+                    return (
+                      <span key={idx} className="badge-missing text-[11px]">
+                        ✗ {mName}
+                      </span>
+                    );
+                  })
                 ) : (
                   <span className="text-xs text-emerald-400 font-mono">100% Core Skill Fit!</span>
                 )}

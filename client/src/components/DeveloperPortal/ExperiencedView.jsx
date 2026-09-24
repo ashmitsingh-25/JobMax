@@ -120,27 +120,30 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
           </p>
 
           <div className="space-y-3">
-            {growthReport?.skillsToAcquire?.map(skill => (
-              <div key={skill.name} className="card-hr space-y-2 border-l-4 border-l-brand-green">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-white text-sm flex items-center gap-2">
-                    <Rocket className="w-4 h-4 text-brand-green" />
-                    {skill.name}
-                  </h4>
-                  <span className="badge-matched text-[11px]">
-                    {skill.salaryImpact}
-                  </span>
+            {(growthReport?.skillsToAcquire || growthReport?.tierUnlockingSkills || []).map((skill, sIdx) => {
+              const sName = typeof skill === 'string' ? skill : (skill?.name || `Skill ${sIdx + 1}`);
+              return (
+                <div key={sIdx} className="card-hr space-y-2 border-l-4 border-l-brand-green">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-white text-sm flex items-center gap-2">
+                      <Rocket className="w-4 h-4 text-brand-green" />
+                      {sName}
+                    </h4>
+                    <span className="badge-matched text-[11px]">
+                      {skill?.salaryImpact || skill?.tierImpact || '+₹8 LPA'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {skill?.description || 'High-leverage competency unlocking senior-level compensation.'}
+                  </p>
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 pt-1">
+                    <span>Domain: {skill?.category || 'Architecture'}</span>
+                    <span>•</span>
+                    <span>Target Mastery: {skill?.difficulty || 'Advanced'}</span>
+                  </div>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {skill.description}
-                </p>
-                <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 pt-1">
-                  <span>Domain: {skill.category}</span>
-                  <span>•</span>
-                  <span>Target Mastery: {skill.difficulty}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

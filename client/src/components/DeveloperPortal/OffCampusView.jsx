@@ -54,8 +54,9 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
   }, [currentUser?.skills]);
 
   const filteredJobs = jobs.filter(j => 
-    selectedDomain === 'all' || j.domain.toLowerCase().includes(selectedDomain.toLowerCase())
+    selectedDomain === 'all' || (j?.domain && j.domain.toLowerCase().includes(selectedDomain.toLowerCase()))
   );
+
 
   return (
     <div className="space-y-8 animate-in fade-in">
@@ -119,12 +120,16 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
                 Highest ROI Skills in 2026 Tech Market:
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {analysisReport.topGapsToClose.map(gap => (
-                  <span key={gap.name} className="badge-missing text-[11px]">
-                    <XCircle className="w-3 h-3" />
-                    {gap.name} ({gap.marketDemandFrequency}% demand)
-                  </span>
-                ))}
+                {(analysisReport?.topGapsToClose || analysisReport?.criticalMarketGaps || []).map((gap, gIdx) => {
+                  const gName = typeof gap === 'string' ? gap : (gap?.name || `Gap ${gIdx + 1}`);
+                  const gFreq = typeof gap === 'object' && gap?.marketDemandFrequency ? gap.marketDemandFrequency : 80;
+                  return (
+                    <span key={gIdx} className="badge-missing text-[11px]">
+                      <XCircle className="w-3 h-3" />
+                      {gName} ({gFreq}% demand)
+                    </span>
+                  );
+                })}
               </div>
             </div>
 
@@ -216,23 +221,25 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
             </p>
 
             <div className="space-y-3 pt-2">
-              {marketDemand.slice(0, 8).map(item => {
+              {(marketDemand || []).slice(0, 8).map((item, idx) => {
+                const itemName = typeof item === 'string' ? item : (item?.name || `Skill ${idx + 1}`);
+                const itemFreq = typeof item === 'object' ? (item?.demandFrequency || item?.frequency || 75) : 75;
                 const isStudentHave = currentUser?.skills?.some(s => 
-                  s.toLowerCase() === item.name.toLowerCase()
+                  s && s.toLowerCase() === itemName.toLowerCase()
                 );
                 return (
-                  <div key={item.name} className="space-y-1">
+                  <div key={idx} className="space-y-1">
                     <div className="flex items-center justify-between text-xs font-mono">
                       <span className={isStudentHave ? "text-brand-green font-semibold flex items-center gap-1" : "text-slate-300"}>
                         {isStudentHave && "✓ "}
-                        {item.name}
+                        {itemName}
                       </span>
-                      <span className="text-slate-400">{item.demandFrequency}%</span>
+                      <span className="text-slate-400">{itemFreq}%</span>
                     </div>
                     <div className="w-full h-1.5 bg-dark-700 rounded-full overflow-hidden">
                       <div 
                         className={`h-full rounded-full ${isStudentHave ? 'bg-brand-green' : 'bg-brand-purple'}`}
-                        style={{ width: `${item.demandFrequency}%` }}
+                        style={{ width: `${itemFreq}%` }}
                       ></div>
                     </div>
                   </div>
@@ -296,11 +303,12 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
 
                 <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-dark-700/80">
                   <div className="flex flex-wrap gap-1.5">
-                    {job.requiredSkills.map(sk => {
-                      const isMatched = currentUser?.skills?.some(s => s.toLowerCase() === sk.name.toLowerCase());
+                    {(job?.requiredSkills || []).map((sk, skIdx) => {
+                      const skName = typeof sk === 'string' ? sk : (sk?.name || `Skill ${skIdx + 1}`);
+                      const isMatched = currentUser?.skills?.some(s => s && s.toLowerCase() === skName.toLowerCase());
                       return (
-                        <span key={sk.name} className={isMatched ? "badge-matched text-[10px]" : "badge-code text-[10px]"}>
-                          {sk.name}
+                        <span key={skIdx} className={isMatched ? "badge-matched text-[10px]" : "badge-code text-[10px]"}>
+                          {skName}
                         </span>
                       );
                     })}
