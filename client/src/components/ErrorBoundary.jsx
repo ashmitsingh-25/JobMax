@@ -29,19 +29,19 @@ export class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4 font-sans">
-          <div className="bg-white border-2 border-rose-500/40 rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-5">
+        <div className="min-h-screen bg-dark-900 text-slate-100 flex items-center justify-center p-4 font-sans">
+          <div className="bg-dark-800 border-2 border-rose-500/40 rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-5">
             <div className="flex items-center gap-3 text-rose-400">
               <div className="w-10 h-10 rounded-xl bg-rose-950/60 border border-rose-500/40 flex items-center justify-center">
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white">Application Exception Caught</h3>
-                <p className="text-xs text-slate-600 font-mono">JobMax Self-Healing Diagnostic</p>
+                <p className="text-xs text-slate-400 font-mono">JobMax Self-Healing Diagnostic</p>
               </div>
             </div>
 
-            <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono text-rose-300 overflow-x-auto">
+            <div className="p-3.5 bg-dark-900 rounded-xl border border-dark-700 text-xs font-mono text-rose-300 overflow-x-auto">
               {this.state.error?.toString() || "Unknown rendering exception"}
             </div>
 
