@@ -240,7 +240,7 @@ export const FALLBACK_ONCAMPUS_REPORT = {
       cgpaCutoff: 8.0,
       fitPercentage: 82,
       tierLabel: "Strong Fit",
-      tierColor: "text-brand-green",
+      tierColor: "text-black",
       matchedSkills: [{ name: "Data Structures & Algorithms" }, { name: "Java" }, { name: "Operating Systems" }],
       missingSkills: [{ name: "Dynamic Programming", frequency: 92 }]
     },

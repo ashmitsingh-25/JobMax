@@ -42,40 +42,40 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-dark-800 border border-dark-600 w-full max-w-xl rounded-2xl p-6 sm:p-7 shadow-2xl relative">
+      <div className="bg-white border border-slate-300 w-full max-w-xl rounded-2xl p-6 sm:p-7 shadow-2xl relative">
         
-        <div className="flex items-center justify-between pb-4 mb-5 border-b border-dark-700">
+        <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brand-green/10 text-brand-green border border-brand-green/30 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-black/10 text-black border border-black/30 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Contribute Campus Placement Record</h3>
-              <p className="text-xs text-slate-400 font-mono">Crowdsourced & Placement Cell verified data</p>
+              <p className="text-xs text-slate-600 font-mono">Crowdsourced & Placement Cell verified data</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-600 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-mono text-slate-400 mb-1.5">Target College / Campus</label>
+            <label className="block text-xs font-mono text-slate-600 mb-1.5">Target College / Campus</label>
             <select
               value={collegeId}
               onChange={(e) => setCollegeId(e.target.value)}
               className="input-hr w-full font-sans"
             >
               {colleges.map(c => (
-                <option key={c.id} value={c.id} className="bg-dark-800">{c.name} ({c.tier})</option>
+                <option key={c.id} value={c.id} className="bg-white">{c.name} ({c.tier})</option>
               ))}
             </select>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Recruiter / Company Name</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Recruiter / Company Name</label>
               <input
                 type="text"
                 required
@@ -86,7 +86,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Role Offered</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Role Offered</label>
               <input
                 type="text"
                 required
@@ -100,7 +100,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CTC Band</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">CTC Band</label>
               <input
                 type="text"
                 placeholder="e.g. ₹28 - 42 LPA"
@@ -110,7 +110,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CGPA Cutoff</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">CGPA Cutoff</label>
               <input
                 type="number"
                 step="0.1"
@@ -121,7 +121,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Offers Made</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Offers Made</label>
               <input
                 type="number"
                 placeholder="15"
@@ -133,7 +133,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-slate-400 mb-1.5">Skills Demanded (Comma separated)</label>
+            <label className="block text-xs font-mono text-slate-600 mb-1.5">Skills Demanded (Comma separated)</label>
             <textarea
               rows={3}
               placeholder="e.g. Data Structures & Algorithms, Java, System Design Fundamentals, Dynamic Programming, SQL Query Optimization"
@@ -143,7 +143,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-3 border-t border-dark-700">
+          <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
             <button
               type="button"
               onClick={onClose}

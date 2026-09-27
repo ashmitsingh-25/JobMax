@@ -45,19 +45,19 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-dark-800 border border-dark-600 w-full max-w-xl rounded-2xl p-6 sm:p-7 shadow-2xl relative">
+      <div className="bg-white border border-slate-300 w-full max-w-xl rounded-2xl p-6 sm:p-7 shadow-2xl relative">
         
-        <div className="flex items-center justify-between pb-4 mb-5 border-b border-dark-700">
+        <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-blue-600/10 text-blue-600 border border-blue-600/30 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Create Open Role & Calibration Profile</h3>
-              <p className="text-xs text-slate-400 font-mono">Input skill requirements to analyze candidate talent pool</p>
+              <p className="text-xs text-slate-600 font-mono">Input skill requirements to analyze candidate talent pool</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-600 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -65,7 +65,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Job Title</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Job Title</label>
               <input
                 type="text"
                 required
@@ -76,7 +76,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Location</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Location</label>
               <input
                 type="text"
                 value={location}
@@ -88,7 +88,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CTC Band</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">CTC Band</label>
               <input
                 type="text"
                 value={ctcBand}
@@ -97,7 +97,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Experience</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Experience</label>
               <input
                 type="text"
                 value={experienceLevel}
@@ -106,7 +106,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Min CGPA</label>
+              <label className="block text-xs font-mono text-slate-600 mb-1.5">Min CGPA</label>
               <input
                 type="number"
                 step="0.1"
@@ -118,7 +118,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-brand-green mb-1.5">Mandatory Core Skills (Weighted 60%)</label>
+            <label className="block text-xs font-mono text-black mb-1.5">Mandatory Core Skills (Weighted 60%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Data Structures & Algorithms, Java, System Design Fundamentals, SQL Query Optimization"
@@ -129,7 +129,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-brand-cyan mb-1.5">Good-to-Have Skills (Weighted 20%)</label>
+            <label className="block text-xs font-mono text-blue-600 mb-1.5">Good-to-Have Skills (Weighted 20%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Docker & Containerization, Kubernetes, Kafka, Redis"
@@ -139,7 +139,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-3 border-t border-dark-700">
+          <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
             <button
               type="button"
               onClick={onClose}

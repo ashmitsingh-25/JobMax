@@ -59,23 +59,23 @@ export default function DeveloperDashboard({
     <div className="space-y-8 animate-in fade-in">
       
       {/* Top Track & Profile Bar */}
-      <div className="bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark">
+      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
           <div className="flex items-center gap-4">
             <img
               src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"}
               alt={currentUser?.name}
-              className="w-12 h-12 rounded-xl object-cover border-2 border-brand-green shadow-glow-green"
+              className="w-12 h-12 rounded-xl object-cover border-2 border-black shadow-sm"
             />
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-white">{currentUser?.name}</h2>
-                <span className="font-mono text-xs bg-dark-700 text-brand-green border border-brand-green/30 px-2 py-0.5 rounded">
+                <span className="font-mono text-xs bg-slate-100 text-black border border-black/30 px-2 py-0.5 rounded">
                   {currentUser?.track === 'fresher' ? 'Fresher Candidate' : 'Experienced Engineer'}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-mono mt-0.5">
+              <p className="text-xs text-slate-700 font-mono mt-0.5">
                 {currentUser?.college || currentUser?.currentCompany || "Developer Profile"} 
                 {currentUser?.cgpa ? ` • ${currentUser.cgpa} CGPA` : (currentUser?.yearsOfExperience ? ` • ${currentUser.yearsOfExperience} YoE` : "")}
               </p>
@@ -84,13 +84,13 @@ export default function DeveloperDashboard({
 
           {/* Sub-Track Switcher (for Freshers: On-Campus vs Off-Campus) */}
           {isFresher ? (
-            <div className="flex items-center bg-dark-850 p-1.5 rounded-xl border border-dark-700 w-full lg:w-auto">
+            <div className="flex items-center bg-white p-1.5 rounded-xl border border-slate-200 w-full lg:w-auto">
               <button
                 onClick={() => setActiveSubTrack('on-campus')}
                 className={`flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all ${
                   activeSubTrack === 'on-campus'
-                    ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-glow-green'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-slate-100 text-black border border-black/30 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-800'
                 }`}
               >
                 <School className="w-3.5 h-3.5" />
@@ -101,8 +101,8 @@ export default function DeveloperDashboard({
                 onClick={() => setActiveSubTrack('off-campus')}
                 className={`flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all ${
                   activeSubTrack === 'off-campus'
-                    ? 'bg-dark-700 text-brand-cyan border border-brand-cyan/30 shadow-glow-blue'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-slate-100 text-blue-600 border border-blue-600/30 shadow-md'
+                    : 'text-slate-600 hover:text-slate-800'
                 }`}
               >
                 <Globe className="w-3.5 h-3.5" />
@@ -110,7 +110,7 @@ export default function DeveloperDashboard({
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-xs font-mono bg-dark-850 border border-brand-purple/40 px-3.5 py-2 rounded-lg text-brand-purple">
+            <div className="flex items-center gap-2 text-xs font-mono bg-white border border-brand-purple/40 px-3.5 py-2 rounded-lg text-brand-purple">
               <TrendingUp className="w-4 h-4" />
               <span>Experienced Career Growth & Promotion Engine Active</span>
             </div>
@@ -119,13 +119,13 @@ export default function DeveloperDashboard({
         </div>
 
         {/* Live Interactive Skills Tag Cloud & Radar Grid */}
-        <div className="mt-5 pt-4 border-t border-dark-700/80 grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="mt-5 pt-4 border-t border-slate-200/80 grid grid-cols-1 lg:grid-cols-3 gap-5">
           
           {/* Left 2 Cols: Interactive Skills Cloud */}
           <div className="lg:col-span-2 space-y-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-1">
-              <p className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5 text-brand-green" />
+              <p className="text-xs font-mono text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
+                <Code className="w-3.5 h-3.5 text-black" />
                 Your Verified Skill Profile ({currentUser?.skills?.length || 0}):
               </p>
 
@@ -143,10 +143,10 @@ export default function DeveloperDashboard({
               </form>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto p-3 bg-dark-850 rounded-xl border border-dark-700/80">
+            <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto p-3 bg-white rounded-xl border border-slate-200/80">
               {currentUser?.skills?.map(skill => (
                 <span key={skill} className="badge-matched text-xs group">
-                  <CheckCircle2 className="w-3 h-3 text-brand-green" />
+                  <CheckCircle2 className="w-3 h-3 text-black" />
                   {skill}
                   <button
                     type="button"

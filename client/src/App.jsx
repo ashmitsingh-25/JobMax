@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import LandingHero from './components/LandingHero';
+import LoginPage from './components/LoginPage';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
@@ -30,18 +30,18 @@ export default function App() {
     setCurrentPortal(fallbackUser.role || 'developer');
   };
 
-  // Custom role selection & registration from landing hero
+  // Custom role selection & registration from login page
   const handleSelectRole = (role, userData) => {
     const userObj = {
       id: `user_${Date.now()}`,
-      name: userData.name || (role === 'developer' ? 'Aarav Sharma' : 'Sarah Jenkins'),
-      email: userData.email,
+      name: userData?.name || (role === 'developer' ? 'Aarav Sharma' : 'Sarah Jenkins'),
+      email: userData?.email,
       role: role,
-      track: 'fresher',
-      subTrack: 'on-campus',
-      college: 'Indian Institute of Technology (IIT) Delhi',
+      track: userData?.track || 'fresher',
+      subTrack: userData?.subTrack || 'on-campus',
+      college: userData?.college || 'Indian Institute of Technology (IIT) Delhi',
       collegeId: 'iit-delhi',
-      companyName: role === 'company' ? 'Microsoft' : null,
+      companyName: role === 'company' ? (userData?.companyName || 'Microsoft') : null,
       skills: [
         'Data Structures & Algorithms',
         'Dynamic Programming',
@@ -61,8 +61,8 @@ export default function App() {
     setCurrentUser(userObj);
     setCurrentPortal(role);
 
-    // If developer, prompt onboarding classification modal
-    if (role === 'developer') {
+    // If developer fresher, prompt onboarding classification modal
+    if (role === 'developer' && userData?.track !== 'experienced') {
       setIsOnboardingOpen(true);
     }
   };
@@ -94,64 +94,68 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-brand-green selection:text-black">
-      
-      {/* Top Navigation Bar */}
-      <Navbar
-        currentUser={currentUser}
-        currentPortal={currentPortal}
-        setCurrentPortal={setCurrentPortal}
-        onSwitchUser={(user) => {
-          setCurrentUser(user);
-          setCurrentPortal(user.role);
-        }}
-        onLogout={handleLogout}
-        onOpenOnboarding={() => setIsOnboardingOpen(true)}
-      />
-
-      {/* Main App Content View */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {!currentUser ? (
-          <LandingHero
-            onSelectRole={handleSelectRole}
-            onQuickLogin={handleQuickLogin}
-          />
-        ) : currentPortal === 'developer' ? (
-          <DeveloperDashboard
+    <>
+      {!currentUser ? (
+        <LoginPage
+          onSelectRole={handleSelectRole}
+          onQuickLogin={handleQuickLogin}
+        />
+      ) : (
+        <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-black selection:text-black">
+          
+          {/* Top Navigation Bar */}
+          <Navbar
             currentUser={currentUser}
-            onUpdateUserSkills={handleUpdateUserSkills}
+            currentPortal={currentPortal}
+            setCurrentPortal={setCurrentPortal}
+            onSwitchUser={(user) => {
+              setCurrentUser(user);
+              setCurrentPortal(user.role);
+            }}
+            onLogout={handleLogout}
             onOpenOnboarding={() => setIsOnboardingOpen(true)}
           />
-        ) : (
-          <CompanyDashboard
-            currentUser={currentUser}
-          />
-        )}
-      </main>
 
-      {/* Developer Onboarding / Classification Modal */}
-      {isOnboardingOpen && (
-        <DeveloperOnboardingModal
-          isOpen={isOnboardingOpen}
-          onClose={() => setIsOnboardingOpen(false)}
-          onSaveClassification={handleSaveClassification}
-          initialTrack={currentUser?.track || 'fresher'}
-          initialSubTrack={currentUser?.subTrack || 'on-campus'}
-        />
-      )}
+          {/* Main App Content View */}
+          <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {currentPortal === 'developer' ? (
+              <DeveloperDashboard
+                currentUser={currentUser}
+                onUpdateUserSkills={handleUpdateUserSkills}
+                onOpenOnboarding={() => setIsOnboardingOpen(true)}
+              />
+            ) : (
+              <CompanyDashboard
+                currentUser={currentUser}
+              />
+            )}
+          </main>
 
-      {/* Footer */}
-      <footer className="border-t border-dark-700/80 bg-dark-900/90 py-6 mt-12 text-center">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-green"></span>
-            <span className="text-slate-300 font-bold">JobMax</span>
-            <span>— AI Skill-Gap Analyzer Platform</span>
-          </div>
-          <p>Model calibrated on HackerRank UI design system & Tier-1 Recruitment data</p>
+          {/* Developer Onboarding / Classification Modal */}
+          {isOnboardingOpen && (
+            <DeveloperOnboardingModal
+              isOpen={isOnboardingOpen}
+              onClose={() => setIsOnboardingOpen(false)}
+              onSaveClassification={handleSaveClassification}
+              initialTrack={currentUser?.track || 'fresher'}
+              initialSubTrack={currentUser?.subTrack || 'on-campus'}
+            />
+          )}
+
+          {/* Footer */}
+          <footer className="border-t border-slate-200/80 bg-slate-50/90 py-6 mt-12 text-center">
+            <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-black"></span>
+                <span className="text-slate-700 font-bold">JobMax</span>
+                <span>— AI Skill-Gap Analyzer Platform</span>
+              </div>
+              <p>Model calibrated on HackerRank UI design system & Tier-1 Recruitment data</p>
+            </div>
+          </footer>
+
         </div>
-      </footer>
-
-    </div>
+      )}
+    </>
   );
 }
