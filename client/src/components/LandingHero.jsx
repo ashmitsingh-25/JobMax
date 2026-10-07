@@ -61,6 +61,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
   };
 
   return (
+    <>
     <div className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
       {/* Background Matrix & Circuit Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-30 pointer-events-none"></div>
@@ -322,6 +323,101 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
           </div>
         )}
 
+      </div>
+    </div>
+    
+    {/* How JobMax Works Section */}
+    {authMode === 'select' && <HowItWorksSection />}
+    </>
+  );
+}
+
+function HowItWorksSection() {
+  const [activeStep, setActiveStep] = useState(1);
+
+  const steps = [
+    {
+      id: 1,
+      title: 'Build Your Profile',
+      desc: 'Add your skills, education, experience, projects and career goals.'
+    },
+    {
+      id: 2,
+      title: 'AI Skill Analysis',
+      desc: 'JobMax analyzes your profile against the requirements of your target role.'
+    },
+    {
+      id: 3,
+      title: 'Identify Skill Gaps',
+      desc: 'See exactly which skills you need to improve to become more competitive.'
+    },
+    {
+      id: 4,
+      title: 'Take Action',
+      desc: 'Get a focused roadmap and discover relevant opportunities.'
+    }
+  ];
+
+  return (
+    <div className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
+      <div className="text-center mb-16">
+        <InView
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How JobMax Works</h2>
+          <p className="text-slate-400 text-lg">From your current skills to your next opportunity.</p>
+        </InView>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6 relative">
+        {/* Connecting line for desktop */}
+        <div className="hidden md:block absolute top-[52px] left-12 right-12 h-0.5 bg-dark-700 -z-10"></div>
+        
+        {steps.map((step, index) => (
+          <InView
+            key={step.id}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
+            className="flex-1"
+          >
+            <div 
+              onClick={() => setActiveStep(step.id)}
+              className={`relative cursor-pointer group transition-all duration-300 h-full ${activeStep === step.id ? '-translate-y-2' : 'hover:-translate-y-1'}`}
+            >
+              <div className={`bg-dark-800 border-2 rounded-2xl p-6 h-full transition-colors duration-300 shadow-card-dark ${
+                activeStep === step.id 
+                  ? 'border-brand-green bg-dark-750 shadow-glow-green' 
+                  : 'border-dark-700 hover:border-brand-cyan/50 hover:bg-dark-750 hover:shadow-glow-blue'
+              }`}>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg transition-colors ${
+                    activeStep === step.id ? 'bg-brand-green/20 text-brand-green' : 'bg-dark-700 text-slate-400 group-hover:bg-brand-cyan/20 group-hover:text-brand-cyan'
+                  }`}>
+                    0{step.id}
+                  </div>
+                  <h3 className={`font-bold transition-colors ${activeStep === step.id ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                    {step.title}
+                  </h3>
+                </div>
+                
+                <div className={`grid transition-all duration-300 ease-in-out ${
+                  activeStep === step.id ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
+                }`}>
+                  <p className="text-sm text-slate-300 leading-relaxed overflow-hidden">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </InView>
+        ))}
       </div>
     </div>
   );
