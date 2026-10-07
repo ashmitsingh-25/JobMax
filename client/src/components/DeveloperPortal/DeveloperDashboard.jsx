@@ -19,7 +19,6 @@ import ExperiencedView from './ExperiencedView';
 import ResumeUploadModal from './ResumeUploadModal';
 import ContributePlacementModal from './ContributePlacementModal';
 import SkillRadarCard from './SkillRadarCard';
-import { BorderTrail } from '../core/border-trail';
 
 export default function DeveloperDashboard({
   currentUser,
@@ -60,14 +59,8 @@ export default function DeveloperDashboard({
     <div className="space-y-8 animate-in fade-in">
       
       {/* Top Track & Profile Bar */}
-      <div className="bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark relative overflow-hidden">
-        <BorderTrail 
-          style={{
-            boxShadow: '0px 0px 60px 30px rgb(255 255 255 / 10%), 0 0 100px 60px rgb(37 99 235 / 15%), 0 0 140px 90px rgb(37 99 235 / 10%)'
-          }}
-          size={140} 
-        />
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 relative z-10">
+      <div className="bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
           <div className="flex items-center gap-4">
             <img
@@ -126,7 +119,7 @@ export default function DeveloperDashboard({
         </div>
 
         {/* Live Interactive Skills Tag Cloud & Radar Grid */}
-        <div className="mt-5 pt-4 border-t border-dark-700/80 grid grid-cols-1 lg:grid-cols-3 gap-5 relative z-10">
+        <div className="mt-5 pt-4 border-t border-dark-700/80 grid grid-cols-1 lg:grid-cols-3 gap-5">
           
           {/* Left 2 Cols: Interactive Skills Cloud */}
           <div className="lg:col-span-2 space-y-2.5">
