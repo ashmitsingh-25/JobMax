@@ -19,30 +19,15 @@ import { api } from '../../services/api';
 
 export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
   const [growthReport, setGrowthReport] = useState(null);
-  const [mlHikeResult, setMlHikeResult] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (currentUser) {
       setIsLoading(true);
-
-      const skillsLower = (currentUser.skills || []).map(s => (s || '').toLowerCase());
-      const hasBigData = skillsLower.some(s => s.includes('spark') || s.includes('hadoop') || s.includes('kafka') || s.includes('big data')) ? 1 : 0;
-      const hasMaths = skillsLower.some(s => s.includes('math') || s.includes('stat') || s.includes('algebra') || s.includes('calculus')) ? 1 : 0;
-      const hasCoding = skillsLower.some(s => s.includes('python') || s.includes('c++') || s.includes('java') || s.includes('go') || s.includes('javascript') || s.includes('data structure')) ? 1 : 1;
-      const hasAiMl = skillsLower.some(s => s.includes('machine learning') || s.includes('ai') || s.includes('deep learning') || s.includes('neural') || s.includes('pytorch')) ? 1 : 0;
-      const hasDashboard = skillsLower.some(s => s.includes('tableau') || s.includes('powerbi') || s.includes('dashboard') || s.includes('story')) ? 1 : 0;
-
-      Promise.all([
-        api.analyzeCareerGrowth(currentUser),
-        api.predictSalaryHike([hasBigData, hasMaths, hasCoding, hasAiMl, hasDashboard])
-      ])
-        .then(([res, mlRes]) => {
+      api.analyzeCareerGrowth(currentUser)
+        .then(res => {
           if (res && res.success) {
             setGrowthReport(res.growthReport);
-          }
-          if (mlRes && mlRes.success) {
-            setMlHikeResult(mlRes);
           }
         })
         .finally(() => setIsLoading(false));
@@ -113,13 +98,6 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
               <span className="text-xs font-mono text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2.5 py-0.5 rounded-full inline-block mt-1">
                 {growthReport.targetUpliftPercent} Pay Uplift
               </span>
-
-              {mlHikeResult && (
-                <div className="mt-2 text-[10px] font-mono text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded-md flex items-center justify-center gap-1">
-                  <CheckCircle2 className="w-3 h-3 text-brand-green" />
-                  <span>jds_salary_hike_model: {mlHikeResult.salary_hike_high_or_low === 1 ? 'High Hike (1)' : 'Standard (0)'}</span>
-                </div>
-              )}
             </div>
 
           </div>
