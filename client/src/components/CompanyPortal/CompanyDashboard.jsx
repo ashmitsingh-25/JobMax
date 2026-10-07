@@ -24,6 +24,10 @@ import CandidateDetailModal from './CandidateDetailModal';
 import CreateRoleModal from './CreateRoleModal';
 import BatchResumeUploadModal from './BatchResumeUploadModal';
 import CandidateComparisonModal from './CandidateComparisonModal';
+import CompanyContestsView from './CompanyContestsView';
+import CompanyProjectsManageView from './CompanyProjectsManageView';
+import CompanyProposalsView from './CompanyProposalsView';
+import { Trophy, FileText, Send } from 'lucide-react';
 
 export default function CompanyDashboard({ currentUser }) {
   const [roles, setRoles] = useState([]);
@@ -33,6 +37,7 @@ export default function CompanyDashboard({ currentUser }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [tierFilter, setTierFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('sourcing');
 
   // Modals
   const [isCreateRoleOpen, setIsCreateRoleOpen] = useState(false);
@@ -149,6 +154,33 @@ export default function CompanyDashboard({ currentUser }) {
         </div>
 
       </div>
+
+      {/* Top Navigation Tabs */}
+      <div className="flex overflow-x-auto gap-2 bg-dark-800 p-1.5 rounded-xl border border-dark-700 scrollbar-hide">
+        {[
+          { id: 'sourcing', icon: <Search className="w-4 h-4" />, label: 'Talent Sourcing' },
+          { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Skill Contests' },
+          { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
+          { id: 'proposals', icon: <Send className="w-4 h-4" />, label: 'Sent Proposals' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${
+              activeTab === tab.id
+                ? 'bg-dark-700 text-brand-cyan border border-brand-cyan/30 shadow-glow-blue'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-dark-750'
+            }`}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Main Content Area */}
+      {activeTab === 'sourcing' && (
+        <div className="space-y-8 animate-in fade-in">
 
       {/* Role Calibration & Talent Pool Gap Overview Banner */}
       {selectedRole && talentPoolAnalytics && (
@@ -402,7 +434,13 @@ export default function CompanyDashboard({ currentUser }) {
           </div>
         </div>
 
+        </div>
       </div>
+      )}
+
+      {activeTab === 'contests' && <CompanyContestsView currentUser={currentUser} />}
+      {activeTab === 'projects' && <CompanyProjectsManageView currentUser={currentUser} />}
+      {activeTab === 'proposals' && <CompanyProposalsView currentUser={currentUser} />}
 
       {/* Candidate Deep-Dive Modal */}
       {selectedCandidate && (

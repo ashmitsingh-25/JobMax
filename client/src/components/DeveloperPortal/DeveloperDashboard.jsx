@@ -10,7 +10,9 @@ import {
   CheckCircle2, 
   TrendingUp,
   Layers,
-  Code
+  Code,
+  Trophy,
+  FileText
 } from 'lucide-react';
 import { TransitionPanel } from '../core/transition-panel';
 import OnCampusView from './OnCampusView';
@@ -19,6 +21,9 @@ import ExperiencedView from './ExperiencedView';
 import ResumeUploadModal from './ResumeUploadModal';
 import ContributePlacementModal from './ContributePlacementModal';
 import SkillRadarCard from './SkillRadarCard';
+import ExploreContestsView from './ExploreContestsView';
+import CompanyProjectsView from './CompanyProjectsView';
+import HiringProposalsView from './HiringProposalsView';
 
 export default function DeveloperDashboard({
   currentUser,
@@ -26,6 +31,7 @@ export default function DeveloperDashboard({
   onOpenOnboarding
 }) {
   const [activeSubTrack, setActiveSubTrack] = useState(currentUser?.subTrack || 'on-campus');
+  const [activeTab, setActiveTab] = useState('profile');
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [isContributeModalOpen, setIsContributeModalOpen] = useState(false);
   const [newSkillInput, setNewSkillInput] = useState('');
@@ -82,40 +88,32 @@ export default function DeveloperDashboard({
             </div>
           </div>
 
-          {/* Sub-Track Switcher (for Freshers: On-Campus vs Off-Campus) */}
-          {isFresher ? (
-            <div className="flex items-center bg-dark-850 p-1.5 rounded-xl border border-dark-700 w-full lg:w-auto">
-              <button
-                onClick={() => setActiveSubTrack('on-campus')}
-                className={`flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all ${
-                  activeSubTrack === 'on-campus'
-                    ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-glow-green'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <School className="w-3.5 h-3.5" />
-                2A. On-Campus Placement Path
-              </button>
-
-              <button
-                onClick={() => setActiveSubTrack('off-campus')}
-                className={`flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all ${
-                  activeSubTrack === 'off-campus'
-                    ? 'bg-dark-700 text-brand-cyan border border-brand-cyan/30 shadow-glow-blue'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <Globe className="w-3.5 h-3.5" />
-                2B. Off-Campus Market Path
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 text-xs font-mono bg-dark-850 border border-brand-purple/40 px-3.5 py-2 rounded-lg text-brand-purple">
-              <TrendingUp className="w-4 h-4" />
-              <span>Experienced Career Growth & Promotion Engine Active</span>
-            </div>
-          )}
-
+          <div className="flex flex-wrap items-center gap-6 mt-4 lg:mt-0">
+            {currentUser?.githubUsername && (
+              <a href={`https://github.com/${currentUser.githubUsername}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span className="text-sm font-mono">{currentUser.githubUsername}</span>
+              </a>
+            )}
+            {currentUser?.contestRating && (
+              <div className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-yellow-500" />
+                <div>
+                  <div className="text-sm font-bold text-white">{currentUser.contestRating}</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono">Rating</div>
+                </div>
+              </div>
+            )}
+            {currentUser?.projectsCompleted !== undefined && (
+              <div className="flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-brand-green" />
+                <div>
+                  <div className="text-sm font-bold text-white">{currentUser.projectsCompleted}</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono">Projects</div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Live Interactive Skills Tag Cloud & Radar Grid */}
@@ -174,37 +172,66 @@ export default function DeveloperDashboard({
 
       </div>
 
-      {/* Main Path Views */}
-      <TransitionPanel
-        activeIndex={!isFresher ? 2 : activeSubTrack === 'on-campus' ? 0 : 1}
-        variants={{
-          enter: (direction) => ({ opacity: 0, x: direction > 0 ? 50 : -50, position: 'absolute', width: '100%' }),
-          center: { opacity: 1, x: 0, position: 'relative' },
-          exit: (direction) => ({ opacity: 0, x: direction < 0 ? 50 : -50, position: 'absolute', width: '100%' }),
-        }}
-        transition={{ duration: 0.3 }}
-        custom={activeSubTrack === 'on-campus' ? -1 : 1}
-      >
-        <div key="on-campus">
-          <OnCampusView
-            currentUser={currentUser}
-            onOpenResumeModal={() => setIsResumeModalOpen(true)}
-            onOpenContributeModal={() => setIsContributeModalOpen(true)}
-          />
-        </div>
-        <div key="off-campus">
-          <OffCampusView
-            currentUser={currentUser}
-            onOpenResumeModal={() => setIsResumeModalOpen(true)}
-          />
-        </div>
-        <div key="experienced">
-          <ExperiencedView
-            currentUser={currentUser}
-            onOpenResumeModal={() => setIsResumeModalOpen(true)}
-          />
-        </div>
-      </TransitionPanel>
+      {/* Top Navigation Tabs */}
+      <div className="flex overflow-x-auto gap-2 bg-dark-800 p-1.5 rounded-xl border border-dark-700 scrollbar-hide">
+        {[
+          { id: 'profile', icon: <Code className="w-4 h-4" />, label: 'Skill Profile' },
+          { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Explore Contests' },
+          { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
+          { id: 'proposals', icon: <FileText className="w-4 h-4" />, label: 'Hiring Proposals' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${
+              activeTab === tab.id
+                ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-glow-green'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-dark-750'
+            }`}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Main Content Area */}
+      {activeTab === 'profile' && (
+        <TransitionPanel
+          activeIndex={!isFresher ? 2 : activeSubTrack === 'on-campus' ? 0 : 1}
+          variants={{
+            enter: (direction) => ({ opacity: 0, x: direction > 0 ? 50 : -50, position: 'absolute', width: '100%' }),
+            center: { opacity: 1, x: 0, position: 'relative' },
+            exit: (direction) => ({ opacity: 0, x: direction < 0 ? 50 : -50, position: 'absolute', width: '100%' }),
+          }}
+          transition={{ duration: 0.3 }}
+          custom={activeSubTrack === 'on-campus' ? -1 : 1}
+        >
+          <div key="on-campus">
+            <OnCampusView
+              currentUser={currentUser}
+              onOpenResumeModal={() => setIsResumeModalOpen(true)}
+              onOpenContributeModal={() => setIsContributeModalOpen(true)}
+            />
+          </div>
+          <div key="off-campus">
+            <OffCampusView
+              currentUser={currentUser}
+              onOpenResumeModal={() => setIsResumeModalOpen(true)}
+            />
+          </div>
+          <div key="experienced">
+            <ExperiencedView
+              currentUser={currentUser}
+              onOpenResumeModal={() => setIsResumeModalOpen(true)}
+            />
+          </div>
+        </TransitionPanel>
+      )}
+
+      {activeTab === 'contests' && <ExploreContestsView currentUser={currentUser} />}
+      {activeTab === 'projects' && <CompanyProjectsView currentUser={currentUser} />}
+      {activeTab === 'proposals' && <HiringProposalsView currentUser={currentUser} />}
 
       {/* Modals */}
       {isResumeModalOpen && (

@@ -1,4 +1,5 @@
 // Base URL: use relative /api which Vite proxies to backend, with fallback
+import { ecosystemApi } from './mockEcosystem';
 const getBaseUrl = () => {
   if (typeof window !== "undefined" && window.location && window.location.origin) {
     return `${window.location.origin}/api`;
@@ -37,96 +38,149 @@ export const FALLBACK_DEMO_USERS = [
     track: "fresher",
     subTrack: "on-campus",
     college: "Indian Institute of Technology (IIT) Delhi",
-    collegeId: "iit-delhi",
-    cgpa: 8.8,
-    skills: [
-      "Data Structures & Algorithms",
-      "Dynamic Programming",
-      "Graph Algorithms",
-      "Tree Algorithms",
-      "C++",
-      "Java",
-      "Object-Oriented Programming",
-      "Operating Systems",
-      "Database Management Systems",
-      "PostgreSQL",
-      "Git & Version Control"
-    ],
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+    skills: ["Data Structures & Algorithms", "React", "JavaScript", "MongoDB"],
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    contestRating: 1450,
+    contestsParticipated: 5,
+    projectsCompleted: 10,
+    githubUsername: "aarav-sharma-tech"
   },
   {
     id: "user-fresher-2",
-    name: "Priya Sundaram",
-    email: "priya@bits-pilani.ac.in",
+    name: "Ananya Singh",
+    email: "ananya@bits.ac.in",
     role: "developer",
     track: "fresher",
     subTrack: "off-campus",
-    college: "BITS Pilani (Main Campus)",
-    collegeId: "bits-pilani",
-    cgpa: 9.1,
-    skills: [
-      "Data Structures & Algorithms",
-      "Java",
-      "Spring Boot",
-      "React.js",
-      "TypeScript",
-      "SQL",
-      "Database Management Systems",
-      "Object-Oriented Programming",
-      "Docker & Containerization",
-      "Amazon Web Services (AWS)",
-      "RESTful API Design"
-    ],
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80"
+    college: "BITS Pilani",
+    skills: ["React", "TypeScript", "UI/UX", "Node.js"],
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    contestRating: 1620,
+    contestsParticipated: 8,
+    projectsCompleted: 8,
+    githubUsername: "ananya-codes"
+  },
+  {
+    id: "user-fresher-3",
+    name: "Rahul Verma",
+    email: "rahul@nit.ac.in",
+    role: "developer",
+    track: "fresher",
+    subTrack: "on-campus",
+    college: "NIT Trichy",
+    skills: ["Python", "Machine Learning", "Data Structures"],
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    contestRating: 1580,
+    contestsParticipated: 12,
+    projectsCompleted: 5,
+    githubUsername: "rahulv-dev"
+  },
+  {
+    id: "user-fresher-4",
+    name: "Priya Gupta",
+    email: "priya@dtu.ac.in",
+    role: "developer",
+    track: "fresher",
+    subTrack: "on-campus",
+    college: "DTU",
+    skills: ["Java", "Spring Boot", "SQL"],
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    contestRating: 1390,
+    contestsParticipated: 3,
+    projectsCompleted: 4,
+    githubUsername: "priya-gupta-code"
   },
   {
     id: "user-exp-1",
-    name: "Vikram Malhotra",
-    email: "vikram.m@swiggy.com",
+    name: "Rohan Mehta",
+    email: "rohan@swiggy.com",
     role: "developer",
     track: "experienced",
-    yearsOfExperience: 3.5,
+    yearsOfExperience: 4,
     currentRole: "SDE II",
     currentCompany: "Swiggy",
-    currentCtc: "₹24 LPA",
-    targetCtc: "₹45 LPA",
-    domain: "High-Scale Backend & Logistics",
-    skills: [
-      "Go",
-      "Java",
-      "Data Structures & Algorithms",
-      "Microservices Architecture",
-      "Message Queues & Streaming",
-      "Redis",
-      "PostgreSQL",
-      "SQL Query Optimization",
-      "Docker & Containerization",
-      "Kubernetes",
-      "System Design Fundamentals"
-    ],
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
+    skills: ["Go", "Distributed Systems", "Kubernetes"],
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    contestRating: 1850,
+    contestsParticipated: 20,
+    projectsCompleted: 15,
+    githubUsername: "rohan-m-go"
+  },
+  {
+    id: "user-exp-2",
+    name: "Aditya Kapoor",
+    email: "aditya@zomato.com",
+    role: "developer",
+    track: "experienced",
+    yearsOfExperience: 3,
+    currentRole: "Frontend Lead",
+    currentCompany: "Zomato",
+    skills: ["React", "Next.js", "System Design"],
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    contestRating: 1700,
+    contestsParticipated: 15,
+    projectsCompleted: 22,
+    githubUsername: "aditya-kapoor-ui"
+  },
+  {
+    id: "user-exp-3",
+    name: "Sneha Malhotra",
+    email: "sneha@amazon.com",
+    role: "developer",
+    track: "experienced",
+    yearsOfExperience: 5,
+    currentRole: "SDE III",
+    currentCompany: "Amazon",
+    skills: ["Java", "AWS", "Microservices"],
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
+    contestRating: 1900,
+    contestsParticipated: 25,
+    projectsCompleted: 18,
+    githubUsername: "sneha-m-aws"
   },
   {
     id: "user-company-1",
-    name: "Sarah Jenkins",
-    email: "sjenkins@microsoft.com",
+    name: "TechNova Recruiter",
+    email: "recruiter@technova.com",
     role: "company",
-    companyName: "Microsoft",
-    companyLogo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60",
-    designation: "Principal Tech Talent Partner",
+    companyName: "TechNova",
+    companyLogo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100",
+    designation: "Tech Talent Partner",
     activeRolesCount: 4,
-    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&auto=format&fit=crop&q=80"
+    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150"
   },
   {
     id: "user-company-2",
-    name: "Ritesh Agarwal",
-    email: "ritesh.recruiter@stripe.com",
+    name: "InnovateX HR",
+    email: "hr@innovatex.com",
     role: "company",
-    companyName: "Stripe",
-    companyLogo: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&auto=format&fit=crop&q=60",
-    designation: "Lead Technical Recruiter",
+    companyName: "InnovateX",
+    companyLogo: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    designation: "Lead Recruiter",
+    activeRolesCount: 2,
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150"
+  },
+  {
+    id: "user-company-3",
+    name: "CodeSphere Hiring",
+    email: "hiring@codesphere.com",
+    role: "company",
+    companyName: "CodeSphere",
+    companyLogo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100",
+    designation: "VP of Engineering",
+    activeRolesCount: 5,
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150"
+  },
+  {
+    id: "user-company-4",
+    name: "DataCore Talent",
+    email: "talent@datacore.com",
+    role: "company",
+    companyName: "DataCore",
+    companyLogo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=100",
+    designation: "Senior Recruiter",
     activeRolesCount: 3,
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80"
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150"
   }
 ];
 
@@ -307,6 +361,7 @@ export const FALLBACK_ONCAMPUS_REPORT = {
 };
 
 export const api = {
+  ...ecosystemApi,
   // Auth
   login: async (credentials) => {
     try {

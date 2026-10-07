@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { InView } from './core/in-view';
 import { 
-  Target, Zap, Compass, CheckCircle2, 
-  ChevronDown, Code, Map, FileText, Globe, 
+  Target, Zap, Compass, ChevronDown, Map, Globe, 
   BarChart, Building2, UserCircle, Users,
-  X, Mail, Send, Cpu, Crosshair, ArrowUpRight, FileEdit
+  X, Mail, Send, Cpu, Crosshair, ArrowUpRight, FileEdit,
+  Search, Briefcase, CheckCircle2, FileText, Award, Code
 } from 'lucide-react';
 
 export function CareerImpactBanner() {
@@ -352,32 +352,64 @@ export function HowJobMaxHelps() {
   const steps = [
     {
       id: 1,
-      title: 'Build Your Profile',
-      desc: 'Add your education, skills, experience, projects, certifications, and career goals.',
-      icon: <FileEdit className="w-6 h-6" />
+      title: 'Company Creates Contest',
+      desc: 'Companies publish technical challenges to evaluate real-world problem-solving skills.',
+      icon: <FileEdit className="w-6 h-6" />,
+      color: 'brand-cyan'
     },
     {
       id: 2,
-      title: 'Analyze Your Skills',
-      desc: 'JobMax analyzes your profile to understand your current skills, experience, and career readiness.',
-      icon: <Cpu className="w-6 h-6" />
+      title: 'Candidates Participate',
+      desc: 'Students and professionals write code, solve problems, and submit their solutions.',
+      icon: <Code className="w-6 h-6" />,
+      color: 'brand-green'
     },
     {
       id: 3,
-      title: 'Find Your Gaps',
-      desc: 'Identify the skills and areas you need to improve for your target role.',
-      icon: <Crosshair className="w-6 h-6" />
+      title: 'Global Leaderboard',
+      desc: 'Performance is automatically evaluated, and top talent ranks on the leaderboard.',
+      icon: <BarChart className="w-6 h-6" />,
+      color: 'purple-400'
     },
     {
       id: 4,
-      title: 'Take Action',
-      desc: 'Follow a focused path to strengthen your skills and move closer to your career goals.',
-      icon: <ArrowUpRight className="w-6 h-6" />
+      title: 'Company Discovers Talent',
+      desc: 'Hiring managers filter and discover top candidates based on actual performance, not just resumes.',
+      icon: <Search className="w-6 h-6" />,
+      color: 'brand-cyan'
+    },
+    {
+      id: 5,
+      title: 'Real-World Projects',
+      desc: 'Candidates can further prove themselves by contributing to real company projects.',
+      icon: <Briefcase className="w-6 h-6" />,
+      color: 'brand-green'
+    },
+    {
+      id: 6,
+      title: 'Performance Evaluation',
+      desc: 'Companies review code quality, creativity, and project documentation.',
+      icon: <CheckCircle2 className="w-6 h-6" />,
+      color: 'purple-400'
+    },
+    {
+      id: 7,
+      title: 'Hiring Proposal',
+      desc: 'Companies send direct job/internship proposals with CTC and role details to selected talent.',
+      icon: <FileText className="w-6 h-6" />,
+      color: 'brand-cyan'
+    },
+    {
+      id: 8,
+      title: 'Job / Internship',
+      desc: 'Candidate accepts the proposal, completing the skill-based hiring process.',
+      icon: <Award className="w-6 h-6" />,
+      color: 'brand-green'
     }
   ];
 
   return (
-    <div id="how-it-works-section" className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
+    <div id="how-it-works-section" className="w-full max-w-5xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
       <div className="text-center mb-16">
         <InView
           variants={{
@@ -386,48 +418,66 @@ export function HowJobMaxHelps() {
           }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How JobMax Helps You Move Forward</h2>
-          <p className="text-slate-400 text-lg">From your current skills to your next opportunity.</p>
+          <div className="inline-flex items-center gap-2 bg-dark-800 border border-brand-green/30 px-3.5 py-1.5 rounded-full mb-4 shadow-glow-green">
+            <Sparkles className="w-4 h-4 text-brand-green" />
+            <span className="font-mono text-xs text-brand-green font-semibold tracking-wide">
+              THE SKILL-BASED WORKFLOW
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How JobMax Connects Talent & Companies</h2>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">From publishing a contest to signing an offer letter, everything is driven by proof of work.</p>
         </InView>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6 relative">
-        {/* Connecting line for desktop */}
-        <div className="hidden md:block absolute top-[52px] left-12 right-12 h-0.5 bg-dark-700 -z-10"></div>
+      <div className="relative">
+        {/* Vertical Connecting Line */}
+        <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-0.5 bg-dark-700 -translate-x-1/2"></div>
         
-        {steps.map((step, index) => (
-          <InView
-            key={step.id}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
-            className="flex-1"
-          >
-            <div className="relative group transition-all duration-300 h-full hover:-translate-y-2">
-              <div className="bg-dark-800 border-2 border-dark-700 rounded-2xl p-6 h-full transition-colors duration-300 shadow-card-dark hover:border-brand-green/50 hover:bg-dark-750 hover:shadow-glow-green flex flex-col">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg transition-colors bg-dark-700 text-slate-400 group-hover:bg-brand-green/20 group-hover:text-brand-green shrink-0">
-                    0{step.id}
+        <div className="flex flex-col gap-8 md:gap-12 relative z-10">
+          {steps.map((step, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <InView
+                key={step.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.05 }}
+              >
+                <div className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  
+                  {/* Content Box */}
+                  <div className={`flex-1 w-full md:w-auto ${isEven ? 'md:text-right' : 'md:text-left'}`}>
+                    <div className={`bg-dark-800 border border-dark-700 rounded-2xl p-6 shadow-card-dark transition-all duration-300 hover:border-${step.color}/50 hover:bg-dark-750 inline-block w-full max-w-md`}>
+                      <div className={`flex items-center gap-3 mb-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                        <div className={`text-${step.color}`}>
+                          {step.icon}
+                        </div>
+                        <h3 className="font-bold text-slate-200 text-lg">
+                          {step.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-slate-400 leading-relaxed">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-slate-200 group-hover:text-white transition-colors text-lg">
-                    {step.title}
-                  </h3>
-                </div>
-                
-                <div className="flex-grow flex flex-col justify-between">
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                    {step.desc}
-                  </p>
-                  <div className="mt-auto flex justify-end text-slate-500 group-hover:text-brand-green transition-colors">
-                    {step.icon}
+
+                  {/* Center Node */}
+                  <div className="hidden md:flex flex-col items-center justify-center relative shrink-0 w-12 h-12">
+                    <div className={`w-10 h-10 rounded-full bg-dark-900 border-2 border-${step.color} flex items-center justify-center font-mono font-bold text-sm text-${step.color} z-10 shadow-glow-${step.color.split('-')[1] || 'green'}`}>
+                      {step.id}
+                    </div>
                   </div>
+
+                  {/* Empty Spacer for alternating layout */}
+                  <div className="hidden md:block flex-1"></div>
                 </div>
-              </div>
-            </div>
-          </InView>
-        ))}
+              </InView>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

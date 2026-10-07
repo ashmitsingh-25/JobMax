@@ -100,26 +100,12 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-8 max-w-4xl mx-auto leading-[1.1] sm:leading-tight text-center">
-            Close the Gap Between <br className="hidden sm:block" />
-            <TextLoop
-              className='overflow-y-visible text-brand-green inline-flex justify-center w-[280px] sm:w-[440px] pb-1'
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              variants={{
-                initial: { y: 20, opacity: 0, filter: 'blur(4px)' },
-                animate: { y: 0, opacity: 1, filter: 'blur(0px)' },
-                exit: { y: -20, opacity: 0, filter: 'blur(4px)' },
-              }}
-            >
-              <span className="whitespace-nowrap">our Current Skills</span>
-              <span className="whitespace-nowrap">our Academic Knowledge</span>
-            </TextLoop>
-            <br className="hidden sm:block" />
-            &amp; What Tech Demands
+            Don't Just Hire Resumes. <br className="hidden sm:block" />
+            Hire <span className="text-brand-green">Real Skills</span>.
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Real-world recruitment data from campus drives and off-campus job markets, 
-            powered by AI that benchmarks your skills, generates personalized 6-week closing roadmaps, and ranks candidates for hiring teams.
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
+            JobMax connects companies with talented students and professionals through real coding challenges, projects, GitHub work, and performance-based hiring.
           </p>
         </div>
 
