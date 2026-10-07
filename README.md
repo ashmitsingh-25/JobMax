@@ -120,13 +120,17 @@ node test-e2e.js
 
 ---
 
-## ⚡ 1-Click Instant Demo Credentials
+## ⚡ Authentication
 
-No credentials needed! Click **"⚡ 1-Click Instant Demo Login"** on the landing screen, or test with:
-- **Developer Demo**: `student@demo.com`
-- **Company Demo**: `recruiter@google.com`
+JobMax now uses **Firebase Authentication**.
+- Log in with actual email/password or use GitHub/Google OAuth.
+- No dummy or mock user logins bypass the authentication system anymore for security reasons.
 
 ---
+
+## 🌐 Live Production URL
+
+**[https://jobmax-tau.vercel.app](https://jobmax-tau.vercel.app)**
 
 ## 🌐 Deploy to Vercel
 
