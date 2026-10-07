@@ -162,12 +162,21 @@ export default function Navbar({
                           className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:bg-rose-950/30 rounded-lg transition-colors"
                         >
                           <LogOut className="w-3.5 h-3.5" />
-                          Exit to Role Selector
+                          Logout
                         </button>
                       </div>
                     </div>
                   )}
                 </div>
+                
+                {/* Standalone Logout Button */}
+                <button
+                  onClick={onLogout}
+                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-rose-500/10 hover:text-rose-400 transition-colors border border-transparent hover:border-rose-500/20 ml-1"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  Logout
+                </button>
               </>
             ) : (
               <div className="flex items-center gap-2">
