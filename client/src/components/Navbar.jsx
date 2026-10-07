@@ -41,7 +41,7 @@ export default function Navbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-dark-900/85 backdrop-blur-xl border-b border-dark-700/80 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
@@ -51,35 +51,33 @@ export default function Navbar({
               onClick={() => navigate('/')}
               className="flex items-center gap-2.5 cursor-pointer group select-none"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white flex items-center justify-center font-mono font-bold shadow-glow-blue border border-blue-400/30 group-hover:scale-105 transition-transform duration-200">
-                <Terminal className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-mono font-bold shadow-xs group-hover:bg-blue-700 transition-colors">
+                <Terminal className="w-4 h-4 text-white" />
               </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-blue-400 transition-colors font-heading">
-                    Job<span className="text-blue-400">Max</span>
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold text-slate-400 bg-dark-800 border border-dark-700 px-1.5 py-0.5 rounded">
-                    AI
-                  </span>
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors font-heading">
+                  Job<span className="text-blue-600">Max</span>
+                </span>
+                <span className="text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">
+                  SaaS
+                </span>
               </div>
             </div>
 
             {/* Active Portal Indicator */}
             {currentUser && (
-              <div className="hidden md:flex items-center bg-dark-850 px-3 py-1 rounded-full border border-dark-700">
+              <div className="hidden md:flex items-center">
                 {currentUser.role === 'developer' ? (
-                  <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-teal-50 border border-teal-200/80 text-xs font-semibold text-teal-800">
+                    <span className="w-2 h-2 rounded-full bg-teal-600"></span>
                     <Code className="w-3.5 h-3.5" />
-                    Developer Hub
+                    Developer Portal
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2 text-xs font-semibold text-blue-400">
-                    <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 border border-blue-200/80 text-xs font-semibold text-blue-800">
+                    <span className="w-2 h-2 rounded-full bg-blue-600"></span>
                     <Building2 className="w-3.5 h-3.5" />
-                    Recruiter Workspace
+                    Company Workspace
                   </div>
                 )}
               </div>
@@ -92,59 +90,61 @@ export default function Navbar({
               <>
                 {/* Active Track Badge */}
                 {currentUser.role === 'developer' && (
-                  <div 
+                  <button 
+                    type="button"
                     onClick={onOpenOnboarding}
-                    className="hidden lg:flex items-center gap-2 bg-dark-850 hover:bg-dark-800 border border-dark-700 hover:border-emerald-500/40 px-3 py-1.5 rounded-lg text-xs cursor-pointer text-slate-300 transition-all shadow-sm"
-                    title="Click to re-classify your track"
+                    className="hidden lg:flex items-center gap-2 bg-slate-100 hover:bg-slate-200/70 border border-slate-200 px-3 py-1.5 rounded-lg text-xs cursor-pointer text-slate-700 transition-colors shadow-xs"
+                    title="Click to change your track"
                   >
-                    <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
+                    <GraduationCap className="w-3.5 h-3.5 text-teal-700" />
                     <span>
-                      Track: <span className="text-emerald-400 font-bold capitalize">{currentUser.track || 'Fresher'}</span> 
+                      Track: <span className="text-slate-900 font-semibold capitalize">{currentUser.track || 'Fresher'}</span> 
                       {currentUser.track === 'fresher' && ` (${currentUser.subTrack || 'On-Campus'})`}
                     </span>
-                    <span className="text-[10px] text-slate-400 underline ml-1 hover:text-white">Change</span>
-                  </div>
+                    <span className="text-[10px] text-blue-600 font-medium ml-1">Change</span>
+                  </button>
                 )}
 
                 {/* User Dropdown */}
                 <div className="relative">
                   <button
+                    type="button"
                     onClick={() => setShowUserDropdown(!showUserDropdown)}
-                    className="flex items-center gap-2.5 bg-dark-850 hover:bg-dark-800 border border-dark-700 hover:border-dark-600 px-3 py-1.5 rounded-xl text-xs transition-all shadow-sm"
+                    className="flex items-center gap-2.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 px-2.5 py-1.5 rounded-lg text-xs transition-colors shadow-xs"
                   >
                     <img
                       src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
                       alt={currentUser?.name || "User"}
-                      className="w-7 h-7 rounded-full object-cover border border-blue-500/40"
+                      className="w-6 h-6 rounded-full object-cover border border-slate-200"
                     />
                     <div className="text-left hidden sm:block">
-                      <p className="font-semibold text-white leading-none">{currentUser?.name || "User"}</p>
-                      <p className="text-[10px] text-slate-400 mt-0.5 capitalize font-mono">
+                      <p className="font-semibold text-slate-900 leading-none">{currentUser?.name || "User"}</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5 capitalize font-mono">
                         {currentUser?.role === 'company' ? (currentUser?.companyName || 'Recruiter') : (currentUser?.track || 'Developer')}
                       </p>
                     </div>
                     <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                   </button>
 
-                  {/* Enhanced Dropdown Menu */}
+                  {/* Dropdown Menu */}
                   {showUserDropdown && (
-                    <div className="absolute right-0 mt-2 w-64 bg-dark-850 border border-dark-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-lg shadow-lg p-2.5 z-50 animate-in fade-in">
                       {/* User Header */}
-                      <div className="px-3 py-2 border-b border-dark-700/80 mb-2">
-                        <p className="text-xs font-bold text-white">{currentUser?.name}</p>
-                        <p className="text-[11px] text-slate-400 truncate">{currentUser?.email}</p>
-                        <span className={`inline-block mt-1 text-[10px] font-mono px-2 py-0.5 rounded-full ${
-                          currentUser?.role === 'developer' ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/30' : 'bg-blue-950 text-blue-400 border border-blue-500/30'
+                      <div className="px-3 py-2 border-b border-slate-100 mb-2">
+                        <p className="text-xs font-bold text-slate-900">{currentUser?.name}</p>
+                        <p className="text-[11px] text-slate-500 truncate">{currentUser?.email}</p>
+                        <span className={`inline-block mt-1 text-[10px] font-mono font-medium px-2 py-0.5 rounded ${
+                          currentUser?.role === 'developer' ? 'bg-teal-50 text-teal-800 border border-teal-200' : 'bg-blue-50 text-blue-800 border border-blue-200'
                         }`}>
                           {currentUser?.role === 'developer' ? 'Engineer Account' : 'Enterprise Recruiter'}
                         </span>
                       </div>
 
                       {/* 1-Click Persona Switcher for Evaluators */}
-                      <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                        ⚡ Quick Switch Profile:
+                      <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                        Switch Demo Persona:
                       </div>
-                      <div className="space-y-1 mb-2">
+                      <div className="space-y-0.5 mb-2">
                         {demoUsers.slice(0, 4).map(demo => (
                           <button
                             key={demo.id}
@@ -153,42 +153,42 @@ export default function Navbar({
                               setShowUserDropdown(false);
                               if (onSwitchUser) onSwitchUser(demo);
                             }}
-                            className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${
-                              currentUser?.id === demo.id ? 'bg-blue-600/20 text-blue-300 font-semibold' : 'text-slate-300 hover:bg-dark-800 hover:text-white'
+                            className={`w-full text-left px-2.5 py-1.5 rounded text-xs flex items-center justify-between transition-colors ${
+                              currentUser?.id === demo.id ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-slate-700 hover:bg-slate-50'
                             }`}
                           >
                             <span className="truncate">{demo.name} ({demo.role === 'company' ? 'HR' : demo.track})</span>
-                            {currentUser?.id === demo.id && <span className="text-[10px] text-blue-400">Active</span>}
+                            {currentUser?.id === demo.id && <span className="text-[10px] text-blue-600 font-bold">Active</span>}
                           </button>
                         ))}
                       </div>
 
                       {/* Developer Track Option */}
                       {currentUser?.role === 'developer' && (
-                        <div className="border-t border-dark-700/80 pt-1">
+                        <div className="border-t border-slate-100 pt-1">
                           <button
                             type="button"
                             onClick={() => {
                               setShowUserDropdown(false);
                               if (onOpenOnboarding) onOpenOnboarding();
                             }}
-                            className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-dark-800 rounded-lg transition-colors"
+                            className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-50 rounded transition-colors"
                           >
-                            <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
+                            <GraduationCap className="w-3.5 h-3.5 text-teal-700" />
                             Re-classify Track & College
                           </button>
                         </div>
                       )}
 
                       {/* Logout Option */}
-                      <div className="border-t border-dark-700/80 pt-1">
+                      <div className="border-t border-slate-100 pt-1">
                         <button
                           type="button"
                           onClick={() => {
                             setShowUserDropdown(false);
                             onLogout();
                           }}
-                          className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors font-medium"
+                          className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50 rounded transition-colors font-medium"
                         >
                           <LogOut className="w-3.5 h-3.5" />
                           Sign Out
@@ -202,7 +202,7 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-rose-500/10 hover:text-rose-400 transition-all border border-transparent hover:border-rose-500/20"
+                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors border border-slate-200 hover:border-rose-200"
                 >
                   <LogOut className="w-3.5 h-3.5" />
                   <span>Logout</span>
@@ -213,7 +213,7 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={() => window.dispatchEvent(new CustomEvent('trigger-auth', { detail: { role: 'developer' } }))}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-glow-blue transition-all border border-blue-400/20 active:scale-[0.98]"
+                  className="btn-primary text-xs"
                 >
                   <span>Sign In</span>
                   <ArrowRight className="w-3.5 h-3.5" />

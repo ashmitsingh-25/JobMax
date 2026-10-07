@@ -4,110 +4,96 @@
 
 @layer base {
   body {
-    @apply bg-dark-900 text-slate-100 min-h-screen overflow-x-hidden antialiased;
+    @apply bg-slate-50 text-slate-800 min-h-screen overflow-x-hidden antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight font-heading;
+    @apply font-heading tracking-tight text-slate-900 font-semibold;
   }
 }
 
-/* Custom Executive Slate Scrollbar */
+/* Crisp B2B Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0F1D;
+  background: #F8FAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #233454;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3B82F6;
+  background: #94A3B8;
 }
 
-/* Monospace skill tags & custom badges */
+/* Accessible Status Badges */
 .badge-code {
-  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-dark-850 border border-dark-700 text-slate-300 font-medium inline-flex items-center gap-1.5 transition-colors;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-700 font-medium inline-flex items-center gap-1.5;
 }
 
 .badge-matched {
-  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 font-medium inline-flex items-center gap-1 shadow-sm;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-teal-50 border border-teal-200 text-teal-800 font-semibold inline-flex items-center gap-1;
 }
 
 .badge-missing {
-  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-rose-950/70 border border-rose-500/40 text-rose-300 font-medium inline-flex items-center gap-1 shadow-sm;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-rose-50 border border-rose-200 text-rose-800 font-semibold inline-flex items-center gap-1;
 }
 
 .badge-warning {
-  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-amber-950/70 border border-amber-500/40 text-amber-300 font-medium inline-flex items-center gap-1 shadow-sm;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-900 font-semibold inline-flex items-center gap-1;
 }
 
 .badge-info {
-  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-blue-950/70 border border-blue-500/40 text-blue-300 font-medium inline-flex items-center gap-1 shadow-sm;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-800 font-semibold inline-flex items-center gap-1;
 }
 
-/* Glassmorphism & Executive Cards */
+/* Bento Cards & Clean Surfaces */
 .card-hr {
-  @apply bg-dark-800/90 backdrop-blur-md border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200 hover:border-dark-600;
+  @apply bg-white border border-slate-200/90 rounded-lg p-5 shadow-sm transition-all duration-150 hover:border-slate-300;
 }
 
 .card-hr-interactive {
-  @apply bg-dark-800/90 backdrop-blur-md border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200 cursor-pointer hover:border-brand-primary/60 hover:shadow-glow-blue hover:-translate-y-0.5;
+  @apply bg-white border border-slate-200/90 rounded-lg p-5 shadow-sm transition-all duration-150 cursor-pointer hover:border-blue-300 hover:shadow-md;
 }
 
 .card-glass {
-  @apply bg-dark-850/80 backdrop-blur-xl border border-dark-700/80 rounded-2xl shadow-glass;
+  @apply bg-white border border-slate-200 rounded-lg shadow-sm;
 }
 
-/* Form Inputs - LinkedIn / Freelancer Style */
+/* Form Inputs - Clean B2B SaaS Style */
 .input-hr {
-  @apply bg-dark-850 border border-dark-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/30 transition-all duration-150;
+  @apply bg-white border border-slate-200 rounded-lg px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-colors;
 }
 
 /* Buttons */
 .btn-primary {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-blue hover:shadow-lg active:scale-[0.98] border border-blue-400/20;
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition-all duration-150 flex items-center justify-center gap-2 shadow-xs hover:shadow active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
 }
 
 .btn-secondary {
-  @apply bg-dark-800 hover:bg-dark-750 border border-dark-700 hover:border-dark-600 text-slate-200 font-medium px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98];
+  @apply bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm transition-all duration-150 flex items-center justify-center gap-2 shadow-xs active:scale-[0.99];
 }
 
 .btn-outline-blue {
-  @apply bg-transparent hover:bg-blue-600/10 border border-blue-500/50 hover:border-blue-400 text-blue-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 active:scale-[0.98];
+  @apply bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors flex items-center gap-1.5 active:scale-[0.99];
 }
 
 .btn-outline-green {
-  @apply bg-transparent hover:bg-emerald-600/10 border border-emerald-500/50 hover:border-emerald-400 text-emerald-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 active:scale-[0.98];
+  @apply bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-700 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors flex items-center gap-1.5 active:scale-[0.99];
 }
 
 /* Code block highlight */
 .code-block {
-  @apply font-mono text-xs bg-dark-950/90 border border-dark-700 rounded-lg p-3 text-slate-300 overflow-x-auto;
+  @apply font-mono text-xs bg-slate-900 border border-slate-800 rounded-lg p-3 text-slate-200 overflow-x-auto;
 }
 
-/* Keyframes & Ambient Micro-interactions */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.35; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.02); }
-}
-
-@keyframes subtleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.animate-float {
-  animation: subtleFloat 5s ease-in-out infinite;
+/* AI Insights Callout Box - Restrained Tinted Panel */
+.ai-insight-panel {
+  @apply bg-teal-50/60 border border-teal-200/80 rounded-lg p-4 text-slate-800;
 }

@@ -63,54 +63,63 @@ export default function DeveloperDashboard({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-6 animate-in fade-in">
       
-      {/* Top Track & Profile Bar */}
-      <div className="bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark">
+      {/* Top Track & Profile Bento Header */}
+      <div className="bg-white border border-slate-200 rounded-lg p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
           <div className="flex items-center gap-4">
             <img
               src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"}
               alt={currentUser?.name}
-              className="w-12 h-12 rounded-xl object-cover border-2 border-brand-green shadow-glow-green"
+              className="w-12 h-12 rounded-lg object-cover border border-slate-200 shadow-xs"
             />
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold text-white">{currentUser?.name}</h2>
-                <span className="font-sans tracking-wide text-xs bg-dark-700 text-brand-green border border-brand-green/30 px-2 py-0.5 rounded">
-                  {currentUser?.track === 'fresher' ? 'Fresher Candidate' : 'Experienced Engineer'}
+                <h2 className="text-xl font-bold text-slate-900 font-heading">{currentUser?.name}</h2>
+                <span className={`text-xs px-2.5 py-0.5 rounded font-medium ${
+                  currentUser?.track === 'fresher' 
+                    ? 'bg-teal-50 text-teal-800 border border-teal-200' 
+                    : 'bg-blue-50 text-blue-800 border border-blue-200'
+                }`}>
+                  {currentUser?.track === 'fresher' ? 'College Fresher' : 'Experienced Engineer'}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-sans tracking-wide mt-0.5">
+              <p className="text-xs text-slate-500 mt-1">
                 {currentUser?.college || currentUser?.currentCompany || "Developer Profile"} 
                 {currentUser?.cgpa ? ` • ${currentUser.cgpa} CGPA` : (currentUser?.yearsOfExperience ? ` • ${currentUser.yearsOfExperience} YoE` : "")}
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 mt-4 lg:mt-0">
+          <div className="flex flex-wrap items-center gap-6 mt-2 lg:mt-0">
             {currentUser?.githubUsername && (
-              <a href={`https://github.com/${currentUser.githubUsername}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span className="text-sm font-sans tracking-wide">{currentUser.githubUsername}</span>
+              <a 
+                href={`https://github.com/${currentUser.githubUsername}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                <svg className="w-4 h-4 fill-current text-slate-700" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span className="text-xs font-mono">{currentUser.githubUsername}</span>
               </a>
             )}
             {currentUser?.contestRating && (
               <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
+                <Trophy className="w-4 h-4 text-amber-500" />
                 <div>
-                  <div className="text-sm font-bold text-white">{currentUser.contestRating}</div>
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-sans tracking-wide">Rating</div>
+                  <div className="text-sm font-bold text-slate-900 font-mono">{currentUser.contestRating}</div>
+                  <div className="text-[10px] text-slate-500 uppercase tracking-wider font-mono">Rating</div>
                 </div>
               </div>
             )}
             {currentUser?.projectsCompleted !== undefined && (
               <div className="flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-brand-green" />
+                <Briefcase className="w-4 h-4 text-teal-600" />
                 <div>
-                  <div className="text-sm font-bold text-white">{currentUser.projectsCompleted}</div>
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-sans tracking-wide">Projects</div>
+                  <div className="text-sm font-bold text-slate-900 font-mono">{currentUser.projectsCompleted}</div>
+                  <div className="text-[10px] text-slate-500 uppercase tracking-wider font-mono">Projects</div>
                 </div>
               </div>
             )}
@@ -118,13 +127,13 @@ export default function DeveloperDashboard({
         </div>
 
         {/* Live Interactive Skills Tag Cloud & Radar Grid */}
-        <div className="mt-5 pt-4 border-t border-dark-700/80 grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="mt-5 pt-4 border-t border-slate-200 grid grid-cols-1 lg:grid-cols-3 gap-5">
           
           {/* Left 2 Cols: Interactive Skills Cloud */}
           <div className="lg:col-span-2 space-y-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-1">
-              <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5 text-brand-green" />
+              <p className="text-xs font-mono text-slate-600 uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+                <Code className="w-3.5 h-3.5 text-teal-600" />
                 Your Verified Skill Profile ({currentUser?.skills?.length || 0}):
               </p>
 
@@ -142,15 +151,15 @@ export default function DeveloperDashboard({
               </form>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto p-3 bg-dark-850 rounded-xl border border-dark-700/80">
+            <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto p-3 bg-slate-50 rounded-lg border border-slate-200">
               {currentUser?.skills?.map(skill => (
                 <span key={skill} className="badge-matched text-xs group">
-                  <CheckCircle2 className="w-3 h-3 text-brand-green" />
+                  <CheckCircle2 className="w-3 h-3 text-teal-700" />
                   {skill}
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(skill)}
-                    className="hover:text-rose-400 opacity-60 group-hover:opacity-100 ml-1"
+                    className="hover:text-rose-700 opacity-60 group-hover:opacity-100 ml-1 transition-opacity"
                     title="Remove skill"
                   >
                     <X className="w-3 h-3" />
@@ -159,7 +168,7 @@ export default function DeveloperDashboard({
               ))}
             </div>
             
-            <p className="text-[11px] text-slate-500 font-sans tracking-wide">
+            <p className="text-[11px] text-slate-500">
               💡 Tip: Adding or removing skills updates your placement readiness scores and company fit matrices in real time.
             </p>
           </div>
@@ -173,22 +182,22 @@ export default function DeveloperDashboard({
 
       </div>
 
-      {/* Top Navigation Tabs */}
-      <div className="flex overflow-x-auto gap-2 bg-dark-800 p-1.5 rounded-xl border border-dark-700 scrollbar-hide">
+      {/* Top Navigation Tabs - Bento Filter Row */}
+      <div className="flex overflow-x-auto gap-1.5 bg-white p-1 rounded-lg border border-slate-200 shadow-xs">
         {[
           { id: 'profile', icon: <Code className="w-4 h-4" />, label: 'Skill Profile' },
           { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Explore Contests' },
           { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
           { id: 'proposals', icon: <FileText className="w-4 h-4" />, label: 'Hiring Proposals' },
-          { id: 'ml-hub', icon: <Sparkles className="w-4 h-4 text-brand-green" />, label: 'AI Models Hub' }
+          { id: 'ml-hub', icon: <Sparkles className="w-4 h-4 text-teal-600" />, label: 'AI Models Hub' }
         ].map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-sans tracking-wide font-medium transition-all ${
+            className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-3 py-2 rounded text-xs font-semibold transition-all ${
               activeTab === tab.id
-                ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-glow-green'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-dark-750'
+                ? 'bg-blue-50 text-blue-800 border border-blue-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
             {tab.icon}
@@ -206,7 +215,7 @@ export default function DeveloperDashboard({
             center: { opacity: 1, x: 0, position: 'relative' },
             exit: (direction) => ({ opacity: 0, x: direction < 0 ? 50 : -50, position: 'absolute', width: '100%' }),
           }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           custom={activeSubTrack === 'on-campus' ? -1 : 1}
         >
           <div key="on-campus">

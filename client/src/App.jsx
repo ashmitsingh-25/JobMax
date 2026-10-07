@@ -146,11 +146,11 @@ export default function App() {
   };
 
   if (authLoading) {
-    return <div className="min-h-screen bg-dark-900 flex items-center justify-center text-brand-green">Loading...</div>;
+    return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-blue-600 font-medium">Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-brand-green selection:text-black">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
       
       {/* Top Navigation Bar */}
       <Navbar
