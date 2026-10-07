@@ -75,7 +75,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
             </span>
             <span className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <TextLoop
-                className='overflow-y-clip text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex pb-1'
+                className='overflow-y-visible text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex justify-center w-[280px] sm:w-[440px] pb-1'
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 variants={{
                   initial: { y: 20, opacity: 0, filter: 'blur(4px)' },
@@ -83,9 +83,9 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   exit: { y: -20, opacity: 0, filter: 'blur(4px)' },
                 }}
               >
-                <span>What You Know</span>
-                <span>Academic Knowledge</span>
-                <span>Your Current Skills</span>
+                <span className="whitespace-nowrap">What You Know</span>
+                <span className="whitespace-nowrap">Academic Knowledge</span>
+                <span className="whitespace-nowrap">Your Current Skills</span>
               </TextLoop>
               <span className="text-white">&amp; What Tech Demands</span>
             </span>
@@ -202,13 +202,13 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
                 <InfiniteSlider gap={48} speed={30}>
-                  <img src="https://logo.clearbit.com/google.com" alt="Google" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/netflix.com" alt="Netflix" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/meta.com" alt="Meta" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/atlassian.com" alt="Atlassian" className="h-[35px] w-auto object-contain" />
-                  <img src="https://logo.clearbit.com/stripe.com" alt="Stripe" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/google/4285F4" alt="Google" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/microsoft/5E5E5E" alt="Microsoft" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/amazon/FF9900" alt="Amazon" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/meta/0467DF" alt="Meta" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/atlassian/0052CC" alt="Atlassian" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/stripe/008CDD" alt="Stripe" className="h-[35px] w-auto object-contain" />
                 </InfiniteSlider>
               </InView>
             </div>

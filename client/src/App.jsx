@@ -140,17 +140,6 @@ export default function App() {
         />
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-dark-700/80 bg-dark-900/90 py-6 mt-12 text-center">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-green"></span>
-            <span className="text-slate-300 font-bold">JobMax</span>
-            <span>— AI Skill-Gap Analyzer Platform</span>
-          </div>
-          <p>Model calibrated on Tier-1 Recruitment data</p>
-        </div>
-      </footer>
 
     </div>
   );
