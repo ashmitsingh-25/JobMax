@@ -11,6 +11,22 @@ const buildUrl = (path) => {
   return `${base}${path}`;
 };
 
+const getAuthHeaders = (extraHeaders = {}) => {
+  const headers = { ...extraHeaders };
+  try {
+    const sessionStr = localStorage.getItem('jobmax_session');
+    if (sessionStr) {
+      const user = JSON.parse(sessionStr);
+      if (user && user.role) {
+        headers['x-user-role'] = user.role;
+      }
+    }
+  } catch (e) {
+    // Ignore
+  }
+  return headers;
+};
+
 // Fallback demo users for instant, 100% resilient login
 export const FALLBACK_DEMO_USERS = [
   {
@@ -486,6 +502,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/developer/upload-resume"), {
         method: "POST",
+        headers: getAuthHeaders(),
         body: formData
       });
       if (res.ok) return await res.json();
@@ -504,7 +521,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/developer/analyze-oncampus"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ studentProfile, collegeId })
       });
       if (res.ok) return await res.json();
@@ -518,7 +535,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/developer/analyze-offcampus"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ studentProfile })
       });
       if (res.ok) return await res.json();
@@ -546,7 +563,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/developer/career-growth"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ devProfile })
       });
       if (res.ok) return await res.json();
@@ -578,7 +595,9 @@ export const api = {
   // Company AI Analytics
   getCompanyRoles: async () => {
     try {
-      const res = await fetch(buildUrl("/company/roles"));
+      const res = await fetch(buildUrl("/company/roles"), {
+        headers: getAuthHeaders()
+      });
       if (res.ok) return await res.json();
     } catch (e) {
       console.warn("getCompanyRoles fallback:", e);
@@ -614,7 +633,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/company/roles"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify(roleData)
       });
       if (res.ok) return await res.json();
@@ -628,7 +647,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/company/analyze-gap"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ roleId, customRoleRequirements })
       });
       if (res.ok) return await res.json();
@@ -653,7 +672,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/company/source-candidates"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify(params)
       });
       if (res.ok) return await res.json();
@@ -704,6 +723,7 @@ export const api = {
     try {
       const res = await fetch(buildUrl("/company/batch-resume-upload"), {
         method: "POST",
+        headers: getAuthHeaders(),
         body: formData
       });
       if (res.ok) return await res.json();

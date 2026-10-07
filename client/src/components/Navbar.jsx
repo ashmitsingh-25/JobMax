@@ -4,8 +4,6 @@ import { api, FALLBACK_DEMO_USERS } from '../services/api';
 
 export default function Navbar({
   currentUser,
-  currentPortal,
-  setCurrentPortal,
   onSwitchUser,
   onLogout,
   onOpenOnboarding
@@ -56,38 +54,22 @@ export default function Navbar({
               </div>
             </div>
 
-            {/* Portal Switcher Tabs (If logged in) */}
+            {/* Active Portal Indicator */}
             {currentUser && (
-              <div className="hidden md:flex items-center bg-dark-850 p-1 rounded-lg border border-dark-700">
-                <button
-                  onClick={() => setCurrentPortal('developer')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    currentPortal === 'developer'
-                      ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Code className="w-3.5 h-3.5" />
-                  Developer Portal
-                  {currentUser.role === 'developer' && (
+              <div className="hidden md:flex items-center bg-dark-850 px-3.5 py-1.5 rounded-lg border border-dark-700">
+                {currentUser.role === 'developer' ? (
+                  <div className="flex items-center gap-2 text-xs font-medium text-brand-green">
+                    <Code className="w-3.5 h-3.5" />
+                    Developer Portal
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
-                  )}
-                </button>
-
-                <button
-                  onClick={() => setCurrentPortal('company')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    currentPortal === 'company'
-                      ? 'bg-dark-700 text-brand-cyan border border-brand-cyan/30 shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Building2 className="w-3.5 h-3.5" />
-                  Company Portal
-                  {currentUser.role === 'company' && (
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 text-xs font-medium text-brand-cyan">
+                    <Building2 className="w-3.5 h-3.5" />
+                    Company Portal
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan"></span>
-                  )}
-                </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

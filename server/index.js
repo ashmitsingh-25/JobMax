@@ -6,6 +6,7 @@ import developerRoutes from "./routes/developer.js";
 import companyRoutes from "./routes/company.js";
 import placementRoutes from "./routes/placement.js";
 import jobsRoutes from "./routes/jobs.js";
+import { requireDeveloper, requireCompany } from "./middleware/authMiddleware.js";
 import { SKILLS_TAXONOMY, ALL_SKILLS_FLAT } from "./data/skillsTaxonomy.js";
 
 dotenv.config();
@@ -20,8 +21,8 @@ app.use(express.urlencoded({ extended: true, limit: "25mb" }));
 
 // Route registrations
 app.use("/api/auth", authRoutes);
-app.use("/api/developer", developerRoutes);
-app.use("/api/company", companyRoutes);
+app.use("/api/developer", requireDeveloper, developerRoutes);
+app.use("/api/company", requireCompany, companyRoutes);
 app.use("/api/placement", placementRoutes);
 app.use("/api/jobs", jobsRoutes);
 

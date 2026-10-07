@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingHero from './components/LandingHero';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
@@ -6,10 +7,51 @@ import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
 import { api, FALLBACK_DEMO_USERS } from './services/api';
 
+// Protected Route Component
+const ProtectedRoute = ({ currentUser, allowedRole, children }) => {
+  if (!currentUser) {
+    return <Navigate to="/" replace />;
+  }
+  
+  if (currentUser.role !== allowedRole) {
+    // Redirect to their proper portal if they try to access the wrong one
+    return <Navigate to={`/${currentUser.role}`} replace />;
+  }
+
+  return children;
+};
+
 export default function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [currentPortal, setCurrentPortal] = useState('developer'); // 'developer' | 'company'
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Initialize state from localStorage if available
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('jobmax_session');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { return null; }
+    }
+    return null;
+  });
+  
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+
+  // Persist user session whenever it changes
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('jobmax_session', JSON.stringify(currentUser));
+      
+      // Auto redirect to portal if logged in and on landing page
+      if (location.pathname === '/') {
+        navigate(`/${currentUser.role}`, { replace: true });
+      }
+    } else {
+      localStorage.removeItem('jobmax_session');
+      if (location.pathname !== '/') {
+        navigate('/', { replace: true });
+      }
+    }
+  }, [currentUser, navigate, location.pathname]);
 
   // Quick login handler for demo accounts
   const handleQuickLogin = async (userId) => {
@@ -17,7 +59,6 @@ export default function App() {
       const res = await api.switchDemoUser(userId);
       if (res && res.success && res.user) {
         setCurrentUser(res.user);
-        setCurrentPortal(res.user.role || 'developer');
         return;
       }
     } catch (err) {
@@ -27,7 +68,6 @@ export default function App() {
     // Instant local fallback
     const fallbackUser = (FALLBACK_DEMO_USERS && FALLBACK_DEMO_USERS.find(u => u.id === userId)) || FALLBACK_DEMO_USERS[0];
     setCurrentUser(fallbackUser);
-    setCurrentPortal(fallbackUser.role || 'developer');
   };
 
   // Custom role selection & registration from landing hero
@@ -59,7 +99,6 @@ export default function App() {
     };
 
     setCurrentUser(userObj);
-    setCurrentPortal(role);
 
     // If developer, prompt onboarding classification modal
     if (role === 'developer') {
@@ -99,11 +138,8 @@ export default function App() {
       {/* Top Navigation Bar */}
       <Navbar
         currentUser={currentUser}
-        currentPortal={currentPortal}
-        setCurrentPortal={setCurrentPortal}
         onSwitchUser={(user) => {
           setCurrentUser(user);
-          setCurrentPortal(user.role);
         }}
         onLogout={handleLogout}
         onOpenOnboarding={() => setIsOnboardingOpen(true)}
@@ -111,22 +147,49 @@ export default function App() {
 
       {/* Main App Content View */}
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {!currentUser ? (
-          <LandingHero
-            onSelectRole={handleSelectRole}
-            onQuickLogin={handleQuickLogin}
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              !currentUser ? (
+                <LandingHero
+                  onSelectRole={handleSelectRole}
+                  onQuickLogin={handleQuickLogin}
+                />
+              ) : (
+                <Navigate to={`/${currentUser.role}`} replace />
+              )
+            } 
           />
-        ) : currentPortal === 'developer' ? (
-          <DeveloperDashboard
-            currentUser={currentUser}
-            onUpdateUserSkills={handleUpdateUserSkills}
-            onOpenOnboarding={() => setIsOnboardingOpen(true)}
+
+          <Route 
+            path="/developer/*" 
+            element={
+              <ProtectedRoute currentUser={currentUser} allowedRole="developer">
+                <DeveloperDashboard
+                  currentUser={currentUser}
+                  onUpdateUserSkills={handleUpdateUserSkills}
+                  onOpenOnboarding={() => setIsOnboardingOpen(true)}
+                />
+              </ProtectedRoute>
+            } 
           />
-        ) : (
-          <CompanyDashboard
-            currentUser={currentUser}
+
+          <Route 
+            path="/company/*" 
+            element={
+              <ProtectedRoute currentUser={currentUser} allowedRole="company">
+                <CompanyDashboard currentUser={currentUser} />
+              </ProtectedRoute>
+            } 
           />
-        )}
+
+          {/* Catch all route - redirects appropriately */}
+          <Route 
+            path="*" 
+            element={<Navigate to={currentUser ? `/${currentUser.role}` : "/"} replace />} 
+          />
+        </Routes>
       </main>
 
       {/* Developer Onboarding / Classification Modal */}
@@ -139,7 +202,6 @@ export default function App() {
           initialSubTrack={currentUser?.subTrack || 'on-campus'}
         />
       )}
-
 
     </div>
   );
