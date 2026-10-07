@@ -13,51 +13,38 @@ import {
   Mail, 
   User, 
   Sparkles,
-  ShieldCheck,
-  Eye,
-  EyeOff
+  ChevronRight,
+  Github
 } from 'lucide-react';
 import { FALLBACK_DEMO_USERS } from '../services/api';
 import { auth, googleProvider, githubProvider } from '../firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
 export default function LoginPage({ onSelectRole }) {
-  // Modal state: { role: 'company' | 'developer', mode: 'login' | 'signup' | 'trial' | 'contact' } | null
-  const [modalConfig, setModalConfig] = useState(null);
+  // Modal state
+  const [modalConfig, setModalConfig] = useState(null); 
+  // modalConfig: { role: 'company' | 'developer', mode: 'login' | 'signup' | 'trial' | 'contact' } | null
 
   // Form states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [developerTrack, setDeveloperTrack] = useState('fresher'); // 'fresher' | 'experienced'
   const [fresherSubTrack, setFresherSubTrack] = useState('on-campus'); // 'on-campus' | 'off-campus'
   const [collegeName, setCollegeName] = useState('Indian Institute of Technology (IIT) Delhi');
-  const [loading, setLoading] = useState(false);
-  const [authError, setAuthError] = useState('');
 
-  // Open modal
+  // Quick helper to open modal
   const openModal = (role, mode = 'login') => {
     setModalConfig({ role, mode });
     setEmail('');
     setPassword('');
     setName('');
-    setAuthError('');
     setCompanyName(role === 'company' ? 'Microsoft' : '');
   };
 
   const closeModal = () => {
     setModalConfig(null);
-    setAuthError('');
-  };
-
-  // Instant 1-Click Demo Profiles selector
-  const handleDemoSelect = (userId) => {
-    const user = FALLBACK_DEMO_USERS.find(u => u.id === userId) || FALLBACK_DEMO_USERS[0];
-    if (user && onSelectRole) {
-      onSelectRole(user.role, user);
-    }
   };
 
   // Form submission handler
@@ -67,12 +54,9 @@ export default function LoginPage({ onSelectRole }) {
 
     const { role, mode } = modalConfig;
     if (!email || !password) {
-      setAuthError("Please enter both email and password.");
+      alert("Please enter both email and password.");
       return;
     }
-
-    setLoading(true);
-    setAuthError('');
 
     try {
       let userCredential;
@@ -94,8 +78,6 @@ export default function LoginPage({ onSelectRole }) {
           track: developerTrack,
           subTrack: isFresher ? fresherSubTrack : undefined,
           college: isFresher ? collegeName : undefined,
-          avatar: user.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-          skills: ['Data Structures & Algorithms', 'React', 'JavaScript', 'Node.js']
         });
       } else {
         onSelectRole('company', {
@@ -103,45 +85,17 @@ export default function LoginPage({ onSelectRole }) {
           name: name || user.displayName || email.split('@')[0],
           uid: user.uid,
           role: 'company',
-          companyName: companyName || 'Enterprise Partner',
-          avatar: user.photoURL || 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150'
+          companyName: companyName || 'Microsoft'
         });
       }
     } catch (error) {
       console.error("Firebase Auth Error:", error);
-      if (error.code === 'auth/api-key-not-valid' || error.message?.includes('api-key')) {
-        if (role === 'developer') {
-          onSelectRole('developer', {
-            email: email,
-            name: name || email.split('@')[0],
-            uid: `dev_${Date.now()}`,
-            role: 'developer',
-            track: developerTrack,
-            subTrack: fresherSubTrack,
-            college: collegeName,
-            skills: ['Data Structures & Algorithms', 'React', 'JavaScript']
-          });
-        } else {
-          onSelectRole('company', {
-            email: email,
-            name: name || email.split('@')[0],
-            uid: `comp_${Date.now()}`,
-            role: 'company',
-            companyName: companyName || 'Company'
-          });
-        }
-      } else {
-        setAuthError(error.message || "Authentication failed. Please check credentials.");
-      }
-    } finally {
-      setLoading(false);
+      alert(error.message);
     }
   };
 
   const handleSocialLogin = async (provider) => {
     if (!modalConfig) return;
-    setLoading(true);
-    setAuthError('');
     try {
       const userCredential = await signInWithPopup(auth, provider);
       const user = userCredential.user;
@@ -157,8 +111,6 @@ export default function LoginPage({ onSelectRole }) {
           track: developerTrack,
           subTrack: isFresher ? fresherSubTrack : undefined,
           college: isFresher ? collegeName : undefined,
-          avatar: user.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-          skills: ['Data Structures & Algorithms', 'React', 'JavaScript', 'Node.js']
         });
       } else {
         onSelectRole('company', {
@@ -166,188 +118,158 @@ export default function LoginPage({ onSelectRole }) {
           name: user.displayName || user.email.split('@')[0],
           uid: user.uid,
           role: 'company',
-          companyName: companyName || 'Enterprise Partner',
-          avatar: user.photoURL || 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150'
+          companyName: companyName || 'Company'
         });
       }
     } catch (error) {
       console.error("Firebase Social Login Error:", error);
-      if (error.code === 'auth/api-key-not-valid' || error.message?.includes('api-key')) {
-        const { role } = modalConfig;
-        if (role === 'developer') {
-          handleDemoSelect('user-fresher-1');
-        } else {
-          handleDemoSelect('user-company-1');
-        }
-      } else {
-        setAuthError(error.message || "Social login cancelled.");
-      }
-    } finally {
-      setLoading(false);
+      alert(error.message);
     }
-  };
-
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between relative overflow-hidden font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-white text-neutral-900 flex flex-col justify-between relative overflow-hidden font-sans selection:bg-[#00EA64]/30 selection:text-black">
       
-      {/* Top Header Bar */}
-      <header className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 pt-6 pb-4 flex items-center justify-between border-b border-slate-200/80 bg-white shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-mono font-bold shadow-xs">
-            <Terminal className="w-4 h-4 text-white" />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-heading text-lg font-bold text-slate-900 tracking-tight">
-              Job<span className="text-blue-600">Max</span>
-            </span>
-            <span className="text-[10px] font-mono font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
-              B2B PLATFORM
-            </span>
-          </div>
-        </div>
+      {/* Top Subtle Ambient Pastel Aura (Soft Pink / Purple / Cyan Blended Glow) */}
+      <div className="absolute top-0 left-0 right-0 h-64 sm:h-72 pointer-events-none z-0 overflow-hidden">
+        {/* Soft Pink / Violet Aura at top-left center */}
+        <div 
+          className="absolute -top-24 left-[38%] w-[520px] h-[340px] rounded-full blur-3xl opacity-40 transform -translate-x-1/2 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(244,114,182,0.45) 0%, rgba(216,180,254,0.3) 40%, transparent 70%)' }}
+        />
+        {/* Soft Cyan / Sky Aura at top-right center */}
+        <div 
+          className="absolute -top-24 right-[38%] w-[520px] h-[340px] rounded-full blur-3xl opacity-35 transform translate-x-1/2 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.4) 0%, rgba(147,197,253,0.25) 40%, transparent 70%)' }}
+        />
+      </div>
 
-        <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
-          <ShieldCheck className="w-4 h-4 text-teal-600" />
-          <span className="hidden sm:inline">256-bit Encrypted • SOC2 Type II Certified</span>
+      {/* Minimal Top Brand Bar */}
+      <header className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 pt-6 pb-2 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-black text-[#00EA64] flex items-center justify-center font-sans tracking-wide font-bold shadow-sm">
+            <Terminal className="w-4 h-4 text-[#00EA64]" />
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="font-sans tracking-wide text-lg font-bold text-neutral-900 tracking-tight">
+              Job<span className="text-[#00875a]">Max</span>
+            </span>
+            <span className="text-[10px] font-sans tracking-wide font-medium text-neutral-500 bg-neutral-100 border border-neutral-200 px-1.5 py-0.5 rounded">
+              v1.0
+            </span>
+          </div>
         </div>
       </header>
 
-      {/* Main Symmetrical Split-Screen */}
-      <main className="relative z-10 flex-grow flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="w-full">
+      {/* Main Split-Screen Section */}
+      <main className="relative z-10 flex-grow flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <div className="w-full relative">
           
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight font-heading">
-              Select Your Workspace
-            </h1>
-            <p className="text-slate-500 text-sm mt-1">
-              Choose your profile type to access benchmark intelligence, recruitment consoles, and skill analytics.
-            </p>
-          </div>
-
-          {/* Symmetrical Two-Column Bento Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {/* Symmetrical Two-Column Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 relative">
+            
+            {/* Center Vertical Divider (Desktop Only) */}
+            <div 
+              className="hidden md:block absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-[1px] bg-neutral-200 pointer-events-none"
+              aria-hidden="true"
+            />
 
             {/* LEFT COLUMN: For Companies */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <span className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-md">
-                    <Building2 className="w-3.5 h-3.5" />
-                    ENTERPRISE RECRUITMENT
+            <div className="flex flex-col items-center justify-between text-center px-6 sm:px-12 py-8 md:py-12 md:pr-16">
+              <div className="flex flex-col items-center">
+                
+                {/* BUSINESS Pill Badge */}
+                <div className="h-8 flex items-center justify-center mb-4">
+                  <span className="inline-block bg-black text-white text-[10px] font-bold tracking-[0.16em] uppercase px-3.5 py-1 rounded-full shadow-sm">
+                    BUSINESS
                   </span>
-                  <span className="text-xs text-slate-500 font-mono">500+ Companies</span>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-2 font-heading">
-                  For <span className="text-blue-600">Companies</span> & HR Teams
-                </h2>
+                {/* Heading */}
+                <h1 className="text-3xl sm:text-[34px] font-sans font-medium text-neutral-900 tracking-tight mb-4">
+                  For <span className="font-serif italic font-normal">Companies</span>
+                </h1>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Evaluate candidates with automated skill-gap benchmarks, multi-college batch calibration, salary predictions, and code verifications.
+                {/* Subtext */}
+                <p className="text-neutral-600 text-sm sm:text-[15px] leading-relaxed max-w-[420px] mb-8 font-normal">
+                  Thousands of companies have embraced the new way to hire and upskill developers across roles and throughout their careers.
                 </p>
 
-                <div className="space-y-2 mb-8">
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                    <span>Candidate Skill Radar & Code Verification</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                    <span>ML Salary Hike & SDE Success Predictor</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                    <span>On-Campus & Off-Campus Multi-Tier Talent Pool</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
+                {/* Black Action Button */}
                 <button
                   type="button"
                   onClick={() => openModal('company', 'login')}
-                  className="w-full btn-primary py-2.5 text-sm"
+                  className="bg-black hover:bg-neutral-800 active:scale-[0.98] text-white font-medium text-sm px-8 py-2.5 rounded-[6px] transition-all duration-150 shadow-sm hover:shadow"
                 >
-                  <Building2 className="w-4 h-4" />
-                  <span>Sign In as Recruiter</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                  Login
                 </button>
+              </div>
 
-                <div className="mt-3.5 flex items-center justify-center gap-3 text-xs text-slate-500">
-                  <button 
-                    type="button"
-                    onClick={() => openModal('company', 'trial')}
-                    className="text-blue-600 hover:underline font-medium"
-                  >
-                    Start Free Trial
-                  </button>
-                  <span>•</span>
+              {/* Bottom Footer Section */}
+              <div className="mt-14 sm:mt-16 text-center">
+                <p className="text-neutral-500 text-xs sm:text-[13px] mb-1.5 font-normal">
+                  Don't have an account?
+                </p>
+                <div className="text-xs sm:text-[13px]">
                   <button 
                     type="button"
                     onClick={() => openModal('company', 'contact')}
-                    className="text-slate-600 hover:text-slate-900 hover:underline"
+                    className="text-[#00875a] hover:underline font-semibold"
                   >
-                    Contact Enterprise Sales
+                    Contact sales
+                  </button>
+                  <span className="text-neutral-500 font-normal"> or </span>
+                  <button 
+                    type="button"
+                    onClick={() => openModal('company', 'trial')}
+                    className="text-[#00875a] hover:underline font-semibold"
+                  >
+                    Get free trial
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: For Developers */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <span className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold px-2.5 py-1 rounded-md">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    DEVELOPER PORTAL
-                  </span>
-                  <span className="text-xs text-slate-500 font-mono">26,000+ Engineers</span>
-                </div>
+            {/* Mobile Horizontal Divider */}
+            <div className="block md:hidden w-full h-[1px] bg-neutral-200 my-4" />
 
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-2 font-heading">
-                  For <span className="text-teal-700">Developers</span> & Students
+            {/* RIGHT COLUMN: For Developers */}
+            <div className="flex flex-col items-center justify-between text-center px-6 sm:px-12 py-8 md:py-12 md:pl-16">
+              <div className="flex flex-col items-center">
+                
+                {/* Spacer to align baseline with left badge */}
+                <div className="h-8 mb-4 hidden md:block" aria-hidden="true" />
+
+                {/* Heading */}
+                <h2 className="text-3xl sm:text-[34px] font-sans font-medium text-neutral-900 tracking-tight mb-4">
+                  For <span className="font-serif italic font-normal">Developers</span>
                 </h2>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Benchmark your technical skills against actual hiring bars, close identified gaps, practice targeted contests, and receive direct company proposals.
+                {/* Subtext */}
+                <p className="text-neutral-600 text-sm sm:text-[15px] leading-relaxed max-w-[390px] mb-8 font-normal">
+                  Join over 26 million developers, practice coding skills, prepare for interviews, and get hired.
                 </p>
 
-                <div className="space-y-2 mb-8">
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 flex-shrink-0" />
-                    <span>Personalized Skill Radar vs Company Bar</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 flex-shrink-0" />
-                    <span>Campus Placement Insights (IIT, BITS, NITs)</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 flex-shrink-0" />
-                    <span>Direct Company Proposals & Real-World Projects</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
+                {/* Black Action Button */}
                 <button
                   type="button"
                   onClick={() => openModal('developer', 'login')}
-                  className="w-full bg-teal-700 hover:bg-teal-800 text-white font-medium py-2.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2 shadow-xs active:scale-[0.99]"
+                  className="bg-black hover:bg-neutral-800 active:scale-[0.98] text-white font-medium text-sm px-8 py-2.5 rounded-[6px] transition-all duration-150 shadow-sm hover:shadow"
                 >
-                  <Terminal className="w-4 h-4" />
-                  <span>Sign In as Developer</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                  Login
                 </button>
+              </div>
 
-                <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-slate-500">
-                  <span>Don't have an account?</span>
+              {/* Bottom Footer Section */}
+              <div className="mt-14 sm:mt-16 text-center">
+                <p className="text-neutral-500 text-xs sm:text-[13px] mb-1.5 font-normal">
+                  Don't have an account?
+                </p>
+                <div className="text-xs sm:text-[13px]">
                   <button 
                     type="button"
                     onClick={() => openModal('developer', 'signup')}
-                    className="text-teal-700 hover:underline font-semibold"
+                    className="text-[#00875a] hover:underline font-semibold"
                   >
-                    Create Free Profile
+                    Sign up.
                   </button>
                 </div>
               </div>
@@ -357,74 +279,67 @@ export default function LoginPage({ onSelectRole }) {
         </div>
       </main>
 
-      {/* 1-Click Demo Profiles Bar */}
-      <div className="relative z-10 pb-8 text-center px-4">
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-lg shadow-xs text-xs font-mono text-slate-600">
-          <span className="flex items-center gap-1.5 text-slate-800 font-semibold mr-1">
+      {/* Floating Subtle Demo Toolbar for Evaluators */}
+      <div className="relative z-10 pb-6 text-center px-4">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-neutral-50/90 backdrop-blur-sm border border-neutral-200/90 px-4 py-2 rounded-full shadow-sm text-xs font-sans tracking-wide text-neutral-600">
+          <span className="flex items-center gap-1 text-neutral-800 font-semibold mr-1">
             <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
             1-Click Demo Profiles:
           </span>
           <button
-            type="button"
             onClick={() => handleDemoSelect('user-fresher-1')}
-            className="hover:text-blue-600 hover:bg-slate-50 px-2 py-1 rounded transition-colors"
+            className="hover:text-black hover:bg-white px-2 py-1 rounded transition-colors"
           >
             🎓 Fresher (IIT Delhi)
           </button>
-          <span className="text-slate-300">·</span>
+          <span className="text-neutral-300">·</span>
           <button
-            type="button"
             onClick={() => handleDemoSelect('user-fresher-2')}
-            className="hover:text-blue-600 hover:bg-slate-50 px-2 py-1 rounded transition-colors"
+            className="hover:text-black hover:bg-white px-2 py-1 rounded transition-colors"
           >
             💼 Fresher (BITS Off-Campus)
           </button>
-          <span className="text-slate-300">·</span>
+          <span className="text-neutral-300">·</span>
           <button
-            type="button"
             onClick={() => handleDemoSelect('user-exp-1')}
-            className="hover:text-blue-600 hover:bg-slate-50 px-2 py-1 rounded transition-colors"
+            className="hover:text-black hover:bg-white px-2 py-1 rounded transition-colors"
           >
-            🚀 SDE II (Swiggy 4 YoE)
+            🚀 SDE II (Swiggy 3.5 YoE)
           </button>
-          <span className="text-slate-300">·</span>
+          <span className="text-neutral-300">·</span>
           <button
-            type="button"
             onClick={() => handleDemoSelect('user-company-1')}
-            className="hover:text-blue-700 hover:bg-blue-50 text-blue-600 font-semibold px-2 py-1 rounded transition-colors"
+            className="hover:text-black hover:bg-white px-2 py-1 rounded transition-colors font-medium text-[#00875a]"
           >
             🏢 Recruiter (Microsoft)
           </button>
         </div>
       </div>
 
-      {/* Light Clean Modal Overlay */}
+      {/* Minimalist Clean Modal Overlay */}
       {modalConfig && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
-            className="relative w-full max-w-md bg-white border border-slate-200 rounded-lg p-6 sm:p-7 shadow-lg animate-in zoom-in-95 duration-150"
+            className="relative w-full max-w-md bg-white border border-neutral-200 rounded-2xl p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-md transition-colors"
+              className="absolute top-5 right-5 text-neutral-400 hover:text-neutral-700 p-1 rounded-md transition-colors"
               aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Modal Header */}
-            <div className="text-center mb-5">
-              <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded mb-2 ${
-                modalConfig.role === 'company' 
-                  ? 'bg-blue-50 border border-blue-200 text-blue-800' 
-                  : 'bg-teal-50 border border-teal-200 text-teal-800'
-              }`}>
-                {modalConfig.role === 'company' ? 'ENTERPRISE HIRING' : 'DEVELOPER PORTAL'}
-              </span>
-              
-              <h3 className="text-xl font-bold text-slate-900 font-heading">
+            <div className="text-center mb-6">
+              {modalConfig.role === 'company' && (
+                <span className="inline-block bg-black text-white text-[9px] font-bold tracking-[0.16em] uppercase px-2.5 py-0.5 rounded-full mb-2">
+                  BUSINESS
+                </span>
+              )}
+              <h3 className="text-xl sm:text-2xl font-sans font-semibold text-neutral-900">
                 {modalConfig.mode === 'signup' 
                   ? 'Create Developer Account'
                   : modalConfig.mode === 'trial' 
@@ -432,30 +347,22 @@ export default function LoginPage({ onSelectRole }) {
                   : modalConfig.mode === 'contact'
                   ? 'Contact Enterprise Sales'
                   : modalConfig.role === 'company' 
-                  ? 'Log in to Recruiter Portal' 
-                  : 'Log in to Developer Hub'}
+                  ? 'Log in as Company' 
+                  : 'Log in as Developer'}
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-neutral-500 mt-1">
                 {modalConfig.role === 'company' 
                   ? 'Access candidate skill gap analytics & recruitment engine'
                   : 'Benchmark your skills against real company job bars'}
               </p>
             </div>
 
-            {/* Error Banner */}
-            {authError && (
-              <div className="mb-4 p-2.5 rounded-md bg-rose-50 border border-rose-200 text-rose-800 text-xs">
-                ⚠️ {authError}
-              </div>
-            )}
-
             {/* Social Login Options */}
-            <div className="mb-4 space-y-2">
+            <div className="mb-5 space-y-2">
               <button
                 type="button"
-                disabled={loading}
                 onClick={() => handleSocialLogin(googleProvider)}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors shadow-xs"
+                className="w-full flex items-center justify-center gap-2 p-2 rounded-lg bg-white border border-neutral-200 hover:bg-neutral-50 text-xs font-medium transition-colors text-neutral-700"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -467,66 +374,68 @@ export default function LoginPage({ onSelectRole }) {
               </button>
               <button
                 type="button"
-                disabled={loading}
                 onClick={() => handleSocialLogin(githubProvider)}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+                className="w-full flex items-center justify-center gap-2 p-2 rounded-lg bg-[#24292e] hover:bg-[#2c3137] text-white text-xs font-medium transition-colors"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <Github className="w-4 h-4" />
                 Continue with GitHub
               </button>
             </div>
 
-            <div className="relative flex py-1 items-center mb-4">
-              <div className="flex-grow border-t border-slate-200"></div>
-              <span className="flex-shrink mx-3 text-[10px] text-slate-400 font-mono uppercase">or email credentials</span>
-              <div className="flex-grow border-t border-slate-200"></div>
+            <div className="relative flex py-1 items-center mb-5">
+              <div className="flex-grow border-t border-neutral-200"></div>
+              <span className="flex-shrink mx-3 text-[10px] text-neutral-400 font-sans tracking-wide uppercase">or continue with credentials</span>
+              <div className="flex-grow border-t border-neutral-200"></div>
             </div>
 
             {/* Custom Input Form */}
-            <form onSubmit={handleFormSubmit} className="space-y-3">
+            <form onSubmit={handleFormSubmit} className="space-y-3.5">
+              {/* Name field for sign up / trial */}
               {(modalConfig.mode === 'signup' || modalConfig.mode === 'trial' || modalConfig.mode === 'contact') && (
                 <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">Full Name</label>
+                  <label className="block text-xs font-medium text-neutral-700 mb-1">Full Name</label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <User className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" />
                     <input
                       type="text"
                       placeholder="e.g. Alex Johnson"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="input-hr w-full pl-9"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                     />
                   </div>
                 </div>
               )}
 
+              {/* Company field */}
               {modalConfig.role === 'company' && (
                 <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">Company / Organization</label>
+                  <label className="block text-xs font-medium text-neutral-700 mb-1">Company Name</label>
                   <div className="relative">
-                    <Building2 className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Building2 className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" />
                     <input
                       type="text"
                       placeholder="e.g. Microsoft, Amazon, Google"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="input-hr w-full pl-9"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                     />
                   </div>
                 </div>
               )}
 
+              {/* Developer Track Selector for Sign Up */}
               {modalConfig.role === 'developer' && modalConfig.mode === 'signup' && (
-                <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-slate-700">Select Track</label>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-neutral-700">Select Track</label>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => setDeveloperTrack('fresher')}
-                      className={`py-1.5 px-3 rounded-md text-xs font-medium border text-center transition-all ${
+                      className={`py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
                         developerTrack === 'fresher' 
-                          ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold' 
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                          ? 'border-black bg-black text-white' 
+                          : 'border-neutral-200 text-neutral-600 hover:bg-neutral-50'
                       }`}
                     >
                       🎓 College Fresher
@@ -534,10 +443,10 @@ export default function LoginPage({ onSelectRole }) {
                     <button
                       type="button"
                       onClick={() => setDeveloperTrack('experienced')}
-                      className={`py-1.5 px-3 rounded-md text-xs font-medium border text-center transition-all ${
+                      className={`py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
                         developerTrack === 'experienced' 
-                          ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold' 
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                          ? 'border-black bg-black text-white' 
+                          : 'border-neutral-200 text-neutral-600 hover:bg-neutral-50'
                       }`}
                     >
                       🚀 Experienced (1-5+ YoE)
@@ -546,84 +455,75 @@ export default function LoginPage({ onSelectRole }) {
                 </div>
               )}
 
+              {/* Email field */}
               <div>
-                <label className="block text-xs font-medium text-slate-700 mb-1">
+                <label className="block text-xs font-medium text-neutral-700 mb-1">
                   {modalConfig.role === 'company' ? 'Work Email' : 'Email Address'}
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Mail className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" />
                   <input
                     type="email"
-                    required
-                    placeholder={modalConfig.role === 'company' ? 'recruiter@microsoft.com' : 'engineer@talent.io'}
+                    placeholder={modalConfig.role === 'company' ? 'recruiter@microsoft.com' : 'student@iitd.ac.in'}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="input-hr w-full pl-9"
+                    className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                   />
                 </div>
               </div>
 
+              {/* Password field */}
               <div>
-                <label className="block text-xs font-medium text-slate-700 mb-1">Password</label>
+                <label className="block text-xs font-medium text-neutral-700 mb-1">Password</label>
                 <div className="relative">
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Lock className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" />
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    required
+                    type="password"
                     placeholder="••••••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="input-hr w-full pl-9 pr-9"
+                    className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
                 </div>
               </div>
 
+              {/* Submit button */}
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full btn-primary py-2.5 mt-3"
+                className="w-full bg-black hover:bg-neutral-800 active:scale-[0.99] text-white font-medium text-xs sm:text-sm py-2.5 rounded-lg transition-all shadow-sm flex items-center justify-center gap-2 mt-4"
               >
                 <span>
-                  {loading ? 'Processing...' : modalConfig.mode === 'signup' 
+                  {modalConfig.mode === 'signup' 
                     ? 'Create Account & Enter'
                     : modalConfig.mode === 'trial'
                     ? 'Start Free Trial'
                     : 'Log In'}
                 </span>
-                {!loading && <ArrowRight className="w-4 h-4" />}
+                <ArrowRight className="w-4 h-4" />
               </button>
             </form>
 
             {/* Modal Footer Mode Switch */}
-            <div className="mt-3.5 pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
+            <div className="mt-4 pt-3 border-t border-neutral-100 text-center text-xs text-neutral-500">
               {modalConfig.mode === 'login' ? (
                 modalConfig.role === 'developer' ? (
                   <p>
                     Don't have an account?{' '}
                     <button 
-                      type="button"
                       onClick={() => openModal('developer', 'signup')}
-                      className="text-teal-700 font-semibold hover:underline"
+                      className="text-[#00875a] font-semibold hover:underline"
                     >
-                      Sign up free
+                      Sign up
                     </button>
                   </p>
                 ) : (
                   <p>
-                    New enterprise partner?{' '}
+                    Don't have an account?{' '}
                     <button 
-                      type="button"
                       onClick={() => openModal('company', 'trial')}
-                      className="text-blue-600 font-semibold hover:underline"
+                      className="text-[#00875a] font-semibold hover:underline"
                     >
-                      Get trial access
+                      Get free trial
                     </button>
                   </p>
                 )
@@ -631,9 +531,8 @@ export default function LoginPage({ onSelectRole }) {
                 <p>
                   Already have an account?{' '}
                   <button 
-                    type="button"
                     onClick={() => openModal(modalConfig.role, 'login')}
-                    className="text-blue-600 font-semibold hover:underline"
+                    className="text-[#00875a] font-semibold hover:underline"
                   >
                     Log in
                   </button>

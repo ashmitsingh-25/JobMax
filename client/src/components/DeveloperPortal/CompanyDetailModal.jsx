@@ -41,49 +41,50 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
     ? Math.round((matchedList.length / demanded.length) * 100) 
     : 70;
 
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-2xl rounded-xl p-6 sm:p-7 shadow-xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-dark-800 border border-dark-600 w-full max-w-2xl rounded-2xl p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         
         {/* Header */}
-        <div className="flex items-start justify-between pb-4 mb-5 border-b border-slate-200">
+        <div className="flex items-start justify-between pb-4 mb-5 border-b border-dark-700">
           <div className="flex items-center gap-3.5">
             <img
               src={companyRecord.companyLogo || "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100"}
               alt={companyRecord.company}
-              className="w-12 h-12 rounded-xl object-cover border border-slate-200 shadow-2xs"
+              className="w-12 h-12 rounded-xl object-cover border border-dark-600"
             />
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-display font-semibold text-xl text-slate-900">{companyRecord.company}</h3>
-                <span className="font-sans tracking-wide text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-md">
+                <h3 className="font-bold text-xl text-white">{companyRecord.company}</h3>
+                <span className="font-sans tracking-wide text-xs text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded">
                   {matchPercentage}% Fit Match
                 </span>
               </div>
-              <p className="text-xs text-slate-600 font-sans tracking-wide mt-0.5">{companyRecord.role}</p>
-              <div className="flex items-center gap-2 text-[11px] text-slate-500 font-sans tracking-wide mt-1">
-                <span>CTC: <strong className="text-slate-800">{companyRecord.ctcBand}</strong></span>
+              <p className="text-xs text-slate-300 font-sans tracking-wide mt-0.5">{companyRecord.role}</p>
+              <div className="flex items-center gap-2 text-[11px] text-slate-400 font-sans tracking-wide mt-1">
+                <span>CTC: <strong className="text-white">{companyRecord.ctcBand}</strong></span>
                 <span>•</span>
-                <span>Cutoff: <strong className="text-slate-800">{companyRecord.cgpaCutoff} CGPA</strong></span>
+                <span>Cutoff: <strong className="text-white">{companyRecord.cgpaCutoff} CGPA</strong></span>
                 <span>•</span>
-                <span className="text-teal-700 font-medium">{companyRecord.visitFrequency}</span>
+                <span className="text-brand-green">{companyRecord.visitFrequency}</span>
               </div>
             </div>
           </div>
 
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1 rounded-lg transition-colors">
+          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Comparison Overview */}
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6">
+        <div className="bg-dark-850 border border-dark-700 rounded-xl p-4 mb-6">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-sans tracking-wide text-slate-700 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+            <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-brand-green" />
               Skill Compatibility Breakdown:
             </p>
-            <span className="text-xs font-sans tracking-wide text-slate-600 font-medium">
+            <span className="text-xs font-sans tracking-wide text-slate-300">
               {matchedList.length} of {demanded.length} required competencies matched
             </span>
           </div>
@@ -92,8 +93,8 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
             
             {/* Matched */}
             <div className="space-y-2">
-              <span className="text-[11px] font-sans tracking-wide text-teal-700 flex items-center gap-1 font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
+              <span className="text-[11px] font-sans tracking-wide text-emerald-400 flex items-center gap-1 font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5" />
                 Your Verified Matches:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -104,15 +105,15 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-400 font-sans tracking-wide">No direct matches yet</span>
+                  <span className="text-xs text-slate-500 font-sans tracking-wide">No direct matches yet</span>
                 )}
               </div>
             </div>
 
             {/* Missing */}
             <div className="space-y-2">
-              <span className="text-[11px] font-sans tracking-wide text-rose-700 flex items-center gap-1 font-semibold">
-                <XCircle className="w-3.5 h-3.5 text-rose-600" />
+              <span className="text-[11px] font-sans tracking-wide text-rose-400 flex items-center gap-1 font-semibold">
+                <XCircle className="w-3.5 h-3.5" />
                 Missing Demanded Gaps:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -123,7 +124,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-teal-700 font-sans tracking-wide font-medium">Ready to clear all rounds!</span>
+                  <span className="text-xs text-emerald-400 font-sans tracking-wide">Ready to clear all rounds!</span>
                 )}
               </div>
             </div>
@@ -134,20 +135,20 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
         {/* Selection Rounds Breakdown */}
         {companyRecord.rounds && companyRecord.rounds.length > 0 && (
           <div className="space-y-3 mb-6">
-            <h4 className="font-display font-semibold text-sm text-slate-900 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-blue-600" />
+            <h4 className="font-bold text-sm text-white flex items-center gap-2">
+              <Clock className="w-4 h-4 text-brand-cyan" />
               Campus Recruitment Rounds & Evaluation Rubric
             </h4>
 
             <div className="space-y-2.5">
               {companyRecord.rounds.map((round, ri) => (
-                <div key={ri} className="card-hr p-3.5 flex items-start gap-3 bg-white">
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center font-display font-bold text-blue-600 text-xs flex-shrink-0">
+                <div key={ri} className="card-hr p-3.5 flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-dark-750 border border-brand-cyan/30 flex items-center justify-center font-sans tracking-wide font-bold text-brand-cyan text-xs flex-shrink-0">
                     R{ri + 1}
                   </div>
                   <div>
-                    <h5 className="font-semibold text-slate-900 text-xs">{round?.name || (typeof round === 'string' ? round : `Round ${ri+1}`)}</h5>
-                    <p className="text-xs text-slate-600 font-sans mt-0.5 leading-relaxed">{round?.description || ''}</p>
+                    <h5 className="font-semibold text-white text-xs">{round?.name || (typeof round === 'string' ? round : `Round ${ri+1}`)}</h5>
+                    <p className="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">{round?.description || ''}</p>
                   </div>
                 </div>
               ))}
@@ -158,14 +159,14 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
         {/* Recommended Flagship Projects for this Recruiter */}
         {companyRecord.recommendedProjects && companyRecord.recommendedProjects.length > 0 && (
           <div className="space-y-3 mb-6">
-            <h4 className="font-display font-semibold text-sm text-slate-900 flex items-center gap-2">
-              <Code className="w-4 h-4 text-purple-600" />
+            <h4 className="font-bold text-sm text-white flex items-center gap-2">
+              <Code className="w-4 h-4 text-brand-purple" />
               Tailored Flagship Projects for {companyRecord.company}
             </h4>
             <div className="space-y-2">
               {companyRecord.recommendedProjects.map((proj, pi) => (
-                <div key={pi} className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs text-slate-700 font-sans tracking-wide flex items-start gap-2">
-                  <Check className="w-3.5 h-3.5 text-teal-600 mt-0.5 flex-shrink-0" />
+                <div key={pi} className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs text-slate-200 font-sans tracking-wide flex items-start gap-2">
+                  <Check className="w-3.5 h-3.5 text-brand-green mt-0.5 flex-shrink-0" />
                   <span>{proj}</span>
                 </div>
               ))}
@@ -175,22 +176,22 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
 
         {/* Eligible Branches & Criteria */}
         {companyRecord.eligibleBranches && (
-          <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs font-sans tracking-wide text-slate-600 flex items-center justify-between mb-6">
+          <div className="bg-dark-850 p-3.5 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-slate-300 flex items-center justify-between mb-6">
             <div>
-              <span className="text-slate-400 uppercase text-[10px] font-semibold block">Eligible Branches:</span>
-              <span className="text-slate-900 font-medium">{companyRecord.eligibleBranches.join(", ")}</span>
+              <span className="text-slate-500 uppercase text-[10px] block">Eligible Branches:</span>
+              <span className="text-white">{companyRecord.eligibleBranches.join(", ")}</span>
             </div>
             {companyRecord.offersLastYear && (
               <div className="text-right">
-                <span className="text-slate-400 uppercase text-[10px] font-semibold block">Offers Last Year:</span>
-                <span className="text-teal-700 font-bold text-sm">{companyRecord.offersLastYear} Students</span>
+                <span className="text-slate-500 uppercase text-[10px] block">Offers Last Year:</span>
+                <span className="text-brand-green font-bold text-sm">{companyRecord.offersLastYear} Students</span>
               </div>
             )}
           </div>
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-dark-700">
           <button onClick={onClose} className="btn-secondary text-xs">
             Close
           </button>

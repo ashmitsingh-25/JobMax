@@ -38,30 +38,30 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white border border-slate-200/90 w-full max-w-lg rounded-xl p-6 sm:p-7 shadow-xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-dark-800 border border-dark-600 w-full max-w-lg rounded-2xl p-6 sm:p-7 shadow-2xl relative">
         
-        <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-4 mb-5 border-b border-dark-700">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 flex items-center justify-center">
               <Files className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-heading font-bold text-lg text-slate-900">Batch Resume Sourcing & Ranking</h3>
-              <p className="text-xs text-slate-500 font-sans">Upload multiple applicant resumes for automatic AI parsing</p>
+              <h3 className="font-bold text-lg text-white">Batch Resume Sourcing & Ranking</h3>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">Upload multiple applicant resumes for automatic AI parsing</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <div className="space-y-4">
-          <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs font-sans text-slate-600">
-            Target Role: <strong className="text-blue-700 font-medium">{selectedRole?.title || "Open Role"}</strong>
+          <div className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs font-sans tracking-wide text-slate-300">
+            Target Role: <strong className="text-brand-cyan">{selectedRole?.title || "Open Role"}</strong>
           </div>
 
-          <div className="border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-xl p-8 text-center bg-slate-50/50 transition-colors">
+          <div className="border-2 border-dashed border-dark-600 hover:border-brand-cyan/60 rounded-xl p-8 text-center bg-dark-850/50 transition-colors">
             <input
               type="file"
               multiple
@@ -71,34 +71,34 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
               className="hidden"
             />
             <label htmlFor="batch-files-input" className="cursor-pointer flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 mb-3 border border-blue-200">
-                <Upload className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-full bg-dark-750 flex items-center justify-center text-brand-cyan mb-3">
+                <Upload className="w-6 h-6" />
               </div>
-              <p className="text-xs font-semibold text-slate-800 mb-1 font-sans">
+              <p className="text-sm font-medium text-slate-200 mb-1">
                 {files.length > 0 ? `${files.length} resumes selected` : "Select batch candidate resumes (PDF/DOCX)"}
               </p>
-              <p className="text-[11px] text-slate-500 font-sans">
+              <p className="text-xs text-slate-500 font-sans tracking-wide">
                 Supports up to 15 files at once
               </p>
             </label>
           </div>
 
           {files.length > 0 && (
-            <div className="max-h-32 overflow-y-auto space-y-1 bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-xs font-sans text-slate-700">
+            <div className="max-h-32 overflow-y-auto space-y-1 bg-dark-850 p-2.5 rounded-lg border border-dark-700 text-xs font-sans tracking-wide text-slate-300">
               {files.map((f, i) => (
                 <div key={i} className="flex items-center justify-between py-0.5">
                   <span className="truncate max-w-[300px]">{f.name}</span>
-                  <span className="text-slate-400 font-mono text-[10px]">{(f.size / 1024).toFixed(0)} KB</span>
+                  <span className="text-slate-500 text-[10px]">{(f.size / 1024).toFixed(0)} KB</span>
                 </div>
               ))}
             </div>
           )}
 
           {message && (
-            <p className="text-xs font-sans text-rose-600">{message}</p>
+            <p className="text-xs font-sans tracking-wide text-rose-400">{message}</p>
           )}
 
-          <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
+          <div className="flex justify-end gap-3 pt-3 border-t border-dark-700">
             <button
               type="button"
               onClick={onClose}

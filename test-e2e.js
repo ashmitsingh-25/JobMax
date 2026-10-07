@@ -16,7 +16,7 @@ async function testEndpoints() {
     // 3. AI Bot #1: Placement Readiness Analyzer
     const readiness = await fetch("http://localhost:5000/api/developer/analyze-oncampus", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-user-role": "developer" },
       body: JSON.stringify({
         studentProfile: {
           skills: ["Data Structures & Algorithms", "C++", "Java", "Object-Oriented Programming", "Operating Systems", "Database Management Systems", "PostgreSQL"]
@@ -32,7 +32,7 @@ async function testEndpoints() {
     // 4. AI Bot #2: Career Growth Advisor (Experienced Track)
     const growth = await fetch("http://localhost:5000/api/developer/career-growth", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-user-role": "developer" },
       body: JSON.stringify({
         devProfile: {
           yearsOfExperience: 3.5,
@@ -49,7 +49,7 @@ async function testEndpoints() {
     // 5. Company Portal: Candidate Sourcing & Ranking
     const sourced = await fetch("http://localhost:5000/api/company/source-candidates", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-user-role": "company" },
       body: JSON.stringify({
         roleId: "role-1",
         filterCollegeTier: "all"
@@ -62,7 +62,7 @@ async function testEndpoints() {
     // 6. Resume NLP Extraction test
     const extracted = await fetch("http://localhost:5000/api/developer/upload-resume", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-user-role": "developer" },
       body: JSON.stringify({
         resumeText: "Experienced Software Engineer with 4 years of experience building microservices in Go, Java Spring Boot, and Kafka. Proficient in Docker, Kubernetes, PostgreSQL, Redis and System Design. CGPA: 9.1/10 from IIT Delhi."
       })

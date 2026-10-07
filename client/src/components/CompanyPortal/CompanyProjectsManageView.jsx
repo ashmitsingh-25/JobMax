@@ -84,114 +84,114 @@ export default function CompanyProjectsManageView({ currentUser }) {
     }
   };
 
-  if (loading) return <div className="text-center p-12 text-slate-500 font-sans text-sm">Loading projects...</div>;
+  if (loading) return <div className="text-center p-12 text-slate-400">Loading projects...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs">
+      <div className="flex justify-between items-center bg-dark-800 p-6 rounded-xl border border-dark-700 shadow-card-dark">
         <div>
-          <h2 className="text-lg font-heading font-bold text-slate-900 flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-blue-600" /> Real-World Projects
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <Briefcase className="w-5 h-5 text-brand-green" /> Real-World Projects
           </h2>
-          <p className="text-xs text-slate-500 font-sans mt-0.5">Assign projects to candidates to evaluate their hands-on skills.</p>
+          <p className="text-sm text-slate-400 mt-1">Assign projects to candidates to evaluate their hands-on skills.</p>
         </div>
-        <button onClick={() => setShowCreateModal(true)} className="btn-primary flex items-center gap-1.5 text-xs py-2 px-3">
-          <Plus className="w-3.5 h-3.5" /> Create Project
+        <button onClick={() => setShowCreateModal(true)} className="btn-primary flex items-center gap-2 text-sm">
+          <Plus className="w-4 h-4" /> Create Project
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map(project => (
-          <div key={project.id} className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between hover:border-blue-300 transition-all">
+          <div key={project.id} className="bg-dark-800 border border-dark-700 rounded-xl p-6 shadow-card-dark flex flex-col justify-between">
             <div>
-              <div className="flex justify-between items-start mb-2.5">
-                <h3 className="text-base font-heading font-bold text-slate-900">{project.name}</h3>
-                <span className="flex items-center gap-1 text-[10px] uppercase font-sans font-semibold tracking-wider px-2 py-0.5 rounded bg-teal-50 text-teal-700 border border-teal-200">
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-lg font-bold text-white">{project.name}</h3>
+                <span className="flex items-center gap-1 text-[10px] uppercase font-sans tracking-wide font-bold tracking-wider px-2 py-1 rounded bg-brand-green/10 text-brand-green border border-brand-green/30">
                   <Play className="w-3 h-3" /> {project.status}
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-sans mb-4 line-clamp-2">{project.description}</p>
+              <p className="text-sm text-slate-400 mb-4 line-clamp-2">{project.description}</p>
               
-              <div className="flex flex-wrap gap-1.5 mb-5">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {project.skills.slice(0, 3).map(skill => (
-                  <span key={skill} className="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-xs font-sans text-slate-700">
+                  <span key={skill} className="px-2 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-sans tracking-wide text-slate-300">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-3.5 border-t border-slate-100">
+            <div className="flex items-center justify-between pt-4 border-t border-dark-700">
               <div className="flex gap-4">
-                <div className="flex items-center gap-1.5 text-slate-500 text-xs font-sans">
-                  <Users className="w-3.5 h-3.5" /> <span className="font-mono font-semibold text-slate-800">{project.participants || 0}</span>
+                <div className="flex items-center gap-1.5 text-slate-400 text-sm">
+                  <Users className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{project.participants || 0}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-slate-500 text-xs font-sans">
-                  <Clock className="w-3.5 h-3.5" /> <span className="font-sans text-slate-700">{project.duration}</span>
+                <div className="flex items-center gap-1.5 text-slate-400 text-sm">
+                  <Clock className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{project.duration}</span>
                 </div>
               </div>
-              <button onClick={() => setManagingProject(project)} className="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 text-xs font-medium font-sans">
-                <Edit2 className="w-3.5 h-3.5" /> Manage
+              <button onClick={() => setManagingProject(project)} className="text-brand-cyan hover:text-white transition-colors flex items-center gap-1 text-sm font-medium">
+                <Edit2 className="w-4 h-4" /> Manage
               </button>
             </div>
           </div>
         ))}
 
-        <button onClick={() => setShowCreateModal(true)} className="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-slate-500 hover:text-blue-600 hover:border-blue-400 hover:bg-slate-50/50 transition-all min-h-[200px]">
-          <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center mb-3 border border-slate-200 text-slate-600">
-            <Plus className="w-5 h-5" />
+        <button onClick={() => setShowCreateModal(true)} className="border-2 border-dashed border-dark-600 rounded-xl p-8 flex flex-col items-center justify-center text-slate-500 hover:text-brand-green hover:border-brand-green/50 hover:bg-dark-800/50 transition-all min-h-[250px]">
+          <div className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center mb-4 border border-dark-600">
+            <Plus className="w-6 h-6" />
           </div>
-          <h3 className="font-heading font-bold text-base text-slate-800 mb-1">Create New Project</h3>
-          <p className="text-xs font-sans text-slate-500 text-center max-w-xs">Define a project for candidates to build and demonstrate their capabilities.</p>
+          <h3 className="font-bold text-lg text-slate-300 mb-1">Create New Project</h3>
+          <p className="text-sm text-center max-w-xs">Define a project for candidates to build and demonstrate their capabilities.</p>
         </button>
       </div>
 
       {/* CREATE PROJECT MODAL */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
-          <div className="bg-white rounded-xl border border-slate-200 p-6 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto shadow-xl">
-            <button onClick={() => setShowCreateModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"><X className="w-5 h-5" /></button>
-            <h2 className="text-xl font-heading font-bold text-slate-900 mb-5">Create Project</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+          <div className="bg-dark-800 rounded-2xl border border-dark-700 p-6 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setShowCreateModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-white"><X className="w-5 h-5" /></button>
+            <h2 className="text-2xl font-bold text-white mb-6">Create Project</h2>
             <form onSubmit={handleCreateSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Project Name</label>
-                <input required name="name" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" placeholder="e.g. Build an AI Resume Screener" />
+                <label className="block text-sm text-slate-400 mb-1">Project Name</label>
+                <input required name="name" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" placeholder="e.g. Build an AI Resume Screener" />
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Description</label>
-                <textarea required name="description" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none h-20" placeholder="Describe the project requirements..."></textarea>
+                <label className="block text-sm text-slate-400 mb-1">Description</label>
+                <textarea required name="description" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white h-24" placeholder="Describe the project requirements..."></textarea>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Difficulty</label>
-                  <select name="difficulty" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none">
+                  <label className="block text-sm text-slate-400 mb-1">Difficulty</label>
+                  <select name="difficulty" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white">
                     <option>Intermediate</option><option>Advanced</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Duration (Days)</label>
-                  <input required type="number" name="duration" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" min="1" defaultValue="7" />
+                  <label className="block text-sm text-slate-400 mb-1">Duration (Days)</label>
+                  <input required type="number" name="duration" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" min="1" defaultValue="7" />
                 </div>
                 <div>
-                  <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Max Participants</label>
-                  <input required type="number" name="maxParticipants" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" min="1" defaultValue="100" />
+                  <label className="block text-sm text-slate-400 mb-1">Max Participants</label>
+                  <input required type="number" name="maxParticipants" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" min="1" defaultValue="100" />
                 </div>
                 <div>
-                  <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Reward</label>
-                  <input required name="reward" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" placeholder="e.g. Interview Opportunity" />
+                  <label className="block text-sm text-slate-400 mb-1">Reward</label>
+                  <input required name="reward" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" placeholder="e.g. Interview Opportunity" />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Required Skills (comma separated)</label>
-                <input required name="skills" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" placeholder="React, Python, Machine Learning" />
+                <label className="block text-sm text-slate-400 mb-1">Required Skills (comma separated)</label>
+                <input required name="skills" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" placeholder="React, Python, Machine Learning" />
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Deadline</label>
-                <input required type="datetime-local" name="deadline" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" />
+                <label className="block text-sm text-slate-400 mb-1">Deadline</label>
+                <input required type="datetime-local" name="deadline" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" />
               </div>
               <div className="flex justify-end gap-3 mt-6">
-                <button type="button" onClick={() => setShowCreateModal(false)} className="px-4 py-2 text-xs font-sans text-slate-600 hover:text-slate-900 transition-colors">Cancel</button>
-                <button type="submit" className="btn-primary text-xs py-2 px-4">Publish Project</button>
+                <button type="button" onClick={() => setShowCreateModal(false)} className="px-4 py-2 text-slate-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="btn-primary">Publish Project</button>
               </div>
             </form>
           </div>
@@ -200,32 +200,32 @@ export default function CompanyProjectsManageView({ currentUser }) {
 
       {/* MANAGE PROJECT MODAL */}
       {managingProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
-          <div className="bg-white rounded-xl border border-slate-200 p-6 max-w-4xl w-full relative max-h-[90vh] overflow-y-auto shadow-xl">
-            <button onClick={() => setManagingProject(null)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"><X className="w-5 h-5" /></button>
-            <h2 className="text-xl font-heading font-bold text-slate-900 mb-1">{managingProject.name}</h2>
-            <p className="text-xs font-sans text-slate-500 mb-5">Manage submissions and evaluate candidates.</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+          <div className="bg-dark-800 rounded-2xl border border-dark-700 p-6 max-w-4xl w-full relative max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setManagingProject(null)} className="absolute top-4 right-4 text-slate-400 hover:text-white"><X className="w-5 h-5" /></button>
+            <h2 className="text-2xl font-bold text-white mb-2">{managingProject.name}</h2>
+            <p className="text-slate-400 mb-6">Manage submissions and evaluate candidates.</p>
             
-            <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 mb-6">
-              <h3 className="text-slate-900 font-heading font-bold text-sm mb-3 flex items-center gap-2"><CheckSquare className="w-4 h-4 text-teal-600"/> Project Submissions</h3>
+            <div className="bg-dark-900 rounded-xl p-4 border border-dark-700 mb-6">
+              <h3 className="text-white font-bold mb-4 flex items-center gap-2"><CheckSquare className="w-4 h-4 text-brand-green"/> Project Submissions</h3>
               
               {applications.filter(a => a.projectId === managingProject.id).length === 0 ? (
-                <p className="text-slate-500 font-sans text-xs">No submissions yet.</p>
+                <p className="text-slate-400 text-sm">No submissions yet.</p>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {applications.filter(a => a.projectId === managingProject.id).map(app => (
-                    <div key={app.candidateId} className="bg-white border border-slate-200 rounded-lg p-4 flex justify-between items-center shadow-xs">
+                    <div key={app.candidateId} className="bg-dark-800 border border-dark-700 rounded-lg p-4 flex justify-between items-center">
                       <div>
-                        <h4 className="text-slate-900 font-semibold font-sans text-sm">{app.candidateDetails?.name || 'Unknown Candidate'}</h4>
-                        <p className="text-xs text-slate-500 font-sans mt-0.5">Status: <span className="uppercase font-semibold text-blue-600">{app.status}</span></p>
+                        <h4 className="text-white font-bold">{app.candidateDetails?.name || 'Unknown Candidate'}</h4>
+                        <p className="text-xs text-slate-400 mt-1">Status: <span className="uppercase text-brand-cyan">{app.status}</span></p>
                         {app.status === 'submitted' && app.submissionData && (
-                          <div className="mt-2 text-xs space-y-1">
-                            <a href={app.submissionData.github} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline block font-mono">GitHub Repository</a>
-                            <a href={app.submissionData.demo} target="_blank" rel="noreferrer" className="text-teal-700 hover:underline block font-mono">Live Demo</a>
+                          <div className="mt-2 text-sm text-slate-300">
+                            <a href={app.submissionData.github} target="_blank" rel="noreferrer" className="text-brand-green hover:underline block">GitHub Repository</a>
+                            <a href={app.submissionData.demo} target="_blank" rel="noreferrer" className="text-brand-cyan hover:underline block">Live Demo</a>
                           </div>
                         )}
                         {app.status === 'evaluated' && app.evaluationData && (
-                          <div className="mt-2 text-xs text-teal-700 font-mono font-bold">
+                          <div className="mt-2 text-sm text-brand-green font-sans tracking-wide">
                             Overall Score: {app.evaluationData.overall}/100
                           </div>
                         )}
@@ -233,12 +233,12 @@ export default function CompanyProjectsManageView({ currentUser }) {
                       
                       <div className="flex gap-2">
                         {app.status === 'submitted' && (
-                          <button onClick={() => setEvaluatingApp(app)} className="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-blue-100 transition-colors">
+                          <button onClick={() => setEvaluatingApp(app)} className="bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 px-3 py-1 rounded text-sm hover:bg-brand-cyan/20">
                             Evaluate
                           </button>
                         )}
                         {app.status === 'evaluated' && (
-                          <button onClick={() => handleSendProposal(app)} className="bg-teal-600 text-white font-medium px-3.5 py-1.5 rounded-lg text-xs hover:bg-teal-700 transition-colors shadow-xs">
+                          <button onClick={() => handleSendProposal(app)} className="bg-brand-green text-dark-900 font-bold px-3 py-1 rounded text-sm hover:bg-brand-green/90">
                             Send Proposal
                           </button>
                         )}
@@ -254,30 +254,30 @@ export default function CompanyProjectsManageView({ currentUser }) {
 
       {/* EVALUATE SUBMISSION MODAL */}
       {evaluatingApp && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
-          <div className="bg-white rounded-xl border border-slate-200 p-6 max-w-lg w-full relative shadow-xl">
-            <button onClick={() => setEvaluatingApp(null)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"><X className="w-5 h-5" /></button>
-            <h2 className="text-xl font-heading font-bold text-slate-900 mb-4">Evaluate Submission</h2>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90">
+          <div className="bg-dark-800 rounded-2xl border border-dark-700 p-6 max-w-lg w-full relative">
+            <button onClick={() => setEvaluatingApp(null)} className="absolute top-4 right-4 text-slate-400 hover:text-white"><X className="w-5 h-5" /></button>
+            <h2 className="text-xl font-bold text-white mb-4">Evaluate Submission</h2>
             <form onSubmit={handleEvaluateSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Technical Skills Score (0-100)</label>
-                <input required type="number" name="techScore" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" min="0" max="100" />
+                <label className="block text-sm text-slate-400 mb-1">Technical Skills Score (0-100)</label>
+                <input required type="number" name="techScore" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" min="0" max="100" />
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Problem Solving Score (0-100)</label>
-                <input required type="number" name="probScore" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" min="0" max="100" />
+                <label className="block text-sm text-slate-400 mb-1">Problem Solving Score (0-100)</label>
+                <input required type="number" name="probScore" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" min="0" max="100" />
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Code Quality Score (0-100)</label>
-                <input required type="number" name="codeScore" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none" min="0" max="100" />
+                <label className="block text-sm text-slate-400 mb-1">Code Quality Score (0-100)</label>
+                <input required type="number" name="codeScore" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white" min="0" max="100" />
               </div>
               <div>
-                <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Feedback Comments</label>
-                <textarea name="comments" className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-none h-20" placeholder="Great work on..."></textarea>
+                <label className="block text-sm text-slate-400 mb-1">Feedback Comments</label>
+                <textarea name="comments" className="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-white h-24" placeholder="Great work on..."></textarea>
               </div>
               <div className="flex justify-end gap-3 mt-6">
-                <button type="button" onClick={() => setEvaluatingApp(null)} className="px-4 py-2 text-xs font-sans text-slate-600 hover:text-slate-900 transition-colors">Cancel</button>
-                <button type="submit" className="btn-primary flex items-center gap-1.5 text-xs py-2 px-4"><Star className="w-3.5 h-3.5"/> Save Evaluation</button>
+                <button type="button" onClick={() => setEvaluatingApp(null)} className="px-4 py-2 text-slate-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="btn-primary flex items-center gap-2"><Star className="w-4 h-4"/> Save Evaluation</button>
               </div>
             </form>
           </div>

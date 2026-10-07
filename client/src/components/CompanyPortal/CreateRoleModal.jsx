@@ -44,20 +44,20 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white border border-slate-200/90 w-full max-w-xl rounded-xl p-6 sm:p-7 shadow-xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-dark-800 border border-dark-600 w-full max-w-xl rounded-2xl p-6 sm:p-7 shadow-2xl relative">
         
-        <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-4 mb-5 border-b border-dark-700">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-heading font-bold text-lg text-slate-900">Create Open Role & Calibration Profile</h3>
-              <p className="text-xs text-slate-500 font-sans">Input skill requirements to analyze candidate talent pool</p>
+              <h3 className="font-bold text-lg text-white">Create Open Role & Calibration Profile</h3>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">Input skill requirements to analyze candidate talent pool</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 p-1 rounded-lg">
+          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -65,81 +65,81 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Job Title</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Job Title</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. SDE II - Core Platform"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="input-hr w-full bg-white text-slate-900 text-xs"
+                className="input-hr w-full"
               />
             </div>
             <div>
-              <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Location</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Location</label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="input-hr w-full bg-white text-slate-900 text-xs"
+                className="input-hr w-full"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-sans font-medium text-slate-600 mb-1">CTC Band</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">CTC Band</label>
               <input
                 type="text"
                 value={ctcBand}
                 onChange={(e) => setCtcBand(e.target.value)}
-                className="input-hr w-full bg-white text-slate-900 text-xs"
+                className="input-hr w-full"
               />
             </div>
             <div>
-              <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Experience</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Experience</label>
               <input
                 type="text"
                 value={experienceLevel}
                 onChange={(e) => setExperienceLevel(e.target.value)}
-                className="input-hr w-full bg-white text-slate-900 text-xs"
+                className="input-hr w-full"
               />
             </div>
             <div>
-              <label className="block text-xs font-sans font-medium text-slate-600 mb-1">Min CGPA</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Min CGPA</label>
               <input
                 type="number"
                 step="0.1"
                 value={minCgpa}
                 onChange={(e) => setMinCgpa(e.target.value)}
-                className="input-hr w-full bg-white text-slate-900 text-xs"
+                className="input-hr w-full"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-sans text-teal-700 font-semibold mb-1">Mandatory Core Skills (Weighted 60%)</label>
+            <label className="block text-xs font-sans tracking-wide text-brand-green mb-1.5">Mandatory Core Skills (Weighted 60%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Data Structures & Algorithms, Java, System Design Fundamentals, SQL Query Optimization"
               value={mandatorySkillsText}
               onChange={(e) => setMandatorySkillsText(e.target.value)}
-              className="input-hr w-full font-sans text-xs bg-white text-slate-900"
+              className="input-hr w-full font-sans text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-sans text-blue-700 font-semibold mb-1">Good-to-Have Skills (Weighted 20%)</label>
+            <label className="block text-xs font-sans tracking-wide text-brand-cyan mb-1.5">Good-to-Have Skills (Weighted 20%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Docker & Containerization, Kubernetes, Kafka, Redis"
               value={optionalSkillsText}
               onChange={(e) => setOptionalSkillsText(e.target.value)}
-              className="input-hr w-full font-sans text-xs bg-white text-slate-900"
+              className="input-hr w-full font-sans text-xs"
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
+          <div className="flex justify-end gap-3 pt-3 border-t border-dark-700">
             <button
               type="button"
               onClick={onClose}

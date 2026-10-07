@@ -82,67 +82,67 @@ export default function ExploreContestsView({ currentUser }) {
     }
   };
 
-  if (loading) return <div className="text-center p-12 text-slate-500 font-sans text-sm">Loading contests...</div>;
+  if (loading) return <div className="text-center p-12 text-slate-400">Loading contests...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs">
+      <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-lg font-heading font-bold text-slate-900 flex items-center gap-2">
-            <Trophy className="w-4 h-4 text-teal-600" /> Explore Contests
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-brand-green" /> Explore Contests
           </h2>
-          <p className="text-xs text-slate-500 font-sans mt-0.5">Participate in challenges to prove your skills to companies.</p>
+          <p className="text-sm text-slate-400">Participate in challenges to prove your skills to companies.</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-6">
         {contests.map(contest => {
           const isRegistered = registrations.includes(contest.id);
           return (
-            <div key={contest.id} className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col md:flex-row gap-6 hover:border-blue-300 transition-all">
-              <div className="flex-1 space-y-3">
+            <div key={contest.id} className="bg-dark-800 border border-dark-700 rounded-xl p-6 shadow-card-dark flex flex-col md:flex-row gap-6 hover:border-brand-green/30 transition-colors">
+              <div className="flex-1 space-y-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-base font-heading font-bold text-slate-900 mb-0.5">{contest.name}</h3>
-                    <p className="text-xs text-blue-700 font-sans font-medium">{contest.companyName}</p>
+                    <h3 className="text-lg font-bold text-white mb-1">{contest.name}</h3>
+                    <p className="text-sm text-brand-green font-sans tracking-wide">{contest.companyName}</p>
                   </div>
-                  <span className="px-2.5 py-0.5 bg-slate-50 text-[11px] font-sans text-slate-600 rounded-full border border-slate-200">
+                  <span className="px-3 py-1 bg-dark-700 text-xs font-sans tracking-wide text-slate-300 rounded-full border border-dark-600">
                     {contest.difficulty}
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 font-sans leading-relaxed">{contest.description}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <p className="text-sm text-slate-400 leading-relaxed">{contest.description}</p>
+                <div className="flex flex-wrap gap-2 pt-2">
                   {contest.skills.map(skill => (
-                    <span key={skill} className="px-2 py-0.5 bg-slate-50 text-slate-700 border border-slate-200 rounded text-xs font-sans">
+                    <span key={skill} className="px-2 py-1 bg-dark-850 text-slate-300 border border-dark-700 rounded text-xs font-sans tracking-wide">
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
               
-              <div className="flex flex-col justify-between md:w-64 shrink-0 bg-slate-50 rounded-lg p-4 border border-slate-200">
-                <div className="space-y-2.5 text-xs font-sans">
-                  <div className="flex justify-between">
-                    <span className="text-slate-500 flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-slate-400" /> Duration</span>
-                    <span className="text-slate-800 font-medium">{contest.duration}</span>
+              <div className="flex flex-col justify-between md:w-64 shrink-0 bg-dark-850 rounded-lg p-4 border border-dark-700">
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400 flex items-center gap-1.5"><Clock className="w-4 h-4" /> Duration</span>
+                    <span className="text-white font-sans tracking-wide">{contest.duration}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500 flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-slate-400" /> Enrolled</span>
-                    <span className="text-slate-800 font-mono">{contest.participants} / {contest.maxParticipants}</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400 flex items-center gap-1.5"><Users className="w-4 h-4" /> Enrolled</span>
+                    <span className="text-white font-sans tracking-wide">{contest.participants} / {contest.maxParticipants}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500 flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-slate-400" /> Prize</span>
-                    <span className="text-teal-700 font-medium text-right max-w-[120px] truncate">{contest.prize}</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400 flex items-center gap-1.5"><Award className="w-4 h-4" /> Prize</span>
+                    <span className="text-white font-sans tracking-wide text-xs text-right max-w-[100px]">{contest.prize}</span>
                   </div>
                 </div>
                 
                 {isRegistered ? (
-                  <button onClick={() => handleStartContest(contest)} className="w-full mt-4 bg-teal-600 text-white font-medium py-2 px-3 rounded-lg flex justify-center items-center gap-2 hover:bg-teal-700 transition-colors text-xs shadow-xs">
-                    <Play className="w-3.5 h-3.5" /> Start Contest
+                  <button onClick={() => handleStartContest(contest)} className="w-full mt-4 bg-brand-cyan text-dark-900 font-bold py-2 px-4 rounded-lg flex justify-center items-center gap-2 hover:bg-brand-cyan/90 transition-colors">
+                    <Play className="w-4 h-4" /> Start Contest
                   </button>
                 ) : (
-                  <button onClick={() => handleRegister(contest)} className="btn-primary w-full mt-4 flex justify-center items-center gap-1.5 text-xs py-2">
-                    Register Now <ChevronRight className="w-3.5 h-3.5" />
+                  <button onClick={() => handleRegister(contest)} className="btn-primary w-full mt-4 flex justify-center items-center gap-2">
+                    Register Now <ChevronRight className="w-4 h-4" />
                   </button>
                 )}
               </div>
@@ -150,68 +150,68 @@ export default function ExploreContestsView({ currentUser }) {
           );
         })}
         {contests.length === 0 && (
-          <div className="text-center p-12 bg-white rounded-xl border border-slate-200 shadow-xs">
-            <Trophy className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-            <h3 className="text-base font-heading font-bold text-slate-800">No active contests</h3>
-            <p className="text-xs font-sans text-slate-500 mt-1">Check back later for new coding challenges.</p>
+          <div className="text-center p-12 bg-dark-800 rounded-xl border border-dark-700">
+            <Trophy className="w-12 h-12 text-slate-600 mx-auto mb-4" />
+            <h3 className="text-lg font-bold text-white">No active contests</h3>
+            <p className="text-slate-400 mt-2">Check back later for new coding challenges.</p>
           </div>
         )}
       </div>
 
       {/* CONTEST ASSESSMENT MODAL */}
       {activeContest && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
-          <div className="bg-white rounded-xl border border-slate-200 p-6 max-w-3xl w-full relative shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90">
+          <div className="bg-dark-800 rounded-2xl border border-dark-700 p-8 max-w-3xl w-full relative">
             {!submissionScore ? (
               <>
-                <div className="flex justify-between items-center mb-5">
-                  <h2 className="text-xl font-heading font-bold text-slate-900 flex items-center gap-2">
-                    <Code className="w-5 h-5 text-blue-600" /> {activeContest.name}
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                    <Code className="w-6 h-6 text-brand-green" /> {activeContest.name}
                   </h2>
-                  <div className="flex items-center gap-1.5 text-teal-700 font-mono text-xs bg-teal-50 px-2.5 py-1 rounded border border-teal-200">
-                    <Clock className="w-3.5 h-3.5" /> Time Running
+                  <div className="flex items-center gap-2 text-brand-cyan font-sans tracking-wide bg-brand-cyan/10 px-3 py-1 rounded border border-brand-cyan/30">
+                    <Clock className="w-4 h-4" /> Time Running
                   </div>
                 </div>
                 
                 <form onSubmit={handleSubmitContest}>
-                  <div className="bg-slate-50 border border-slate-200 p-5 rounded-xl mb-5 text-slate-700 text-xs font-sans">
-                    <p className="mb-3 text-slate-900 font-medium"><strong>Task 1:</strong> Implement a function that satisfies the requirements below.</p>
-                    <p className="text-xs font-mono bg-white p-3 rounded text-slate-600 mb-3 border border-slate-200">
+                  <div className="bg-dark-900 border border-dark-700 p-6 rounded-xl mb-6 text-slate-300">
+                    <p className="mb-4 text-white"><strong>Task 1:</strong> Implement a function that satisfies the requirements below.</p>
+                    <p className="text-sm font-sans tracking-wide bg-dark-800 p-4 rounded text-brand-green mb-4 border border-dark-600">
                       // Write your solution here...<br/>
                       // (This is a simplified contest simulator)
                     </p>
                     <textarea 
                       required 
-                      className="w-full bg-white border border-slate-200 rounded-lg p-3 font-mono text-xs text-slate-900 h-40 focus:border-blue-500 outline-none" 
+                      className="w-full bg-dark-800 border border-dark-600 rounded-lg p-4 font-sans tracking-wide text-sm text-white h-48 focus:border-brand-green outline-none" 
                       placeholder="function solution() { ... }"
                     ></textarea>
                   </div>
                   
-                  <div className="flex justify-end gap-3">
-                    <button type="button" onClick={() => setActiveContest(null)} className="px-4 py-2 text-xs font-sans text-slate-600 hover:text-slate-900 transition-colors">
+                  <div className="flex justify-end gap-4">
+                    <button type="button" onClick={() => setActiveContest(null)} className="px-6 py-2 text-slate-400 hover:text-white transition-colors">
                       Cancel & Exit
                     </button>
-                    <button type="submit" className="btn-primary text-xs py-2 px-6">
+                    <button type="submit" className="btn-primary px-8">
                       Submit Code
                     </button>
                   </div>
                 </form>
               </>
             ) : (
-              <div className="text-center py-6">
-                <div className="w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-teal-200">
-                  <CheckCircle2 className="w-8 h-8 text-teal-600" />
+              <div className="text-center py-8">
+                <div className="w-20 h-20 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-brand-green/30">
+                  <CheckCircle2 className="w-10 h-10 text-brand-green" />
                 </div>
-                <h2 className="text-2xl font-heading font-bold text-slate-900 mb-1">Submission Successful!</h2>
-                <p className="text-xs font-sans text-slate-500 mb-6">Your code has been evaluated against our hidden test cases.</p>
+                <h2 className="text-3xl font-bold text-white mb-2">Submission Successful!</h2>
+                <p className="text-slate-400 mb-8">Your code has been evaluated against our hidden test cases.</p>
                 
-                <div className="inline-block bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6">
-                  <p className="text-xs font-sans text-slate-500 uppercase tracking-wider font-semibold mb-1">Final Score</p>
-                  <p className="text-4xl font-heading font-bold text-teal-700">{submissionScore} <span className="text-xl text-slate-400">/ 100</span></p>
+                <div className="inline-block bg-dark-900 border border-dark-700 rounded-xl p-6 mb-8">
+                  <p className="text-sm text-slate-400 uppercase tracking-widest font-bold mb-1">Final Score</p>
+                  <p className="text-5xl font-bold text-brand-green font-sans tracking-wide">{submissionScore} <span className="text-2xl text-slate-500">/ 100</span></p>
                 </div>
                 
                 <div>
-                  <button onClick={() => { setActiveContest(null); setSubmissionScore(null); }} className="btn-primary text-xs py-2 px-6">
+                  <button onClick={() => { setActiveContest(null); setSubmissionScore(null); }} className="btn-primary px-8">
                     Return to Dashboard
                   </button>
                 </div>

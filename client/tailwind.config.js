@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,48 +11,87 @@ export default {
     extend: {
       colors: {
         dark: {
-          950: '#F8FAFC', // soft cool off-white background
-          900: '#F8FAFC', // main surface background
-          850: '#F1F5F9', // subtle tonal surface
-          800: '#FFFFFF', // clean white cards
-          750: '#F8FAFC', // hover state
-          700: '#E2E8F0', // thin neutral border
-          600: '#CBD5E1', // stronger border
-          500: '#94A3B8', // placeholder / muted
+          900: '#FFFFFF', // was deepest dark, now white
+          850: '#F8FAFC', // was dashboard bg, now Very Light Blue
+          800: '#FFFFFF', // was card bg, now white
+          750: '#EFF6FF', // was hover card, now Light Blue
+          700: '#E2E8F0', // was border, now light border
+          600: '#CBD5E1', // was prominent border
         },
         brand: {
-          blue: '#2563EB',       // Confident Professional Blue
-          primary: '#2563EB',
-          primaryHover: '#1D4ED8',
-          cyan: '#0284C7',
-          teal: '#0D9488',       // Restrained Teal for positive insights & AI intelligence
-          emerald: '#0D9488',
-          green: '#0D9488',      // Soft accessible status green/teal
-          amber: '#D97706',      // Accessible amber
-          purple: '#4F46E5',     // Indigo / intelligence
-          rose: '#E11D48',       // Accessible gap / alert red
+          green: '#2563EB',    // Primary Blue
+          darkgreen: '#1D4ED8', // Dark Blue
+          glow: '#2563EB33',
+          emerald: '#2563EB',
+          cyan: '#3B82F6',
+          blue: '#2563EB',
+          purple: '#8B5CF6',
+          amber: '#F59E0B',
+          rose: '#F43F5E'
         },
+        white: '#0F172A',
+        black: '#FFFFFF',
+        slate: {
+          50: colors.slate[950],
+          100: '#1E293B',
+          200: '#334155',
+          300: '#475569',
+          400: '#64748B', // Secondary text
+          500: '#94A3B8',
+          600: '#CBD5E1',
+          700: '#E2E8F0',
+          800: '#F1F5F9',
+          900: '#F8FAFC',
+          950: colors.slate[50],
+        },
+        emerald: {
+          50: colors.blue[950],
+          100: colors.blue[900],
+          200: colors.blue[800],
+          300: colors.blue[700],
+          400: colors.blue[600],
+          500: colors.blue[500],
+          600: colors.blue[400],
+          700: colors.blue[300],
+          800: colors.blue[200],
+          900: colors.blue[100],
+          950: '#EFF6FF',
+        },
+        rose: {
+          50: colors.rose[950],
+          100: colors.rose[900],
+          200: colors.rose[800],
+          300: colors.rose[700],
+          400: colors.rose[600],
+          500: colors.rose[500],
+          600: colors.rose[400],
+          700: colors.rose[300],
+          800: colors.rose[200],
+          900: colors.rose[100],
+          950: '#FFF1F2',
+        },
+        amber: {
+          50: colors.amber[950],
+          100: colors.amber[900],
+          200: colors.amber[800],
+          300: colors.amber[700],
+          400: colors.amber[600],
+          500: colors.amber[500],
+          600: colors.amber[400],
+          700: colors.amber[300],
+          800: colors.amber[200],
+          900: colors.amber[100],
+          950: '#FFFBEB',
+        }
       },
       fontFamily: {
-        sans: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        heading: ['Outfit', 'Figtree', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'Fira Code', 'Cascadia Code', 'Consolas', 'monospace']
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'monospace']
       },
       boxShadow: {
-        'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'sm': '0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04)',
-        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',
-        'card-dark': '0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
-        'card-hover': '0 6px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04)',
-        'glow-blue': '0 2px 8px -1px rgba(37, 99, 235, 0.16)',
-        'glow-green': '0 2px 8px -1px rgba(13, 148, 136, 0.16)',
-      },
-      borderRadius: {
-        'sm': '6px',
-        'DEFAULT': '8px',
-        'md': '8px',
-        'lg': '10px',
-        'xl': '12px',
+        'glow-green': '0 0 20px -3px rgba(37, 99, 235, 0.3)',
+        'glow-blue': '0 0 20px -3px rgba(37, 99, 235, 0.3)',
+        'card-dark': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
       }
     },
   },

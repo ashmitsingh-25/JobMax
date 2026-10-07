@@ -29,19 +29,19 @@ export class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center p-4 font-sans">
-          <div className="bg-white border border-rose-200 rounded-xl p-6 sm:p-8 max-w-lg w-full shadow-lg space-y-5">
-            <div className="flex items-center gap-3 text-rose-600">
-              <div className="w-10 h-10 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center">
-                <AlertTriangle className="w-5 h-5 text-rose-600" />
+        <div className="min-h-screen bg-dark-900 text-slate-100 flex items-center justify-center p-4 font-sans">
+          <div className="bg-dark-800 border-2 border-rose-500/40 rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-5">
+            <div className="flex items-center gap-3 text-rose-400">
+              <div className="w-10 h-10 rounded-xl bg-rose-950/60 border border-rose-500/40 flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-lg text-slate-900">Application Exception Caught</h3>
-                <p className="text-xs text-slate-500 font-sans tracking-wide">JobMax Self-Healing Diagnostic</p>
+                <h3 className="font-bold text-lg text-white">Application Exception Caught</h3>
+                <p className="text-xs text-slate-400 font-sans tracking-wide">JobMax Self-Healing Diagnostic</p>
               </div>
             </div>
 
-            <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200 text-xs font-mono text-rose-700 overflow-x-auto">
+            <div className="p-3.5 bg-dark-900 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-rose-300 overflow-x-auto">
               {this.state.error?.toString() || "Unknown rendering exception"}
             </div>
 

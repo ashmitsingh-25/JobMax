@@ -59,32 +59,32 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-2xl rounded-xl p-6 sm:p-7 shadow-xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-dark-800 border border-dark-600 w-full max-w-2xl rounded-2xl p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-200">
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-dark-700">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-teal-50 text-teal-600 border border-teal-200 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-brand-green/10 text-brand-green border border-brand-green/30 flex items-center justify-center">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-display font-semibold text-lg text-slate-900">AI Resume Skill Parser</h3>
-              <p className="text-xs text-slate-500 font-sans tracking-wide">NLP & semantic entity extraction engine</p>
+              <h3 className="font-bold text-lg text-white">AI Resume Skill Parser</h3>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">NLP & Semantic entity extraction engine</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1 rounded-lg transition-colors">
+          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Mode Selector */}
         {!extractedData && (
-          <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 mb-5">
+          <div className="flex items-center bg-dark-850 p-1 rounded-lg border border-dark-700 mb-5">
             <button
               onClick={() => setActiveMode('upload')}
               className={`flex-1 py-1.5 rounded-md text-xs font-sans tracking-wide font-medium transition-all flex items-center justify-center gap-2 ${
-                activeMode === 'upload' ? 'bg-white text-blue-600 shadow-xs border border-slate-200 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                activeMode === 'upload' ? 'bg-dark-700 text-brand-green border border-brand-green/30' : 'text-slate-400'
               }`}
             >
               <Upload className="w-3.5 h-3.5" />
@@ -93,7 +93,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
             <button
               onClick={() => setActiveMode('paste')}
               className={`flex-1 py-1.5 rounded-md text-xs font-sans tracking-wide font-medium transition-all flex items-center justify-center gap-2 ${
-                activeMode === 'paste' ? 'bg-white text-blue-600 shadow-xs border border-slate-200 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                activeMode === 'paste' ? 'bg-dark-700 text-brand-green border border-brand-green/30' : 'text-slate-400'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -106,7 +106,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
         {!extractedData ? (
           <div className="space-y-4">
             {activeMode === 'upload' ? (
-              <div className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-8 text-center bg-slate-50/70 hover:bg-blue-50/20 transition-colors">
+              <div className="border-2 border-dashed border-dark-600 hover:border-brand-green/60 rounded-xl p-8 text-center bg-dark-850/50 transition-colors">
                 <input
                   type="file"
                   id="resume-file-input"
@@ -115,10 +115,10 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
                   className="hidden"
                 />
                 <label htmlFor="resume-file-input" className="cursor-pointer flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3 shadow-xs">
+                  <div className="w-12 h-12 rounded-full bg-dark-750 flex items-center justify-center text-brand-green mb-3">
                     <Upload className="w-6 h-6" />
                   </div>
-                  <p className="text-sm font-medium text-slate-800 mb-1">
+                  <p className="text-sm font-medium text-slate-200 mb-1">
                     {file ? file.name : "Click to browse or drop your Resume (PDF/DOCX)"}
                   </p>
                   <p className="text-xs text-slate-500 font-sans tracking-wide">
@@ -128,20 +128,20 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
               </div>
             ) : (
               <div>
-                <label className="block text-xs font-sans tracking-wide text-slate-700 font-medium mb-1.5">Paste Resume or Project Summary Text</label>
+                <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Paste Resume or Project Summary Text</label>
                 <textarea
                   rows={7}
                   placeholder="Paste your resume contents, project descriptions, skills list (e.g. Java, React, SQL, LeetCode 350+ solved, Docker, IIT Delhi B.Tech CS CGPA: 8.8)..."
                   value={pasteText}
                   onChange={(e) => setPasteText(e.target.value)}
-                  className="input-hr w-full font-sans text-xs bg-white text-slate-800"
+                  className="input-hr w-full font-sans text-xs"
                 />
               </div>
             )}
 
             {errorMessage && (
-              <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-rose-700 text-xs flex items-center gap-2 font-sans tracking-wide">
-                <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-600" />
+              <div className="p-3 bg-rose-950/40 border border-rose-500/40 rounded-lg text-rose-400 text-xs flex items-center gap-2 font-sans tracking-wide">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{errorMessage}</span>
               </div>
             )}
@@ -169,33 +169,33 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
         ) : (
           /* Extracted Result View */
           <div className="space-y-5 animate-in fade-in">
-            <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-2 text-teal-800 font-sans tracking-wide text-xs font-medium">
-                <CheckCircle2 className="w-4 h-4 text-teal-600" />
+            <div className="p-4 bg-emerald-950/30 border border-emerald-500/40 rounded-xl flex items-center justify-between">
+              <div className="flex items-center gap-2 text-emerald-400 font-sans tracking-wide text-xs">
+                <CheckCircle2 className="w-4 h-4" />
                 <span>Successfully extracted {extractedData.totalSkillsCount} structured skills</span>
               </div>
               {extractedData.metadata?.detectedCgpa && (
-                <span className="text-xs font-sans tracking-wide bg-white border border-teal-200 px-2 py-0.5 rounded text-slate-700">
-                  Detected CGPA: <strong className="text-teal-700">{extractedData.metadata.detectedCgpa}</strong>
+                <span className="text-xs font-sans tracking-wide bg-dark-750 px-2 py-0.5 rounded text-slate-300">
+                  Detected CGPA: <strong className="text-brand-green">{extractedData.metadata.detectedCgpa}</strong>
                 </span>
               )}
             </div>
 
             <div>
-              <p className="text-xs font-sans tracking-wide text-slate-500 uppercase tracking-wider mb-2.5 font-semibold">
+              <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-2.5">
                 Extracted Skills & Competencies:
               </p>
-              <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-3 bg-dark-850 rounded-xl border border-dark-700">
                 {extractedData.extractedSkills.map(skill => (
                   <span key={skill} className="badge-matched text-xs">
-                    <CheckCircle2 className="w-3 h-3 text-teal-600" />
+                    <CheckCircle2 className="w-3 h-3 text-brand-green" />
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+            <div className="flex items-center justify-between pt-4 border-t border-dark-700">
               <button
                 type="button"
                 onClick={() => {
@@ -203,7 +203,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
                   setFile(null);
                   setPasteText('');
                 }}
-                className="text-xs font-sans tracking-wide text-slate-500 hover:text-slate-800 font-medium"
+                className="text-xs font-sans tracking-wide text-slate-400 hover:text-white"
               >
                 ← Scan Another File
               </button>

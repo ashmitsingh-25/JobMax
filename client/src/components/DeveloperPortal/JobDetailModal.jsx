@@ -44,6 +44,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
     ? Math.round((matched.length / required.length) * 100) 
     : 75;
 
+
   const handleApply = () => {
     setApplied(true);
     confetti({
@@ -54,26 +55,26 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-2xl rounded-xl p-6 sm:p-7 shadow-xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-dark-800 border border-dark-600 w-full max-w-2xl rounded-2xl p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         
         {/* Header */}
-        <div className="flex items-start justify-between pb-4 mb-5 border-b border-slate-200">
+        <div className="flex items-start justify-between pb-4 mb-5 border-b border-dark-700">
           <div className="flex items-center gap-3.5">
             <img
               src={job.companyLogo || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100"}
               alt={job.company}
-              className="w-12 h-12 rounded-xl object-cover border border-slate-200 shadow-2xs"
+              className="w-12 h-12 rounded-xl object-cover border border-dark-600"
             />
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-display font-semibold text-xl text-slate-900">{job.role}</h3>
-                <span className="font-sans tracking-wide text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-md">
+                <h3 className="font-bold text-xl text-white">{job.role}</h3>
+                <span className="font-sans tracking-wide text-xs text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2 py-0.5 rounded">
                   {fitPercent}% Fit Score
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-500 font-sans tracking-wide mt-1">
-                <span className="text-slate-800 font-semibold">{job.company}</span>
+              <div className="flex items-center gap-2 text-xs text-slate-400 font-sans tracking-wide mt-0.5">
+                <span className="text-white font-semibold">{job.company}</span>
                 <span>•</span>
                 <span>{job.location}</span>
                 <span>•</span>
@@ -82,51 +83,51 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
             </div>
           </div>
 
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1 rounded-lg transition-colors">
+          <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Quick Highlights */}
-        <div className="grid grid-cols-3 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs font-sans tracking-wide text-slate-700 mb-6">
+        <div className="grid grid-cols-3 gap-3 bg-dark-850 p-3 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-slate-300 mb-6">
           <div>
-            <span className="text-slate-400 uppercase text-[10px] font-semibold block">Compensation</span>
-            <strong className="text-blue-700 font-bold text-sm">{job.ctcBand}</strong>
+            <span className="text-slate-500 uppercase text-[10px] block">Compensation:</span>
+            <strong className="text-brand-green text-sm">{job.ctcBand}</strong>
           </div>
           <div>
-            <span className="text-slate-400 uppercase text-[10px] font-semibold block">Experience</span>
-            <strong className="text-slate-900 font-bold text-sm">{job.experienceRequired}</strong>
+            <span className="text-slate-500 uppercase text-[10px] block">Experience:</span>
+            <strong className="text-white text-sm">{job.experienceRequired}</strong>
           </div>
           <div>
-            <span className="text-slate-400 uppercase text-[10px] font-semibold block">Domain</span>
-            <strong className="text-teal-700 font-bold text-sm">{job.domain}</strong>
+            <span className="text-slate-500 uppercase text-[10px] block">Domain:</span>
+            <strong className="text-brand-cyan text-sm">{job.domain}</strong>
           </div>
         </div>
 
         {/* Description */}
         <div className="space-y-2 mb-6">
-          <h4 className="font-display font-semibold text-sm text-slate-900">Role Overview</h4>
-          <p className="text-xs text-slate-600 leading-relaxed font-sans">
+          <h4 className="font-bold text-sm text-white">Role Overview</h4>
+          <p className="text-xs text-slate-300 leading-relaxed font-sans">
             {job.description}
           </p>
         </div>
 
         {/* Skill Match Breakdown */}
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6">
+        <div className="bg-dark-850 border border-dark-700 rounded-xl p-4 mb-6">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-sans tracking-wide text-slate-700 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
               Skill Compatibility Check:
             </p>
-            <span className="text-xs font-sans tracking-wide text-slate-600 font-medium">
+            <span className="text-xs font-sans tracking-wide text-slate-300">
               {matched.length} of {required.length} required skills matched
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <span className="text-[11px] font-sans tracking-wide text-teal-700 flex items-center gap-1 font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
+              <span className="text-[11px] font-sans tracking-wide text-emerald-400 flex items-center gap-1 font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5" />
                 Verified Matching Skills:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -140,14 +141,14 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
                     );
                   })
                 ) : (
-                  <span className="text-xs text-slate-400 font-sans tracking-wide">No direct matches</span>
+                  <span className="text-xs text-slate-500 font-sans tracking-wide">No direct matches</span>
                 )}
               </div>
             </div>
 
             <div className="space-y-2">
-              <span className="text-[11px] font-sans tracking-wide text-rose-700 flex items-center gap-1 font-semibold">
-                <XCircle className="w-3.5 h-3.5 text-rose-600" />
+              <span className="text-[11px] font-sans tracking-wide text-rose-400 flex items-center gap-1 font-semibold">
+                <XCircle className="w-3.5 h-3.5" />
                 Skills You Should Learn:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -161,7 +162,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
                     );
                   })
                 ) : (
-                  <span className="text-xs text-teal-700 font-sans tracking-wide font-medium">100% Core Skill Fit!</span>
+                  <span className="text-xs text-emerald-400 font-sans tracking-wide">100% Core Skill Fit!</span>
                 )}
               </div>
             </div>
@@ -171,7 +172,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
         {/* Good to have */}
         {job.goodToHaveSkills && job.goodToHaveSkills.length > 0 && (
           <div className="space-y-2 mb-6">
-            <h4 className="font-display font-semibold text-xs text-slate-600 uppercase tracking-wider">
+            <h4 className="font-bold text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider">
               Bonus / Preferred Technologies:
             </h4>
             <div className="flex flex-wrap gap-1.5">
@@ -185,7 +186,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
         )}
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+        <div className="flex items-center justify-between pt-4 border-t border-dark-700">
           <span className="text-xs font-sans tracking-wide text-slate-500">
             Posted {job.postedDate} • {job.applicantsCount} Applicants
           </span>
@@ -199,7 +200,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
               disabled={applied}
               className={`px-4 py-2 rounded-lg text-xs font-semibold font-sans tracking-wide flex items-center gap-1.5 transition-all ${
                 applied
-                  ? 'bg-teal-50 text-teal-700 border border-teal-300 font-medium'
+                  ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40'
                   : 'btn-primary'
               }`}
             >
