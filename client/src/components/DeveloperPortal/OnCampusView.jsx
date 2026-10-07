@@ -133,7 +133,7 @@ export default function OnCampusView({
             <Building2 className="w-5 h-5" />
           </div>
           <div className="flex-grow">
-            <label className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+            <label className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider block">
               Active College Placement Cell
             </label>
             <select
@@ -161,7 +161,7 @@ export default function OnCampusView({
 
           <button
             onClick={onOpenContributeModal}
-            className="btn-secondary text-xs font-mono flex items-center gap-1.5"
+            className="btn-secondary text-xs font-sans tracking-wide flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5 text-brand-cyan" />
             Contribute Placement Drive
@@ -179,10 +179,10 @@ export default function OnCampusView({
               <div className="relative flex items-center justify-center">
                 <div className="w-24 h-24 rounded-full bg-dark-900 border-4 border-dark-700 flex items-center justify-center">
                   <div className="text-center">
-                    <span className="text-3xl font-extrabold font-mono text-brand-green leading-none">
+                    <span className="text-3xl font-extrabold font-sans tracking-wide text-brand-green leading-none">
                       {analysisReport.overallReadinessScore}%
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400 block mt-1">Readiness</span>
+                    <span className="text-[10px] font-sans tracking-wide text-slate-400 block mt-1">Readiness</span>
                   </div>
                 </div>
                 {/* Visual pulse glow */}
@@ -190,7 +190,7 @@ export default function OnCampusView({
               </div>
 
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] font-mono px-2 py-0.5 rounded-full mb-1.5">
+                <div className="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] font-sans tracking-wide px-2 py-0.5 rounded-full mb-1.5">
                   <Sparkles className="w-3 h-3" />
                   AI Bot #1 · Placement Readiness Analyzer
                 </div>
@@ -206,18 +206,18 @@ export default function OnCampusView({
             {/* Quick Metrics */}
             <div className="flex items-center gap-4 bg-dark-900/80 border border-dark-700 p-3.5 rounded-xl">
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Campus Recruiters</p>
-                <p className="text-xl font-bold font-mono text-white">{analysisReport.totalRecruitersAnalyzed}</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Campus Recruiters</p>
+                <p className="text-xl font-bold font-sans tracking-wide text-white">{analysisReport.totalRecruitersAnalyzed}</p>
               </div>
               <div className="h-8 w-px bg-dark-700"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Matched Skills</p>
-                <p className="text-xl font-bold font-mono text-brand-green">{analysisReport.matchedSkills.length}</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Matched Skills</p>
+                <p className="text-xl font-bold font-sans tracking-wide text-brand-green">{analysisReport.matchedSkills.length}</p>
               </div>
               <div className="h-8 w-px bg-dark-700"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Gaps to Close</p>
-                <p className="text-xl font-bold font-mono text-rose-400">{analysisReport.missingSkills.length}</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Gaps to Close</p>
+                <p className="text-xl font-bold font-sans tracking-wide text-rose-400">{analysisReport.missingSkills.length}</p>
               </div>
             </div>
 
@@ -226,7 +226,7 @@ export default function OnCampusView({
           {/* Missing Skills Warning Bar */}
           {analysisReport?.topGapsToClose && analysisReport.topGapsToClose.length > 0 && (
             <div className="mt-5 pt-4 border-t border-dark-700/80 flex flex-wrap items-center gap-2">
-              <span className="text-xs font-mono text-rose-400 flex items-center gap-1">
+              <span className="text-xs font-sans tracking-wide text-rose-400 flex items-center gap-1">
                 <AlertTriangle className="w-3.5 h-3.5" />
                 Critical Priority Gaps to Close:
               </span>
@@ -257,7 +257,7 @@ export default function OnCampusView({
                 Personalized 6-Week Placement Closing Roadmap
               </h3>
             </div>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-sans tracking-wide text-slate-400">
               Interactive Checklist
             </span>
           </div>
@@ -274,7 +274,7 @@ export default function OnCampusView({
               <AccordionItem key={planBlock.week} value={planBlock.week} className="card-hr !p-0 overflow-hidden">
                 <AccordionTrigger className="w-full p-4 flex items-center justify-between border-b border-dark-700 bg-dark-800/50 hover:bg-dark-800 transition-colors group">
                   <div className="flex items-center gap-2.5">
-                    <span className="font-mono text-xs font-bold bg-dark-700 text-brand-green px-2.5 py-1 rounded border border-brand-green/30">
+                    <span className="font-sans tracking-wide text-xs font-bold bg-dark-700 text-brand-green px-2.5 py-1 rounded border border-brand-green/30">
                       {planBlock.week}
                     </span>
                     <h4 className="font-semibold text-white text-sm">
@@ -282,7 +282,7 @@ export default function OnCampusView({
                     </h4>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
+                    <span className="text-[11px] font-sans tracking-wide text-slate-400 flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       Sprint Phase 0{idx + 1}
                     </span>
@@ -294,10 +294,10 @@ export default function OnCampusView({
                   <div className="p-4 space-y-4">
                     {/* Focus Areas */}
                     <div className="space-y-1.5">
-                      <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Focus Areas:</p>
+                      <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider">Focus Areas:</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {planBlock.focusAreas.map((area, i) => (
-                          <div key={i} className="bg-dark-850 p-2.5 rounded-lg border border-dark-700/80 text-xs text-slate-300 font-mono flex items-start gap-2">
+                          <div key={i} className="bg-dark-850 p-2.5 rounded-lg border border-dark-700/80 text-xs text-slate-300 font-sans tracking-wide flex items-start gap-2">
                             <Code2 className="w-3.5 h-3.5 text-brand-green flex-shrink-0 mt-0.5" />
                             <span>{area}</span>
                           </div>
@@ -307,7 +307,7 @@ export default function OnCampusView({
 
                     {/* Actionable Deliverables with Checkbox */}
                     <div className="space-y-2 pt-1">
-                      <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Actionable Deliverables:</p>
+                      <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider">Actionable Deliverables:</p>
                       <div className="space-y-1.5">
                         {planBlock.deliverables.map((item, dIdx) => {
                           const taskId = `task-${idx}-${dIdx}`;
@@ -337,7 +337,7 @@ export default function OnCampusView({
                     {/* Curated Resources */}
                     {planBlock?.suggestedResources && Array.isArray(planBlock.suggestedResources) && (
                       <div className="pt-2 flex flex-wrap items-center gap-2">
-                        <span className="text-[11px] font-mono text-slate-400">Curated Prep Sheets:</span>
+                        <span className="text-[11px] font-sans tracking-wide text-slate-400">Curated Prep Sheets:</span>
                         {planBlock.suggestedResources.map((res, rIdx) => {
                           const rName = typeof res === 'string' ? res : (res?.name || `Resource ${rIdx + 1}`);
                           const rUrl = typeof res === 'object' && res?.url ? res.url : 'https://takeuforward.org';
@@ -347,7 +347,7 @@ export default function OnCampusView({
                               href={rUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-xs font-mono bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
+                              className="text-xs font-sans tracking-wide bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
                             >
                               <BookOpen className="w-3 h-3" />
                               {rName}
@@ -373,7 +373,7 @@ export default function OnCampusView({
                 Company Fit Matrix
               </h3>
             </div>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-sans tracking-wide text-slate-400">
               Ranked by Fit
             </span>
           </div>
@@ -391,22 +391,22 @@ export default function OnCampusView({
                       <img src={comp.companyLogo} alt={comp.company || 'Company'} className="w-7 h-7 rounded-md object-cover border border-dark-600" />
                       <div>
                         <h4 className="font-bold text-white text-sm">{comp.company}</h4>
-                        <p className="text-[11px] text-slate-400 font-mono">{comp.role}</p>
+                        <p className="text-[11px] text-slate-400 font-sans tracking-wide">{comp.role}</p>
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <span className="text-sm font-bold font-mono text-brand-green">
+                      <span className="text-sm font-bold font-sans tracking-wide text-brand-green">
                         {comp.fitPercentage}%
                       </span>
-                      <span className={`block text-[10px] font-mono ${comp.tierColor}`}>
+                      <span className={`block text-[10px] font-sans tracking-wide ${comp.tierColor}`}>
                         {comp.tierLabel}
                       </span>
                     </div>
                   </div>
 
                   {/* CTC & Criteria */}
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 bg-dark-850 px-2.5 py-1.5 rounded border border-dark-700/80 mb-2.5">
+                  <div className="flex items-center justify-between text-[11px] font-sans tracking-wide text-slate-400 bg-dark-850 px-2.5 py-1.5 rounded border border-dark-700/80 mb-2.5">
                     <span>CTC: <strong className="text-slate-200">{comp.ctcBand}</strong></span>
                     <span>Min CGPA: <strong className="text-slate-200">{comp.cgpaCutoff}</strong></span>
                   </div>
@@ -423,7 +423,7 @@ export default function OnCampusView({
                         );
                       })}
                       {comp.missingSkills.length > 2 && (
-                        <span className="text-[10px] text-slate-500 font-mono self-center">
+                        <span className="text-[10px] text-slate-500 font-sans tracking-wide self-center">
                           +{comp.missingSkills.length - 2} more
                         </span>
                       )}
@@ -445,7 +445,7 @@ export default function OnCampusView({
               <Layers className="w-5 h-5 text-brand-green" />
               {selectedCollegeObj?.name || 'Campus'} · Historical Placement Records
             </h3>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">
+            <p className="text-xs text-slate-400 font-sans tracking-wide mt-0.5">
               Verified campus hiring records and skill frequency demands
             </p>
           </div>
@@ -467,7 +467,7 @@ export default function OnCampusView({
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-dark-850 border-b border-dark-700 text-[11px] font-mono uppercase text-slate-400">
+                <tr className="bg-dark-850 border-b border-dark-700 text-[11px] font-sans tracking-wide uppercase text-slate-400">
                   <th className="py-3 px-4">Recruiter & Role</th>
                   <th className="py-3 px-4">CTC Band</th>
                   <th className="py-3 px-4">CGPA Cutoff</th>
@@ -484,17 +484,17 @@ export default function OnCampusView({
                         <img src={rec.companyLogo} alt={rec.company} className="w-8 h-8 rounded-lg object-cover border border-dark-600" />
                         <div>
                           <p className="font-bold text-white text-sm">{rec.company}</p>
-                          <p className="text-[11px] text-slate-400 font-mono">{rec.role}</p>
-                          <span className="text-[10px] text-brand-green/80 font-mono">{rec.visitFrequency}</span>
+                          <p className="text-[11px] text-slate-400 font-sans tracking-wide">{rec.role}</p>
+                          <span className="text-[10px] text-brand-green/80 font-sans tracking-wide">{rec.visitFrequency}</span>
                         </div>
                       </div>
                     </td>
 
-                    <td className="py-3 px-4 font-mono font-semibold text-brand-green">
+                    <td className="py-3 px-4 font-sans tracking-wide font-semibold text-brand-green">
                       {rec.ctcBand}
                     </td>
 
-                    <td className="py-3 px-4 font-mono text-slate-300">
+                    <td className="py-3 px-4 font-sans tracking-wide text-slate-300">
                       {rec.cgpaCutoff} CGPA
                     </td>
 
@@ -522,7 +522,7 @@ export default function OnCampusView({
                     <td className="py-3 px-4">
                       <div className="space-y-1">
                         {(rec.rounds || []).slice(0, 2).map((r, ri) => (
-                          <div key={ri} className="text-[11px] text-slate-300 font-mono">
+                          <div key={ri} className="text-[11px] text-slate-300 font-sans tracking-wide">
                             <span className="text-brand-green">R{ri+1}:</span> {typeof r === 'string' ? r : (r?.name || '')}
                           </div>
                         ))}

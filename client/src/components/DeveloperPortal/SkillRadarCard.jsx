@@ -51,7 +51,7 @@ export default function SkillRadarCard({ userSkills = [] }) {
           <PieChart className="w-4 h-4 text-brand-green" />
           <h4 className="font-bold text-sm text-white">Skill Proficiency Radar</h4>
         </div>
-        <span className="text-[10px] font-mono text-brand-green bg-brand-green/10 px-2 py-0.5 rounded border border-brand-green/30">
+        <span className="text-[10px] font-sans tracking-wide text-brand-green bg-brand-green/10 px-2 py-0.5 rounded border border-brand-green/30">
           Domain Balance
         </span>
       </div>
@@ -80,7 +80,7 @@ export default function SkillRadarCard({ userSkills = [] }) {
         </ResponsiveContainer>
       </div>
 
-      <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-dark-700/80">
+      <div className="flex items-center justify-between text-[11px] font-sans tracking-wide text-slate-400 pt-1 border-t border-dark-700/80">
         <span>Active Matrix: 7 Domains</span>
         <span className="text-slate-300">Target: High-Density Pentagon</span>
       </div>

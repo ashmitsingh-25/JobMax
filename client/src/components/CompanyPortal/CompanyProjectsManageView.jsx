@@ -106,7 +106,7 @@ export default function CompanyProjectsManageView({ currentUser }) {
             <div>
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-bold text-white">{project.name}</h3>
-                <span className="flex items-center gap-1 text-[10px] uppercase font-mono font-bold tracking-wider px-2 py-1 rounded bg-brand-green/10 text-brand-green border border-brand-green/30">
+                <span className="flex items-center gap-1 text-[10px] uppercase font-sans tracking-wide font-bold tracking-wider px-2 py-1 rounded bg-brand-green/10 text-brand-green border border-brand-green/30">
                   <Play className="w-3 h-3" /> {project.status}
                 </span>
               </div>
@@ -114,7 +114,7 @@ export default function CompanyProjectsManageView({ currentUser }) {
               
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.skills.slice(0, 3).map(skill => (
-                  <span key={skill} className="px-2 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-mono text-slate-300">
+                  <span key={skill} className="px-2 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-sans tracking-wide text-slate-300">
                     {skill}
                   </span>
                 ))}
@@ -124,10 +124,10 @@ export default function CompanyProjectsManageView({ currentUser }) {
             <div className="flex items-center justify-between pt-4 border-t border-dark-700">
               <div className="flex gap-4">
                 <div className="flex items-center gap-1.5 text-slate-400 text-sm">
-                  <Users className="w-4 h-4" /> <span className="font-mono text-white">{project.participants || 0}</span>
+                  <Users className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{project.participants || 0}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-slate-400 text-sm">
-                  <Clock className="w-4 h-4" /> <span className="font-mono text-white">{project.duration}</span>
+                  <Clock className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{project.duration}</span>
                 </div>
               </div>
               <button onClick={() => setManagingProject(project)} className="text-brand-cyan hover:text-white transition-colors flex items-center gap-1 text-sm font-medium">
@@ -225,7 +225,7 @@ export default function CompanyProjectsManageView({ currentUser }) {
                           </div>
                         )}
                         {app.status === 'evaluated' && app.evaluationData && (
-                          <div className="mt-2 text-sm text-brand-green font-mono">
+                          <div className="mt-2 text-sm text-brand-green font-sans tracking-wide">
                             Overall Score: {app.evaluationData.overall}/100
                           </div>
                         )}

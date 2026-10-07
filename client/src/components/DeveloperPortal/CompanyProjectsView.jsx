@@ -88,16 +88,16 @@ export default function CompanyProjectsView({ currentUser }) {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-lg font-bold text-white mb-1">{project.name}</h3>
-                    <p className="text-sm text-brand-green font-mono">{project.companyName}</p>
+                    <p className="text-sm text-brand-green font-sans tracking-wide">{project.companyName}</p>
                   </div>
-                  <span className="px-3 py-1 bg-dark-700 text-xs font-mono text-slate-300 rounded-full border border-dark-600">
+                  <span className="px-3 py-1 bg-dark-700 text-xs font-sans tracking-wide text-slate-300 rounded-full border border-dark-600">
                     {project.difficulty}
                   </span>
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {project.skills.map(skill => (
-                    <span key={skill} className="px-2 py-1 bg-dark-850 text-slate-300 border border-dark-700 rounded text-xs font-mono">
+                    <span key={skill} className="px-2 py-1 bg-dark-850 text-slate-300 border border-dark-700 rounded text-xs font-sans tracking-wide">
                       {skill}
                     </span>
                   ))}
@@ -108,15 +108,15 @@ export default function CompanyProjectsView({ currentUser }) {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Clock className="w-4 h-4" /> Timeline</span>
-                    <span className="text-white font-mono">{project.duration}</span>
+                    <span className="text-white font-sans tracking-wide">{project.duration}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Users className="w-4 h-4" /> Working</span>
-                    <span className="text-white font-mono">{project.participants} / {project.maxParticipants}</span>
+                    <span className="text-white font-sans tracking-wide">{project.participants} / {project.maxParticipants}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Award className="w-4 h-4" /> Reward</span>
-                    <span className="text-white font-mono text-xs text-right max-w-[100px]">{project.reward}</span>
+                    <span className="text-white font-sans tracking-wide text-xs text-right max-w-[100px]">{project.reward}</span>
                   </div>
                 </div>
                 

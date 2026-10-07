@@ -199,7 +199,7 @@ export default function MLModelsHubView({ currentUser }) {
         
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green text-xs font-mono mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green text-xs font-sans tracking-wide mb-2">
               <Zap className="w-3.5 h-3.5" />
               Machine Learning Engine · Standalone Architecture
             </div>
@@ -214,7 +214,7 @@ export default function MLModelsHubView({ currentUser }) {
           {/* Backend Connection Widget */}
           <div className="bg-dark-900 border border-dark-700 p-4 rounded-xl flex flex-col gap-2 min-w-[280px]">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-400 font-mono">Engine Status</span>
+              <span className="text-xs text-slate-400 font-sans tracking-wide">Engine Status</span>
               <button 
                 onClick={checkStatus} 
                 className="text-xs text-slate-500 hover:text-slate-300 flex items-center gap-1 transition-colors"
@@ -231,7 +231,7 @@ export default function MLModelsHubView({ currentUser }) {
               </span>
             </div>
 
-            <div className="text-[11px] font-mono text-slate-400 flex items-center justify-between pt-1 border-t border-dark-800">
+            <div className="text-[11px] font-sans tracking-wide text-slate-400 flex items-center justify-between pt-1 border-t border-dark-800">
               <span>AWS Cloud: <span className="text-emerald-400 font-bold">Not Required</span></span>
               <button 
                 onClick={() => setIsEditingUrl(!isEditingUrl)}
@@ -248,7 +248,7 @@ export default function MLModelsHubView({ currentUser }) {
                   placeholder="e.g. http://localhost:5000"
                   value={customBackendUrl}
                   onChange={(e) => setCustomBackendUrl(e.target.value)}
-                  className="w-full bg-dark-950 border border-dark-700 rounded px-2 py-1 text-xs text-white font-mono focus:border-brand-green focus:outline-none"
+                  className="w-full bg-dark-950 border border-dark-700 rounded px-2 py-1 text-xs text-white font-sans tracking-wide focus:border-brand-green focus:outline-none"
                 />
                 <button type="submit" className="w-full btn-primary text-xs py-1">
                   Save URL
@@ -294,7 +294,7 @@ export default function MLModelsHubView({ currentUser }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-7 bg-dark-800 border border-dark-700 rounded-2xl p-6 space-y-6">
             <div>
-              <div className="flex items-center gap-2 text-brand-green text-xs font-mono mb-1">
+              <div className="flex items-center gap-2 text-brand-green text-xs font-sans tracking-wide mb-1">
                 <TrendingUp className="w-4 h-4" />
                 <span>RandomForest Classifier · jds_salary_hike_model.pkl</span>
               </div>
@@ -315,13 +315,13 @@ export default function MLModelsHubView({ currentUser }) {
                 <div key={trait.key} className="bg-dark-900 border border-dark-700 p-4 rounded-xl flex items-center justify-between">
                   <div>
                     <h4 className="text-sm font-semibold text-white">{trait.label}</h4>
-                    <p className="text-xs text-slate-500 font-mono mt-0.5">{trait.desc}</p>
+                    <p className="text-xs text-slate-500 font-sans tracking-wide mt-0.5">{trait.desc}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setSalarySkills(s => ({ ...s, [trait.key]: s[trait.key] === 1 ? 0 : 1 }))}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-sans tracking-wide font-bold transition-all ${
                         salarySkills[trait.key] === 1
                           ? 'bg-brand-green text-black shadow-glow-green'
                           : 'bg-dark-800 text-slate-500 border border-dark-700 hover:text-slate-300'
@@ -346,7 +346,7 @@ export default function MLModelsHubView({ currentUser }) {
 
           <div className="lg:col-span-5 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h4 className="text-sm font-mono text-slate-400 uppercase tracking-wider mb-4">
+              <h4 className="text-sm font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-4">
                 Model Evaluation Output
               </h4>
 
@@ -357,16 +357,16 @@ export default function MLModelsHubView({ currentUser }) {
                       ? 'bg-brand-green/10 border-brand-green/40 shadow-glow-green'
                       : 'bg-blue-500/10 border-blue-500/30'
                   }`}>
-                    <p className="text-xs font-mono uppercase text-slate-400 mb-1">Prediction Classification</p>
+                    <p className="text-xs font-sans tracking-wide uppercase text-slate-400 mb-1">Prediction Classification</p>
                     <h2 className="text-2xl font-black text-white">{salaryResult.prediction_label}</h2>
-                    <span className="inline-block mt-2 font-mono text-xs px-2.5 py-0.5 rounded-full bg-dark-900 border border-dark-700 text-slate-300">
+                    <span className="inline-block mt-2 font-sans tracking-wide text-xs px-2.5 py-0.5 rounded-full bg-dark-900 border border-dark-700 text-slate-300">
                       Model Class Output: {salaryResult.salary_hike_high_or_low}
                     </span>
                   </div>
 
                   {salaryResult.probabilities && (
                     <div className="bg-dark-900 border border-dark-700 p-4 rounded-xl space-y-2">
-                      <div className="flex justify-between text-xs font-mono text-slate-400">
+                      <div className="flex justify-between text-xs font-sans tracking-wide text-slate-400">
                         <span>High Hike Probability:</span>
                         <span className="text-brand-green font-bold">
                           {(salaryResult.probabilities[1] * 100).toFixed(1)}%
@@ -382,8 +382,8 @@ export default function MLModelsHubView({ currentUser }) {
                   )}
 
                   <div className="bg-dark-900 border border-dark-700 p-4 rounded-xl">
-                    <p className="text-xs font-mono text-slate-400 uppercase mb-2">Projected Compensation Uplift</p>
-                    <p className="text-xl font-mono font-extrabold text-brand-green">
+                    <p className="text-xs font-sans tracking-wide text-slate-400 uppercase mb-2">Projected Compensation Uplift</p>
+                    <p className="text-xl font-sans tracking-wide font-extrabold text-brand-green">
                       {salaryResult.salary_hike_high_or_low === 1 ? 'INR 32.0 - 45.0 LPA (+65% to +110%)' : 'INR 22.0 - 28.0 LPA (+25% to +45%)'}
                     </p>
                   </div>
@@ -396,7 +396,7 @@ export default function MLModelsHubView({ currentUser }) {
               )}
             </div>
 
-            <div className="text-[11px] font-mono text-slate-500 border-t border-dark-700 pt-4 mt-6">
+            <div className="text-[11px] font-sans tracking-wide text-slate-500 border-t border-dark-700 pt-4 mt-6">
               Loaded from <code className="text-brand-green">jds_salary_hike_model.pkl</code> via FastAPI.
             </div>
           </div>
@@ -410,7 +410,7 @@ export default function MLModelsHubView({ currentUser }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-7 bg-dark-800 border border-dark-700 rounded-2xl p-6 space-y-6">
             <div>
-              <div className="flex items-center gap-2 text-brand-cyan text-xs font-mono mb-1">
+              <div className="flex items-center gap-2 text-brand-cyan text-xs font-sans tracking-wide mb-1">
                 <BrainCircuit className="w-4 h-4" />
                 <span>Pipeline(SimpleImputer, RandomForest) · candidate_skills_classifier.joblib</span>
               </div>
@@ -433,7 +433,7 @@ export default function MLModelsHubView({ currentUser }) {
                   <button
                     type="button"
                     onClick={() => setCandidateSkillsState(s => ({ ...s, [trait.key]: s[trait.key] === 1 ? 0 : 1 }))}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-sans tracking-wide font-bold transition-all ${
                       candidateSkillsState[trait.key] === 1
                         ? 'bg-brand-cyan text-black shadow-glow-blue'
                         : 'bg-dark-800 text-slate-500 border border-dark-700 hover:text-slate-300'
@@ -457,7 +457,7 @@ export default function MLModelsHubView({ currentUser }) {
 
           <div className="lg:col-span-5 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h4 className="text-sm font-mono text-slate-400 uppercase tracking-wider mb-4">
+              <h4 className="text-sm font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-4">
                 Qualification Verdict
               </h4>
 
@@ -471,7 +471,7 @@ export default function MLModelsHubView({ currentUser }) {
                     <h2 className="text-2xl font-black text-white">
                       {candSkillsResult.qualified ? 'Candidate Qualified' : 'Skill Gaps Detected'}
                     </h2>
-                    <p className="text-xs font-mono text-slate-400 mt-2">
+                    <p className="text-xs font-sans tracking-wide text-slate-400 mt-2">
                       Model Score: {candSkillsResult.skill_qualification} (Confidence: {candSkillsResult.confidence ? `${(candSkillsResult.confidence * 100).toFixed(1)}%` : 'Evaluated'})
                     </p>
                   </div>
@@ -484,7 +484,7 @@ export default function MLModelsHubView({ currentUser }) {
               )}
             </div>
 
-            <div className="text-[11px] font-mono text-slate-500 border-t border-dark-700 pt-4 mt-6">
+            <div className="text-[11px] font-sans tracking-wide text-slate-500 border-t border-dark-700 pt-4 mt-6">
               Loaded from <code className="text-brand-cyan">candidate_skills_classifier.joblib</code>.
             </div>
           </div>
@@ -498,7 +498,7 @@ export default function MLModelsHubView({ currentUser }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-7 bg-dark-800 border border-dark-700 rounded-2xl p-6 space-y-6">
             <div>
-              <div className="flex items-center gap-2 text-purple-400 text-xs font-mono mb-1">
+              <div className="flex items-center gap-2 text-purple-400 text-xs font-sans tracking-wide mb-1">
                 <Sliders className="w-4 h-4" />
                 <span>Big-5 Traits Classifier · sds_success_model.pkl</span>
               </div>
@@ -519,7 +519,7 @@ export default function MLModelsHubView({ currentUser }) {
                 <div key={trait.key} className="bg-dark-900 border border-dark-700 p-4 rounded-xl space-y-2">
                   <div className="flex justify-between items-center text-sm font-semibold text-white">
                     <span>{trait.label}</span>
-                    <span className="font-mono text-purple-400">{personalityTraits[trait.key]} / 5.0</span>
+                    <span className="font-sans tracking-wide text-purple-400">{personalityTraits[trait.key]} / 5.0</span>
                   </div>
                   <input
                     type="range"
@@ -546,16 +546,16 @@ export default function MLModelsHubView({ currentUser }) {
 
           <div className="lg:col-span-5 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h4 className="text-sm font-mono text-slate-400 uppercase tracking-wider mb-4">
+              <h4 className="text-sm font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-4">
                 Behavioral Insights & SDS Verdict
               </h4>
 
               {sdsResult ? (
                 <div className="space-y-4">
                   <div className="bg-purple-500/10 border border-purple-500/30 p-5 rounded-2xl text-center">
-                    <p className="text-xs font-mono text-purple-400 uppercase">SDS Career Trajectory</p>
+                    <p className="text-xs font-sans tracking-wide text-purple-400 uppercase">SDS Career Trajectory</p>
                     <h2 className="text-2xl font-black text-white mt-1">{sdsResult.verdict}</h2>
-                    <p className="text-xs font-mono text-slate-400 mt-2">
+                    <p className="text-xs font-sans tracking-wide text-slate-400 mt-2">
                       High Growth Probability: {sdsResult.high_success_probability ? `${(sdsResult.high_success_probability * 100).toFixed(1)}%` : 'High'}
                     </p>
                   </div>
@@ -563,7 +563,7 @@ export default function MLModelsHubView({ currentUser }) {
                   {personalityResult && (
                     <div className="bg-dark-900 border border-dark-700 p-4 rounded-xl flex items-center justify-between">
                       <span className="text-xs text-slate-300">Cultural Fit Score:</span>
-                      <span className="text-xs font-mono font-bold text-emerald-400">
+                      <span className="text-xs font-sans tracking-wide font-bold text-emerald-400">
                         {personalityResult.suitable ? 'Highly Suitable (Cultural Match)' : 'Standard Fit'}
                       </span>
                     </div>
@@ -577,7 +577,7 @@ export default function MLModelsHubView({ currentUser }) {
               )}
             </div>
 
-            <div className="text-[11px] font-mono text-slate-500 border-t border-dark-700 pt-4 mt-6">
+            <div className="text-[11px] font-sans tracking-wide text-slate-500 border-t border-dark-700 pt-4 mt-6">
               Powered by <code className="text-purple-400">candidate_personality_classifier.joblib</code> & <code className="text-purple-400">sds_success_model.pkl</code>.
             </div>
           </div>
@@ -591,7 +591,7 @@ export default function MLModelsHubView({ currentUser }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-7 bg-dark-800 border border-dark-700 rounded-2xl p-6 space-y-4">
             <div>
-              <div className="flex items-center gap-2 text-amber-400 text-xs font-mono mb-1">
+              <div className="flex items-center gap-2 text-amber-400 text-xs font-sans tracking-wide mb-1">
                 <Layers className="w-4 h-4" />
                 <span>ColumnTransformer + OneHotEncoder · job_role_classifier.joblib</span>
               </div>
@@ -603,7 +603,7 @@ export default function MLModelsHubView({ currentUser }) {
 
             <div className="space-y-3">
               <div>
-                <label className="text-xs text-slate-400 font-mono">Job Title</label>
+                <label className="text-xs text-slate-400 font-sans tracking-wide">Job Title</label>
                 <input
                   type="text"
                   value={jobInput.title}
@@ -613,7 +613,7 @@ export default function MLModelsHubView({ currentUser }) {
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 font-mono">Key Skills</label>
+                <label className="text-xs text-slate-400 font-sans tracking-wide">Key Skills</label>
                 <input
                   type="text"
                   value={jobInput.skills}
@@ -623,7 +623,7 @@ export default function MLModelsHubView({ currentUser }) {
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 font-mono">Job Description</label>
+                <label className="text-xs text-slate-400 font-sans tracking-wide">Job Description</label>
                 <textarea
                   rows="3"
                   value={jobInput.description}
@@ -645,23 +645,23 @@ export default function MLModelsHubView({ currentUser }) {
 
           <div className="lg:col-span-5 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h4 className="text-sm font-mono text-slate-400 uppercase tracking-wider mb-4">
+              <h4 className="text-sm font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-4">
                 Classification Result
               </h4>
 
               {roleResult ? (
                 <div className="space-y-6">
                   <div className="p-6 rounded-2xl border border-amber-400/40 bg-amber-400/10 text-center">
-                    <p className="text-xs font-mono text-amber-400 uppercase">Predicted Domain</p>
+                    <p className="text-xs font-sans tracking-wide text-amber-400 uppercase">Predicted Domain</p>
                     <h2 className="text-3xl font-black text-white mt-1">{roleResult.predicted_domain}</h2>
                   </div>
 
                   {roleResult.confidence_breakdown && (
                     <div className="bg-dark-900 border border-dark-700 p-4 rounded-xl space-y-3">
-                      <p className="text-xs font-mono text-slate-400 uppercase">Confidence Breakdown</p>
+                      <p className="text-xs font-sans tracking-wide text-slate-400 uppercase">Confidence Breakdown</p>
                       {Object.entries(roleResult.confidence_breakdown).map(([domain, prob]) => (
                         <div key={domain} className="space-y-1">
-                          <div className="flex justify-between text-xs font-mono">
+                          <div className="flex justify-between text-xs font-sans tracking-wide">
                             <span className="text-slate-300">{domain}</span>
                             <span className="text-amber-400 font-bold">{(prob * 100).toFixed(1)}%</span>
                           </div>
@@ -681,7 +681,7 @@ export default function MLModelsHubView({ currentUser }) {
               )}
             </div>
 
-            <div className="text-[11px] font-mono text-slate-500 border-t border-dark-700 pt-4 mt-6">
+            <div className="text-[11px] font-sans tracking-wide text-slate-500 border-t border-dark-700 pt-4 mt-6">
               Trained on combined feature space of 17,443 real job listings.
             </div>
           </div>
@@ -695,7 +695,7 @@ export default function MLModelsHubView({ currentUser }) {
         <div className="bg-dark-800 border border-dark-700 rounded-2xl p-6 space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-brand-green text-xs font-mono mb-1">
+              <div className="flex items-center gap-2 text-brand-green text-xs font-sans tracking-wide mb-1">
                 <Database className="w-4 h-4" />
                 <span>Live Dataset Search · 17,443 Verified Job Postings</span>
               </div>
@@ -724,20 +724,20 @@ export default function MLModelsHubView({ currentUser }) {
               <div key={job.id} className="bg-dark-900 border border-dark-700 p-4 rounded-xl flex flex-col justify-between hover:border-brand-green/40 transition-colors">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
+                    <span className={`text-[10px] font-sans tracking-wide uppercase px-2 py-0.5 rounded ${
                       job.category === 'Data Science' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/30' : 'bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30'
                     }`}>
                       {job.category || 'Engineering'}
                     </span>
-                    <span className="text-xs font-mono font-bold text-brand-green">{job.salary}</span>
+                    <span className="text-xs font-sans tracking-wide font-bold text-brand-green">{job.salary}</span>
                   </div>
                   <h4 className="text-sm font-bold text-white mt-2">{job.title}</h4>
-                  <p className="text-xs text-slate-400 font-mono mt-0.5">{job.company} • {job.location}</p>
+                  <p className="text-xs text-slate-400 font-sans tracking-wide mt-0.5">{job.company} • {job.location}</p>
                   {job.skills && (
                     <p className="text-[11px] text-slate-500 mt-2 line-clamp-2">Skills: {job.skills}</p>
                   )}
                 </div>
-                <div className="mt-3 pt-2 border-t border-dark-800 text-[11px] font-mono text-slate-500 flex justify-between">
+                <div className="mt-3 pt-2 border-t border-dark-800 text-[11px] font-sans tracking-wide text-slate-500 flex justify-between">
                   <span>Exp: {job.experience}</span>
                   <span className="text-brand-green">Direct Match</span>
                 </div>

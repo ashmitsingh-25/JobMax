@@ -104,16 +104,16 @@ export default function ExploreContestsView({ currentUser }) {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-lg font-bold text-white mb-1">{contest.name}</h3>
-                    <p className="text-sm text-brand-green font-mono">{contest.companyName}</p>
+                    <p className="text-sm text-brand-green font-sans tracking-wide">{contest.companyName}</p>
                   </div>
-                  <span className="px-3 py-1 bg-dark-700 text-xs font-mono text-slate-300 rounded-full border border-dark-600">
+                  <span className="px-3 py-1 bg-dark-700 text-xs font-sans tracking-wide text-slate-300 rounded-full border border-dark-600">
                     {contest.difficulty}
                   </span>
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">{contest.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {contest.skills.map(skill => (
-                    <span key={skill} className="px-2 py-1 bg-dark-850 text-slate-300 border border-dark-700 rounded text-xs font-mono">
+                    <span key={skill} className="px-2 py-1 bg-dark-850 text-slate-300 border border-dark-700 rounded text-xs font-sans tracking-wide">
                       {skill}
                     </span>
                   ))}
@@ -124,15 +124,15 @@ export default function ExploreContestsView({ currentUser }) {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Clock className="w-4 h-4" /> Duration</span>
-                    <span className="text-white font-mono">{contest.duration}</span>
+                    <span className="text-white font-sans tracking-wide">{contest.duration}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Users className="w-4 h-4" /> Enrolled</span>
-                    <span className="text-white font-mono">{contest.participants} / {contest.maxParticipants}</span>
+                    <span className="text-white font-sans tracking-wide">{contest.participants} / {contest.maxParticipants}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400 flex items-center gap-1.5"><Award className="w-4 h-4" /> Prize</span>
-                    <span className="text-white font-mono text-xs text-right max-w-[100px]">{contest.prize}</span>
+                    <span className="text-white font-sans tracking-wide text-xs text-right max-w-[100px]">{contest.prize}</span>
                   </div>
                 </div>
                 
@@ -168,7 +168,7 @@ export default function ExploreContestsView({ currentUser }) {
                   <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                     <Code className="w-6 h-6 text-brand-green" /> {activeContest.name}
                   </h2>
-                  <div className="flex items-center gap-2 text-brand-cyan font-mono bg-brand-cyan/10 px-3 py-1 rounded border border-brand-cyan/30">
+                  <div className="flex items-center gap-2 text-brand-cyan font-sans tracking-wide bg-brand-cyan/10 px-3 py-1 rounded border border-brand-cyan/30">
                     <Clock className="w-4 h-4" /> Time Running
                   </div>
                 </div>
@@ -176,13 +176,13 @@ export default function ExploreContestsView({ currentUser }) {
                 <form onSubmit={handleSubmitContest}>
                   <div className="bg-dark-900 border border-dark-700 p-6 rounded-xl mb-6 text-slate-300">
                     <p className="mb-4 text-white"><strong>Task 1:</strong> Implement a function that satisfies the requirements below.</p>
-                    <p className="text-sm font-mono bg-dark-800 p-4 rounded text-brand-green mb-4 border border-dark-600">
+                    <p className="text-sm font-sans tracking-wide bg-dark-800 p-4 rounded text-brand-green mb-4 border border-dark-600">
                       // Write your solution here...<br/>
                       // (This is a simplified contest simulator)
                     </p>
                     <textarea 
                       required 
-                      className="w-full bg-dark-800 border border-dark-600 rounded-lg p-4 font-mono text-sm text-white h-48 focus:border-brand-green outline-none" 
+                      className="w-full bg-dark-800 border border-dark-600 rounded-lg p-4 font-sans tracking-wide text-sm text-white h-48 focus:border-brand-green outline-none" 
                       placeholder="function solution() { ... }"
                     ></textarea>
                   </div>
@@ -207,7 +207,7 @@ export default function ExploreContestsView({ currentUser }) {
                 
                 <div className="inline-block bg-dark-900 border border-dark-700 rounded-xl p-6 mb-8">
                   <p className="text-sm text-slate-400 uppercase tracking-widest font-bold mb-1">Final Score</p>
-                  <p className="text-5xl font-bold text-brand-green font-mono">{submissionScore} <span className="text-2xl text-slate-500">/ 100</span></p>
+                  <p className="text-5xl font-bold text-brand-green font-sans tracking-wide">{submissionScore} <span className="text-2xl text-slate-500">/ 100</span></p>
                 </div>
                 
                 <div>

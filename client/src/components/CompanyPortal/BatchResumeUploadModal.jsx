@@ -48,7 +48,7 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Batch Resume Sourcing & Ranking</h3>
-              <p className="text-xs text-slate-400 font-mono">Upload multiple applicant resumes for automatic AI parsing</p>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">Upload multiple applicant resumes for automatic AI parsing</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
@@ -57,7 +57,7 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
         </div>
 
         <div className="space-y-4">
-          <div className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs font-mono text-slate-300">
+          <div className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs font-sans tracking-wide text-slate-300">
             Target Role: <strong className="text-brand-cyan">{selectedRole?.title || "Open Role"}</strong>
           </div>
 
@@ -77,14 +77,14 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
               <p className="text-sm font-medium text-slate-200 mb-1">
                 {files.length > 0 ? `${files.length} resumes selected` : "Select batch candidate resumes (PDF/DOCX)"}
               </p>
-              <p className="text-xs text-slate-500 font-mono">
+              <p className="text-xs text-slate-500 font-sans tracking-wide">
                 Supports up to 15 files at once
               </p>
             </label>
           </div>
 
           {files.length > 0 && (
-            <div className="max-h-32 overflow-y-auto space-y-1 bg-dark-850 p-2.5 rounded-lg border border-dark-700 text-xs font-mono text-slate-300">
+            <div className="max-h-32 overflow-y-auto space-y-1 bg-dark-850 p-2.5 rounded-lg border border-dark-700 text-xs font-sans tracking-wide text-slate-300">
               {files.map((f, i) => (
                 <div key={i} className="flex items-center justify-between py-0.5">
                   <span className="truncate max-w-[300px]">{f.name}</span>
@@ -95,7 +95,7 @@ export default function BatchResumeUploadModal({ isOpen, onClose, selectedRole, 
           )}
 
           {message && (
-            <p className="text-xs font-mono text-rose-400">{message}</p>
+            <p className="text-xs font-sans tracking-wide text-rose-400">{message}</p>
           )}
 
           <div className="flex justify-end gap-3 pt-3 border-t border-dark-700">

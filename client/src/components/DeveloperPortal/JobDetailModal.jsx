@@ -69,11 +69,11 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-xl text-white">{job.role}</h3>
-                <span className="font-mono text-xs text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2 py-0.5 rounded">
+                <span className="font-sans tracking-wide text-xs text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2 py-0.5 rounded">
                   {fitPercent}% Fit Score
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-400 font-mono mt-0.5">
+              <div className="flex items-center gap-2 text-xs text-slate-400 font-sans tracking-wide mt-0.5">
                 <span className="text-white font-semibold">{job.company}</span>
                 <span>•</span>
                 <span>{job.location}</span>
@@ -89,7 +89,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
         </div>
 
         {/* Quick Highlights */}
-        <div className="grid grid-cols-3 gap-3 bg-dark-850 p-3 rounded-xl border border-dark-700 text-xs font-mono text-slate-300 mb-6">
+        <div className="grid grid-cols-3 gap-3 bg-dark-850 p-3 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-slate-300 mb-6">
           <div>
             <span className="text-slate-500 uppercase text-[10px] block">Compensation:</span>
             <strong className="text-brand-green text-sm">{job.ctcBand}</strong>
@@ -115,18 +115,18 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
         {/* Skill Match Breakdown */}
         <div className="bg-dark-850 border border-dark-700 rounded-xl p-4 mb-6">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
               Skill Compatibility Check:
             </p>
-            <span className="text-xs font-mono text-slate-300">
+            <span className="text-xs font-sans tracking-wide text-slate-300">
               {matched.length} of {required.length} required skills matched
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1 font-semibold">
+              <span className="text-[11px] font-sans tracking-wide text-emerald-400 flex items-center gap-1 font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 Verified Matching Skills:
               </span>
@@ -141,13 +141,13 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
                     );
                   })
                 ) : (
-                  <span className="text-xs text-slate-500 font-mono">No direct matches</span>
+                  <span className="text-xs text-slate-500 font-sans tracking-wide">No direct matches</span>
                 )}
               </div>
             </div>
 
             <div className="space-y-2">
-              <span className="text-[11px] font-mono text-rose-400 flex items-center gap-1 font-semibold">
+              <span className="text-[11px] font-sans tracking-wide text-rose-400 flex items-center gap-1 font-semibold">
                 <XCircle className="w-3.5 h-3.5" />
                 Skills You Should Learn:
               </span>
@@ -162,7 +162,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
                     );
                   })
                 ) : (
-                  <span className="text-xs text-emerald-400 font-mono">100% Core Skill Fit!</span>
+                  <span className="text-xs text-emerald-400 font-sans tracking-wide">100% Core Skill Fit!</span>
                 )}
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
         {/* Good to have */}
         {job.goodToHaveSkills && job.goodToHaveSkills.length > 0 && (
           <div className="space-y-2 mb-6">
-            <h4 className="font-bold text-xs font-mono text-slate-400 uppercase tracking-wider">
+            <h4 className="font-bold text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider">
               Bonus / Preferred Technologies:
             </h4>
             <div className="flex flex-wrap gap-1.5">
@@ -187,7 +187,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
 
         {/* Action Buttons */}
         <div className="flex items-center justify-between pt-4 border-t border-dark-700">
-          <span className="text-xs font-mono text-slate-500">
+          <span className="text-xs font-sans tracking-wide text-slate-500">
             Posted {job.postedDate} • {job.applicantsCount} Applicants
           </span>
 
@@ -198,7 +198,7 @@ export default function JobDetailModal({ isOpen, onClose, job, currentUser }) {
             <button
               onClick={handleApply}
               disabled={applied}
-              className={`px-4 py-2 rounded-lg text-xs font-semibold font-mono flex items-center gap-1.5 transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs font-semibold font-sans tracking-wide flex items-center gap-1.5 transition-all ${
                 applied
                   ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40'
                   : 'btn-primary'

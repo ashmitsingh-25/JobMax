@@ -85,7 +85,7 @@ export default function CompanyContestsView({ currentUser }) {
             <div>
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-bold text-white">{contest.name}</h3>
-                <span className={`flex items-center gap-1 text-[10px] uppercase font-mono font-bold tracking-wider px-2 py-1 rounded border ${
+                <span className={`flex items-center gap-1 text-[10px] uppercase font-sans tracking-wide font-bold tracking-wider px-2 py-1 rounded border ${
                   contest.status === 'active' ? 'bg-brand-green/10 text-brand-green border-brand-green/30' :
                   contest.status === 'draft' ? 'bg-slate-500/10 text-slate-400 border-slate-500/30' :
                   'bg-red-500/10 text-red-400 border-red-500/30'
@@ -97,7 +97,7 @@ export default function CompanyContestsView({ currentUser }) {
               
               <div className="flex flex-wrap gap-2 mb-6">
                 {contest.skills.slice(0, 3).map(skill => (
-                  <span key={skill} className="px-2 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-mono text-slate-300">
+                  <span key={skill} className="px-2 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-sans tracking-wide text-slate-300">
                     {skill}
                   </span>
                 ))}
@@ -107,10 +107,10 @@ export default function CompanyContestsView({ currentUser }) {
             <div className="flex items-center justify-between pt-4 border-t border-dark-700">
               <div className="flex gap-4">
                 <div className="flex items-center gap-1.5 text-slate-400 text-sm">
-                  <Users className="w-4 h-4" /> <span className="font-mono text-white">{contest.participants || 0}</span>
+                  <Users className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{contest.participants || 0}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-slate-400 text-sm">
-                  <Clock className="w-4 h-4" /> <span className="font-mono text-white">{contest.duration}</span>
+                  <Clock className="w-4 h-4" /> <span className="font-sans tracking-wide text-white">{contest.duration}</span>
                 </div>
               </div>
               <button onClick={() => setManagingContest(contest)} className="text-brand-cyan hover:text-white transition-colors flex items-center gap-1 text-sm font-medium">
@@ -235,7 +235,7 @@ export default function CompanyContestsView({ currentUser }) {
                         {leaderboard.map(cand => (
                           <div key={cand.id} className="flex items-center justify-between bg-dark-800 p-3 rounded-lg border border-dark-700">
                             <div className="flex items-center gap-3">
-                              <span className="text-brand-green font-mono font-bold w-6">#{cand.rank}</span>
+                              <span className="text-brand-green font-sans tracking-wide font-bold w-6">#{cand.rank}</span>
                               <div>
                                 <p className="text-white font-medium">{cand.name}</p>
                                 <p className="text-xs text-slate-400">Score: {cand.score} | Time: {cand.time}</p>

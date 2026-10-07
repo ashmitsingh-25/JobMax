@@ -37,11 +37,11 @@ export class ErrorBoundary extends React.Component {
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white">Application Exception Caught</h3>
-                <p className="text-xs text-slate-400 font-mono">JobMax Self-Healing Diagnostic</p>
+                <p className="text-xs text-slate-400 font-sans tracking-wide">JobMax Self-Healing Diagnostic</p>
               </div>
             </div>
 
-            <div className="p-3.5 bg-dark-900 rounded-xl border border-dark-700 text-xs font-mono text-rose-300 overflow-x-auto">
+            <div className="p-3.5 bg-dark-900 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-rose-300 overflow-x-auto">
               {this.state.error?.toString() || "Unknown rendering exception"}
             </div>
 

@@ -33,15 +33,15 @@
 }
 
 .badge-matched {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-medium inline-flex items-center gap-1;
+  @apply font-sans tracking-wide font-bold text-[10px] uppercase px-2.5 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 inline-flex items-center gap-1;
 }
 
 .badge-missing {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-rose-950/60 border border-rose-500/40 text-rose-400 font-medium inline-flex items-center gap-1;
+  @apply font-sans tracking-wide font-bold text-[10px] uppercase px-2.5 py-1 rounded bg-rose-950/60 border border-rose-500/40 text-rose-400 inline-flex items-center gap-1;
 }
 
 .badge-warning {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-amber-950/60 border border-amber-500/40 text-amber-400 font-medium inline-flex items-center gap-1;
+  @apply font-sans tracking-wide font-bold text-[10px] uppercase px-2.5 py-1 rounded bg-amber-950/60 border border-amber-500/40 text-amber-400 inline-flex items-center gap-1;
 }
 
 /* Glassmorphism & High-Density Cards */

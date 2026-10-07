@@ -145,14 +145,14 @@ export default function LoginPage({ onSelectRole }) {
       {/* Minimal Top Brand Bar */}
       <header className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 pt-6 pb-2 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-black text-[#00EA64] flex items-center justify-center font-mono font-bold shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-black text-[#00EA64] flex items-center justify-center font-sans tracking-wide font-bold shadow-sm">
             <Terminal className="w-4 h-4 text-[#00EA64]" />
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="font-mono text-lg font-bold text-neutral-900 tracking-tight">
+            <span className="font-sans tracking-wide text-lg font-bold text-neutral-900 tracking-tight">
               Job<span className="text-[#00875a]">Max</span>
             </span>
-            <span className="text-[10px] font-mono font-medium text-neutral-500 bg-neutral-100 border border-neutral-200 px-1.5 py-0.5 rounded">
+            <span className="text-[10px] font-sans tracking-wide font-medium text-neutral-500 bg-neutral-100 border border-neutral-200 px-1.5 py-0.5 rounded">
               v1.0
             </span>
           </div>
@@ -281,7 +281,7 @@ export default function LoginPage({ onSelectRole }) {
 
       {/* Floating Subtle Demo Toolbar for Evaluators */}
       <div className="relative z-10 pb-6 text-center px-4">
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-neutral-50/90 backdrop-blur-sm border border-neutral-200/90 px-4 py-2 rounded-full shadow-sm text-xs font-mono text-neutral-600">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-neutral-50/90 backdrop-blur-sm border border-neutral-200/90 px-4 py-2 rounded-full shadow-sm text-xs font-sans tracking-wide text-neutral-600">
           <span className="flex items-center gap-1 text-neutral-800 font-semibold mr-1">
             <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
             1-Click Demo Profiles:
@@ -384,7 +384,7 @@ export default function LoginPage({ onSelectRole }) {
 
             <div className="relative flex py-1 items-center mb-5">
               <div className="flex-grow border-t border-neutral-200"></div>
-              <span className="flex-shrink mx-3 text-[10px] text-neutral-400 font-mono uppercase">or continue with credentials</span>
+              <span className="flex-shrink mx-3 text-[10px] text-neutral-400 font-sans tracking-wide uppercase">or continue with credentials</span>
               <div className="flex-grow border-t border-neutral-200"></div>
             </div>
 

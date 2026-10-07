@@ -33,7 +33,7 @@ export default function CompanyProposalsView({ currentUser }) {
             <div className="flex flex-col md:flex-row justify-between gap-6 mb-6">
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">{proposal.jobRole}</h3>
-                <div className="flex items-center gap-4 text-sm text-slate-400 font-mono">
+                <div className="flex items-center gap-4 text-sm text-slate-400 font-sans tracking-wide">
                   <span className="flex items-center gap-1.5 text-brand-cyan">
                     <Building2 className="w-4 h-4" /> To: Candidate {proposal.candidateId}
                   </span>
@@ -46,7 +46,7 @@ export default function CompanyProposalsView({ currentUser }) {
                 </div>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
+                <span className={`px-3 py-1 rounded-full text-xs font-sans tracking-wide font-bold border ${
                   proposal.status === 'pending' ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30' :
                   proposal.status === 'accepted' ? 'bg-brand-green/10 text-brand-green border-brand-green/30' :
                   'bg-red-500/10 text-red-500 border-red-500/30'

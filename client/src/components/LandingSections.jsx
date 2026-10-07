@@ -22,7 +22,7 @@ export function CareerImpactBanner() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green border border-brand-green/30 px-3 py-1 rounded-full mb-6 text-xs font-mono font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green border border-brand-green/30 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5" /> Career Readiness
             </div>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
@@ -48,7 +48,7 @@ export function CareerImpactBanner() {
               <div className="w-32 h-32 bg-dark-800 rounded-full flex flex-col items-center justify-center z-10 border border-brand-green/40 shadow-glow-green">
                 <Target className="w-8 h-8 text-brand-green mb-2" />
                 <div className="text-2xl font-bold text-white">92%</div>
-                <div className="text-[10px] text-slate-400 font-mono uppercase">Readiness</div>
+                <div className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Readiness</div>
               </div>
 
               {/* Orbiting Elements */}
@@ -420,7 +420,7 @@ export function HowJobMaxHelps() {
         >
           <div className="inline-flex items-center gap-2 bg-dark-800 border border-brand-green/30 px-3.5 py-1.5 rounded-full mb-4 shadow-glow-green">
             <Sparkles className="w-4 h-4 text-brand-green" />
-            <span className="font-mono text-xs text-brand-green font-semibold tracking-wide">
+            <span className="text-xs text-brand-green font-bold tracking-widest uppercase">
               THE SKILL-BASED WORKFLOW
             </span>
           </div>
@@ -466,7 +466,7 @@ export function HowJobMaxHelps() {
 
                   {/* Center Node */}
                   <div className="hidden md:flex flex-col items-center justify-center relative shrink-0 w-12 h-12">
-                    <div className={`w-10 h-10 rounded-full bg-dark-900 border-2 border-${step.color} flex items-center justify-center font-mono font-bold text-sm text-${step.color} z-10 shadow-glow-${step.color.split('-')[1] || 'green'}`}>
+                    <div className={`w-10 h-10 rounded-full bg-dark-900 border-2 border-${step.color} flex items-center justify-center font-bold text-sm text-${step.color} z-10 shadow-glow-${step.color.split('-')[1] || 'green'}`}>
                       {step.id}
                     </div>
                   </div>
