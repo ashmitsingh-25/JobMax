@@ -67,28 +67,22 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 flex flex-col gap-3">
-            <span className="block">
-              <TextEffect per='word' preset='blur'>
-                Close the Gap Between
-              </TextEffect>
-            </span>
-            <span className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <TextLoop
-                className='overflow-y-visible text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex justify-center w-[280px] sm:w-[440px] pb-1'
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                variants={{
-                  initial: { y: 20, opacity: 0, filter: 'blur(4px)' },
-                  animate: { y: 0, opacity: 1, filter: 'blur(0px)' },
-                  exit: { y: -20, opacity: 0, filter: 'blur(4px)' },
-                }}
-              >
-                <span className="whitespace-nowrap">What You Know</span>
-                <span className="whitespace-nowrap">Academic Knowledge</span>
-                <span className="whitespace-nowrap">Your Current Skills</span>
-              </TextLoop>
-              <span className="text-white">&amp; What Tech Demands</span>
-            </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-8 max-w-4xl mx-auto leading-[1.1] sm:leading-tight text-center">
+            Close the Gap Between <br className="hidden sm:block" />
+            <TextLoop
+              className='overflow-y-visible text-brand-green inline-flex justify-center w-[280px] sm:w-[440px] pb-1'
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              variants={{
+                initial: { y: 20, opacity: 0, filter: 'blur(4px)' },
+                animate: { y: 0, opacity: 1, filter: 'blur(0px)' },
+                exit: { y: -20, opacity: 0, filter: 'blur(4px)' },
+              }}
+            >
+              <span className="whitespace-nowrap">our Current Skills</span>
+              <span className="whitespace-nowrap">our Academic Knowledge</span>
+            </TextLoop>
+            <br className="hidden sm:block" />
+            &amp; What Tech Demands
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -202,13 +196,13 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
                 <InfiniteSlider gap={48} speed={30}>
-                  <img src="https://cdn.simpleicons.org/google/4285F4" alt="Google" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/microsoft/5E5E5E" alt="Microsoft" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/amazon/FF9900" alt="Amazon" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/meta/0467DF" alt="Meta" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/atlassian/0052CC" alt="Atlassian" className="h-[35px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/stripe/008CDD" alt="Stripe" className="h-[35px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/google" alt="Google" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/microsoft" alt="Microsoft" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/amazon" alt="Amazon" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/meta" alt="Meta" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/atlassian" alt="Atlassian" className="h-[30px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/stripe" alt="Stripe" className="h-[30px] w-auto object-contain" />
                 </InfiniteSlider>
               </InView>
             </div>

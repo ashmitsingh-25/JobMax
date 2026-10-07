@@ -23,6 +23,7 @@ import { api } from '../../services/api';
 import CandidateDetailModal from './CandidateDetailModal';
 import CreateRoleModal from './CreateRoleModal';
 import BatchResumeUploadModal from './BatchResumeUploadModal';
+import CandidateComparisonModal from './CandidateComparisonModal';
 
 export default function CompanyDashboard({ currentUser }) {
   const [roles, setRoles] = useState([]);
@@ -37,6 +38,8 @@ export default function CompanyDashboard({ currentUser }) {
   const [isCreateRoleOpen, setIsCreateRoleOpen] = useState(false);
   const [isBatchUploadOpen, setIsBatchUploadOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [compareList, setCompareList] = useState([]);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
 
   // 1. Fetch company roles
   useEffect(() => {
@@ -85,6 +88,14 @@ export default function CompanyDashboard({ currentUser }) {
     setCandidates(ranked);
   };
 
+  const toggleCompare = (candId) => {
+    setCompareList(prev => 
+      prev.includes(candId) ? prev.filter(id => id !== candId) : [...prev, candId]
+    );
+  };
+
+  const selectedCandidatesForCompare = candidates.filter(c => compareList.includes(c.id));
+
   return (
     <div className="space-y-8 animate-in fade-in">
       
@@ -122,10 +133,10 @@ export default function CompanyDashboard({ currentUser }) {
         <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
           <button
             onClick={() => setIsBatchUploadOpen(true)}
-            className="btn-secondary text-xs font-mono flex items-center gap-1.5"
+            className="btn-secondary text-xs flex items-center gap-1.5"
           >
             <Upload className="w-3.5 h-3.5 text-brand-cyan" />
-            Batch Upload Resumes
+            Upload Candidate Resumes
           </button>
 
           <button
@@ -145,14 +156,14 @@ export default function CompanyDashboard({ currentUser }) {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-1.5 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[11px] font-mono px-2.5 py-0.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[11px] px-2.5 py-0.5 rounded-full font-medium">
                 <Sparkles className="w-3 h-3" />
                 AI Skill Gap Analyzer · Candidate Pool Calibration
               </div>
               <h3 className="text-xl font-bold text-white">
                 Talent Pool Readiness vs "{selectedRole.title}"
               </h3>
-              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300 font-mono pt-1">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300 pt-1">
                 <span>Location: <strong className="text-white">{selectedRole.location}</strong></span>
                 <span>•</span>
                 <span>CTC: <strong className="text-brand-green">{selectedRole.ctcBand}</strong></span>
@@ -224,12 +235,20 @@ export default function CompanyDashboard({ currentUser }) {
               <Users className="w-5 h-5 text-brand-green" />
               AI-Ranked Candidates for Shortlisting ({filteredCandidates.length})
             </h3>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">
+            <p className="text-xs text-slate-400 mt-0.5">
               Ranked by multi-attribute fit score, core matching skills and gap breakdown
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto flex-wrap sm:flex-nowrap">
+            {compareList.length > 0 && (
+              <button
+                onClick={() => setIsCompareModalOpen(true)}
+                className="btn-primary py-1.5 px-3 text-xs"
+              >
+                Compare Selected ({compareList.length})
+              </button>
+            )}
             <select
               value={tierFilter}
               onChange={(e) => setTierFilter(e.target.value)}
@@ -259,9 +278,21 @@ export default function CompanyDashboard({ currentUser }) {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-dark-850 border-b border-dark-700 text-[11px] font-mono uppercase text-slate-400">
+                <tr className="bg-dark-850 border-b border-dark-700 text-xs font-semibold text-slate-400">
+                  <th className="py-3 px-4 w-8">
+                    <input 
+                      type="checkbox" 
+                      className="rounded border-dark-600 bg-dark-900 text-brand-green focus:ring-brand-green"
+                      checked={compareList.length === filteredCandidates.length && filteredCandidates.length > 0}
+                      onChange={(e) => {
+                        if (e.target.checked) setCompareList(filteredCandidates.map(c => c.id));
+                        else setCompareList([]);
+                      }}
+                    />
+                  </th>
                   <th className="py-3 px-4">Rank & Candidate</th>
                   <th className="py-3 px-4">Fit Score</th>
+                  <th className="py-3 px-4">Tech Match</th>
                   <th className="py-3 px-4">College / Experience</th>
                   <th className="py-3 px-4">Matching Skills</th>
                   <th className="py-3 px-4">Identified Skill Gaps</th>
@@ -269,9 +300,18 @@ export default function CompanyDashboard({ currentUser }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-dark-700/60 text-xs">
-                {filteredCandidates.map((cand, idx) => (
+                {filteredCandidates.map((cand, idx) => {
+                  const techMatch = Math.round((cand.matchedCount / Math.max(1, (cand.matchedCount + cand.missingCount))) * 100) || 0;
+                  return (
                   <tr key={cand.id} className="hover:bg-dark-750/50 transition-colors">
-                    
+                    <td className="py-3 px-4">
+                      <input 
+                        type="checkbox" 
+                        className="rounded border-dark-600 bg-dark-900 text-brand-green focus:ring-brand-green"
+                        checked={compareList.includes(cand.id)}
+                        onChange={() => toggleCompare(cand.id)}
+                      />
+                    </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <span className="font-mono text-xs font-bold text-slate-500 w-5">
@@ -299,7 +339,17 @@ export default function CompanyDashboard({ currentUser }) {
                       </div>
                     </td>
 
-                    <td className="py-3 px-4 font-mono text-slate-300">
+                    <td className="py-3 px-4">
+                      <div className="w-16 h-1.5 bg-dark-700 rounded-full overflow-hidden mt-1 relative">
+                        <div 
+                          className="h-full bg-brand-cyan rounded-full"
+                          style={{ width: `${techMatch}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-[10px] text-slate-400 mt-1 block">{techMatch}% Match</span>
+                    </td>
+
+                    <td className="py-3 px-4 text-slate-300">
                       <p className="font-medium text-white">{cand.college}</p>
                       <p className="text-[10px] text-slate-400">
                         {cand.cgpa ? `${cand.cgpa} CGPA` : `${cand.yearsOfExperience} YoE`} • {cand.collegeTier}
@@ -346,7 +396,7 @@ export default function CompanyDashboard({ currentUser }) {
                     </td>
 
                   </tr>
-                ))}
+                )})}
               </tbody>
             </table>
           </div>
@@ -383,6 +433,13 @@ export default function CompanyDashboard({ currentUser }) {
           onBatchRanked={handleBatchRanked}
         />
       )}
+
+      {/* Candidate Comparison Modal */}
+      <CandidateComparisonModal 
+        isOpen={isCompareModalOpen}
+        onClose={() => setIsCompareModalOpen(false)}
+        candidates={selectedCandidatesForCompare}
+      />
 
     </div>
   );

@@ -58,7 +58,7 @@
 }
 
 .input-hr {
-  @apply bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green font-mono transition-colors;
+  @apply bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors;
 }
 
 .btn-primary {
@@ -70,7 +70,7 @@
 }
 
 .btn-outline-green {
-  @apply bg-transparent hover:bg-brand-green/10 border border-brand-green/60 hover:border-brand-green text-brand-green font-mono text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5;
+  @apply bg-transparent hover:bg-brand-green/10 border border-brand-green/60 hover:border-brand-green text-brand-green text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5;
 }
 
 /* Code block highlight */
