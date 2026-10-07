@@ -16,6 +16,7 @@ import {
   Building2 
 } from 'lucide-react';
 import { api } from '../../services/api';
+import { BorderTrail } from '../core/border-trail';
 
 export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
   const [growthReport, setGrowthReport] = useState(null);
@@ -60,7 +61,13 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
       {/* Main Career Growth Overview Banner */}
       {growthReport && (
         <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-purple/40 rounded-2xl p-6 shadow-glow-blue relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <BorderTrail 
+            style={{
+              boxShadow: '0px 0px 60px 30px rgb(255 255 255 / 50%), 0 0 100px 60px rgb(168 85 247 / 45%), 0 0 140px 90px rgb(168 85 247 / 25%)'
+            }}
+            size={120} 
+          />
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             
             <div className="space-y-3">
               <div className="inline-flex items-center gap-1.5 bg-brand-purple/10 text-brand-purple border border-brand-purple/30 text-[11px] font-mono px-2.5 py-0.5 rounded-full">

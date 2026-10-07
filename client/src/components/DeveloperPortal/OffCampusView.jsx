@@ -19,6 +19,7 @@ import {
   Target 
 } from 'lucide-react';
 import { api } from '../../services/api';
+import { BorderTrail } from '../core/border-trail';
 import JobDetailModal from './JobDetailModal';
 
 export default function OffCampusView({ currentUser, onOpenResumeModal }) {
@@ -84,7 +85,13 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
       {/* AI Bot Off-Campus Gap Report */}
       {analysisReport && (
         <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-cyan/40 rounded-2xl p-6 shadow-glow-blue relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <BorderTrail 
+            style={{
+              boxShadow: '0px 0px 60px 30px rgb(255 255 255 / 50%), 0 0 100px 60px rgb(34 211 238 / 45%), 0 0 140px 90px rgb(34 211 238 / 25%)'
+            }}
+            size={120} 
+          />
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             
             <div className="flex items-center gap-6">
               <div className="relative flex items-center justify-center">

@@ -23,6 +23,7 @@ import {
   Square
 } from 'lucide-react';
 import { api } from '../../services/api';
+import { BorderTrail } from '../core/border-trail';
 import confetti from 'canvas-confetti';
 import CompanyDetailModal from './CompanyDetailModal';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../core/accordion';
@@ -172,7 +173,12 @@ export default function OnCampusView({
       {/* AI Bot #1 Placement Readiness Analyzer Banner */}
       {analysisReport && (
         <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-green/40 rounded-2xl p-6 shadow-glow-green relative overflow-hidden">
-          
+          <BorderTrail 
+            style={{
+              boxShadow: '0px 0px 60px 30px rgb(255 255 255 / 50%), 0 0 100px 60px rgb(0 214 89 / 45%), 0 0 140px 90px rgb(0 214 89 / 25%)'
+            }}
+            size={120} 
+          />
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             
             {/* Gauge & Main Verdict */}

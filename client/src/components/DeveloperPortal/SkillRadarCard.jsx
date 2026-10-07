@@ -47,7 +47,13 @@ export default function SkillRadarCard({ userSkills = [] }) {
   });
 
   return (
-    <div className="card-hr p-4 space-y-3 relative">
+    <div className="card-hr p-4 space-y-3 relative overflow-hidden">
+      <BorderTrail 
+        style={{
+          boxShadow: '0px 0px 60px 30px rgb(255 255 255 / 10%), 0 0 100px 60px rgb(0 234 100 / 15%), 0 0 140px 90px rgb(0 234 100 / 10%)'
+        }}
+        size={120} 
+      />
       <div className="flex items-center justify-between border-b border-dark-700 pb-2.5 relative z-10">
         <div className="flex items-center gap-2">
           <PieChart className="w-4 h-4 text-brand-green" />
