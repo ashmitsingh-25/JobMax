@@ -25,6 +25,7 @@ import {
 import { api } from '../../services/api';
 import confetti from 'canvas-confetti';
 import CompanyDetailModal from './CompanyDetailModal';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../core/accordion';
 
 const DEFAULT_COLLEGES = [
   { id: "iit-delhi", name: "Indian Institute of Technology (IIT) Delhi", location: "New Delhi", tier: "Tier 1" },
@@ -262,90 +263,106 @@ export default function OnCampusView({
             </span>
           </div>
 
-          {analysisReport?.actionPlan?.map((planBlock, idx) => (
-            <div key={planBlock.week} className="card-hr space-y-4">
-              <div className="flex items-center justify-between border-b border-dark-700 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <span className="font-mono text-xs font-bold bg-dark-700 text-brand-green px-2.5 py-1 rounded border border-brand-green/30">
-                    {planBlock.week}
-                  </span>
-                  <h4 className="font-semibold text-white text-sm">
-                    {planBlock.theme}
-                  </h4>
-                </div>
-                <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  Sprint Phase 0{idx + 1}
-                </span>
-              </div>
+          <Accordion
+            className="flex w-full flex-col gap-4"
+            transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+            variants={{
+              expanded: { opacity: 1, scale: 1 },
+              collapsed: { opacity: 0, scale: 0.95 },
+            }}
+          >
+            {analysisReport?.actionPlan?.map((planBlock, idx) => (
+              <AccordionItem key={planBlock.week} value={planBlock.week} className="card-hr !p-0 overflow-hidden">
+                <AccordionTrigger className="w-full p-4 flex items-center justify-between border-b border-dark-700 bg-dark-800/50 hover:bg-dark-800 transition-colors group">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold bg-dark-700 text-brand-green px-2.5 py-1 rounded border border-brand-green/30">
+                      {planBlock.week}
+                    </span>
+                    <h4 className="font-semibold text-white text-sm">
+                      {planBlock.theme}
+                    </h4>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      Sprint Phase 0{idx + 1}
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400 transition-transform duration-200 group-data-[expanded]:rotate-90" />
+                  </div>
+                </AccordionTrigger>
 
-              {/* Focus Areas */}
-              <div className="space-y-1.5">
-                <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Focus Areas:</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {planBlock.focusAreas.map((area, i) => (
-                    <div key={i} className="bg-dark-850 p-2.5 rounded-lg border border-dark-700/80 text-xs text-slate-300 font-mono flex items-start gap-2">
-                      <Code2 className="w-3.5 h-3.5 text-brand-green flex-shrink-0 mt-0.5" />
-                      <span>{area}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Actionable Deliverables with Checkbox */}
-              <div className="space-y-2 pt-1">
-                <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Actionable Deliverables:</p>
-                <div className="space-y-1.5">
-                  {planBlock.deliverables.map((item, dIdx) => {
-                    const taskId = `task-${idx}-${dIdx}`;
-                    const isDone = completedTasks[taskId];
-                    return (
-                      <div
-                        key={dIdx}
-                        onClick={() => toggleTask(taskId)}
-                        className={`flex items-start gap-2.5 p-2.5 rounded-lg border text-xs cursor-pointer transition-colors ${
-                          isDone 
-                            ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300 line-through' 
-                            : 'bg-dark-850 border-dark-700 text-slate-200 hover:border-dark-600'
-                        }`}
-                      >
-                        {isDone ? (
-                          <CheckSquare className="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" />
-                        ) : (
-                          <Square className="w-4 h-4 text-slate-500 flex-shrink-0 mt-0.5" />
-                        )}
-                        <span className="font-sans">{item}</span>
+                <AccordionContent className="origin-top bg-dark-800">
+                  <div className="p-4 space-y-4">
+                    {/* Focus Areas */}
+                    <div className="space-y-1.5">
+                      <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Focus Areas:</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {planBlock.focusAreas.map((area, i) => (
+                          <div key={i} className="bg-dark-850 p-2.5 rounded-lg border border-dark-700/80 text-xs text-slate-300 font-mono flex items-start gap-2">
+                            <Code2 className="w-3.5 h-3.5 text-brand-green flex-shrink-0 mt-0.5" />
+                            <span>{area}</span>
+                          </div>
+                        ))}
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
+                    </div>
 
-              {/* Curated Resources */}
-              {planBlock?.suggestedResources && Array.isArray(planBlock.suggestedResources) && (
-                <div className="pt-2 flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-mono text-slate-400">Curated Prep Sheets:</span>
-                  {planBlock.suggestedResources.map((res, rIdx) => {
-                    const rName = typeof res === 'string' ? res : (res?.name || `Resource ${rIdx + 1}`);
-                    const rUrl = typeof res === 'object' && res?.url ? res.url : 'https://takeuforward.org';
-                    return (
-                      <a
-                        key={rIdx}
-                        href={rUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-xs font-mono bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
-                      >
-                        <BookOpen className="w-3 h-3" />
-                        {rName}
-                        <ExternalLink className="w-2.5 h-2.5" />
-                      </a>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          ))}
+                    {/* Actionable Deliverables with Checkbox */}
+                    <div className="space-y-2 pt-1">
+                      <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Actionable Deliverables:</p>
+                      <div className="space-y-1.5">
+                        {planBlock.deliverables.map((item, dIdx) => {
+                          const taskId = `task-${idx}-${dIdx}`;
+                          const isDone = completedTasks[taskId];
+                          return (
+                            <div
+                              key={dIdx}
+                              onClick={() => toggleTask(taskId)}
+                              className={`flex items-start gap-2.5 p-2.5 rounded-lg border text-xs cursor-pointer transition-colors ${
+                                isDone 
+                                  ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300 line-through' 
+                                  : 'bg-dark-850 border-dark-700 text-slate-200 hover:border-dark-600'
+                              }`}
+                            >
+                              {isDone ? (
+                                <CheckSquare className="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" />
+                              ) : (
+                                <Square className="w-4 h-4 text-slate-500 flex-shrink-0 mt-0.5" />
+                              )}
+                              <span className="font-sans">{item}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Curated Resources */}
+                    {planBlock?.suggestedResources && Array.isArray(planBlock.suggestedResources) && (
+                      <div className="pt-2 flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-mono text-slate-400">Curated Prep Sheets:</span>
+                        {planBlock.suggestedResources.map((res, rIdx) => {
+                          const rName = typeof res === 'string' ? res : (res?.name || `Resource ${rIdx + 1}`);
+                          const rUrl = typeof res === 'object' && res?.url ? res.url : 'https://takeuforward.org';
+                          return (
+                            <a
+                              key={rIdx}
+                              href={rUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-xs font-mono bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
+                            >
+                              <BookOpen className="w-3 h-3" />
+                              {rName}
+                              <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
 
         {/* Right 1 Col: Target Company Fit Breakdown */}

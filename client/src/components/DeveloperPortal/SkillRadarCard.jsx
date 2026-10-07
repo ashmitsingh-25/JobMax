@@ -9,6 +9,7 @@ import {
 } from 'recharts';
 import { Sparkles, PieChart } from 'lucide-react';
 import { SKILLS_TAXONOMY } from '../../data/skillsTaxonomy.js';
+import { BorderTrail } from '../core/border-trail';
 
 export default function SkillRadarCard({ userSkills = [] }) {
   const normSkills = userSkills.map(s => s.toLowerCase());
@@ -46,8 +47,9 @@ export default function SkillRadarCard({ userSkills = [] }) {
   });
 
   return (
-    <div className="card-hr p-4 space-y-3">
-      <div className="flex items-center justify-between border-b border-dark-700 pb-2.5">
+    <div className="card-hr p-4 space-y-3 relative">
+      <BorderTrail size={120} style={{ boxShadow: '0px 0px 60px 30px rgb(0 234 100 / 30%), 0 0 100px 60px rgb(0 0 0 / 50%)' }} />
+      <div className="flex items-center justify-between border-b border-dark-700 pb-2.5 relative z-10">
         <div className="flex items-center gap-2">
           <PieChart className="w-4 h-4 text-brand-green" />
           <h4 className="font-bold text-sm text-white">Skill Proficiency Radar</h4>
@@ -57,7 +59,7 @@ export default function SkillRadarCard({ userSkills = [] }) {
         </span>
       </div>
 
-      <div className="h-56 w-full flex items-center justify-center">
+      <div className="h-56 w-full flex items-center justify-center relative z-10">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
             <PolarGrid stroke="#1F293D" />
@@ -81,7 +83,7 @@ export default function SkillRadarCard({ userSkills = [] }) {
         </ResponsiveContainer>
       </div>
 
-      <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-dark-700/80">
+      <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-dark-700/80 relative z-10">
         <span>Active Matrix: 7 Domains</span>
         <span className="text-slate-300">Target: High-Density Pentagon</span>
       </div>

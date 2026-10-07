@@ -8,11 +8,10 @@ import {
   Plus, 
   X, 
   CheckCircle2, 
-  Upload, 
-  Code, 
   TrendingUp,
   Layers
 } from 'lucide-react';
+import { TransitionPanel } from '../core/transition-panel';
 import OnCampusView from './OnCampusView';
 import OffCampusView from './OffCampusView';
 import ExperiencedView from './ExperiencedView';
@@ -175,25 +174,36 @@ export default function DeveloperDashboard({
       </div>
 
       {/* Main Path Views */}
-      {isFresher ? (
-        activeSubTrack === 'on-campus' ? (
+      <TransitionPanel
+        activeIndex={!isFresher ? 2 : activeSubTrack === 'on-campus' ? 0 : 1}
+        variants={{
+          enter: (direction) => ({ opacity: 0, x: direction > 0 ? 50 : -50, position: 'absolute', width: '100%' }),
+          center: { opacity: 1, x: 0, position: 'relative' },
+          exit: (direction) => ({ opacity: 0, x: direction < 0 ? 50 : -50, position: 'absolute', width: '100%' }),
+        }}
+        transition={{ duration: 0.3 }}
+        custom={activeSubTrack === 'on-campus' ? -1 : 1}
+      >
+        <div key="on-campus">
           <OnCampusView
             currentUser={currentUser}
             onOpenResumeModal={() => setIsResumeModalOpen(true)}
             onOpenContributeModal={() => setIsContributeModalOpen(true)}
           />
-        ) : (
+        </div>
+        <div key="off-campus">
           <OffCampusView
             currentUser={currentUser}
             onOpenResumeModal={() => setIsResumeModalOpen(true)}
           />
-        )
-      ) : (
-        <ExperiencedView
-          currentUser={currentUser}
-          onOpenResumeModal={() => setIsResumeModalOpen(true)}
-        />
-      )}
+        </div>
+        <div key="experienced">
+          <ExperiencedView
+            currentUser={currentUser}
+            onOpenResumeModal={() => setIsResumeModalOpen(true)}
+          />
+        </div>
+      </TransitionPanel>
 
       {/* Modals */}
       {isResumeModalOpen && (

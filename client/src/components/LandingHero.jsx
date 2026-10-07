@@ -15,7 +15,10 @@ import {
   Lock,
   Mail
 } from 'lucide-react';
-
+import { TextEffect } from './core/text-effect';
+import { TextLoop } from './core/text-loop';
+import { InView } from './core/in-view';
+import { InfiniteSlider } from './core/infinite-slider';
 
 export default function LandingHero({ onSelectRole, onQuickLogin }) {
   const [activeTab, setActiveTab] = useState('developer'); // 'developer' or 'company'
@@ -65,10 +68,28 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
-            Close the Gap Between <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan">
-              What You Know
-            </span> & <span className="text-white">What Tech Demands</span>
+            <TextEffect per='char' preset='fade'>
+              Close the Gap Between
+            </TextEffect> <br className="hidden sm:inline" />
+            <TextLoop
+              className='overflow-y-clip text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex pb-1'
+              transition={{
+                type: 'spring',
+                stiffness: 900,
+                damping: 80,
+                mass: 10,
+              }}
+              variants={{
+                initial: { y: 20, rotateX: 90, opacity: 0, filter: 'blur(4px)' },
+                animate: { y: 0, rotateX: 0, opacity: 1, filter: 'blur(0px)' },
+                exit: { y: -20, rotateX: -90, opacity: 0, filter: 'blur(4px)' },
+              }}
+            >
+              <span>What You Know</span>
+              <span>Academic Knowledge</span>
+              <span>Your Current Skills</span>
+            </TextLoop>
+             &amp; <span className="text-white">What Tech Demands</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -84,9 +105,17 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               
               {/* Card 1: Developer Portal Card */}
+              <InView
+                className="h-full flex flex-col"
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' },
+                  visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
               <div 
                 onClick={() => handleStartAuth('developer')}
-                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-green rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-green flex flex-col justify-between"
+                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-green rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-green flex flex-col justify-between flex-1"
               >
                 <div className="absolute top-4 right-4 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1">
                   <Cpu className="w-3 h-3" />
@@ -115,11 +144,20 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   </button>
                 </div>
               </div>
+              </InView>
 
               {/* Card 2: Company Portal Card */}
+              <InView
+                className="h-full flex flex-col"
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' },
+                  visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.1 }}
+              >
               <div 
                 onClick={() => handleStartAuth('company')}
-                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-cyan rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-blue flex flex-col justify-between"
+                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-cyan rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-blue flex flex-col justify-between flex-1"
               >
                 <div className="absolute top-4 right-4 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1">
                   <Building2 className="w-3 h-3" />
@@ -148,6 +186,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   </button>
                 </div>
               </div>
+              </InView>
 
             </div>
 
@@ -190,6 +229,27 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   <span>Company Recruiter @ Microsoft</span>
                 </button>
               </div>
+            </div>
+
+            <div className="mt-16 text-center">
+              <p className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-8">
+                Recruiters from top tech companies hire through our engine
+              </p>
+              <InView
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                <InfiniteSlider gap={48} speed={30}>
+                  <img src="https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100&auto=format&fit=crop&q=60" alt="Google" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                  <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60" alt="Microsoft" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&auto=format&fit=crop&q=60" alt="Stripe" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&auto=format&fit=crop&q=60" alt="Atlassian" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=100&auto=format&fit=crop&q=60" alt="Zepto" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                </InfiniteSlider>
+              </InView>
             </div>
           </div>
         ) : (
