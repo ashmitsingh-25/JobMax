@@ -29,69 +29,69 @@ export default function HiringProposalsView({ currentUser }) {
     }
   };
 
-  if (loading) return <div className="text-center p-12 text-slate-400">Loading proposals...</div>;
+  if (loading) return <div className="text-center p-12 text-slate-500 font-sans text-sm">Loading proposals...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs">
         <div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <FileText className="w-5 h-5 text-brand-green" /> Hiring Proposals
+          <h2 className="text-lg font-heading font-bold text-slate-900 flex items-center gap-2">
+            <FileText className="w-4 h-4 text-blue-600" /> Hiring Proposals
           </h2>
-          <p className="text-sm text-slate-400">Direct offers from companies based on your performance.</p>
+          <p className="text-xs text-slate-500 font-sans mt-0.5">Direct offers from companies based on your performance.</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-4">
         {proposals.map(proposal => (
-          <div key={proposal.id} className="bg-dark-800 border border-dark-700 rounded-xl p-6 shadow-card-dark transition-colors">
-            <div className="flex flex-col md:flex-row justify-between gap-6 mb-6">
+          <div key={proposal.id} className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs transition-all hover:border-blue-300">
+            <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{proposal.jobRole}</h3>
-                <div className="flex items-center gap-4 text-sm text-slate-400 font-sans tracking-wide">
-                  <span className="flex items-center gap-1.5 text-brand-cyan">
-                    <Building2 className="w-4 h-4" /> {proposal.companyName}
+                <h3 className="text-xl font-heading font-bold text-slate-900 mb-1.5">{proposal.jobRole}</h3>
+                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 font-sans">
+                  <span className="flex items-center gap-1.5 text-blue-700 font-medium">
+                    <Building2 className="w-3.5 h-3.5 text-blue-600" /> {proposal.companyName}
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4" /> {proposal.location} ({proposal.workMode})
+                  <span className="flex items-center gap-1.5 text-slate-500">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400" /> {proposal.location} ({proposal.workMode})
                   </span>
-                  <span className="flex items-center gap-1.5 text-brand-green">
-                    <DollarSign className="w-4 h-4" /> {proposal.ctc}
+                  <span className="flex items-center gap-1.5 text-teal-700 font-mono font-bold">
+                    <DollarSign className="w-3.5 h-3.5 text-teal-600" /> {proposal.ctc}
                   </span>
                 </div>
               </div>
               <div className="flex items-start">
-                <span className={`px-3 py-1 rounded-full text-xs font-sans tracking-wide font-bold border ${
-                  proposal.status === 'pending' ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30' :
-                  proposal.status === 'accepted' ? 'bg-brand-green/10 text-brand-green border-brand-green/30' :
-                  'bg-red-500/10 text-red-500 border-red-500/30'
+                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-sans font-semibold border ${
+                  proposal.status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                  proposal.status === 'accepted' ? 'bg-teal-50 text-teal-700 border-teal-200' :
+                  'bg-rose-50 text-rose-700 border-rose-200'
                 }`}>
                   {proposal.status.toUpperCase()}
                 </span>
               </div>
             </div>
             
-            <div className="bg-dark-900 rounded-lg p-5 border border-dark-700 mb-6">
-              <p className="text-slate-300 leading-relaxed text-sm italic">"{proposal.jobDescription}"</p>
+            <div className="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-5">
+              <p className="text-slate-600 leading-relaxed text-xs font-sans italic">"{proposal.jobDescription}"</p>
             </div>
             
             {proposal.status === 'pending' && (
-              <div className="flex gap-4">
-                <button onClick={() => handleUpdateStatus(proposal.id, 'accepted')} className="btn-primary flex-1 flex justify-center items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4" /> Accept Proposal
+              <div className="flex gap-3">
+                <button onClick={() => handleUpdateStatus(proposal.id, 'accepted')} className="btn-primary flex-1 flex justify-center items-center gap-1.5 text-xs py-2">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Accept Proposal
                 </button>
-                <button onClick={() => handleUpdateStatus(proposal.id, 'declined')} className="px-6 py-2 rounded-lg bg-dark-700 text-white font-medium hover:bg-rose-500/20 hover:text-rose-400 transition-colors flex justify-center items-center gap-2">
-                  <XCircle className="w-4 h-4" /> Decline
+                <button onClick={() => handleUpdateStatus(proposal.id, 'declined')} className="px-5 py-2 rounded-lg bg-slate-100 text-slate-700 font-medium hover:bg-rose-50 hover:text-rose-700 hover:border-rose-200 border border-transparent transition-colors flex justify-center items-center gap-1.5 text-xs font-sans">
+                  <XCircle className="w-3.5 h-3.5" /> Decline
                 </button>
               </div>
             )}
           </div>
         ))}
         {proposals.length === 0 && (
-          <div className="text-center p-12 bg-dark-800 rounded-xl border border-dark-700">
-            <FileText className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-white">No active proposals</h3>
-            <p className="text-slate-400 mt-2">Participate in contests and projects to receive offers.</p>
+          <div className="text-center p-12 bg-white rounded-xl border border-slate-200 shadow-xs">
+            <FileText className="w-10 h-10 text-slate-400 mx-auto mb-3" />
+            <h3 className="text-base font-heading font-bold text-slate-800">No active proposals</h3>
+            <p className="text-xs font-sans text-slate-500 mt-1">Participate in contests and projects to receive offers.</p>
           </div>
         )}
       </div>

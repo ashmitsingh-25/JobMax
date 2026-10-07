@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingHero from './components/LandingHero';
+import LoginPage from './components/LoginPage';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
@@ -152,11 +153,11 @@ export default function App() {
   };
 
   if (authLoading) {
-    return <div className="min-h-screen bg-dark-900 flex items-center justify-center text-brand-green">Loading...</div>;
+    return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-blue-600 font-medium">Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-brand-green selection:text-black">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
       
       {/* Top Navigation Bar */}
       <Navbar
@@ -176,6 +177,19 @@ export default function App() {
             element={
               !currentUser ? (
                 <LandingHero
+                  onSelectRole={handleSelectRole}
+                />
+              ) : (
+                <Navigate to={`/${currentUser.role}`} replace />
+              )
+            } 
+          />
+
+          <Route 
+            path="/login" 
+            element={
+              !currentUser ? (
+                <LoginPage
                   onSelectRole={handleSelectRole}
                 />
               ) : (
