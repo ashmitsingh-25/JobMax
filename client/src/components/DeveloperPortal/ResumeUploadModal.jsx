@@ -70,7 +70,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">AI Resume Skill Parser</h3>
-              <p className="text-xs text-slate-400 font-mono">NLP & Semantic entity extraction engine</p>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">NLP & Semantic entity extraction engine</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
@@ -83,7 +83,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
           <div className="flex items-center bg-dark-850 p-1 rounded-lg border border-dark-700 mb-5">
             <button
               onClick={() => setActiveMode('upload')}
-              className={`flex-1 py-1.5 rounded-md text-xs font-mono font-medium transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 py-1.5 rounded-md text-xs font-sans tracking-wide font-medium transition-all flex items-center justify-center gap-2 ${
                 activeMode === 'upload' ? 'bg-dark-700 text-brand-green border border-brand-green/30' : 'text-slate-400'
               }`}
             >
@@ -92,7 +92,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
             </button>
             <button
               onClick={() => setActiveMode('paste')}
-              className={`flex-1 py-1.5 rounded-md text-xs font-mono font-medium transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 py-1.5 rounded-md text-xs font-sans tracking-wide font-medium transition-all flex items-center justify-center gap-2 ${
                 activeMode === 'paste' ? 'bg-dark-700 text-brand-green border border-brand-green/30' : 'text-slate-400'
               }`}
             >
@@ -121,14 +121,14 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
                   <p className="text-sm font-medium text-slate-200 mb-1">
                     {file ? file.name : "Click to browse or drop your Resume (PDF/DOCX)"}
                   </p>
-                  <p className="text-xs text-slate-500 font-mono">
+                  <p className="text-xs text-slate-500 font-sans tracking-wide">
                     {file ? `${(file.size / 1024).toFixed(1)} KB` : "Supports PDF, DOCX, TXT up to 10MB"}
                   </p>
                 </label>
               </div>
             ) : (
               <div>
-                <label className="block text-xs font-mono text-slate-400 mb-1.5">Paste Resume or Project Summary Text</label>
+                <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Paste Resume or Project Summary Text</label>
                 <textarea
                   rows={7}
                   placeholder="Paste your resume contents, project descriptions, skills list (e.g. Java, React, SQL, LeetCode 350+ solved, Docker, IIT Delhi B.Tech CS CGPA: 8.8)..."
@@ -140,7 +140,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
             )}
 
             {errorMessage && (
-              <div className="p-3 bg-rose-950/40 border border-rose-500/40 rounded-lg text-rose-400 text-xs flex items-center gap-2 font-mono">
+              <div className="p-3 bg-rose-950/40 border border-rose-500/40 rounded-lg text-rose-400 text-xs flex items-center gap-2 font-sans tracking-wide">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -170,19 +170,19 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
           /* Extracted Result View */
           <div className="space-y-5 animate-in fade-in">
             <div className="p-4 bg-emerald-950/30 border border-emerald-500/40 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
+              <div className="flex items-center gap-2 text-emerald-400 font-sans tracking-wide text-xs">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Successfully extracted {extractedData.totalSkillsCount} structured skills</span>
               </div>
               {extractedData.metadata?.detectedCgpa && (
-                <span className="text-xs font-mono bg-dark-750 px-2 py-0.5 rounded text-slate-300">
+                <span className="text-xs font-sans tracking-wide bg-dark-750 px-2 py-0.5 rounded text-slate-300">
                   Detected CGPA: <strong className="text-brand-green">{extractedData.metadata.detectedCgpa}</strong>
                 </span>
               )}
             </div>
 
             <div>
-              <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2.5">
+              <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-2.5">
                 Extracted Skills & Competencies:
               </p>
               <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-3 bg-dark-850 rounded-xl border border-dark-700">
@@ -203,7 +203,7 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
                   setFile(null);
                   setPasteText('');
                 }}
-                className="text-xs font-mono text-slate-400 hover:text-white"
+                className="text-xs font-sans tracking-wide text-slate-400 hover:text-white"
               >
                 ← Scan Another File
               </button>

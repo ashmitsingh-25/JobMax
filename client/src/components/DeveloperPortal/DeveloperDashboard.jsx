@@ -78,11 +78,11 @@ export default function DeveloperDashboard({
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-white">{currentUser?.name}</h2>
-                <span className="font-mono text-xs bg-dark-700 text-brand-green border border-brand-green/30 px-2 py-0.5 rounded">
+                <span className="font-sans tracking-wide text-xs bg-dark-700 text-brand-green border border-brand-green/30 px-2 py-0.5 rounded">
                   {currentUser?.track === 'fresher' ? 'Fresher Candidate' : 'Experienced Engineer'}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-mono mt-0.5">
+              <p className="text-xs text-slate-300 font-sans tracking-wide mt-0.5">
                 {currentUser?.college || currentUser?.currentCompany || "Developer Profile"} 
                 {currentUser?.cgpa ? ` • ${currentUser.cgpa} CGPA` : (currentUser?.yearsOfExperience ? ` • ${currentUser.yearsOfExperience} YoE` : "")}
               </p>
@@ -93,7 +93,7 @@ export default function DeveloperDashboard({
             {currentUser?.githubUsername && (
               <a href={`https://github.com/${currentUser.githubUsername}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span className="text-sm font-mono">{currentUser.githubUsername}</span>
+                <span className="text-sm font-sans tracking-wide">{currentUser.githubUsername}</span>
               </a>
             )}
             {currentUser?.contestRating && (
@@ -101,7 +101,7 @@ export default function DeveloperDashboard({
                 <Trophy className="w-5 h-5 text-yellow-500" />
                 <div>
                   <div className="text-sm font-bold text-white">{currentUser.contestRating}</div>
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono">Rating</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-sans tracking-wide">Rating</div>
                 </div>
               </div>
             )}
@@ -110,7 +110,7 @@ export default function DeveloperDashboard({
                 <Briefcase className="w-5 h-5 text-brand-green" />
                 <div>
                   <div className="text-sm font-bold text-white">{currentUser.projectsCompleted}</div>
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono">Projects</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-sans tracking-wide">Projects</div>
                 </div>
               </div>
             )}
@@ -123,7 +123,7 @@ export default function DeveloperDashboard({
           {/* Left 2 Cols: Interactive Skills Cloud */}
           <div className="lg:col-span-2 space-y-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-1">
-              <p className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <Code className="w-3.5 h-3.5 text-brand-green" />
                 Your Verified Skill Profile ({currentUser?.skills?.length || 0}):
               </p>
@@ -159,7 +159,7 @@ export default function DeveloperDashboard({
               ))}
             </div>
             
-            <p className="text-[11px] text-slate-500 font-mono">
+            <p className="text-[11px] text-slate-500 font-sans tracking-wide">
               💡 Tip: Adding or removing skills updates your placement readiness scores and company fit matrices in real time.
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function DeveloperDashboard({
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${
+            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-sans tracking-wide font-medium transition-all ${
               activeTab === tab.id
                 ? 'bg-dark-700 text-brand-green border border-brand-green/30 shadow-glow-green'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-dark-750'

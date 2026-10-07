@@ -57,12 +57,12 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-xl text-white">{companyRecord.company}</h3>
-                <span className="font-mono text-xs text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded">
+                <span className="font-sans tracking-wide text-xs text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded">
                   {matchPercentage}% Fit Match
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-mono mt-0.5">{companyRecord.role}</p>
-              <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-1">
+              <p className="text-xs text-slate-300 font-sans tracking-wide mt-0.5">{companyRecord.role}</p>
+              <div className="flex items-center gap-2 text-[11px] text-slate-400 font-sans tracking-wide mt-1">
                 <span>CTC: <strong className="text-white">{companyRecord.ctcBand}</strong></span>
                 <span>•</span>
                 <span>Cutoff: <strong className="text-white">{companyRecord.cgpaCutoff} CGPA</strong></span>
@@ -80,11 +80,11 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
         {/* Comparison Overview */}
         <div className="bg-dark-850 border border-dark-700 rounded-xl p-4 mb-6">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-brand-green" />
               Skill Compatibility Breakdown:
             </p>
-            <span className="text-xs font-mono text-slate-300">
+            <span className="text-xs font-sans tracking-wide text-slate-300">
               {matchedList.length} of {demanded.length} required competencies matched
             </span>
           </div>
@@ -93,7 +93,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
             
             {/* Matched */}
             <div className="space-y-2">
-              <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1 font-semibold">
+              <span className="text-[11px] font-sans tracking-wide text-emerald-400 flex items-center gap-1 font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 Your Verified Matches:
               </span>
@@ -105,14 +105,14 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-500 font-mono">No direct matches yet</span>
+                  <span className="text-xs text-slate-500 font-sans tracking-wide">No direct matches yet</span>
                 )}
               </div>
             </div>
 
             {/* Missing */}
             <div className="space-y-2">
-              <span className="text-[11px] font-mono text-rose-400 flex items-center gap-1 font-semibold">
+              <span className="text-[11px] font-sans tracking-wide text-rose-400 flex items-center gap-1 font-semibold">
                 <XCircle className="w-3.5 h-3.5" />
                 Missing Demanded Gaps:
               </span>
@@ -124,7 +124,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-emerald-400 font-mono">Ready to clear all rounds!</span>
+                  <span className="text-xs text-emerald-400 font-sans tracking-wide">Ready to clear all rounds!</span>
                 )}
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
             <div className="space-y-2.5">
               {companyRecord.rounds.map((round, ri) => (
                 <div key={ri} className="card-hr p-3.5 flex items-start gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-dark-750 border border-brand-cyan/30 flex items-center justify-center font-mono font-bold text-brand-cyan text-xs flex-shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-dark-750 border border-brand-cyan/30 flex items-center justify-center font-sans tracking-wide font-bold text-brand-cyan text-xs flex-shrink-0">
                     R{ri + 1}
                   </div>
                   <div>
@@ -165,7 +165,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
             </h4>
             <div className="space-y-2">
               {companyRecord.recommendedProjects.map((proj, pi) => (
-                <div key={pi} className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs text-slate-200 font-mono flex items-start gap-2">
+                <div key={pi} className="bg-dark-850 p-3 rounded-lg border border-dark-700 text-xs text-slate-200 font-sans tracking-wide flex items-start gap-2">
                   <Check className="w-3.5 h-3.5 text-brand-green mt-0.5 flex-shrink-0" />
                   <span>{proj}</span>
                 </div>
@@ -176,7 +176,7 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
 
         {/* Eligible Branches & Criteria */}
         {companyRecord.eligibleBranches && (
-          <div className="bg-dark-850 p-3.5 rounded-xl border border-dark-700 text-xs font-mono text-slate-300 flex items-center justify-between mb-6">
+          <div className="bg-dark-850 p-3.5 rounded-xl border border-dark-700 text-xs font-sans tracking-wide text-slate-300 flex items-center justify-between mb-6">
             <div>
               <span className="text-slate-500 uppercase text-[10px] block">Eligible Branches:</span>
               <span className="text-white">{companyRecord.eligibleBranches.join(", ")}</span>

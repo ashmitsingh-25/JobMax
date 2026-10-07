@@ -51,7 +51,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Contribute Campus Placement Record</h3>
-              <p className="text-xs text-slate-400 font-mono">Crowdsourced & Placement Cell verified data</p>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">Crowdsourced & Placement Cell verified data</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
@@ -61,7 +61,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-mono text-slate-400 mb-1.5">Target College / Campus</label>
+            <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Target College / Campus</label>
             <select
               value={collegeId}
               onChange={(e) => setCollegeId(e.target.value)}
@@ -75,7 +75,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Recruiter / Company Name</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Recruiter / Company Name</label>
               <input
                 type="text"
                 required
@@ -86,7 +86,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Role Offered</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Role Offered</label>
               <input
                 type="text"
                 required
@@ -100,7 +100,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CTC Band</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">CTC Band</label>
               <input
                 type="text"
                 placeholder="e.g. ₹28 - 42 LPA"
@@ -110,7 +110,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CGPA Cutoff</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">CGPA Cutoff</label>
               <input
                 type="number"
                 step="0.1"
@@ -121,7 +121,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Offers Made</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Offers Made</label>
               <input
                 type="number"
                 placeholder="15"
@@ -133,7 +133,7 @@ export default function ContributePlacementModal({ isOpen, onClose, colleges, on
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-slate-400 mb-1.5">Skills Demanded (Comma separated)</label>
+            <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Skills Demanded (Comma separated)</label>
             <textarea
               rows={3}
               placeholder="e.g. Data Structures & Algorithms, Java, System Design Fundamentals, Dynamic Programming, SQL Query Optimization"

@@ -54,7 +54,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Create Open Role & Calibration Profile</h3>
-              <p className="text-xs text-slate-400 font-mono">Input skill requirements to analyze candidate talent pool</p>
+              <p className="text-xs text-slate-400 font-sans tracking-wide">Input skill requirements to analyze candidate talent pool</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white p-1 rounded-lg">
@@ -65,7 +65,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Job Title</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Job Title</label>
               <input
                 type="text"
                 required
@@ -76,7 +76,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Location</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Location</label>
               <input
                 type="text"
                 value={location}
@@ -88,7 +88,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">CTC Band</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">CTC Band</label>
               <input
                 type="text"
                 value={ctcBand}
@@ -97,7 +97,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Experience</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Experience</label>
               <input
                 type="text"
                 value={experienceLevel}
@@ -106,7 +106,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
               />
             </div>
             <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Min CGPA</label>
+              <label className="block text-xs font-sans tracking-wide text-slate-400 mb-1.5">Min CGPA</label>
               <input
                 type="number"
                 step="0.1"
@@ -118,7 +118,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-brand-green mb-1.5">Mandatory Core Skills (Weighted 60%)</label>
+            <label className="block text-xs font-sans tracking-wide text-brand-green mb-1.5">Mandatory Core Skills (Weighted 60%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Data Structures & Algorithms, Java, System Design Fundamentals, SQL Query Optimization"
@@ -129,7 +129,7 @@ export default function CreateRoleModal({ isOpen, onClose, onRoleCreated, curren
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-brand-cyan mb-1.5">Good-to-Have Skills (Weighted 20%)</label>
+            <label className="block text-xs font-sans tracking-wide text-brand-cyan mb-1.5">Good-to-Have Skills (Weighted 20%)</label>
             <textarea
               rows={2}
               placeholder="e.g. Docker & Containerization, Kubernetes, Kafka, Redis"

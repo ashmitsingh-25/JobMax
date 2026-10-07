@@ -23,14 +23,14 @@ export default function DeveloperOnboardingModal({ isOpen, onClose, onSaveClassi
         {/* Step Indicator */}
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-dark-700">
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-brand-green/20 text-brand-green text-xs font-mono font-bold flex items-center justify-center">
+            <span className="w-6 h-6 rounded-full bg-brand-green/20 text-brand-green text-xs font-sans tracking-wide font-bold flex items-center justify-center">
               {step}
             </span>
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider">
               {step === 1 ? "Step 1 of 2: Experience Classification" : "Step 2 of 2: Placement Strategy"}
             </span>
           </div>
-          <span className="text-xs font-mono text-brand-green">JobMax Personalized Track</span>
+          <span className="text-xs font-sans tracking-wide text-brand-green">JobMax Personalized Track</span>
         </div>
 
         {/* Step 1: Fresher vs Experienced */}
@@ -171,7 +171,7 @@ export default function DeveloperOnboardingModal({ isOpen, onClose, onSaveClassi
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-xs font-mono text-slate-400 hover:text-white"
+                className="text-xs font-sans tracking-wide text-slate-400 hover:text-white"
               >
                 ← Back to Step 1
               </button>

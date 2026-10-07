@@ -45,7 +45,7 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
           </div>
           <div>
             <h2 className="text-xl font-bold text-white">Experienced Track · Career Growth Advisor</h2>
-            <p className="text-xs text-slate-400 font-mono">
+            <p className="text-xs text-slate-400 font-sans tracking-wide">
               AI Bot #2: Promotion velocity, compensation benchmarks & tier-unlocking skills
             </p>
           </div>
@@ -63,21 +63,21 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 bg-brand-purple/10 text-brand-purple border border-brand-purple/30 text-[11px] font-mono px-2.5 py-0.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 bg-brand-purple/10 text-brand-purple border border-brand-purple/30 text-[11px] font-sans tracking-wide px-2.5 py-0.5 rounded-full">
                 <Sparkles className="w-3 h-3" />
                 AI Bot #2 · Senior Career Trajectory Engine
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
                 <div className="bg-dark-900 border border-dark-700 px-3.5 py-2 rounded-xl">
-                  <p className="text-[10px] font-mono text-slate-500 uppercase">Current Level</p>
+                  <p className="text-[10px] font-sans tracking-wide text-slate-500 uppercase">Current Level</p>
                   <p className="font-bold text-slate-200 text-sm">{growthReport.currentLevel}</p>
                 </div>
                 
-                <span className="text-brand-purple font-mono font-bold text-lg">➔</span>
+                <span className="text-brand-purple font-sans tracking-wide font-bold text-lg">➔</span>
 
                 <div className="bg-dark-900 border border-brand-purple/40 px-3.5 py-2 rounded-xl shadow-glow-blue">
-                  <p className="text-[10px] font-mono text-brand-purple uppercase">Target Next Level</p>
+                  <p className="text-[10px] font-sans tracking-wide text-brand-purple uppercase">Target Next Level</p>
                   <p className="font-bold text-white text-sm">{growthReport.targetNextRole}</p>
                 </div>
               </div>
@@ -89,13 +89,13 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
 
             {/* Compensation Uplift Metrics */}
             <div className="bg-dark-900/90 border border-dark-700 p-5 rounded-xl text-center min-w-[240px]">
-              <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-1">
+              <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-1">
                 Projected Compensation Jump
               </p>
-              <span className="text-3xl font-extrabold font-mono text-brand-green leading-none block my-1">
+              <span className="text-3xl font-extrabold font-sans tracking-wide text-brand-green leading-none block my-1">
                 {growthReport.targetCompBand}
               </span>
-              <span className="text-xs font-mono text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2.5 py-0.5 rounded-full inline-block mt-1">
+              <span className="text-xs font-sans tracking-wide text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/30 px-2.5 py-0.5 rounded-full inline-block mt-1">
                 {growthReport.targetUpliftPercent} Pay Uplift
               </span>
             </div>
@@ -115,7 +115,7 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
               High-Leverage Tier-Unlocking Skills
             </h3>
           </div>
-          <p className="text-xs text-slate-400 font-mono">
+          <p className="text-xs text-slate-400 font-sans tracking-wide">
             Adding these high-leverage proficiencies unlocks Senior & Staff level interviews
           </p>
 
@@ -136,7 +136,7 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
                   <p className="text-xs text-slate-300 leading-relaxed">
                     {skill?.description || 'High-leverage competency unlocking senior-level compensation.'}
                   </p>
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 pt-1">
+                  <div className="flex items-center gap-2 text-[10px] font-sans tracking-wide text-slate-500 pt-1">
                     <span>Domain: {skill?.category || 'Architecture'}</span>
                     <span>•</span>
                     <span>Target Mastery: {skill?.difficulty || 'Advanced'}</span>
@@ -167,10 +167,10 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
                       <img src={target.logo} alt={target.company} className="w-7 h-7 rounded-md object-cover border border-dark-600" />
                       <h4 className="font-bold text-white text-sm">{target.company}</h4>
                     </div>
-                    <span className="text-xs font-mono text-brand-green font-semibold">{target.fitScore}% Fit</span>
+                    <span className="text-xs font-sans tracking-wide text-brand-green font-semibold">{target.fitScore}% Fit</span>
                   </div>
 
-                  <div className="bg-dark-850 p-2 rounded text-[11px] font-mono text-slate-300">
+                  <div className="bg-dark-850 p-2 rounded text-[11px] font-sans tracking-wide text-slate-300">
                     <span className="text-slate-500">Tier:</span> {target.tier} <br />
                     <span className="text-slate-500">Expected CTC:</span> <strong className="text-white">{target.expectedCtc}</strong>
                   </div>
@@ -197,7 +197,7 @@ export default function ExperiencedView({ currentUser, onOpenResumeModal }) {
                 <div key={project.title} className="card-hr p-4 space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-white text-sm">{project.title}</h4>
-                    <span className="text-[10px] font-mono text-brand-cyan bg-brand-cyan/10 px-2 py-0.5 rounded border border-brand-cyan/30">
+                    <span className="text-[10px] font-sans tracking-wide text-brand-cyan bg-brand-cyan/10 px-2 py-0.5 rounded border border-brand-cyan/30">
                       {project.timeToBuild}
                     </span>
                   </div>

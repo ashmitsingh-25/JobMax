@@ -114,7 +114,7 @@ export default function CompanyDashboard({ currentUser }) {
           </div>
           <div className="flex-grow">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+              <span className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider">
                 {currentUser?.companyName || "Microsoft"} Recruiting Console
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
@@ -168,7 +168,7 @@ export default function CompanyDashboard({ currentUser }) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${
+            className={`flex-1 min-w-[150px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-sans tracking-wide font-medium transition-all ${
               activeTab === tab.id
                 ? 'bg-dark-700 text-brand-cyan border border-brand-cyan/30 shadow-glow-blue'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-dark-750'
@@ -209,18 +209,18 @@ export default function CompanyDashboard({ currentUser }) {
             {/* Metrics */}
             <div className="flex items-center gap-4 bg-dark-900/90 border border-dark-700 p-4 rounded-xl">
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Avg Pool Fit</p>
-                <p className="text-2xl font-bold font-mono text-brand-cyan">{talentPoolAnalytics.averageCandidateFitScore}%</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Avg Pool Fit</p>
+                <p className="text-2xl font-bold font-sans tracking-wide text-brand-cyan">{talentPoolAnalytics.averageCandidateFitScore}%</p>
               </div>
               <div className="h-8 w-px bg-dark-700"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Day-1 Ready</p>
-                <p className="text-2xl font-bold font-mono text-brand-green">{talentPoolAnalytics.readyCandidatesCount}</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Day-1 Ready</p>
+                <p className="text-2xl font-bold font-sans tracking-wide text-brand-green">{talentPoolAnalytics.readyCandidatesCount}</p>
               </div>
               <div className="h-8 w-px bg-dark-700"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-mono text-slate-400 uppercase">Upskill Needed</p>
-                <p className="text-2xl font-bold font-mono text-amber-400">{talentPoolAnalytics.upskillingNeededCount}</p>
+                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Upskill Needed</p>
+                <p className="text-2xl font-bold font-sans tracking-wide text-amber-400">{talentPoolAnalytics.upskillingNeededCount}</p>
               </div>
             </div>
 
@@ -228,13 +228,13 @@ export default function CompanyDashboard({ currentUser }) {
 
           {/* Skill Distribution Across Candidate Talent Pool */}
           <div className="mt-6 pt-4 border-t border-dark-700/80">
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">
+            <p className="text-xs font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-3">
               Candidate Pool Skill Availability Matrix:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {talentPoolAnalytics.skillDistribution?.map(sd => (
                 <div key={sd.skillName} className="bg-dark-900/80 p-3 rounded-lg border border-dark-700 space-y-1.5">
-                  <div className="flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center justify-between text-xs font-sans tracking-wide">
                     <span className="text-slate-200 truncate max-w-[140px]">{sd.skillName}</span>
                     <strong className={sd.percentageCoverage >= 70 ? "text-brand-green" : (sd.percentageCoverage >= 40 ? "text-amber-400" : "text-rose-400")}>
                       {sd.percentageCoverage}%
@@ -246,7 +246,7 @@ export default function CompanyDashboard({ currentUser }) {
                       style={{ width: `${sd.percentageCoverage}%` }}
                     ></div>
                   </div>
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                  <div className="flex justify-between text-[10px] font-sans tracking-wide text-slate-400">
                     <span>{sd.candidatesWithSkill} Candidates</span>
                     <span className={sd.isMandatory ? "text-brand-green font-semibold" : "text-slate-500"}>
                       {sd.isMandatory ? "Mandatory" : "Optional"}
@@ -348,20 +348,20 @@ export default function CompanyDashboard({ currentUser }) {
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs font-bold text-slate-500 w-5">
+                        <span className="font-sans tracking-wide text-xs font-bold text-slate-500 w-5">
                           #{idx + 1}
                         </span>
                         <img src={cand.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"} alt={cand?.name || "Candidate"} className="w-8 h-8 rounded-full object-cover border border-dark-600" />
                         <div>
                           <p className="font-bold text-white text-sm">{cand?.name || "Candidate"}</p>
-                          <p className="text-[10px] text-slate-400 font-mono truncate max-w-[160px]">{cand?.email || ""}</p>
+                          <p className="text-[10px] text-slate-400 font-sans tracking-wide truncate max-w-[160px]">{cand?.email || ""}</p>
                         </div>
                       </div>
                     </td>
 
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-base font-bold text-brand-green">
+                        <span className="font-sans tracking-wide text-base font-bold text-brand-green">
                           {cand.fitScore}%
                         </span>
                         <div className="w-12 h-1.5 bg-dark-700 rounded-full overflow-hidden hidden sm:block">
@@ -398,7 +398,7 @@ export default function CompanyDashboard({ currentUser }) {
                           </span>
                         ))}
                         {cand.matchedSkills?.length > 3 && (
-                          <span className="text-[10px] text-slate-500 font-mono self-center">
+                          <span className="text-[10px] text-slate-500 font-sans tracking-wide self-center">
                             +{cand.matchedSkills.length - 3}
                           </span>
                         )}
@@ -414,7 +414,7 @@ export default function CompanyDashboard({ currentUser }) {
                             </span>
                           ))
                         ) : (
-                          <span className="text-[10px] font-mono text-emerald-400">No Gaps</span>
+                          <span className="text-[10px] font-sans tracking-wide text-emerald-400">No Gaps</span>
                         )}
                       </div>
                     </td>
