@@ -69,23 +69,18 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 flex flex-col gap-3">
             <span className="block">
-              <TextEffect per='word' preset='fade'>
+              <TextEffect per='word' preset='blur'>
                 Close the Gap Between
               </TextEffect>
             </span>
             <span className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <TextLoop
                 className='overflow-y-clip text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex pb-1'
-                transition={{
-                  type: 'spring',
-                  stiffness: 900,
-                  damping: 80,
-                  mass: 10,
-                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 variants={{
-                  initial: { y: 20, rotateX: 90, opacity: 0, filter: 'blur(4px)' },
-                  animate: { y: 0, rotateX: 0, opacity: 1, filter: 'blur(0px)' },
-                  exit: { y: -20, rotateX: -90, opacity: 0, filter: 'blur(4px)' },
+                  initial: { y: 20, opacity: 0, filter: 'blur(4px)' },
+                  animate: { y: 0, opacity: 1, filter: 'blur(0px)' },
+                  exit: { y: -20, opacity: 0, filter: 'blur(4px)' },
                 }}
               >
                 <span>What You Know</span>
@@ -207,13 +202,13 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
                 <InfiniteSlider gap={48} speed={30}>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Google</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Microsoft</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Amazon</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Netflix</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Meta</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Atlassian</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Stripe</span>
+                  <img src="https://logo.clearbit.com/google.com" alt="Google" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/netflix.com" alt="Netflix" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/meta.com" alt="Meta" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/atlassian.com" alt="Atlassian" className="h-[35px] w-auto object-contain" />
+                  <img src="https://logo.clearbit.com/stripe.com" alt="Stripe" className="h-[35px] w-auto object-contain" />
                 </InfiniteSlider>
               </InView>
             </div>

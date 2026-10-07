@@ -194,7 +194,6 @@ export default function Navbar({
               </>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-slate-400 hidden sm:inline">Choose a portal below</span>
               </div>
             )}
           </div>

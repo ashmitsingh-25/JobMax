@@ -148,7 +148,7 @@ export default function App() {
             <span className="text-slate-300 font-bold">JobMax</span>
             <span>— AI Skill-Gap Analyzer Platform</span>
           </div>
-          <p>Model calibrated on HackerRank UI design system & Tier-1 Recruitment data</p>
+          <p>Model calibrated on Tier-1 Recruitment data</p>
         </div>
       </footer>
 
