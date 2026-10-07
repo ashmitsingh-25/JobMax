@@ -6,6 +6,8 @@ import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard'
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
 import { api, FALLBACK_DEMO_USERS } from './services/api';
+import { auth } from './firebase';
+import { signOut } from 'firebase/auth';
 
 // Protected Route Component
 const ProtectedRoute = ({ currentUser, allowedRole, children }) => {
@@ -25,15 +27,8 @@ export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Initialize state from localStorage if available
-  const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('jobmax_session');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { return null; }
-    }
-    return null;
-  });
-  
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
 
   // Persist user session whenever it changes
@@ -53,27 +48,39 @@ export default function App() {
     }
   }, [currentUser, navigate, location.pathname]);
 
-  // Quick login handler for demo accounts
-  const handleQuickLogin = async (userId) => {
-    try {
-      const res = await api.switchDemoUser(userId);
-      if (res && res.success && res.user) {
-        setCurrentUser(res.user);
-        return;
+  // Listen to Firebase Auth State
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Firebase authenticated
+        const saved = localStorage.getItem('jobmax_session');
+        if (saved) {
+          try { 
+            const parsed = JSON.parse(saved);
+            if (parsed.uid === user.uid) {
+              setCurrentUser(parsed);
+            } else {
+              setCurrentUser(null);
+            }
+          } catch (e) {
+            setCurrentUser(null);
+          }
+        }
+      } else {
+        // Firebase signed out
+        setCurrentUser(null);
       }
-    } catch (err) {
-      console.warn("API switchDemoUser warning, using client fallback:", err);
-    }
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
-    // Instant local fallback
-    const fallbackUser = (FALLBACK_DEMO_USERS && FALLBACK_DEMO_USERS.find(u => u.id === userId)) || FALLBACK_DEMO_USERS[0];
-    setCurrentUser(fallbackUser);
-  };
 
   // Custom role selection & registration from landing hero
   const handleSelectRole = (role, userData) => {
     const userObj = {
       id: `user_${Date.now()}`,
+      uid: userData.uid,
       name: userData.name || (role === 'developer' ? 'Aarav Sharma' : 'Sarah Jenkins'),
       email: userData.email,
       role: role,
@@ -128,9 +135,18 @@ export default function App() {
     });
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (e) {
+      console.error("Firebase Signout Error:", e);
+    }
     setCurrentUser(null);
   };
+
+  if (authLoading) {
+    return <div className="min-h-screen bg-dark-900 flex items-center justify-center text-brand-green">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-brand-green selection:text-black">
@@ -154,7 +170,6 @@ export default function App() {
               !currentUser ? (
                 <LandingHero
                   onSelectRole={handleSelectRole}
-                  onQuickLogin={handleQuickLogin}
                 />
               ) : (
                 <Navigate to={`/${currentUser.role}`} replace />

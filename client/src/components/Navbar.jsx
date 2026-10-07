@@ -89,7 +89,7 @@ export default function Navbar({
                   </div>
                 )}
 
-                {/* Quick Demo Switcher Dropdown */}
+                {/* User Dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setShowUserDropdown(!showUserDropdown)}
@@ -111,49 +111,8 @@ export default function Navbar({
 
                   {/* Dropdown Menu */}
                   {showUserDropdown && (
-                    <div className="absolute right-0 mt-2 w-72 bg-dark-800 border border-dark-700 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
-                      <div className="px-3 py-2 border-b border-dark-700/80 mb-1">
-                        <p className="text-[11px] text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                          <Sparkles className="w-3 h-3 text-brand-green" />
-                          Quick Switch Demo Profile
-                        </p>
-                      </div>
-
-                      <div className="space-y-1 max-h-60 overflow-y-auto">
-                        {(demoUsers || []).map(user => {
-                          if (!user) return null;
-                          return (
-                            <button
-                              key={user.id || Math.random()}
-                              onClick={() => {
-                                onSwitchUser(user);
-                                setShowUserDropdown(false);
-                              }}
-                              className={`w-full flex items-center justify-between p-2 rounded-lg text-xs text-left transition-colors ${
-                                currentUser?.id === user.id
-                                  ? 'bg-dark-700 text-brand-green border border-brand-green/20'
-                                  : 'text-slate-300 hover:bg-dark-750'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2.5">
-                                <img src={user.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"} alt={user.name || "User"} className="w-6 h-6 rounded-full object-cover" />
-                                <div>
-                                  <p className="font-medium text-slate-100">{user.name || "User"}</p>
-                                  <p className="text-[10px] text-slate-400 font-mono">
-                                    {user.role === 'company' ? `${user.companyName || 'Company'} Recruiter` : `${user.track || 'Fresher'} (${user.subTrack || user.currentRole || 'Dev'})`}
-                                  </p>
-                                </div>
-                              </div>
-                              {currentUser?.id === user.id && (
-                                <CheckCircle className="w-4 h-4 text-brand-green" />
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-
-
-                      <div className="border-t border-dark-700/80 mt-2 pt-1">
+                    <div className="absolute right-0 mt-2 w-48 bg-dark-800 border border-dark-700 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
+                      <div className="border-t border-dark-700/80 pt-1">
                         <button
                           onClick={() => {
                             setShowUserDropdown(false);
