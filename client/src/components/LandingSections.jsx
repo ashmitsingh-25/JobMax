@@ -3,7 +3,8 @@ import { InView } from './core/in-view';
 import { 
   Target, Zap, Compass, CheckCircle2, 
   ChevronDown, Code, Map, FileText, Globe, 
-  BarChart, Building2, UserCircle, Users 
+  BarChart, Building2, UserCircle, Users,
+  X, Mail, Send
 } from 'lucide-react';
 
 export function CareerImpactBanner() {
@@ -223,7 +224,7 @@ export function FaqSection() {
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
+    <div id="faq-section" className="w-full max-w-3xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
       <div className="text-center mb-12">
         <InView variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: 0.5 }}>
           <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
@@ -253,10 +254,28 @@ export function FaqSection() {
   );
 }
 
-export function FooterSection() {
+export function FooterSection({ onStartAuth, onOpenModal }) {
   const handleScrollToTop = (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleModal = (e, modalType) => {
+    e.preventDefault();
+    onOpenModal(modalType);
+  };
+
+  const handleAuth = (e, role) => {
+    e.preventDefault();
+    onStartAuth(role);
   };
 
   return (
@@ -272,43 +291,43 @@ export function FooterSection() {
               JobMax
             </h3>
             <ul className="space-y-3">
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">About JobMax</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">How It Works</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Developers</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Companies</a></li>
+              <li><a href="#" onClick={(e) => handleModal(e, 'about')} className="text-sm text-slate-400 hover:text-white transition-colors">About JobMax</a></li>
+              <li><a href="#how-it-works-section" onClick={(e) => handleScrollToSection(e, 'how-it-works-section')} className="text-sm text-slate-400 hover:text-white transition-colors">How It Works</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-white transition-colors">Developers</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-white transition-colors">Companies</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-6">Developers</h4>
             <ul className="space-y-3">
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Skill Analysis</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Skill Gaps</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Career Roadmap</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Resume Analysis</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-brand-green transition-colors">Developer Login</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-white transition-colors">Skill Analysis</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-white transition-colors">Skill Gaps</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-white transition-colors">Career Roadmap</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-white transition-colors">Resume Analysis</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'developer')} className="text-sm text-slate-400 hover:text-brand-green transition-colors">Developer Login</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-6">Companies</h4>
             <ul className="space-y-3">
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Company Portal</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Role Builder</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Candidate Matching</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Hiring Intelligence</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-brand-cyan transition-colors">Company Login</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-white transition-colors">Company Portal</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-white transition-colors">Role Builder</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-white transition-colors">Candidate Matching</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-white transition-colors">Hiring Intelligence</a></li>
+              <li><a href="#" onClick={(e) => handleAuth(e, 'company')} className="text-sm text-slate-400 hover:text-brand-cyan transition-colors">Company Login</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-6">Resources</h4>
             <ul className="space-y-3">
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">FAQs</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Documentation</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Privacy</a></li>
-              <li><a href="#" onClick={handleScrollToTop} className="text-sm text-slate-400 hover:text-white transition-colors">Terms</a></li>
+              <li><a href="#faq-section" onClick={(e) => handleScrollToSection(e, 'faq-section')} className="text-sm text-slate-400 hover:text-white transition-colors">FAQs</a></li>
+              <li><a href="#" onClick={(e) => handleModal(e, 'documentation')} className="text-sm text-slate-400 hover:text-white transition-colors">Documentation</a></li>
+              <li><a href="#" onClick={(e) => handleModal(e, 'contact')} className="text-sm text-slate-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#" onClick={(e) => handleModal(e, 'privacy')} className="text-sm text-slate-400 hover:text-white transition-colors">Privacy</a></li>
+              <li><a href="#" onClick={(e) => handleModal(e, 'terms')} className="text-sm text-slate-400 hover:text-white transition-colors">Terms</a></li>
             </ul>
           </div>
 
@@ -319,9 +338,9 @@ export function FooterSection() {
             &copy; 2026 JobMax. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" onClick={handleScrollToTop} className="text-xs text-slate-500 hover:text-slate-300">Privacy</a>
-            <a href="#" onClick={handleScrollToTop} className="text-xs text-slate-500 hover:text-slate-300">Terms</a>
-            <a href="#" onClick={handleScrollToTop} className="text-xs text-slate-500 hover:text-slate-300">Contact</a>
+            <a href="#" onClick={(e) => handleModal(e, 'privacy')} className="text-xs text-slate-500 hover:text-slate-300">Privacy</a>
+            <a href="#" onClick={(e) => handleModal(e, 'terms')} className="text-xs text-slate-500 hover:text-slate-300">Terms</a>
+            <a href="#" onClick={(e) => handleModal(e, 'contact')} className="text-xs text-slate-500 hover:text-slate-300">Contact</a>
           </div>
         </div>
       </div>
@@ -356,7 +375,7 @@ export function HowJobMaxHelps() {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
+    <div id="how-it-works-section" className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-dark-800">
       <div className="text-center mb-16">
         <InView
           variants={{
@@ -414,6 +433,229 @@ export function HowJobMaxHelps() {
             </div>
           </InView>
         ))}
+      </div>
+    </div>
+  );
+}
+
+export function InfoModals({ activeModal, onClose }) {
+  if (!activeModal) return null;
+
+  const renderContent = () => {
+    switch (activeModal) {
+      case 'about':
+        return (
+          <div className="space-y-6 text-slate-300">
+            <p>
+              JobMax is an AI-powered career and hiring intelligence platform designed to help developers understand their current skills, identify career gaps, and improve their readiness for target roles.
+            </p>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Developer Experience</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Skill analysis</li>
+                <li>Career direction</li>
+                <li>Skill-gap understanding</li>
+                <li>Career readiness</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Company Experience</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Role requirements</li>
+                <li>Candidate analysis</li>
+                <li>Candidate matching</li>
+                <li>Hiring intelligence</li>
+              </ul>
+            </div>
+          </div>
+        );
+      case 'privacy':
+        return (
+          <div className="space-y-6 text-slate-300">
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Information We Collect</h3>
+              <p>We collect information you provide directly to us, such as when you create or modify your account, request on-demand services, contact customer support, or otherwise communicate with us.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">How We Use Information</h3>
+              <p>We may use the information we collect about you to provide, maintain, and improve our services.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Account Information</h3>
+              <p>You may update, correct, or delete information about you at any time by logging into your online account.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Resume and Profile Information</h3>
+              <p>Your resume and profile data are used strictly to provide you with skill analysis and career readiness insights.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">AI Analysis</h3>
+              <p>We utilize AI models to process your skills and match them against market requirements. Your data is not used to train public models.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Data Security</h3>
+              <p>We take reasonable measures to help protect information about you from loss, theft, misuse, and unauthorized access.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Data Sharing</h3>
+              <p>We do not sell your personal information. Your resume and skills are only visible to matched companies if you explicitly allow it.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">User Choices</h3>
+              <p>You may opt out of certain data collection or request full account deletion.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Data Retention</h3>
+              <p>We retain data only as long as necessary to provide our services.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Contact</h3>
+              <p>If you have any questions about this Privacy Policy, please contact us via the Contact form.</p>
+            </div>
+          </div>
+        );
+      case 'terms':
+        return (
+          <div className="space-y-6 text-slate-300">
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Acceptance of Terms</h3>
+              <p>By accessing or using JobMax, you agree to be bound by these Terms of Use.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Using JobMax</h3>
+              <p>You must use JobMax for its intended purpose of career development and hiring intelligence. Misuse of the platform is strictly prohibited.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Developer Accounts</h3>
+              <p>Developer accounts are for individual use. You must not share your account or use it for automated scraping.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Company Accounts</h3>
+              <p>Company accounts must only be used by authorized representatives for legitimate hiring purposes.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">User Responsibilities</h3>
+              <p>You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Resume and Profile Information</h3>
+              <p>You retain all rights to your resume and profile information. By uploading it, you grant us permission to analyze it for the purpose of providing our services.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">AI-Generated Insights</h3>
+              <p>Our AI insights are provided for informational purposes only. We do not guarantee their complete accuracy or completeness.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Career Recommendations</h3>
+              <p>We do not guarantee employment or specific career outcomes based on our recommendations.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Company/Candidate Information</h3>
+              <p>Information provided by companies or candidates is their sole responsibility. We do not verify all claims made by users.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Intellectual Property</h3>
+              <p>JobMax and its original content, features, and functionality are owned by us and are protected by copyright and other intellectual property laws.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Limitation of Liability</h3>
+              <p>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the platform.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Changes to Terms</h3>
+              <p>We reserve the right to modify these terms at any time. We will provide notice of significant changes.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Contact</h3>
+              <p>For questions about these terms, please contact us.</p>
+            </div>
+          </div>
+        );
+      case 'documentation':
+        return (
+          <div className="space-y-6 text-slate-300">
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Getting Started</h3>
+              <p>Welcome to JobMax. Choose between a Developer or Company account to get started.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Developer Portal</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li><strong>Skill Analysis:</strong> Upload your resume or input skills manually.</li>
+                <li><strong>Skill Gap Analysis:</strong> Compare your current skills against target roles.</li>
+                <li><strong>Career Roadmap:</strong> Get actionable steps to improve your readiness.</li>
+                <li><strong>Resume Analysis:</strong> Receive feedback on your resume's effectiveness.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Company Portal</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li><strong>Candidate Matching:</strong> Find candidates that match your exact requirements.</li>
+                <li><strong>Hiring Intelligence:</strong> Use AI to evaluate talent pools objectively.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Account Types</h3>
+              <p>Developer and Company accounts are strictly separated to ensure privacy and focus.</p>
+            </div>
+          </div>
+        );
+      case 'contact':
+        return (
+          <div className="space-y-6 text-slate-300">
+            <p>Have a question, feedback, or need help? Send us a message.</p>
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Thanks for reaching out! (Demo)"); onClose(); }}>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Name</label>
+                <input type="text" required className="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-green" placeholder="Your name" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Email</label>
+                <input type="email" required className="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-green" placeholder="you@example.com" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Message</label>
+                <textarea required rows="4" className="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-green resize-none" placeholder="How can we help?"></textarea>
+              </div>
+              <button type="submit" className="w-full btn-primary flex items-center justify-center gap-2">
+                <Send className="w-4 h-4" />
+                Send Message
+              </button>
+            </form>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const getTitle = () => {
+    switch (activeModal) {
+      case 'about': return 'About JobMax';
+      case 'privacy': return 'Privacy Policy';
+      case 'terms': return 'Terms of Use';
+      case 'documentation': return 'JobMax Documentation';
+      case 'contact': return 'Contact JobMax';
+      default: return '';
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark-900/80 backdrop-blur-sm animate-in fade-in">
+      <div 
+        className="absolute inset-0" 
+        onClick={onClose}
+      ></div>
+      <div className="relative w-full max-w-2xl bg-dark-800 border border-dark-700 rounded-2xl shadow-2xl flex flex-col max-h-[85vh] animate-in zoom-in-95">
+        <div className="flex items-center justify-between p-6 border-b border-dark-700">
+          <h2 className="text-xl font-bold text-white">{getTitle()}</h2>
+          <button onClick={onClose} className="p-2 text-slate-400 hover:text-white hover:bg-dark-700 rounded-lg transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="p-6 overflow-y-auto custom-scrollbar">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

@@ -25,7 +25,8 @@ import {
   EverythingYouNeed, 
   HowJobMaxHelps, 
   FaqSection, 
-  FooterSection 
+  FooterSection,
+  InfoModals
 } from './LandingSections';
 
 export default function LandingHero({ onSelectRole, onQuickLogin }) {
@@ -34,6 +35,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedRoleForAuth, setSelectedRoleForAuth] = useState('developer');
+  const [activeModal, setActiveModal] = useState(null);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -341,7 +343,14 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
         <EverythingYouNeed />
         <HowJobMaxHelps />
         <FaqSection />
-        <FooterSection />
+        <FooterSection 
+          onStartAuth={handleStartAuth} 
+          onOpenModal={setActiveModal} 
+        />
+        <InfoModals 
+          activeModal={activeModal} 
+          onClose={() => setActiveModal(null)} 
+        />
       </>
     )}
     </>
