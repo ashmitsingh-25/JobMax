@@ -9,7 +9,7 @@ import {
 
 export function CareerImpactBanner() {
   return (
-    <div className="w-full max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="w-full max-w-6xl mx-auto py-8 sm:py-10 px-4 sm:px-6 lg:px-8 relative z-10">
       <InView
         variants={{
           hidden: { opacity: 0, y: 20 },
@@ -17,18 +17,18 @@ export function CareerImpactBanner() {
         }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className="bg-white border border-slate-200 rounded-2xl p-8 md:p-12 shadow-sm overflow-hidden relative flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm overflow-hidden relative flex flex-col md:flex-row items-center justify-between gap-8">
           
           <div className="absolute top-0 right-0 w-80 h-80 bg-blue-50/50 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-200 px-3 py-0.5 rounded-full mb-3 text-xs font-semibold uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5 text-blue-600" /> Career Readiness
             </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-3 leading-tight">
               Turn Skill Gaps Into Career Readiness
             </h2>
-            <p className="text-slate-600 text-lg leading-relaxed mb-8 font-sans">
+            <p className="text-slate-600 text-base leading-relaxed mb-5 font-sans">
               JobMax helps you understand where you stand, identify the skills you need, and build a focused path toward your target role.
             </p>
             <button 
@@ -92,10 +92,10 @@ export function WhyDevelopersChoose() {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="text-center mb-16">
+    <div className="w-full max-w-6xl mx-auto py-10 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="text-center mb-8">
         <InView variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: 0.5 }}>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">Why developers choose JobMax</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-2">Why developers choose JobMax</h2>
         </InView>
       </div>
 
@@ -155,10 +155,10 @@ export function EverythingYouNeed() {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
-      <div className="text-center mb-16">
+    <div className="w-full max-w-6xl mx-auto py-10 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
+      <div className="text-center mb-8">
         <InView variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: 0.5 }}>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">Everything You Need to Become Job-Ready</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-2">Everything You Need to Become Job-Ready</h2>
         </InView>
       </div>
 
@@ -224,10 +224,10 @@ export function FaqSection() {
   ];
 
   return (
-    <div id="faq-section" className="w-full max-w-3xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
-      <div className="text-center mb-12">
+    <div id="faq-section" className="w-full max-w-3xl mx-auto py-10 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
+      <div className="text-center mb-6">
         <InView variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: 0.5 }}>
-          <h2 className="text-3xl font-display font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-display font-bold text-slate-900 mb-2">Frequently Asked Questions</h2>
         </InView>
       </div>
 
@@ -279,9 +279,9 @@ export function FooterSection({ onStartAuth, onOpenModal }) {
   };
 
   return (
-    <footer className="w-full bg-white border-t border-slate-200 pt-16 pb-8 relative z-10">
+    <footer className="w-full bg-white border-t border-slate-200 pt-10 pb-6 relative z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           
           <div>
             <h3 className="text-slate-900 font-display font-bold text-lg mb-6 flex items-center gap-2">
@@ -409,8 +409,8 @@ export function HowJobMaxHelps() {
   ];
 
   return (
-    <div id="how-it-works-section" className="w-full max-w-5xl mx-auto py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
-      <div className="text-center mb-16">
+    <div id="how-it-works-section" className="w-full max-w-5xl mx-auto py-10 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200">
+      <div className="text-center mb-8">
         <InView
           variants={{
             hidden: { opacity: 0, y: 20 },
@@ -418,14 +418,14 @@ export function HowJobMaxHelps() {
           }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full mb-4 shadow-2xs">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1 rounded-full mb-3 shadow-2xs">
             <Sparkles className="w-4 h-4 text-blue-600" />
             <span className="text-xs text-blue-700 font-bold tracking-widest uppercase">
               THE SKILL-BASED WORKFLOW
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">How JobMax Connects Talent & Companies</h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto font-sans">From publishing a contest to signing an offer letter, everything is driven by proof of work.</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-2">How JobMax Connects Talent & Companies</h2>
+          <p className="text-slate-600 text-base max-w-2xl mx-auto font-sans">From publishing a contest to signing an offer letter, everything is driven by proof of work.</p>
         </InView>
       </div>
 

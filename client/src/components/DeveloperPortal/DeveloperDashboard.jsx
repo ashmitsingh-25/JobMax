@@ -25,6 +25,7 @@ import ExploreContestsView from './ExploreContestsView';
 import CompanyProjectsView from './CompanyProjectsView';
 import HiringProposalsView from './HiringProposalsView';
 import MLModelsHubView from './MLModelsHubView';
+import CareerSimulatorView from './CareerSimulatorView';
 
 export default function DeveloperDashboard({
   currentUser,
@@ -63,10 +64,10 @@ export default function DeveloperDashboard({
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in">
+    <div className="space-y-4 animate-in fade-in">
       
       {/* Top Track & Profile Bento Header */}
-      <div className="bg-white border border-slate-200 rounded-lg p-5 sm:p-6 shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 shadow-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
           <div className="flex items-center gap-4">
@@ -186,6 +187,7 @@ export default function DeveloperDashboard({
       <div className="flex overflow-x-auto gap-1.5 bg-white p-1 rounded-lg border border-slate-200 shadow-xs">
         {[
           { id: 'profile', icon: <Code className="w-4 h-4" />, label: 'Skill Profile' },
+          { id: 'simulator', icon: <TrendingUp className="w-4 h-4 text-blue-600" />, label: 'Career Simulator' },
           { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Explore Contests' },
           { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
           { id: 'proposals', icon: <FileText className="w-4 h-4" />, label: 'Hiring Proposals' },
@@ -194,7 +196,7 @@ export default function DeveloperDashboard({
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-3 py-2 rounded text-xs font-semibold transition-all ${
+            className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 px-3 py-2 rounded text-xs font-semibold transition-all ${
               activeTab === tab.id
                 ? 'bg-blue-50 text-blue-800 border border-blue-200 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -240,6 +242,7 @@ export default function DeveloperDashboard({
         </TransitionPanel>
       )}
 
+      {activeTab === 'simulator' && <CareerSimulatorView currentUser={currentUser} />}
       {activeTab === 'contests' && <ExploreContestsView currentUser={currentUser} />}
       {activeTab === 'projects' && <CompanyProjectsView currentUser={currentUser} />}
       {activeTab === 'proposals' && <HiringProposalsView currentUser={currentUser} />}

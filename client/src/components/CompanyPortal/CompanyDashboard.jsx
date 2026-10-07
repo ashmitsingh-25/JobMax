@@ -27,7 +27,6 @@ import CandidateComparisonModal from './CandidateComparisonModal';
 import CompanyContestsView from './CompanyContestsView';
 import CompanyProjectsManageView from './CompanyProjectsManageView';
 import CompanyProposalsView from './CompanyProposalsView';
-import MLModelsHubView from '../DeveloperPortal/MLModelsHubView';
 import { Trophy, FileText, Send } from 'lucide-react';
 
 export default function CompanyDashboard({ currentUser }) {
@@ -103,10 +102,10 @@ export default function CompanyDashboard({ currentUser }) {
   const selectedCandidatesForCompare = candidates.filter(c => compareList.includes(c.id));
 
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-4 animate-in fade-in">
       
       {/* Top Company Header & Role Selector */}
-      <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 flex-shrink-0">
@@ -162,8 +161,7 @@ export default function CompanyDashboard({ currentUser }) {
           { id: 'sourcing', icon: <Search className="w-4 h-4" />, label: 'Talent Sourcing' },
           { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Skill Contests' },
           { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
-          { id: 'proposals', icon: <Send className="w-4 h-4" />, label: 'Sent Proposals' },
-          { id: 'ml-hub', icon: <Sparkles className="w-4 h-4 text-teal-600" />, label: 'AI Models Hub' }
+          { id: 'proposals', icon: <Send className="w-4 h-4" />, label: 'Sent Proposals' }
         ].map(tab => (
           <button
             key={tab.id}
@@ -442,7 +440,6 @@ export default function CompanyDashboard({ currentUser }) {
       {activeTab === 'contests' && <CompanyContestsView currentUser={currentUser} />}
       {activeTab === 'projects' && <CompanyProjectsManageView currentUser={currentUser} />}
       {activeTab === 'proposals' && <CompanyProposalsView currentUser={currentUser} />}
-      {activeTab === 'ml-hub' && <MLModelsHubView currentUser={currentUser} />}
 
       {/* Candidate Deep-Dive Modal */}
       {selectedCandidate && (

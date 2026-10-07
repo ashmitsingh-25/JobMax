@@ -138,29 +138,29 @@ export default function LandingHero({ onSelectRole }) {
 
   return (
     <>
-    <div className="relative overflow-hidden py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <div className="relative overflow-hidden py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-slate-50">
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header Hero Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/90 px-3.5 py-1 rounded-md mb-5 shadow-xs">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/90 px-3 py-0.5 rounded-md mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span className="font-mono text-xs text-blue-800 font-semibold tracking-wide">
               INTELLIGENT SKILL-GAP & VERIFIED TALENT ENGINE
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 max-w-3xl mx-auto leading-tight text-center font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-3 max-w-3xl mx-auto leading-tight text-center font-heading">
             Don't Just Hire Resumes. <br className="hidden sm:block" />
             Hire <span className="text-blue-600">Verified Skills</span>.
           </h1>
 
-          <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-6 font-normal">
+          <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4 font-normal">
             JobMax connects high-growth companies with pre-verified developers through automated skill gap radar, real performance metrics, and multi-model machine learning analytics.
           </p>
 
           {/* Quick Stats Row */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-2 px-4 rounded-lg bg-white border border-slate-200 shadow-xs text-xs font-mono text-slate-600">
+          <div className="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-1.5 px-3.5 rounded-lg bg-white border border-slate-200 shadow-xs text-xs font-mono text-slate-600">
             <span className="flex items-center gap-1.5"><strong className="text-slate-900 font-bold">26,000+</strong> Developers</span>
             <span className="text-slate-300 hidden sm:inline">•</span>
             <span className="flex items-center gap-1.5"><strong className="text-teal-700 font-bold">94.2%</strong> Skill Accuracy</span>
@@ -170,7 +170,7 @@ export default function LandingHero({ onSelectRole }) {
         </div>
 
         {/* 1-Click Fast Demo Profile Selector */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-lg shadow-xs text-xs font-mono text-slate-600">
             <span className="flex items-center gap-1.5 text-slate-800 font-semibold mr-1">
               <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
