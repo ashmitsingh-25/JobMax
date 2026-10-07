@@ -4,7 +4,7 @@ import {
   Target, Zap, Compass, CheckCircle2, 
   ChevronDown, Code, Map, FileText, Globe, 
   BarChart, Building2, UserCircle, Users,
-  X, Mail, Send
+  X, Mail, Send, Cpu, Crosshair, ArrowUpRight, FileEdit
 } from 'lucide-react';
 
 export function CareerImpactBanner() {
@@ -349,28 +349,30 @@ export function FooterSection({ onStartAuth, onOpenModal }) {
 }
 
 export function HowJobMaxHelps() {
-  const [activeStep, setActiveStep] = useState(1);
-
   const steps = [
     {
       id: 1,
       title: 'Build Your Profile',
-      desc: 'Add your education, skills, experience, projects, certifications, and career goals.'
+      desc: 'Add your education, skills, experience, projects, certifications, and career goals.',
+      icon: <FileEdit className="w-6 h-6" />
     },
     {
       id: 2,
       title: 'Analyze Your Skills',
-      desc: 'JobMax evaluates your profile against your target career direction.'
+      desc: 'JobMax analyzes your profile to understand your current skills, experience, and career readiness.',
+      icon: <Cpu className="w-6 h-6" />
     },
     {
       id: 3,
       title: 'Find Your Gaps',
-      desc: 'Understand which skills or areas need improvement.'
+      desc: 'Identify the skills and areas you need to improve for your target role.',
+      icon: <Crosshair className="w-6 h-6" />
     },
     {
       id: 4,
       title: 'Take Action',
-      desc: 'Follow a focused path to improve your career readiness.'
+      desc: 'Follow a focused path to strengthen your skills and move closer to your career goals.',
+      icon: <ArrowUpRight className="w-6 h-6" />
     }
   ];
 
@@ -385,6 +387,7 @@ export function HowJobMaxHelps() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How JobMax Helps You Move Forward</h2>
+          <p className="text-slate-400 text-lg">From your current skills to your next opportunity.</p>
         </InView>
       </div>
 
@@ -402,32 +405,24 @@ export function HowJobMaxHelps() {
             transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
             className="flex-1"
           >
-            <div 
-              onClick={() => setActiveStep(step.id)}
-              className={`relative cursor-pointer group transition-all duration-300 h-full ${activeStep === step.id ? '-translate-y-2' : 'hover:-translate-y-1'}`}
-            >
-              <div className={`bg-dark-800 border-2 rounded-2xl p-6 h-full transition-colors duration-300 shadow-card-dark ${
-                activeStep === step.id 
-                  ? 'border-brand-green bg-dark-750 shadow-glow-green' 
-                  : 'border-dark-700 hover:border-brand-cyan/50 hover:bg-dark-750 hover:shadow-glow-blue'
-              }`}>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg transition-colors ${
-                    activeStep === step.id ? 'bg-brand-green/20 text-brand-green' : 'bg-dark-700 text-slate-400 group-hover:bg-brand-cyan/20 group-hover:text-brand-cyan'
-                  }`}>
+            <div className="relative group transition-all duration-300 h-full hover:-translate-y-2">
+              <div className="bg-dark-800 border-2 border-dark-700 rounded-2xl p-6 h-full transition-colors duration-300 shadow-card-dark hover:border-brand-green/50 hover:bg-dark-750 hover:shadow-glow-green flex flex-col">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg transition-colors bg-dark-700 text-slate-400 group-hover:bg-brand-green/20 group-hover:text-brand-green shrink-0">
                     0{step.id}
                   </div>
-                  <h3 className={`font-bold transition-colors ${activeStep === step.id ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                  <h3 className="font-bold text-slate-200 group-hover:text-white transition-colors text-lg">
                     {step.title}
                   </h3>
                 </div>
                 
-                <div className={`grid transition-all duration-300 ease-in-out ${
-                  activeStep === step.id ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
-                }`}>
-                  <p className="text-sm text-slate-300 leading-relaxed overflow-hidden">
+                <div className="flex-grow flex flex-col justify-between">
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
                     {step.desc}
                   </p>
+                  <div className="mt-auto flex justify-end text-slate-500 group-hover:text-brand-green transition-colors">
+                    {step.icon}
+                  </div>
                 </div>
               </div>
             </div>

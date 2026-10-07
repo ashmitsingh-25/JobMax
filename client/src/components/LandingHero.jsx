@@ -44,7 +44,17 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
       }
     };
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    
+    const handleTriggerAuth = (e) => {
+      handleStartAuth(e.detail?.role || 'developer');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.addEventListener('trigger-auth', handleTriggerAuth);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('trigger-auth', handleTriggerAuth);
+    };
   }, [authMode]);
 
   const handleStartAuth = (role) => {
@@ -124,55 +134,55 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
               }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <div className="max-w-md mx-auto bg-dark-800 border border-dark-700 rounded-2xl p-6 shadow-card-dark text-center relative z-10 mb-12">
-                <p className="text-sm text-slate-400 font-mono mb-4 uppercase tracking-wider">I am a...</p>
+              <div className="max-w-xl mx-auto bg-dark-800 border border-dark-700 rounded-3xl p-8 sm:p-10 shadow-card-dark text-center relative z-10 mb-12">
+                <p className="text-base text-slate-400 font-mono mb-6 uppercase tracking-widest font-semibold">I am a...</p>
                 
-                <div className="flex flex-col sm:flex-row items-center gap-3 justify-center mb-6">
+                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
                   <button 
                     onClick={() => setActiveTab('developer')}
-                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full sm:w-auto ${
+                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl text-base font-bold transition-all w-full sm:w-auto ${
                       activeTab === 'developer' 
                         ? 'bg-brand-green/10 text-brand-green border-2 border-brand-green shadow-glow-green' 
-                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600'
+                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600 hover:-translate-y-1'
                     }`}
                   >
-                    👨‍💻 Developer
+                    <span className="text-xl">👨‍💻</span> Developer
                   </button>
                   
                   <button 
                     onClick={() => setActiveTab('company')}
-                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full sm:w-auto ${
+                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl text-base font-bold transition-all w-full sm:w-auto ${
                       activeTab === 'company' 
                         ? 'bg-brand-cyan/10 text-brand-cyan border-2 border-brand-cyan shadow-glow-blue' 
-                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600'
+                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600 hover:-translate-y-1'
                     }`}
                   >
-                    🏢 Company
+                    <span className="text-xl">🏢</span> Company
                   </button>
                 </div>
 
                 {activeTab === 'developer' ? (
                   <div className="animate-in fade-in slide-in-from-bottom-2">
-                    <p className="text-slate-300 text-sm mb-6 leading-relaxed min-h-[40px]">
+                    <p className="text-slate-300 text-base mb-8 leading-relaxed min-h-[48px]">
                       Analyze your skills, identify your gaps, and build your career roadmap.
                     </p>
                     <button 
                       onClick={() => handleStartAuth('developer')}
-                      className="w-full btn-primary group hover:bg-[#00D659] flex items-center justify-center gap-2"
+                      className="w-full bg-brand-green hover:bg-[#00D659] text-dark-900 font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-glow-green group"
                     >
-                      Analyze My Skills <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      Analyze My Skills <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 ) : (
                   <div className="animate-in fade-in slide-in-from-bottom-2">
-                    <p className="text-slate-300 text-sm mb-6 leading-relaxed min-h-[40px]">
+                    <p className="text-slate-300 text-base mb-8 leading-relaxed min-h-[48px]">
                       Find, compare, and evaluate candidates using AI-powered hiring intelligence.
                     </p>
                     <button 
                       onClick={() => handleStartAuth('company')}
-                      className="w-full bg-brand-cyan hover:bg-[#00c0e4] text-dark-900 font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-blue group"
+                      className="w-full bg-brand-cyan hover:bg-[#00c0e4] text-dark-900 font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-glow-blue group"
                     >
-                      Find Top Talent <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      Find Top Talent <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 )}

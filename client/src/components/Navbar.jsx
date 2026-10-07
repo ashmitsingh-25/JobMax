@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Terminal, Users, Building2, ChevronDown, Sparkles, LogOut, CheckCircle, Code, Briefcase, GraduationCap } from 'lucide-react';
+import { Terminal, Users, Building2, ChevronDown, Sparkles, LogOut, CheckCircle, Code, Briefcase, GraduationCap, ArrowRight } from 'lucide-react';
 import { api, FALLBACK_DEMO_USERS } from '../services/api';
 
 export default function Navbar({
@@ -180,6 +180,12 @@ export default function Navbar({
               </>
             ) : (
               <div className="flex items-center gap-2">
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('trigger-auth', { detail: { role: 'developer' } }))}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-white bg-dark-800 hover:bg-dark-700 transition-colors border border-dark-600 hover:border-brand-green/30"
+                >
+                  Login <ArrowRight className="w-4 h-4 ml-1 text-slate-400" />
+                </button>
               </div>
             )}
           </div>
