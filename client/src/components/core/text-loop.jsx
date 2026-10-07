@@ -14,7 +14,7 @@ export function TextLoop({ children, className, transition, variants, interval =
 
   return (
     <div className={`relative inline-flex ${className}`}>
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence mode="wait">
         <motion.div
           key={index}
           initial="initial"

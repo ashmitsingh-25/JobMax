@@ -67,29 +67,33 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
-            <TextEffect per='char' preset='fade'>
-              Close the Gap Between
-            </TextEffect> <br className="hidden sm:inline" />
-            <TextLoop
-              className='overflow-y-clip text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex pb-1'
-              transition={{
-                type: 'spring',
-                stiffness: 900,
-                damping: 80,
-                mass: 10,
-              }}
-              variants={{
-                initial: { y: 20, rotateX: 90, opacity: 0, filter: 'blur(4px)' },
-                animate: { y: 0, rotateX: 0, opacity: 1, filter: 'blur(0px)' },
-                exit: { y: -20, rotateX: -90, opacity: 0, filter: 'blur(4px)' },
-              }}
-            >
-              <span>What You Know</span>
-              <span>Academic Knowledge</span>
-              <span>Your Current Skills</span>
-            </TextLoop>
-             &amp; <span className="text-white">What Tech Demands</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 flex flex-col gap-3">
+            <span className="block">
+              <TextEffect per='word' preset='fade'>
+                Close the Gap Between
+              </TextEffect>
+            </span>
+            <span className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <TextLoop
+                className='overflow-y-clip text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-cyan inline-flex pb-1'
+                transition={{
+                  type: 'spring',
+                  stiffness: 900,
+                  damping: 80,
+                  mass: 10,
+                }}
+                variants={{
+                  initial: { y: 20, rotateX: 90, opacity: 0, filter: 'blur(4px)' },
+                  animate: { y: 0, rotateX: 0, opacity: 1, filter: 'blur(0px)' },
+                  exit: { y: -20, rotateX: -90, opacity: 0, filter: 'blur(4px)' },
+                }}
+              >
+                <span>What You Know</span>
+                <span>Academic Knowledge</span>
+                <span>Your Current Skills</span>
+              </TextLoop>
+              <span className="text-white">&amp; What Tech Demands</span>
+            </span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -190,46 +194,6 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
 
             </div>
 
-            {/* Quick Demo Evaluation Section */}
-            <div className="bg-dark-850/80 border border-dark-700 rounded-2xl p-6 text-center">
-              <p className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-center gap-2">
-                <Zap className="w-4 h-4 text-brand-amber" />
-                Quick 1-Click Demo Evaluation Profiles
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <button
-                  onClick={() => onQuickLogin('user-fresher-1')}
-                  className="bg-dark-800 hover:bg-dark-750 border border-brand-green/30 hover:border-brand-green text-slate-200 px-3.5 py-2 rounded-lg text-xs font-mono flex items-center gap-2 transition-all hover:scale-105"
-                >
-                  <GraduationCap className="w-4 h-4 text-brand-green" />
-                  <span>Fresher (On-Campus · IIT Delhi)</span>
-                </button>
-
-                <button
-                  onClick={() => onQuickLogin('user-fresher-2')}
-                  className="bg-dark-800 hover:bg-dark-750 border border-brand-green/30 hover:border-brand-green text-slate-200 px-3.5 py-2 rounded-lg text-xs font-mono flex items-center gap-2 transition-all hover:scale-105"
-                >
-                  <Briefcase className="w-4 h-4 text-brand-green" />
-                  <span>Fresher (Off-Campus · BITS)</span>
-                </button>
-
-                <button
-                  onClick={() => onQuickLogin('user-exp-1')}
-                  className="bg-dark-800 hover:bg-dark-750 border border-brand-purple/30 hover:border-brand-purple text-slate-200 px-3.5 py-2 rounded-lg text-xs font-mono flex items-center gap-2 transition-all hover:scale-105"
-                >
-                  <TrendingUp className="w-4 h-4 text-brand-purple" />
-                  <span>Experienced SDE II (Swiggy · 3.5 YoE)</span>
-                </button>
-
-                <button
-                  onClick={() => onQuickLogin('user-company-1')}
-                  className="bg-dark-800 hover:bg-dark-750 border border-brand-cyan/30 hover:border-brand-cyan text-slate-200 px-3.5 py-2 rounded-lg text-xs font-mono flex items-center gap-2 transition-all hover:scale-105"
-                >
-                  <Building2 className="w-4 h-4 text-brand-cyan" />
-                  <span>Company Recruiter @ Microsoft</span>
-                </button>
-              </div>
-            </div>
 
             <div className="mt-16 text-center">
               <p className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-8">
@@ -243,11 +207,13 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
                 <InfiniteSlider gap={48} speed={30}>
-                  <img src="https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100&auto=format&fit=crop&q=60" alt="Google" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
-                  <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60" alt="Microsoft" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&auto=format&fit=crop&q=60" alt="Stripe" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
-                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&auto=format&fit=crop&q=60" alt="Atlassian" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
-                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=100&auto=format&fit=crop&q=60" alt="Zepto" className="h-[40px] w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all rounded-md object-cover aspect-square" />
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Google</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Microsoft</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Amazon</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Netflix</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Meta</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Atlassian</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400 opacity-50 px-8 whitespace-nowrap">Stripe</span>
                 </InfiniteSlider>
               </InView>
             </div>
