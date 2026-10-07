@@ -37,6 +37,7 @@ export default function LandingHero({ onSelectRole }) {
   const [password, setPassword] = useState('');
   const [selectedRoleForAuth, setSelectedRoleForAuth] = useState('developer');
   const [activeModal, setActiveModal] = useState(null);
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -145,7 +146,7 @@ export default function LandingHero({ onSelectRole }) {
         {/* Auth Modal / Direct Role Selection View */}
         {authMode === 'select' ? (
           <div>
-            {/* Small Interactive Role Selector */}
+            {/* Interactive Role Selector */}
             <InView
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -153,63 +154,85 @@ export default function LandingHero({ onSelectRole }) {
               }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <div className="max-w-xl mx-auto bg-dark-800 border border-dark-700 rounded-3xl p-8 sm:p-10 shadow-card-dark text-center relative z-10 mb-16">
-                <p className="text-sm text-slate-400 mb-6 uppercase tracking-widest font-semibold">Get Started as a...</p>
+              <div className="max-w-3xl mx-auto mb-16 animate-in fade-in zoom-in-95">
+                <p className="text-xs text-slate-500 mb-4 uppercase tracking-widest font-bold text-center">Get Started as a...</p>
                 
-                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
-                  <button 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {/* Developer Card */}
+                  <div 
                     onClick={() => setActiveTab('developer')}
-                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-semibold transition-all w-full sm:w-auto ${
-                      activeTab === 'developer' 
-                        ? 'bg-brand-green text-dark-900 shadow-glow-green' 
-                        : 'bg-dark-850 border border-dark-700 text-slate-400 hover:text-white hover:bg-dark-700'
+                    className={`cursor-pointer transition-all duration-300 rounded-2xl p-5 border text-left relative overflow-hidden group ${
+                      activeTab === 'developer'
+                        ? 'border-brand-green bg-brand-green/5 shadow-glow-green shadow-sm'
+                        : 'border-dark-700 bg-dark-850 hover:border-dark-600 hover:bg-dark-800'
                     }`}
                   >
-                    <Code className="w-5 h-5" /> Developer
-                  </button>
-                  
-                  <button 
+                    {activeTab === 'developer' && (
+                      <div className="absolute top-4 right-4 text-brand-green">
+                        <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
+                      </div>
+                    )}
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-colors ${
+                      activeTab === 'developer' ? 'bg-brand-green/20 text-brand-green' : 'bg-dark-750 text-slate-400 group-hover:text-slate-300'
+                    }`}>
+                      <Code className="w-6 h-6" />
+                    </div>
+                    <h3 className={`text-xl font-bold mb-1 transition-colors ${activeTab === 'developer' ? 'text-white' : 'text-slate-300'}`}>Developer</h3>
+                    <p className={`text-sm transition-colors ${activeTab === 'developer' ? 'text-slate-400' : 'text-slate-500'}`}>
+                      Analyze skills and build your career path
+                    </p>
+                  </div>
+
+                  {/* Company Card */}
+                  <div 
                     onClick={() => setActiveTab('company')}
-                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-semibold transition-all w-full sm:w-auto ${
-                      activeTab === 'company' 
-                        ? 'bg-brand-cyan text-dark-900 shadow-glow-blue' 
-                        : 'bg-dark-850 border border-dark-700 text-slate-400 hover:text-white hover:bg-dark-700'
+                    className={`cursor-pointer transition-all duration-300 rounded-2xl p-5 border text-left relative overflow-hidden group ${
+                      activeTab === 'company'
+                        ? 'border-brand-cyan bg-brand-cyan/5 shadow-glow-blue shadow-sm'
+                        : 'border-dark-700 bg-dark-850 hover:border-dark-600 hover:bg-dark-800'
                     }`}
                   >
-                    <Building2 className="w-5 h-5" /> Company
-                  </button>
+                    {activeTab === 'company' && (
+                      <div className="absolute top-4 right-4 text-brand-cyan">
+                        <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
+                      </div>
+                    )}
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-colors ${
+                      activeTab === 'company' ? 'bg-brand-cyan/20 text-brand-cyan' : 'bg-dark-750 text-slate-400 group-hover:text-slate-300'
+                    }`}>
+                      <Building2 className="w-6 h-6" />
+                    </div>
+                    <h3 className={`text-xl font-bold mb-1 transition-colors ${activeTab === 'company' ? 'text-white' : 'text-slate-300'}`}>Company</h3>
+                    <p className={`text-sm transition-colors ${activeTab === 'company' ? 'text-slate-400' : 'text-slate-500'}`}>
+                      Discover and evaluate top talent
+                    </p>
+                  </div>
                 </div>
 
-                {activeTab === 'developer' ? (
-                  <div className="animate-in fade-in slide-in-from-bottom-2">
-                    <p className="text-slate-300 text-base mb-8 leading-relaxed min-h-[48px]">
-                      Analyze your skills, identify your gaps, and build a career roadmap that gets you hired.
-                    </p>
-                    <button 
-                      onClick={() => handleStartAuth('developer')}
-                      className="w-full bg-brand-green hover:bg-brand-darkgreen text-dark-900 font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-glow-green group"
-                    >
-                      Analyze My Skills <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="animate-in fade-in slide-in-from-bottom-2">
-                    <p className="text-slate-300 text-base mb-8 leading-relaxed min-h-[48px]">
-                      Find, compare, and evaluate candidates using AI-powered hiring intelligence and verified skill scores.
-                    </p>
-                    <button 
-                      onClick={() => handleStartAuth('company')}
-                      className="w-full bg-brand-cyan hover:bg-blue-600 text-dark-900 font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-glow-blue group"
-                    >
-                      Find Top Talent <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                )}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-dark-850 border border-dark-700 rounded-2xl p-5 px-6">
+                  <p className="text-slate-400 text-sm max-w-sm">
+                    {activeTab === 'developer' 
+                      ? "Analyze your skills, identify gaps, and build a focused career roadmap."
+                      : "Discover, compare, and evaluate talent using hiring intelligence."}
+                  </p>
+                  
+                  <button 
+                    onClick={() => handleStartAuth(activeTab)}
+                    className={`flex-shrink-0 font-bold px-6 py-3 rounded-xl text-sm transition-all duration-300 flex items-center justify-center gap-2 group ${
+                      activeTab === 'developer'
+                        ? 'btn-primary'
+                        : 'bg-brand-cyan hover:bg-blue-600 text-dark-900 shadow-glow-blue'
+                    }`}
+                  >
+                    {activeTab === 'developer' ? 'Analyze My Skills' : 'Find Top Talent'} 
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
               </div>
             </InView>
 
-            <div className="mt-16 text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-8">
+            <div className="mt-12 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-8">
                 Recruiters from top tech companies hire through our engine
               </p>
               <InView
@@ -219,15 +242,37 @@ export default function LandingHero({ onSelectRole }) {
                 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
-                <InfiniteSlider gap={48} speed={30}>
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-[30px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" className="h-[28px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-[28px] w-auto object-contain mt-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" className="h-[26px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" className="h-[24px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://cdn.simpleicons.org/atlassian/0052CC" alt="Atlassian" className="h-[26px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-[30px] w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                </InfiniteSlider>
+                <div className="relative group cursor-pointer" onMouseLeave={() => setSelectedCompany(null)}>
+                  <InfiniteSlider gap={48} speed={30}>
+                    {[
+                      { name: 'Google', src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', className: 'h-[30px]' },
+                      { name: 'Microsoft', src: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg', className: 'h-[28px]' },
+                      { name: 'Amazon', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', className: 'h-[28px] mt-2' },
+                      { name: 'Netflix', src: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', className: 'h-[26px]' },
+                      { name: 'Meta', src: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg', className: 'h-[24px]' },
+                      { name: 'Atlassian', src: 'https://cdn.simpleicons.org/atlassian/0052CC', className: 'h-[26px]' },
+                      { name: 'Stripe', src: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg', className: 'h-[30px]' }
+                    ].map((company) => (
+                      <div 
+                        key={company.name}
+                        onClick={() => setSelectedCompany(company.name)}
+                        className={`transition-all duration-500 ease-out flex items-center justify-center p-2 rounded-xl ${
+                          selectedCompany === company.name 
+                            ? 'scale-110 opacity-100 bg-white/5 shadow-sm backdrop-blur-sm' 
+                            : selectedCompany 
+                              ? 'opacity-30 grayscale blur-[1px]' 
+                              : 'opacity-60 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-105'
+                        }`}
+                      >
+                        <img 
+                          src={company.src} 
+                          alt={company.name} 
+                          className={`w-auto object-contain transition-all duration-500 ${company.className} ${selectedCompany === company.name ? 'grayscale-0' : ''}`} 
+                        />
+                      </div>
+                    ))}
+                  </InfiniteSlider>
+                </div>
               </InView>
             </div>
           </div>
