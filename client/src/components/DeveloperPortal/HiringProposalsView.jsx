@@ -6,12 +6,28 @@ export default function HiringProposalsView({ currentUser }) {
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const loadProposals = async () => {
+    setLoading(true);
+    const userId = currentUser?.uid || 'user-fresher-1';
+    const res = await api.getProposalsForCandidate(userId);
+    if (res.success) {
+      setProposals(res.proposals);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    api.getProposals(currentUser.id).then(res => {
-      if (res.success) setProposals(res.proposals);
-      setLoading(false);
-    });
-  }, [currentUser.id]);
+    loadProposals();
+  }, [currentUser]);
+
+  const handleUpdateStatus = async (proposalId, status) => {
+    const res = await api.updateProposalStatus(proposalId, status);
+    if (res.success) {
+      loadProposals();
+    } else {
+      alert(res.message);
+    }
+  };
 
   if (loading) return <div className="text-center p-12 text-slate-400">Loading proposals...</div>;
 
@@ -61,10 +77,10 @@ export default function HiringProposalsView({ currentUser }) {
             
             {proposal.status === 'pending' && (
               <div className="flex gap-4">
-                <button className="btn-primary flex-1 flex justify-center items-center gap-2">
+                <button onClick={() => handleUpdateStatus(proposal.id, 'accepted')} className="btn-primary flex-1 flex justify-center items-center gap-2">
                   <CheckCircle2 className="w-4 h-4" /> Accept Proposal
                 </button>
-                <button className="px-6 py-2 rounded-lg bg-dark-700 text-white font-medium hover:bg-rose-500/20 hover:text-rose-400 transition-colors flex justify-center items-center gap-2">
+                <button onClick={() => handleUpdateStatus(proposal.id, 'declined')} className="px-6 py-2 rounded-lg bg-dark-700 text-white font-medium hover:bg-rose-500/20 hover:text-rose-400 transition-colors flex justify-center items-center gap-2">
                   <XCircle className="w-4 h-4" /> Decline
                 </button>
               </div>

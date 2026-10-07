@@ -7,8 +7,8 @@ export default function CompanyProposalsView({ currentUser }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // For mock purposes, just fetching all proposals since we don't have a specific endpoint for company sent proposals
-    api.getProposals("user-fresher-1").then(res => {
+    const companyId = currentUser?.uid || 'user-company-1';
+    api.getProposalsForCompany(companyId).then(res => {
       if (res.success) setProposals(res.proposals);
       setLoading(false);
     });
