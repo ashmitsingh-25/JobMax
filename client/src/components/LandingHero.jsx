@@ -258,16 +258,16 @@ export default function LandingHero({ onSelectRole }) {
                         onClick={() => setSelectedCompany(company.name)}
                         className={`transition-all duration-500 ease-out flex items-center justify-center p-2 rounded-xl ${
                           selectedCompany === company.name 
-                            ? 'scale-110 opacity-100 bg-white/5 shadow-sm backdrop-blur-sm' 
+                            ? 'scale-110 bg-white/5 shadow-sm backdrop-blur-sm' 
                             : selectedCompany 
-                              ? 'opacity-30 grayscale blur-[1px]' 
-                              : 'opacity-60 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-105'
+                              ? 'opacity-50' 
+                              : 'hover:scale-105'
                         }`}
                       >
                         <img 
                           src={company.src} 
                           alt={company.name} 
-                          className={`w-auto object-contain transition-all duration-500 ${company.className} ${selectedCompany === company.name ? 'grayscale-0' : ''}`} 
+                          className={`w-auto object-contain transition-all duration-500 ${company.className}`} 
                         />
                       </div>
                     ))}
