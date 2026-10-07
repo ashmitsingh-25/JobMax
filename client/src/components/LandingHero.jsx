@@ -105,94 +105,68 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
         {/* Auth Modal / Direct Role Selection View */}
         {authMode === 'select' ? (
           <div>
-            {/* 2 Large Role Selector Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              
-              {/* Card 1: Developer Portal Card */}
-              <InView
-                className="h-full flex flex-col"
-                variants={{
-                  hidden: { opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' },
-                  visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-                }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-              >
-              <div 
-                onClick={() => handleStartAuth('developer')}
-                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-green rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-green flex flex-col justify-between flex-1"
-              >
-                <div className="absolute top-4 right-4 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Cpu className="w-3 h-3" />
-                  Students & Engineers
-                </div>
-
-                <div>
-                  <div className="w-14 h-14 rounded-xl bg-dark-700/80 border border-brand-green/40 flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 transition-transform">
-                    <Code className="w-8 h-8" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2 group-hover:text-brand-green transition-colors">
-                    I'm a Developer
-                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-brand-green group-hover:translate-x-1 transition-all" />
-                  </h3>
-
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                    Assess your placement readiness and get AI gap reports, customized roadmaps, and career insights.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <button className="w-full btn-primary group-hover:bg-[#00D659]">
-                    Enter Developer Portal
-                    <ArrowRight className="w-4 h-4" />
+            {/* Small Interactive Role Selector */}
+            <InView
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+            >
+              <div className="max-w-md mx-auto bg-dark-800 border border-dark-700 rounded-2xl p-6 shadow-card-dark text-center relative z-10 mb-12">
+                <p className="text-sm text-slate-400 font-mono mb-4 uppercase tracking-wider">I am a...</p>
+                
+                <div className="flex flex-col sm:flex-row items-center gap-3 justify-center mb-6">
+                  <button 
+                    onClick={() => setActiveTab('developer')}
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full sm:w-auto ${
+                      activeTab === 'developer' 
+                        ? 'bg-brand-green/10 text-brand-green border-2 border-brand-green shadow-glow-green' 
+                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600'
+                    }`}
+                  >
+                    👨‍💻 Developer
+                  </button>
+                  
+                  <button 
+                    onClick={() => setActiveTab('company')}
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full sm:w-auto ${
+                      activeTab === 'company' 
+                        ? 'bg-brand-cyan/10 text-brand-cyan border-2 border-brand-cyan shadow-glow-blue' 
+                        : 'bg-dark-900 border-2 border-dark-700 text-slate-400 hover:text-slate-200 hover:border-dark-600'
+                    }`}
+                  >
+                    🏢 Company
                   </button>
                 </div>
-              </div>
-              </InView>
 
-              {/* Card 2: Company Portal Card */}
-              <InView
-                className="h-full flex flex-col"
-                variants={{
-                  hidden: { opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' },
-                  visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-                }}
-                transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.1 }}
-              >
-              <div 
-                onClick={() => handleStartAuth('company')}
-                className="group relative bg-dark-800/90 hover:bg-dark-750 border-2 border-dark-700 hover:border-brand-cyan rounded-2xl p-8 transition-all duration-300 cursor-pointer shadow-card-dark hover:shadow-glow-blue flex flex-col justify-between flex-1"
-              >
-                <div className="absolute top-4 right-4 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Building2 className="w-3 h-3" />
-                  Recruiters & Tech Leads
-                </div>
-
-                <div>
-                  <div className="w-14 h-14 rounded-xl bg-dark-700/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan mb-6 group-hover:scale-110 transition-transform">
-                    <Building2 className="w-8 h-8" />
+                {activeTab === 'developer' ? (
+                  <div className="animate-in fade-in slide-in-from-bottom-2">
+                    <p className="text-slate-300 text-sm mb-6 leading-relaxed min-h-[40px]">
+                      Analyze your skills, identify your gaps, and build your career roadmap.
+                    </p>
+                    <button 
+                      onClick={() => handleStartAuth('developer')}
+                      className="w-full btn-primary group hover:bg-[#00D659] flex items-center justify-center gap-2"
+                    >
+                      Analyze My Skills <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
                   </div>
-
-                  <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2 group-hover:text-brand-cyan transition-colors">
-                    I'm a Company
-                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-brand-cyan group-hover:translate-x-1 transition-all" />
-                  </h3>
-
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                    Input role requirements to analyze candidate skill gaps and let AI rank applicants with instant breakdowns.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <button className="w-full bg-brand-cyan hover:bg-[#00c0e4] text-dark-900 font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-blue">
-                    Enter Company Portal
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
+                ) : (
+                  <div className="animate-in fade-in slide-in-from-bottom-2">
+                    <p className="text-slate-300 text-sm mb-6 leading-relaxed min-h-[40px]">
+                      Find, compare, and evaluate candidates using AI-powered hiring intelligence.
+                    </p>
+                    <button 
+                      onClick={() => handleStartAuth('company')}
+                      className="w-full bg-brand-cyan hover:bg-[#00c0e4] text-dark-900 font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-blue group"
+                    >
+                      Find Top Talent <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                )}
               </div>
-              </InView>
-
-            </div>
+            </InView>
 
 
             <div className="mt-16 text-center">
