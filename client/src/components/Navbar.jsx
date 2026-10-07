@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Terminal, Users, Building2, ChevronDown, Sparkles, LogOut, CheckCircle, Code, Briefcase, GraduationCap } from 'lucide-react';
 import { api, FALLBACK_DEMO_USERS } from '../services/api';
 
@@ -8,6 +9,7 @@ export default function Navbar({
   onLogout,
   onOpenOnboarding
 }) {
+  const navigate = useNavigate();
   const [demoUsers, setDemoUsers] = useState(FALLBACK_DEMO_USERS);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
@@ -32,7 +34,7 @@ export default function Navbar({
           {/* Logo & Platform Tag */}
           <div className="flex items-center gap-6">
             <div 
-              onClick={() => onLogout && onLogout()}
+              onClick={() => navigate('/')}
               className="flex items-center gap-2.5 cursor-pointer group"
             >
               <div className="w-9 h-9 rounded-lg bg-dark-800 border border-brand-green/40 flex items-center justify-center text-brand-green shadow-glow-green group-hover:scale-105 transition-transform">
@@ -43,14 +45,7 @@ export default function Navbar({
                   <span className="text-xl font-bold tracking-tight text-white group-hover:text-brand-green transition-colors">
                     Job<span className="text-brand-green">Max</span>
                   </span>
-                  <span className="font-mono text-[10px] bg-brand-green/10 text-brand-green border border-brand-green/30 px-1.5 py-0.5 rounded">
-                    v1.0
-                  </span>
                 </div>
-                <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></span>
-                  AI Skill-Gap Engine
-                </span>
               </div>
             </div>
 

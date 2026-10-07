@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Code, 
   Building2, 
@@ -27,9 +27,20 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
   const [password, setPassword] = useState('');
   const [selectedRoleForAuth, setSelectedRoleForAuth] = useState('developer');
 
+  useEffect(() => {
+    const handlePopState = () => {
+      if (authMode !== 'select') {
+        setAuthMode('select');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [authMode]);
+
   const handleStartAuth = (role) => {
     setSelectedRoleForAuth(role);
     setAuthMode('login');
+    window.history.pushState({ auth: true }, '');
   };
 
   const handleFormSubmit = (e) => {
@@ -196,21 +207,27 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
                 <InfiniteSlider gap={48} speed={30}>
-                  <img src="https://cdn.simpleicons.org/google" alt="Google" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/microsoft" alt="Microsoft" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/amazon" alt="Amazon" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/meta" alt="Meta" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/atlassian" alt="Atlassian" className="h-[30px] w-auto object-contain" />
-                  <img src="https://cdn.simpleicons.org/stripe" alt="Stripe" className="h-[30px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-[30px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" className="h-[28px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-[28px] w-auto object-contain mt-2" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" className="h-[26px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" className="h-[24px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Atlassian_2017_logo.svg" alt="Atlassian" className="h-[26px] w-auto object-contain" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-[30px] w-auto object-contain" />
                 </InfiniteSlider>
               </InView>
             </div>
           </div>
         ) : (
           /* Authentication Screen */
-          <div className="max-w-md mx-auto bg-dark-800 border border-dark-700 rounded-2xl p-8 shadow-2xl animate-in fade-in zoom-in-95">
-            <div className="text-center mb-6">
+          <div className="max-w-md mx-auto bg-dark-800 border border-dark-700 rounded-2xl p-8 shadow-2xl animate-in fade-in zoom-in-95 relative">
+            <button
+              onClick={() => setAuthMode('select')}
+              className="absolute top-4 left-4 p-2 text-slate-400 hover:text-white hover:bg-dark-700 rounded-lg transition-colors flex items-center gap-1 text-xs font-medium"
+            >
+              ← Back
+            </button>
+            <div className="text-center mb-6 mt-4">
               <div className="inline-flex items-center gap-2 bg-dark-700/60 px-3 py-1 rounded-full text-xs font-mono text-slate-300 mb-3">
                 {selectedRoleForAuth === 'developer' ? (
                   <>
