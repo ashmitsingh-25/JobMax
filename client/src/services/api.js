@@ -1,5 +1,7 @@
 // Base URL: use relative /api which Vite proxies to backend, with fallback
 import { ecosystemApi } from './mockEcosystem';
+import { db } from '../firebase';
+import { doc, getDoc, setDoc, updateDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 const getBaseUrl = () => {
   try {
     const custom = typeof window !== "undefined" ? localStorage.getItem('jobmax_backend_url') : null;
@@ -370,6 +372,75 @@ export const FALLBACK_ONCAMPUS_REPORT = {
 
 export const api = {
   ...ecosystemApi,
+
+  // Firebase Firestore Sync
+  syncFirebaseUser: async (user, role, extraData = {}) => {
+    if (!user || !user.uid) return null;
+    try {
+      const userRef = doc(db, 'users', user.uid);
+      const userSnap = await getDoc(userRef);
+
+      const userData = {
+        uid: user.uid,
+        name: extraData.name || user.displayName || user.email?.split('@')[0] || 'Unknown',
+        email: user.email || extraData.email || '',
+        photoURL: user.photoURL || extraData.avatar || '',
+        provider: user.providerData?.[0]?.providerId || 'custom',
+        role: role,
+        updatedAt: serverTimestamp(),
+        lastLoginAt: serverTimestamp(),
+      };
+
+      if (!userSnap.exists()) {
+        userData.createdAt = serverTimestamp();
+        await setDoc(userRef, userData);
+      } else {
+        await updateDoc(userRef, userData);
+      }
+
+      // Sync specific profile
+      if (role === 'developer') {
+        const devRef = doc(db, 'developerProfiles', user.uid);
+        const devSnap = await getDoc(devRef);
+        if (!devSnap.exists()) {
+          await setDoc(devRef, {
+            uid: user.uid,
+            ...extraData,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+        } else {
+          // keep existing profile data, just update basic fields or new extraData
+          await updateDoc(devRef, {
+            ...extraData,
+            updatedAt: serverTimestamp()
+          });
+        }
+      } else if (role === 'company') {
+        const compRef = doc(db, 'companyProfiles', user.uid);
+        const compSnap = await getDoc(compRef);
+        if (!compSnap.exists()) {
+          await setDoc(compRef, {
+            uid: user.uid,
+            ...extraData,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+        } else {
+          await updateDoc(compRef, {
+            ...extraData,
+            updatedAt: serverTimestamp()
+          });
+        }
+      }
+
+      return userData;
+    } catch (e) {
+      console.warn("Failed to sync user with Firestore:", e);
+      return null;
+    }
+  },
+
   // Auth
   login: async (credentials) => {
     try {
@@ -548,16 +619,32 @@ export const api = {
 
   postJob: async (jobData) => {
     try {
+      // 1. Try Express backend
       const res = await fetch(buildUrl("/jobs"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobData)
       });
-      if (res.ok) return await res.json();
+      if (res.ok) {
+        // success backend
+      }
     } catch (e) {
-      console.warn("postJob fallback:", e);
+      console.warn("postJob backend fallback:", e);
     }
-    return { success: true, job: { id: `job-${Date.now()}`, ...jobData } };
+    
+    // 2. Persist to Firestore
+    try {
+      const docRef = await addDoc(collection(db, 'jobs'), {
+        ...jobData,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        status: jobData.status || 'open'
+      });
+      return { success: true, job: { id: docRef.id, ...jobData } };
+    } catch (e) {
+      console.warn("postJob firestore fallback:", e);
+      return { success: true, job: { id: `job-${Date.now()}`, ...jobData } };
+    }
   },
 
   // Developer AI Analytics
@@ -859,7 +946,7 @@ export const api = {
     const pred = (sum >= 3.0 && hasKey) ? 1 : 0;
     const probHigh = Math.min(0.95, Math.max(0.05, 0.15 + (sum / 5.0) * 0.75));
 
-    return {
+    const result = {
       success: true,
       salary_hike_high_or_low: pred,
       prediction_label: pred === 1 ? "High Salary Hike Potential" : "Standard Growth Potential",
@@ -872,6 +959,22 @@ export const api = {
         dashboard_and_storytelling_skills: skillsVector?.[4] || 0
       }
     };
+    
+    try {
+      const sessionStr = localStorage.getItem('jobmax_session');
+      if (sessionStr) {
+        const user = JSON.parse(sessionStr);
+        await addDoc(collection(db, 'aiResults'), {
+          uid: user.uid || user.id,
+          modelName: 'jds_salary_hike_model',
+          inputData: { skillsVector },
+          prediction: result,
+          createdAt: serverTimestamp()
+        });
+      }
+    } catch(e) {}
+    
+    return result;
   },
 
   // 2. Candidate Technical Skills Classifier (candidate_skills_classifier.joblib)
@@ -891,13 +994,29 @@ export const api = {
     const qualified = sum >= 2.5;
     const conf = qualified ? Math.min(0.98, 0.65 + sum * 0.06) : Math.max(0.02, 0.45 - sum * 0.08);
 
-    return {
+    const result = {
       success: true,
       skill_qualification: qualified ? 1 : 0,
       qualified: qualified,
       confidence: Number(conf.toFixed(4)),
       probabilities: [Number((1 - conf).toFixed(4)), Number(conf.toFixed(4))]
     };
+    
+    try {
+      const sessionStr = localStorage.getItem('jobmax_session');
+      if (sessionStr) {
+        const user = JSON.parse(sessionStr);
+        await addDoc(collection(db, 'aiResults'), {
+          uid: user.uid || user.id,
+          modelName: 'candidate_skills_classifier',
+          inputData: { skillsVector },
+          prediction: result,
+          createdAt: serverTimestamp()
+        });
+      }
+    } catch(e) {}
+    
+    return result;
   },
 
   // 3. Candidate Personality Classifier (candidate_personality_classifier.joblib)

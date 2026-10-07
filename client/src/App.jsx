@@ -59,6 +59,8 @@ export default function App() {
             const parsed = JSON.parse(saved);
             if (parsed.uid === user.uid) {
               setCurrentUser(parsed);
+              // Make sure we sync in background if role is already known
+              api.syncFirebaseUser(user, parsed.role, parsed).catch(console.error);
             } else {
               setCurrentUser(null);
             }
@@ -106,6 +108,11 @@ export default function App() {
     };
 
     setCurrentUser(userObj);
+
+    // Sync to Firestore immediately upon role selection
+    if (auth.currentUser && auth.currentUser.uid === userData.uid) {
+      api.syncFirebaseUser(auth.currentUser, role, userObj).catch(console.error);
+    }
 
     // If developer, prompt onboarding classification modal
     if (role === 'developer') {
