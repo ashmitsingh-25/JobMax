@@ -47,7 +47,13 @@ export default function LandingHero({ onSelectRole }) {
     window.addEventListener('popstate', handlePopState);
     
     const handleTriggerAuth = (e) => {
-      handleStartAuth(e.detail?.role || 'developer');
+      const targetRole = e.detail?.role;
+      if (targetRole === 'role-selection') {
+        setAuthMode('role-selection');
+        window.history.pushState({ auth: true }, '');
+      } else {
+        handleStartAuth(targetRole || 'developer');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     window.addEventListener('trigger-auth', handleTriggerAuth);
@@ -225,6 +231,48 @@ export default function LandingHero({ onSelectRole }) {
                 </InfiniteSlider>
               </InView>
             </div>
+          </div>
+        ) : authMode === 'role-selection' ? (
+          <div className="max-w-md mx-auto bg-dark-800 border border-dark-700 rounded-2xl p-8 shadow-2xl animate-in fade-in zoom-in-95 relative mt-12 mb-20">
+            <h2 className="text-2xl font-bold text-white text-center mb-2">Choose your account</h2>
+            <p className="text-slate-400 text-center mb-8">Select how you want to continue.</p>
+
+            <div className="flex flex-col gap-4">
+              <button 
+                onClick={() => handleStartAuth('developer')}
+                className="w-full bg-dark-900 border border-dark-700 hover:border-brand-green/50 hover:bg-dark-700/50 rounded-xl p-5 text-left transition-all group flex items-center justify-between shadow-sm"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">👨‍💻</span>
+                    <h3 className="text-white font-semibold text-lg group-hover:text-brand-green transition-colors">Developer</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm pl-8">For students and professionals</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-brand-green group-hover:translate-x-1 transition-all" />
+              </button>
+
+              <button 
+                onClick={() => handleStartAuth('company')}
+                className="w-full bg-dark-900 border border-dark-700 hover:border-brand-cyan/50 hover:bg-dark-700/50 rounded-xl p-5 text-left transition-all group flex items-center justify-between shadow-sm"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">🏢</span>
+                    <h3 className="text-white font-semibold text-lg group-hover:text-brand-cyan transition-colors">Company</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm pl-8">For recruiters and hiring teams</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-brand-cyan group-hover:translate-x-1 transition-all" />
+              </button>
+            </div>
+
+            <button
+              onClick={() => setAuthMode('select')}
+              className="mt-6 w-full py-3 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+            >
+              Cancel
+            </button>
           </div>
         ) : (
           /* Authentication Screen */
