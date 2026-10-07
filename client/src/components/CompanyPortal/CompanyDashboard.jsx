@@ -27,6 +27,7 @@ import CandidateComparisonModal from './CandidateComparisonModal';
 import CompanyContestsView from './CompanyContestsView';
 import CompanyProjectsManageView from './CompanyProjectsManageView';
 import CompanyProposalsView from './CompanyProposalsView';
+import MLModelsHubView from '../DeveloperPortal/MLModelsHubView';
 import { Trophy, FileText, Send } from 'lucide-react';
 
 export default function CompanyDashboard({ currentUser }) {
@@ -161,7 +162,8 @@ export default function CompanyDashboard({ currentUser }) {
           { id: 'sourcing', icon: <Search className="w-4 h-4" />, label: 'Talent Sourcing' },
           { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Skill Contests' },
           { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
-          { id: 'proposals', icon: <Send className="w-4 h-4" />, label: 'Sent Proposals' }
+          { id: 'proposals', icon: <Send className="w-4 h-4" />, label: 'Sent Proposals' },
+          { id: 'ml-hub', icon: <Sparkles className="w-4 h-4 text-brand-green" />, label: 'AI Models Hub' }
         ].map(tab => (
           <button
             key={tab.id}
@@ -441,6 +443,7 @@ export default function CompanyDashboard({ currentUser }) {
       {activeTab === 'contests' && <CompanyContestsView currentUser={currentUser} />}
       {activeTab === 'projects' && <CompanyProjectsManageView currentUser={currentUser} />}
       {activeTab === 'proposals' && <CompanyProposalsView currentUser={currentUser} />}
+      {activeTab === 'ml-hub' && <MLModelsHubView currentUser={currentUser} />}
 
       {/* Candidate Deep-Dive Modal */}
       {selectedCandidate && (

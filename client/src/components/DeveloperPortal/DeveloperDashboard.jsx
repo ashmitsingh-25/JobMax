@@ -24,6 +24,7 @@ import SkillRadarCard from './SkillRadarCard';
 import ExploreContestsView from './ExploreContestsView';
 import CompanyProjectsView from './CompanyProjectsView';
 import HiringProposalsView from './HiringProposalsView';
+import MLModelsHubView from './MLModelsHubView';
 
 export default function DeveloperDashboard({
   currentUser,
@@ -178,7 +179,8 @@ export default function DeveloperDashboard({
           { id: 'profile', icon: <Code className="w-4 h-4" />, label: 'Skill Profile' },
           { id: 'contests', icon: <Trophy className="w-4 h-4" />, label: 'Explore Contests' },
           { id: 'projects', icon: <Briefcase className="w-4 h-4" />, label: 'Company Projects' },
-          { id: 'proposals', icon: <FileText className="w-4 h-4" />, label: 'Hiring Proposals' }
+          { id: 'proposals', icon: <FileText className="w-4 h-4" />, label: 'Hiring Proposals' },
+          { id: 'ml-hub', icon: <Sparkles className="w-4 h-4 text-brand-green" />, label: 'AI Models Hub' }
         ].map(tab => (
           <button
             key={tab.id}
@@ -232,6 +234,7 @@ export default function DeveloperDashboard({
       {activeTab === 'contests' && <ExploreContestsView currentUser={currentUser} />}
       {activeTab === 'projects' && <CompanyProjectsView currentUser={currentUser} />}
       {activeTab === 'proposals' && <HiringProposalsView currentUser={currentUser} />}
+      {activeTab === 'ml-hub' && <MLModelsHubView currentUser={currentUser} />}
 
       {/* Modals */}
       {isResumeModalOpen && (
