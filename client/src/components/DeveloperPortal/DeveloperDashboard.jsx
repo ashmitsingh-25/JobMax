@@ -9,7 +9,8 @@ import {
   X, 
   CheckCircle2, 
   TrendingUp,
-  Layers
+  Layers,
+  Code
 } from 'lucide-react';
 import { TransitionPanel } from '../core/transition-panel';
 import OnCampusView from './OnCampusView';
