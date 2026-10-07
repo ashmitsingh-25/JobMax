@@ -212,7 +212,7 @@ export default function LandingHero({ onSelectRole, onQuickLogin }) {
                   <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-[28px] w-auto object-contain mt-2" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" className="h-[26px] w-auto object-contain" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" className="h-[24px] w-auto object-contain" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Atlassian_2017_logo.svg" alt="Atlassian" className="h-[26px] w-auto object-contain" />
+                  <img src="https://cdn.simpleicons.org/atlassian/0052CC" alt="Atlassian" className="h-[26px] w-auto object-contain" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-[30px] w-auto object-contain" />
                 </InfiniteSlider>
               </InView>

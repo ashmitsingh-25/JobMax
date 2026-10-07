@@ -5,20 +5,17 @@ export function InfiniteSlider({ children, gap = 24, reverse = false, className,
   return (
     <div className={`overflow-hidden flex w-full relative ${className || ''}`}>
       <motion.div
-        className="flex shrink-0 items-center justify-around"
-        style={{ gap, paddingRight: gap }}
-        animate={{ x: reverse ? ['-100%', '0%'] : ['0%', '-100%'] }}
+        className="flex shrink-0 items-center"
+        style={{ gap }}
+        animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{ duration: speed, ease: 'linear', repeat: Infinity }}
       >
-        {children}
-      </motion.div>
-      <motion.div
-        className="flex shrink-0 items-center justify-around absolute top-0 left-[100%]"
-        style={{ gap, paddingRight: gap }}
-        animate={{ x: reverse ? ['-100%', '0%'] : ['0%', '-100%'] }}
-        transition={{ duration: speed, ease: 'linear', repeat: Infinity }}
-      >
-        {children}
+        <div className="flex shrink-0 items-center justify-around" style={{ gap }}>
+          {children}
+        </div>
+        <div className="flex shrink-0 items-center justify-around" style={{ gap }}>
+          {children}
+        </div>
       </motion.div>
     </div>
   );
