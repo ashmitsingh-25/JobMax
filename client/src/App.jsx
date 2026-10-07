@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingHero from './components/LandingHero';
+import LoginPage from './components/LoginPage';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
@@ -169,6 +170,19 @@ export default function App() {
             element={
               !currentUser ? (
                 <LandingHero
+                  onSelectRole={handleSelectRole}
+                />
+              ) : (
+                <Navigate to={`/${currentUser.role}`} replace />
+              )
+            } 
+          />
+
+          <Route 
+            path="/login" 
+            element={
+              !currentUser ? (
+                <LoginPage
                   onSelectRole={handleSelectRole}
                 />
               ) : (

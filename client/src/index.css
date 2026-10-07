@@ -4,85 +4,110 @@
 
 @layer base {
   body {
-    @apply bg-dark-900 text-slate-100 min-h-screen overflow-x-hidden;
+    @apply bg-dark-900 text-slate-100 min-h-screen overflow-x-hidden antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-heading;
   }
 }
 
-/* Custom scrollbar matching Light IDEs */
+/* Custom Executive Slate Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #0A0F1D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: #233454;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #3B82F6;
 }
 
 /* Monospace skill tags & custom badges */
 .badge-code {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-dark-700 border border-dark-600 text-slate-300 font-medium inline-flex items-center gap-1.5;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-dark-850 border border-dark-700 text-slate-300 font-medium inline-flex items-center gap-1.5 transition-colors;
 }
 
 .badge-matched {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-medium inline-flex items-center gap-1;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 font-medium inline-flex items-center gap-1 shadow-sm;
 }
 
 .badge-missing {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-rose-950/60 border border-rose-500/40 text-rose-400 font-medium inline-flex items-center gap-1;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-rose-950/70 border border-rose-500/40 text-rose-300 font-medium inline-flex items-center gap-1 shadow-sm;
 }
 
 .badge-warning {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-amber-950/60 border border-amber-500/40 text-amber-400 font-medium inline-flex items-center gap-1;
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-amber-950/70 border border-amber-500/40 text-amber-300 font-medium inline-flex items-center gap-1 shadow-sm;
 }
 
-/* Glassmorphism & High-Density Cards */
+.badge-info {
+  @apply font-mono text-xs px-2.5 py-1 rounded-md bg-blue-950/70 border border-blue-500/40 text-blue-300 font-medium inline-flex items-center gap-1 shadow-sm;
+}
+
+/* Glassmorphism & Executive Cards */
 .card-hr {
-  @apply bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200;
-}
-
-.card-hr:hover {
-  @apply border-dark-600;
+  @apply bg-dark-800/90 backdrop-blur-md border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200 hover:border-dark-600;
 }
 
 .card-hr-interactive {
-  @apply bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200 cursor-pointer hover:border-brand-green/60 hover:shadow-glow-green;
+  @apply bg-dark-800/90 backdrop-blur-md border border-dark-700 rounded-xl p-5 shadow-card-dark transition-all duration-200 cursor-pointer hover:border-brand-primary/60 hover:shadow-glow-blue hover:-translate-y-0.5;
 }
 
+.card-glass {
+  @apply bg-dark-850/80 backdrop-blur-xl border border-dark-700/80 rounded-2xl shadow-glass;
+}
+
+/* Form Inputs - LinkedIn / Freelancer Style */
 .input-hr {
-  @apply bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors;
+  @apply bg-dark-850 border border-dark-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/30 transition-all duration-150;
 }
 
+/* Buttons */
 .btn-primary {
-  @apply bg-brand-green hover:bg-brand-darkgreen text-dark-900 font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-green hover:scale-[1.01] active:scale-[0.99];
+  @apply bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-glow-blue hover:shadow-lg active:scale-[0.98] border border-blue-400/20;
 }
 
 .btn-secondary {
-  @apply bg-dark-800 hover:bg-dark-850 border border-dark-700 text-brand-green font-medium px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2;
+  @apply bg-dark-800 hover:bg-dark-750 border border-dark-700 hover:border-dark-600 text-slate-200 font-medium px-4 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98];
+}
+
+.btn-outline-blue {
+  @apply bg-transparent hover:bg-blue-600/10 border border-blue-500/50 hover:border-blue-400 text-blue-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 active:scale-[0.98];
 }
 
 .btn-outline-green {
-  @apply bg-transparent hover:bg-brand-green/10 border border-brand-green/60 hover:border-brand-green text-brand-green text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5;
+  @apply bg-transparent hover:bg-emerald-600/10 border border-emerald-500/50 hover:border-emerald-400 text-emerald-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 active:scale-[0.98];
 }
 
 /* Code block highlight */
 .code-block {
-  @apply font-mono text-xs bg-dark-900 border border-dark-700 rounded-lg p-3 text-slate-300 overflow-x-auto;
+  @apply font-mono text-xs bg-dark-950/90 border border-dark-700 rounded-lg p-3 text-slate-300 overflow-x-auto;
 }
 
+/* Keyframes & Ambient Micro-interactions */
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.02); }
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float {
+  animation: subtleFloat 5s ease-in-out infinite;
 }
