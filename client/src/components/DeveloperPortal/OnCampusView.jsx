@@ -111,8 +111,8 @@ export default function OnCampusView({
     setCompletedTasks(updated);
     if (updated[taskId]) {
       confetti({
-        particleCount: 40,
-        spread: 60,
+        particleCount: 30,
+        spread: 50,
         origin: { y: 0.8 }
       });
     }
@@ -122,27 +122,26 @@ export default function OnCampusView({
     ? (colleges.find(c => c && c.id === selectedCollegeId) || colleges[0])
     : DEFAULT_COLLEGES[0];
 
-
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-4 animate-in fade-in">
       
       {/* College Selection Bar & Top Controls */}
-      <div className="bg-dark-800 border border-dark-700 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-card-dark">
+      <div className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-3 w-full md:w-auto">
-          <div className="w-10 h-10 rounded-lg bg-dark-700 border border-brand-green/30 flex items-center justify-center text-brand-green flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 flex-shrink-0">
             <Building2 className="w-5 h-5" />
           </div>
           <div className="flex-grow">
-            <label className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider block">
+            <label className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block font-medium">
               Active College Placement Cell
             </label>
             <select
               value={selectedCollegeId}
               onChange={(e) => setSelectedCollegeId(e.target.value)}
-              className="bg-transparent font-bold text-white text-base sm:text-lg focus:outline-none cursor-pointer hover:text-brand-green transition-colors"
+              className="bg-transparent font-bold text-slate-900 text-base sm:text-lg focus:outline-none cursor-pointer hover:text-blue-600 transition-colors font-heading"
             >
               {(colleges || []).map(col => (
-                <option key={col?.id || Math.random()} value={col?.id} className="bg-dark-850 text-slate-100 font-sans">
+                <option key={col?.id || Math.random()} value={col?.id} className="bg-white text-slate-800 font-sans">
                   {col?.name || col?.id} ({col?.tier || 'General'})
                 </option>
               ))}
@@ -161,9 +160,9 @@ export default function OnCampusView({
 
           <button
             onClick={onOpenContributeModal}
-            className="btn-secondary text-xs font-sans tracking-wide flex items-center gap-1.5"
+            className="btn-secondary text-xs flex items-center gap-1.5"
           >
-            <Plus className="w-3.5 h-3.5 text-brand-cyan" />
+            <Plus className="w-3.5 h-3.5 text-blue-600" />
             Contribute Placement Drive
           </button>
         </div>
@@ -171,53 +170,51 @@ export default function OnCampusView({
 
       {/* AI Bot #1 Placement Readiness Analyzer Banner */}
       {analysisReport && (
-        <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-green/40 rounded-2xl p-6 shadow-glow-green">
+        <div className="bg-white border border-slate-200 rounded-lg p-5 sm:p-6 shadow-sm">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
             {/* Gauge & Main Verdict */}
-            <div className="flex items-center gap-6">
-              <div className="relative flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-dark-900 border-4 border-dark-700 flex items-center justify-center">
+            <div className="flex items-center gap-5">
+              <div className="relative flex items-center justify-center flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-50 border-4 border-teal-200 flex items-center justify-center shadow-xs">
                   <div className="text-center">
-                    <span className="text-3xl font-extrabold font-sans tracking-wide text-brand-green leading-none">
+                    <span className="text-2xl font-bold font-mono text-teal-800 leading-none">
                       {analysisReport.overallReadinessScore}%
                     </span>
-                    <span className="text-[10px] font-sans tracking-wide text-slate-400 block mt-1">Readiness</span>
+                    <span className="text-[10px] font-mono text-slate-500 block mt-0.5">Readiness</span>
                   </div>
                 </div>
-                {/* Visual pulse glow */}
-                <div className="absolute inset-0 rounded-full border-2 border-brand-green animate-ping opacity-20"></div>
               </div>
 
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] font-sans tracking-wide px-2 py-0.5 rounded-full mb-1.5">
-                  <Sparkles className="w-3 h-3" />
-                  AI Bot #1 · Placement Readiness Analyzer
+                <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-800 border border-teal-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-1">
+                  <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+                  Placement Readiness Analyzer
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">
+                <h3 className="text-lg font-bold text-slate-900 font-heading">
                   On-Campus Recruiter Benchmark Report
                 </h3>
-                <p className="text-xs text-slate-300 max-w-xl leading-relaxed">
+                <p className="text-xs text-slate-600 max-w-xl leading-relaxed mt-0.5">
                   {analysisReport.summaryReport}
                 </p>
               </div>
             </div>
 
             {/* Quick Metrics */}
-            <div className="flex items-center gap-4 bg-dark-900/80 border border-dark-700 p-3.5 rounded-xl">
+            <div className="flex items-center gap-4 bg-slate-50 border border-slate-200 p-3.5 rounded-lg">
               <div className="text-center px-2">
-                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Campus Recruiters</p>
-                <p className="text-xl font-bold font-sans tracking-wide text-white">{analysisReport.totalRecruitersAnalyzed}</p>
+                <p className="text-[10px] font-mono text-slate-500 uppercase">Campus Recruiters</p>
+                <p className="text-lg font-bold font-mono text-slate-900">{analysisReport.totalRecruitersAnalyzed}</p>
               </div>
-              <div className="h-8 w-px bg-dark-700"></div>
+              <div className="h-7 w-px bg-slate-200"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Matched Skills</p>
-                <p className="text-xl font-bold font-sans tracking-wide text-brand-green">{analysisReport.matchedSkills.length}</p>
+                <p className="text-[10px] font-mono text-slate-500 uppercase">Matched Skills</p>
+                <p className="text-lg font-bold font-mono text-teal-700">{analysisReport.matchedSkills.length}</p>
               </div>
-              <div className="h-8 w-px bg-dark-700"></div>
+              <div className="h-7 w-px bg-slate-200"></div>
               <div className="text-center px-2">
-                <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Gaps to Close</p>
-                <p className="text-xl font-bold font-sans tracking-wide text-rose-400">{analysisReport.missingSkills.length}</p>
+                <p className="text-[10px] font-mono text-slate-500 uppercase">Gaps to Close</p>
+                <p className="text-lg font-bold font-mono text-rose-700">{analysisReport.missingSkills.length}</p>
               </div>
             </div>
 
@@ -225,8 +222,8 @@ export default function OnCampusView({
 
           {/* Missing Skills Warning Bar */}
           {analysisReport?.topGapsToClose && analysisReport.topGapsToClose.length > 0 && (
-            <div className="mt-5 pt-4 border-t border-dark-700/80 flex flex-wrap items-center gap-2">
-              <span className="text-xs font-sans tracking-wide text-rose-400 flex items-center gap-1">
+            <div className="mt-4 pt-3.5 border-t border-slate-200 flex flex-wrap items-center gap-2">
+              <span className="text-xs text-rose-700 font-semibold flex items-center gap-1 font-mono">
                 <AlertTriangle className="w-3.5 h-3.5" />
                 Critical Priority Gaps to Close:
               </span>
@@ -235,7 +232,7 @@ export default function OnCampusView({
                 const gFreq = typeof gap === 'object' && gap?.marketDemandFrequency ? gap.marketDemandFrequency : 85;
                 return (
                   <span key={gIdx} className="badge-missing text-xs">
-                    <XCircle className="w-3 h-3" />
+                    <XCircle className="w-3 h-3 text-rose-600" />
                     {gName} ({gFreq}% campus demand)
                   </span>
                 );
@@ -246,59 +243,59 @@ export default function OnCampusView({
       )}
 
       {/* Grid: 6-Week Action Plan & Company Fit Matrix */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left 2 Cols: 6-Week Actionable Roadmap */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Target className="w-5 h-5 text-brand-green" />
-              <h3 className="text-lg font-bold text-white">
+              <Target className="w-4 h-4 text-teal-700" />
+              <h3 className="text-base font-bold text-slate-900 font-heading">
                 Personalized 6-Week Placement Closing Roadmap
               </h3>
             </div>
-            <span className="text-xs font-sans tracking-wide text-slate-400">
+            <span className="text-xs text-slate-500 font-mono">
               Interactive Checklist
             </span>
           </div>
 
           <Accordion
-            className="flex w-full flex-col gap-4"
+            className="flex w-full flex-col gap-3"
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             variants={{
               expanded: { opacity: 1, scale: 1 },
-              collapsed: { opacity: 0, scale: 0.95 },
+              collapsed: { opacity: 0, scale: 0.98 },
             }}
           >
             {analysisReport?.actionPlan?.map((planBlock, idx) => (
-              <AccordionItem key={planBlock.week} value={planBlock.week} className="card-hr !p-0 overflow-hidden">
-                <AccordionTrigger className="w-full p-4 flex items-center justify-between border-b border-dark-700 bg-dark-800/50 hover:bg-dark-800 transition-colors group">
+              <AccordionItem key={planBlock.week} value={planBlock.week} className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-xs">
+                <AccordionTrigger className="w-full p-3.5 flex items-center justify-between border-b border-slate-100 bg-white hover:bg-slate-50 transition-colors group">
                   <div className="flex items-center gap-2.5">
-                    <span className="font-sans tracking-wide text-xs font-bold bg-dark-700 text-brand-green px-2.5 py-1 rounded border border-brand-green/30">
+                    <span className="text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-0.5 rounded font-mono">
                       {planBlock.week}
                     </span>
-                    <h4 className="font-semibold text-white text-sm">
+                    <h4 className="font-semibold text-slate-900 text-sm">
                       {planBlock.theme}
                     </h4>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-sans tracking-wide text-slate-400 flex items-center gap-1">
+                    <span className="text-[11px] font-mono text-slate-500 flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      Sprint Phase 0{idx + 1}
+                      Phase 0{idx + 1}
                     </span>
                     <ChevronRight className="w-4 h-4 text-slate-400 transition-transform duration-200 group-data-[expanded]:rotate-90" />
                   </div>
                 </AccordionTrigger>
 
-                <AccordionContent className="origin-top bg-dark-800">
-                  <div className="p-4 space-y-4">
+                <AccordionContent className="origin-top bg-white">
+                  <div className="p-4 space-y-3.5">
                     {/* Focus Areas */}
                     <div className="space-y-1.5">
-                      <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider">Focus Areas:</p>
+                      <p className="text-[11px] font-mono text-slate-500 uppercase tracking-wider font-medium">Focus Areas:</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {planBlock.focusAreas.map((area, i) => (
-                          <div key={i} className="bg-dark-850 p-2.5 rounded-lg border border-dark-700/80 text-xs text-slate-300 font-sans tracking-wide flex items-start gap-2">
-                            <Code2 className="w-3.5 h-3.5 text-brand-green flex-shrink-0 mt-0.5" />
+                          <div key={i} className="bg-slate-50 p-2 rounded border border-slate-200 text-xs text-slate-700 flex items-start gap-2">
+                            <Code2 className="w-3.5 h-3.5 text-teal-700 flex-shrink-0 mt-0.5" />
                             <span>{area}</span>
                           </div>
                         ))}
@@ -306,8 +303,8 @@ export default function OnCampusView({
                     </div>
 
                     {/* Actionable Deliverables with Checkbox */}
-                    <div className="space-y-2 pt-1">
-                      <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider">Actionable Deliverables:</p>
+                    <div className="space-y-1.5 pt-1">
+                      <p className="text-[11px] font-mono text-slate-500 uppercase tracking-wider font-medium">Actionable Deliverables:</p>
                       <div className="space-y-1.5">
                         {planBlock.deliverables.map((item, dIdx) => {
                           const taskId = `task-${idx}-${dIdx}`;
@@ -316,18 +313,18 @@ export default function OnCampusView({
                             <div
                               key={dIdx}
                               onClick={() => toggleTask(taskId)}
-                              className={`flex items-start gap-2.5 p-2.5 rounded-lg border text-xs cursor-pointer transition-colors ${
+                              className={`flex items-start gap-2.5 p-2 rounded border text-xs cursor-pointer transition-colors ${
                                 isDone 
-                                  ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300 line-through' 
-                                  : 'bg-dark-850 border-dark-700 text-slate-200 hover:border-dark-600'
+                                  ? 'bg-teal-50 border-teal-200 text-teal-900 line-through' 
+                                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                               }`}
                             >
                               {isDone ? (
-                                <CheckSquare className="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" />
+                                <CheckSquare className="w-4 h-4 text-teal-700 flex-shrink-0 mt-0.5" />
                               ) : (
-                                <Square className="w-4 h-4 text-slate-500 flex-shrink-0 mt-0.5" />
+                                <Square className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
                               )}
-                              <span className="font-sans">{item}</span>
+                              <span>{item}</span>
                             </div>
                           );
                         })}
@@ -336,8 +333,8 @@ export default function OnCampusView({
 
                     {/* Curated Resources */}
                     {planBlock?.suggestedResources && Array.isArray(planBlock.suggestedResources) && (
-                      <div className="pt-2 flex flex-wrap items-center gap-2">
-                        <span className="text-[11px] font-sans tracking-wide text-slate-400">Curated Prep Sheets:</span>
+                      <div className="pt-1 flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-mono text-slate-500">Prep Resources:</span>
                         {planBlock.suggestedResources.map((res, rIdx) => {
                           const rName = typeof res === 'string' ? res : (res?.name || `Resource ${rIdx + 1}`);
                           const rUrl = typeof res === 'object' && res?.url ? res.url : 'https://takeuforward.org';
@@ -347,7 +344,7 @@ export default function OnCampusView({
                               href={rUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-xs font-sans tracking-wide bg-dark-750 hover:bg-dark-700 border border-dark-600 text-brand-cyan hover:text-white px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors"
+                              className="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-blue-700 px-2.5 py-1 rounded inline-flex items-center gap-1 transition-colors font-medium"
                             >
                               <BookOpen className="w-3 h-3" />
                               {rName}
@@ -365,50 +362,50 @@ export default function OnCampusView({
         </div>
 
         {/* Right 1 Col: Target Company Fit Breakdown */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-brand-cyan" />
-              <h3 className="text-lg font-bold text-white">
+              <Award className="w-4 h-4 text-blue-600" />
+              <h3 className="text-base font-bold text-slate-900 font-heading">
                 Company Fit Matrix
               </h3>
             </div>
-            <span className="text-xs font-sans tracking-wide text-slate-400">
+            <span className="text-xs text-slate-500 font-mono">
               Ranked by Fit
             </span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {analysisReport?.companyFitBreakdown?.map(comp => (
               <div
                 key={comp.companyId || Math.random()}
                 onClick={() => setSelectedCompanyDetail(comp)}
-                className="card-hr-interactive p-4 flex flex-col justify-between"
+                className="bg-white border border-slate-200 rounded-lg p-3.5 shadow-xs hover:border-blue-300 hover:shadow-sm cursor-pointer transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
-                      <img src={comp.companyLogo} alt={comp.company || 'Company'} className="w-7 h-7 rounded-md object-cover border border-dark-600" />
+                      <img src={comp.companyLogo} alt={comp.company || 'Company'} className="w-7 h-7 rounded object-cover border border-slate-200" />
                       <div>
-                        <h4 className="font-bold text-white text-sm">{comp.company}</h4>
-                        <p className="text-[11px] text-slate-400 font-sans tracking-wide">{comp.role}</p>
+                        <h4 className="font-semibold text-slate-900 text-sm">{comp.company}</h4>
+                        <p className="text-[11px] text-slate-500">{comp.role}</p>
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <span className="text-sm font-bold font-sans tracking-wide text-brand-green">
+                      <span className="text-sm font-bold font-mono text-teal-700">
                         {comp.fitPercentage}%
                       </span>
-                      <span className={`block text-[10px] font-sans tracking-wide ${comp.tierColor}`}>
+                      <span className="block text-[10px] text-slate-500">
                         {comp.tierLabel}
                       </span>
                     </div>
                   </div>
 
                   {/* CTC & Criteria */}
-                  <div className="flex items-center justify-between text-[11px] font-sans tracking-wide text-slate-400 bg-dark-850 px-2.5 py-1.5 rounded border border-dark-700/80 mb-2.5">
-                    <span>CTC: <strong className="text-slate-200">{comp.ctcBand}</strong></span>
-                    <span>Min CGPA: <strong className="text-slate-200">{comp.cgpaCutoff}</strong></span>
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded border border-slate-200 mb-2">
+                    <span>CTC: <strong className="text-slate-900">{comp.ctcBand}</strong></span>
+                    <span>Min CGPA: <strong className="text-slate-900">{comp.cgpaCutoff}</strong></span>
                   </div>
 
                   {/* Missing tags preview */}
@@ -423,7 +420,7 @@ export default function OnCampusView({
                         );
                       })}
                       {comp.missingSkills.length > 2 && (
-                        <span className="text-[10px] text-slate-500 font-sans tracking-wide self-center">
+                        <span className="text-[10px] text-slate-400 self-center">
                           +{comp.missingSkills.length - 2} more
                         </span>
                       )}
@@ -438,20 +435,20 @@ export default function OnCampusView({
       </div>
 
       {/* Recruiter Placement History Leaderboard Table */}
-      <div className="space-y-4 pt-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="space-y-3 pt-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Layers className="w-5 h-5 text-brand-green" />
+            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 font-heading">
+              <Layers className="w-4 h-4 text-blue-600" />
               {selectedCollegeObj?.name || 'Campus'} · Historical Placement Records
             </h3>
-            <p className="text-xs text-slate-400 font-sans tracking-wide mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Verified campus hiring records and skill frequency demands
             </p>
           </div>
 
           <div className="relative w-full sm:w-64">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search recruiter, role, skill..."
@@ -463,38 +460,38 @@ export default function OnCampusView({
         </div>
 
         {/* Table */}
-        <div className="card-hr p-0 overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-lg shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-dark-850 border-b border-dark-700 text-[11px] font-sans tracking-wide uppercase text-slate-400">
-                  <th className="py-3 px-4">Recruiter & Role</th>
-                  <th className="py-3 px-4">CTC Band</th>
-                  <th className="py-3 px-4">CGPA Cutoff</th>
-                  <th className="py-3 px-4">Frequently Demanded Skills</th>
-                  <th className="py-3 px-4">Selection Rounds</th>
-                  <th className="py-3 px-4 text-right">Action</th>
+                <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-mono uppercase text-slate-600">
+                  <th className="py-2.5 px-4">Recruiter & Role</th>
+                  <th className="py-2.5 px-4">CTC Band</th>
+                  <th className="py-2.5 px-4">CGPA Cutoff</th>
+                  <th className="py-2.5 px-4">Demanded Skills</th>
+                  <th className="py-2.5 px-4">Selection Rounds</th>
+                  <th className="py-2.5 px-4 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-dark-700/60 text-xs">
+              <tbody className="divide-y divide-slate-100 text-xs">
                 {records.map(rec => (
-                  <tr key={rec.id} className="hover:bg-dark-750/50 transition-colors">
+                  <tr key={rec.id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <img src={rec.companyLogo} alt={rec.company} className="w-8 h-8 rounded-lg object-cover border border-dark-600" />
+                        <img src={rec.companyLogo} alt={rec.company} className="w-8 h-8 rounded object-cover border border-slate-200" />
                         <div>
-                          <p className="font-bold text-white text-sm">{rec.company}</p>
-                          <p className="text-[11px] text-slate-400 font-sans tracking-wide">{rec.role}</p>
-                          <span className="text-[10px] text-brand-green/80 font-sans tracking-wide">{rec.visitFrequency}</span>
+                          <p className="font-semibold text-slate-900 text-sm">{rec.company}</p>
+                          <p className="text-[11px] text-slate-500">{rec.role}</p>
+                          <span className="text-[10px] text-teal-700 font-mono">{rec.visitFrequency}</span>
                         </div>
                       </div>
                     </td>
 
-                    <td className="py-3 px-4 font-sans tracking-wide font-semibold text-brand-green">
+                    <td className="py-3 px-4 font-mono font-semibold text-teal-800">
                       {rec.ctcBand}
                     </td>
 
-                    <td className="py-3 px-4 font-sans tracking-wide text-slate-300">
+                    <td className="py-3 px-4 font-mono text-slate-700">
                       {rec.cgpaCutoff} CGPA
                     </td>
 
@@ -522,8 +519,8 @@ export default function OnCampusView({
                     <td className="py-3 px-4">
                       <div className="space-y-1">
                         {(rec.rounds || []).slice(0, 2).map((r, ri) => (
-                          <div key={ri} className="text-[11px] text-slate-300 font-sans tracking-wide">
-                            <span className="text-brand-green">R{ri+1}:</span> {typeof r === 'string' ? r : (r?.name || '')}
+                          <div key={ri} className="text-[11px] text-slate-600">
+                            <span className="text-blue-600 font-medium">R{ri+1}:</span> {typeof r === 'string' ? r : (r?.name || '')}
                           </div>
                         ))}
                       </div>

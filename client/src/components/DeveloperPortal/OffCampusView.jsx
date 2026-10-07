@@ -57,66 +57,64 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
     selectedDomain === 'all' || (j?.domain && j.domain.toLowerCase().includes(selectedDomain.toLowerCase()))
   );
 
-
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-4 animate-in fade-in">
       
       {/* Top Header Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-dark-800 border border-dark-700 p-5 rounded-xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-dark-700 border border-brand-cyan/30 flex items-center justify-center text-brand-cyan">
+          <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 flex-shrink-0">
             <Globe className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-white">Off-Campus Market Intelligence Hub</h2>
-            <p className="text-xs text-slate-400 font-sans tracking-wide">
+            <h2 className="text-xl font-bold text-slate-900 font-heading">Off-Campus Market Intelligence Hub</h2>
+            <p className="text-xs text-slate-500">
               Live aggregation across tech unicorns, tier-1 companies & startups
             </p>
           </div>
         </div>
 
-        <button onClick={onOpenResumeModal} className="btn-primary text-xs">
-          <Sparkles className="w-3.5 h-3.5" />
+        <button onClick={onOpenResumeModal} className="btn-secondary text-xs">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600" />
           Scan Resume vs Open Market
         </button>
       </div>
 
       {/* AI Bot Off-Campus Gap Report */}
       {analysisReport && (
-        <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-cyan/40 rounded-2xl p-6 shadow-glow-blue">
+        <div className="bg-white border border-slate-200 rounded-lg p-5 sm:p-6 shadow-sm">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
-            <div className="flex items-center gap-6">
-              <div className="relative flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-dark-900 border-4 border-dark-700 flex items-center justify-center">
+            <div className="flex items-center gap-5">
+              <div className="relative flex items-center justify-center flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-50 border-4 border-blue-200 flex items-center justify-center shadow-xs">
                   <div className="text-center">
-                    <span className="text-3xl font-extrabold font-sans tracking-wide text-brand-cyan leading-none">
+                    <span className="text-2xl font-bold font-mono text-blue-800 leading-none">
                       {analysisReport.overallReadinessScore}%
                     </span>
-                    <span className="text-[10px] font-sans tracking-wide text-slate-400 block mt-1">Market Fit</span>
+                    <span className="text-[10px] font-mono text-slate-500 block mt-0.5">Market Fit</span>
                   </div>
                 </div>
-                <div className="absolute inset-0 rounded-full border-2 border-brand-cyan animate-ping opacity-20"></div>
               </div>
 
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 text-[11px] font-sans tracking-wide px-2 py-0.5 rounded-full mb-1.5">
-                  <Sparkles className="w-3 h-3" />
-                  AI Bot #1 · Market Demand Analyzer
+                <div className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-800 border border-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-1">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                  Market Demand Analyzer
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">
+                <h3 className="text-lg font-bold text-slate-900 font-heading">
                   Open Market Tech Compatibility Verdict
                 </h3>
-                <p className="text-xs text-slate-300 max-w-xl leading-relaxed">
+                <p className="text-xs text-slate-600 max-w-xl leading-relaxed mt-0.5">
                   {analysisReport.summaryReport}
                 </p>
               </div>
             </div>
 
             {/* Top Market Gaps */}
-            <div className="bg-dark-900/80 border border-dark-700 p-4 rounded-xl max-w-md w-full">
-              <p className="text-[11px] font-sans tracking-wide text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                <Flame className="w-3.5 h-3.5 text-brand-amber" />
+            <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-lg max-w-md w-full">
+              <p className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1 font-medium">
+                <Flame className="w-3.5 h-3.5 text-amber-600" />
                 Highest ROI Skills in 2026 Tech Market:
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -125,7 +123,7 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
                   const gFreq = typeof gap === 'object' && gap?.marketDemandFrequency ? gap.marketDemandFrequency : 80;
                   return (
                     <span key={gIdx} className="badge-missing text-[11px]">
-                      <XCircle className="w-3 h-3" />
+                      <XCircle className="w-3 h-3 text-rose-600" />
                       {gName} ({gFreq}% demand)
                     </span>
                   );
@@ -137,50 +135,50 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
         </div>
       )}
 
-      {/* Suggested Companies to Target First (Ranked by Best Current Fit) */}
+      {/* Suggested Companies to Target First */}
       {analysisReport?.companyFitBreakdown && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Target className="w-5 h-5 text-brand-green" />
-              <h3 className="text-lg font-bold text-white">
+              <Target className="w-4 h-4 text-teal-700" />
+              <h3 className="text-base font-bold text-slate-900 font-heading">
                 Companies to Target First (Ranked by Highest Immediate Fit)
               </h3>
             </div>
-            <span className="text-xs font-sans tracking-wide text-slate-400">
+            <span className="text-xs text-slate-500 font-mono">
               Apply with highest conversion probability
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {analysisReport.companyFitBreakdown.slice(0, 4).map((comp, idx) => (
-              <div key={comp.companyId} className="card-hr-interactive p-4 relative flex flex-col justify-between">
-                <div className="absolute top-3 right-3 bg-brand-green/10 text-brand-green font-sans tracking-wide text-[10px] px-2 py-0.5 rounded-full border border-brand-green/30">
+              <div key={comp.companyId} className="bg-white border border-slate-200 rounded-lg p-3.5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all relative flex flex-col justify-between">
+                <div className="absolute top-3 right-3 bg-teal-50 text-teal-800 text-[10px] px-2 py-0.5 rounded font-mono border border-teal-200 font-semibold">
                   #{idx + 1} Best Fit
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <img src={comp.companyLogo} alt={comp.company} className="w-9 h-9 rounded-lg object-cover border border-dark-600" />
+                  <div className="flex items-center gap-2.5 mb-2.5">
+                    <img src={comp.companyLogo} alt={comp.company} className="w-8 h-8 rounded object-cover border border-slate-200" />
                     <div>
-                      <h4 className="font-bold text-white text-sm">{comp.company}</h4>
-                      <p className="text-[11px] text-slate-400 font-sans tracking-wide truncate max-w-[140px]">{comp.role}</p>
+                      <h4 className="font-semibold text-slate-900 text-sm">{comp.company}</h4>
+                      <p className="text-[11px] text-slate-500 truncate max-w-[130px]">{comp.role}</p>
                     </div>
                   </div>
 
-                  <div className="bg-dark-850 p-2 rounded-lg border border-dark-700 text-[11px] font-sans tracking-wide text-slate-300 mb-3 space-y-1">
+                  <div className="bg-slate-50 p-2 rounded border border-slate-200 text-[11px] font-mono text-slate-600 mb-2.5 space-y-0.5">
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Fit Score:</span>
-                      <strong className="text-brand-green">{comp.fitPercentage}%</strong>
+                      <span className="text-slate-400">Fit Score:</span>
+                      <strong className="text-teal-700">{comp.fitPercentage}%</strong>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">CTC:</span>
-                      <strong className="text-white">{comp.ctcBand}</strong>
+                      <span className="text-slate-400">CTC:</span>
+                      <strong className="text-slate-900">{comp.ctcBand}</strong>
                     </div>
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-[10px] font-sans tracking-wide text-slate-500 uppercase">Matched Core:</p>
+                    <p className="text-[10px] font-mono text-slate-400 uppercase">Matched Core:</p>
                     <div className="flex flex-wrap gap-1">
                       {comp.matchedSkills.slice(0, 2).map(ms => (
                         <span key={ms} className="badge-matched text-[10px]">
@@ -191,7 +189,7 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-dark-700">
+                <div className="mt-3 pt-2.5 border-t border-slate-100">
                   <button className="w-full btn-outline-green justify-center text-xs">
                     Apply on Careers Page
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -204,23 +202,23 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
       )}
 
       {/* Market Tech Demand Distribution & Active Job Board */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left Col: Aggregated Market Tech Demand */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-brand-purple" />
-            <h3 className="text-lg font-bold text-white">
+            <TrendingUp className="w-4 h-4 text-indigo-700" />
+            <h3 className="text-base font-bold text-slate-900 font-heading">
               Aggregate Skill Demand Curve
             </h3>
           </div>
 
-          <div className="card-hr space-y-3">
-            <p className="text-xs text-slate-400 font-sans tracking-wide">
-              Frequency of technical skill requirements across all analyzed off-campus listings
+          <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-xs space-y-3">
+            <p className="text-xs text-slate-500">
+              Frequency of technical skill requirements across analyzed listings
             </p>
 
-            <div className="space-y-3 pt-2">
+            <div className="space-y-2.5 pt-1">
               {(marketDemand || []).slice(0, 8).map((item, idx) => {
                 const itemName = typeof item === 'string' ? item : (item?.name || `Skill ${idx + 1}`);
                 const itemFreq = typeof item === 'object' ? (item?.demandFrequency || item?.frequency || 75) : 75;
@@ -229,16 +227,16 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
                 );
                 return (
                   <div key={idx} className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-sans tracking-wide">
-                      <span className={isStudentHave ? "text-brand-green font-semibold flex items-center gap-1" : "text-slate-300"}>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className={isStudentHave ? "text-teal-800 font-semibold flex items-center gap-1 font-mono" : "text-slate-700 font-mono"}>
                         {isStudentHave && "✓ "}
                         {itemName}
                       </span>
-                      <span className="text-slate-400">{itemFreq}%</span>
+                      <span className="text-slate-500 font-mono text-[11px]">{itemFreq}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-dark-700 rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${isStudentHave ? 'bg-brand-green' : 'bg-brand-purple'}`}
+                        className={`h-full rounded-full ${isStudentHave ? 'bg-teal-600' : 'bg-blue-600'}`}
                         style={{ width: `${itemFreq}%` }}
                       ></div>
                     </div>
@@ -250,17 +248,17 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
         </div>
 
         {/* Right 2 Cols: Live Job Postings */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-3">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-brand-cyan" />
-              <h3 className="text-lg font-bold text-white">
+              <Briefcase className="w-4 h-4 text-blue-600" />
+              <h3 className="text-base font-bold text-slate-900 font-heading">
                 Active Off-Campus Job Openings ({filteredJobs.length})
               </h3>
             </div>
 
             <div className="relative w-full sm:w-56">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
               <input
                 type="text"
                 placeholder="Filter by title, skill..."
@@ -271,37 +269,37 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {filteredJobs.map(job => (
-              <div key={job.id} className="card-hr hover:border-dark-600 transition-all p-4 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div key={job.id} className="bg-white border border-slate-200 rounded-lg hover:border-slate-300 transition-colors p-4 space-y-2.5 shadow-xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="flex items-center gap-3">
-                    <img src={job.companyLogo} alt={job.company} className="w-10 h-10 rounded-lg object-cover border border-dark-600" />
+                    <img src={job.companyLogo} alt={job.company} className="w-9 h-9 rounded object-cover border border-slate-200" />
                     <div>
-                      <h4 className="font-bold text-white text-base">{job.role}</h4>
-                      <div className="flex items-center gap-2 text-xs text-slate-400 font-sans tracking-wide">
-                        <span className="text-brand-cyan font-semibold">{job.company}</span>
+                      <h4 className="font-semibold text-slate-900 text-sm">{job.role}</h4>
+                      <div className="flex items-center gap-2 text-xs text-slate-500">
+                        <span className="text-blue-700 font-medium">{job.company}</span>
                         <span>•</span>
                         <span>{job.location}</span>
                         <span>•</span>
-                        <span className="text-slate-500">{job.postedDate}</span>
+                        <span className="text-slate-400 font-mono text-[11px]">{job.postedDate}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="text-right flex sm:flex-col items-center sm:items-end justify-between">
-                    <span className="font-sans tracking-wide text-sm font-bold text-brand-green">{job.ctcBand}</span>
-                    <span className="text-[10px] font-sans tracking-wide text-slate-400 bg-dark-750 px-2 py-0.5 rounded border border-dark-700">
+                    <span className="text-sm font-bold font-mono text-teal-800">{job.ctcBand}</span>
+                    <span className="text-[10px] font-mono text-slate-500 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
                       {job.experienceRequired}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
                   {job.description}
                 </p>
 
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-dark-700/80">
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
                   <div className="flex flex-wrap gap-1.5">
                     {(job?.requiredSkills || []).map((sk, skIdx) => {
                       const skName = typeof sk === 'string' ? sk : (sk?.name || `Skill ${skIdx + 1}`);
@@ -316,9 +314,9 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
 
                   <button
                     onClick={() => setSelectedJobDetail(job)}
-                    className="btn-outline-green text-xs py-1 px-3"
+                    className="btn-outline-green text-xs py-1 px-2.5 ml-auto"
                   >
-                    Quick Apply / Inspect Fit
+                    Inspect Fit & Apply
                     <ExternalLink className="w-3 h-3" />
                   </button>
                 </div>

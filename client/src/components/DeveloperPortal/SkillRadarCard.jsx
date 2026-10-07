@@ -7,8 +7,9 @@ import {
   PolarRadiusAxis, 
   ResponsiveContainer 
 } from 'recharts';
-import { Sparkles, PieChart } from 'lucide-react';
+import { PieChart } from 'lucide-react';
 import { SKILLS_TAXONOMY } from '../../data/skillsTaxonomy.js';
+
 export default function SkillRadarCard({ userSkills = [] }) {
   const normSkills = userSkills.map(s => s.toLowerCase());
 
@@ -45,13 +46,13 @@ export default function SkillRadarCard({ userSkills = [] }) {
   });
 
   return (
-    <div className="card-hr p-4 space-y-3 relative">
-      <div className="flex items-center justify-between border-b border-dark-700 pb-2.5">
+    <div className="bg-white border border-slate-200 rounded-lg p-4 space-y-3 relative shadow-xs">
+      <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
         <div className="flex items-center gap-2">
-          <PieChart className="w-4 h-4 text-brand-green" />
-          <h4 className="font-bold text-sm text-white">Skill Proficiency Radar</h4>
+          <PieChart className="w-4 h-4 text-teal-700" />
+          <h4 className="font-semibold text-sm text-slate-900 font-heading">Skill Proficiency Radar</h4>
         </div>
-        <span className="text-[10px] font-sans tracking-wide text-brand-green bg-brand-green/10 px-2 py-0.5 rounded border border-brand-green/30">
+        <span className="text-[10px] font-mono text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 font-medium">
           Domain Balance
         </span>
       </div>
@@ -59,30 +60,30 @@ export default function SkillRadarCard({ userSkills = [] }) {
       <div className="h-56 w-full flex items-center justify-center">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
-            <PolarGrid stroke="#1F293D" />
+            <PolarGrid stroke="#E2E8F0" />
             <PolarAngleAxis 
               dataKey="subject" 
-              tick={{ fill: '#94A3B8', fontSize: 10, fontFamily: 'monospace' }} 
+              tick={{ fill: '#475569', fontSize: 10, fontFamily: 'Figtree' }} 
             />
             <PolarRadiusAxis 
               angle={30} 
               domain={[0, 100]} 
-              tick={{ fill: '#64748B', fontSize: 8 }} 
+              tick={{ fill: '#94A3B8', fontSize: 8 }} 
             />
             <Radar
               name="My Profile"
               dataKey="Score"
-              stroke="#00EA64"
-              fill="#00EA64"
-              fillOpacity={0.25}
+              stroke="#0D9488"
+              fill="#0D9488"
+              fillOpacity={0.2}
             />
           </RadarChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="flex items-center justify-between text-[11px] font-sans tracking-wide text-slate-400 pt-1 border-t border-dark-700/80">
+      <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-200">
         <span>Active Matrix: 7 Domains</span>
-        <span className="text-slate-300">Target: High-Density Pentagon</span>
+        <span className="text-slate-700 font-medium">Target: Balanced Polygon</span>
       </div>
     </div>
   );

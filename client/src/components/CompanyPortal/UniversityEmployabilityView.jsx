@@ -69,61 +69,9 @@ const UNIVERSITIES_DATA = [
         fitScore: 92,
         matchedCount: 4,
         missingCount: 1,
-        matchedSkills: ['Distributed Systems', 'Go', 'Kubernetes', 'Linux Internals'],
-        missingSkills: ['Kafka'],
-        highlight: 'Published Raft-consensus simulator in Go',
-        day1Ready: true
-      }
-    ]
-  },
-  {
-    id: 'iiit-hyderabad',
-    name: 'International Institute of Information Technology (IIIT) Hyderabad',
-    shortName: 'IIIT Hyderabad',
-    location: 'Hyderabad, Telangana',
-    tier: 'Tier 1',
-    employabilityRate: 95.8,
-    hiringSuccessRate: 96.9,
-    medianPackage: '₹42.0 LPA',
-    totalGraduates: 420,
-    activeCandidatesCount: 96,
-    topDomains: ['Competitive Programming', 'Machine Learning', 'Computer Vision', 'Fullstack Architecture'],
-    verifiedSkills: ['Data Structures & Algorithms', 'Python', 'PyTorch', 'C++', 'React.js', 'System Design'],
-    topRecruiters: ['Microsoft', 'Adobe', 'Apple', 'Meta', 'Amazon'],
-    accreditation: 'World-renowned Coding Culture · ICPC World Finalists',
-    candidates: [
-      {
-        id: 'iiith-cand-1',
-        name: 'Kavya Sen',
-        headline: 'AI/ML Researcher & Backend Engineer',
-        email: 'kavya.sen@iiit.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
-        college: 'IIIT Hyderabad',
-        collegeTier: 'Tier 1',
-        cgpa: 9.4,
-        fitScore: 95,
-        matchedCount: 5,
-        missingCount: 0,
-        matchedSkills: ['Python', 'PyTorch', 'Distributed Systems', 'SQL', 'FastAPI'],
-        missingSkills: [],
-        highlight: 'ICPC Regional Top 10 · 2 Top-Tier Publications',
-        day1Ready: true
-      },
-      {
-        id: 'iiith-cand-2',
-        name: 'Tanmay Joshi',
-        headline: 'High-Concurrency Software Architect',
-        email: 'tanmay.j@iiit.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
-        college: 'IIIT Hyderabad',
-        collegeTier: 'Tier 1',
-        cgpa: 8.7,
-        fitScore: 90,
-        matchedCount: 4,
-        missingCount: 1,
-        matchedSkills: ['C++', 'Data Structures & Algorithms', 'PostgreSQL', 'Redis'],
-        missingSkills: ['Docker'],
-        highlight: 'Codeforces Master (2150+)',
+        matchedSkills: ['Data Structures & Algorithms', 'C++', 'PostgreSQL', 'Docker'],
+        missingSkills: ['Distributed Systems'],
+        highlight: 'Core maintainer of an Apache Kafka connector library',
         day1Ready: true
       }
     ]
@@ -134,48 +82,66 @@ const UNIVERSITIES_DATA = [
     shortName: 'BITS Pilani',
     location: 'Pilani, Rajasthan',
     tier: 'Tier 1',
-    employabilityRate: 94.6,
-    hiringSuccessRate: 95.2,
-    medianPackage: '₹38.5 LPA',
+    employabilityRate: 95.8,
+    hiringSuccessRate: 96.5,
+    medianPackage: '₹34.5 LPA',
     totalGraduates: 920,
     activeCandidatesCount: 118,
-    topDomains: ['Fullstack Web', 'Cloud Infrastructure', 'Fintech Systems', 'Product Engineering'],
-    verifiedSkills: ['React.js', 'TypeScript', 'Node.js', 'Go', 'AWS', 'PostgreSQL'],
-    topRecruiters: ['Google', 'De Shaw', 'Morgan Stanley', 'Swiggy', 'Zomato'],
-    accreditation: 'Institute of Eminence · Practice School Industry Network',
+    topDomains: ['Fullstack Web', 'Cloud Infrastructure', 'Fintech Systems', 'Machine Learning'],
+    verifiedSkills: ['React', 'Node.js', 'TypeScript', 'Kubernetes', 'AWS', 'Redis'],
+    topRecruiters: ['Amazon', 'D.E. Shaw', 'CRED', 'Flipkart', 'Salesforce'],
+    accreditation: 'NAAC A++ · Institution of Eminence',
     candidates: [
       {
         id: 'bits-cand-1',
         name: 'Ananya Singh',
-        headline: 'Full-Stack Engineer & Product Builder',
+        headline: 'Full-Stack Product Engineer · 2x Internship Veteran',
         email: 'ananya.s@bits-pilani.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
         college: 'BITS Pilani',
         collegeTier: 'Tier 1',
         cgpa: 9.1,
         fitScore: 94,
         matchedCount: 5,
         missingCount: 0,
-        matchedSkills: ['React.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker'],
+        matchedSkills: ['React', 'Node.js', 'TypeScript', 'AWS', 'Redis'],
         missingSkills: [],
-        highlight: 'Completed 6-Month Practice School at Tier-1 Unicorn',
+        highlight: 'Built real-time auction engine processing 10k req/s at previous internship',
         day1Ready: true
-      },
+      }
+    ]
+  },
+  {
+    id: 'iiit-hyderabad',
+    name: 'International Institute of Information Technology (IIIT) Hyderabad',
+    shortName: 'IIIT Hyderabad',
+    location: 'Hyderabad, Telangana',
+    tier: 'Tier 1',
+    employabilityRate: 98.1,
+    hiringSuccessRate: 99.0,
+    medianPackage: '₹42.0 LPA',
+    totalGraduates: 420,
+    activeCandidatesCount: 96,
+    topDomains: ['Computer Vision', 'Natural Language Processing', 'Advanced Algorithms', 'Robotics'],
+    verifiedSkills: ['Python', 'PyTorch', 'C++', 'Vector Databases', 'CUDA', 'FastAPI'],
+    topRecruiters: ['Meta', 'Apple', 'Google Research', 'Adobe', 'NVIDIA'],
+    accreditation: 'Premier Research Institute in AI & ML',
+    candidates: [
       {
-        id: 'bits-cand-2',
-        name: 'Devansh Roy',
-        headline: 'Cloud Backend & DevOps Engineer',
-        email: 'devansh.r@bits-pilani.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150',
-        college: 'BITS Pilani',
+        id: 'iiith-cand-1',
+        name: 'Kavya Raman',
+        headline: 'AI & LLM Research Engineer · CVPR 2025 Paper Author',
+        email: 'kavya.r@research.iiit.ac.in',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150',
+        college: 'IIIT Hyderabad',
         collegeTier: 'Tier 1',
-        cgpa: 8.6,
-        fitScore: 88,
-        matchedCount: 4,
-        missingCount: 1,
-        matchedSkills: ['Go', 'Docker', 'Kubernetes', 'PostgreSQL'],
-        missingSkills: ['Kafka'],
-        highlight: 'Certified Kubernetes Application Developer (CKAD)',
+        cgpa: 9.4,
+        fitScore: 97,
+        matchedCount: 5,
+        missingCount: 0,
+        matchedSkills: ['Python', 'PyTorch', 'Vector Databases', 'FastAPI', 'C++'],
+        missingSkills: [],
+        highlight: 'Created open-source quantized embedding model with 1.2M downloads',
         day1Ready: true
       }
     ]
@@ -187,173 +153,129 @@ const UNIVERSITIES_DATA = [
     location: 'Tiruchirappalli, Tamil Nadu',
     tier: 'Tier 1',
     employabilityRate: 92.4,
-    hiringSuccessRate: 93.8,
-    medianPackage: '₹32.0 LPA',
+    hiringSuccessRate: 94.2,
+    medianPackage: '₹28.0 LPA',
     totalGraduates: 780,
-    activeCandidatesCount: 134,
-    topDomains: ['Core Software Engineering', 'Embedded Systems', 'Database Engineering', 'Enterprise Java'],
-    verifiedSkills: ['Java', 'Spring Boot', 'Data Structures & Algorithms', 'SQL', 'Microservices'],
-    topRecruiters: ['Amazon', 'Oracle', 'Cisco', 'Qualcomm', 'Texas Instruments'],
-    accreditation: 'NIRF #1 among all NITs',
+    activeCandidatesCount: 88,
+    topDomains: ['Backend Systems', 'Embedded Tech', 'Data Engineering', 'DevOps'],
+    verifiedSkills: ['Java', 'Spring Boot', 'SQL', 'Kafka', 'Microservices', 'Linux'],
+    topRecruiters: ['Morgan Stanley', 'Oracle', 'Qualcomm', 'Texas Instruments'],
+    accreditation: 'NIRF Rank #1 among all NITs',
     candidates: [
       {
         id: 'nitt-cand-1',
-        name: 'Rahul Verma',
-        headline: 'Enterprise Backend & Microservices Engineer',
-        email: 'rahul.v@nitt.edu',
-        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150',
+        name: 'Rohan Mehta',
+        headline: 'Java & High-Throughput Microservices Specialist',
+        email: 'rohan.m@nitt.edu',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
         college: 'NIT Trichy',
         collegeTier: 'Tier 1',
-        cgpa: 8.8,
-        fitScore: 91,
+        cgpa: 8.7,
+        fitScore: 90,
         matchedCount: 4,
         missingCount: 1,
-        matchedSkills: ['Java', 'Spring Boot', 'SQL', 'Docker'],
-        missingSkills: ['Distributed Systems'],
-        highlight: 'Built fault-tolerant payment gateway pipeline',
+        matchedSkills: ['Java', 'Spring Boot', 'SQL', 'Microservices'],
+        missingSkills: ['Kafka'],
+        highlight: 'Ranked top 1% in Inter-NIT Competitive Coding Championship',
         day1Ready: true
       }
     ]
   },
   {
-    id: 'dtu',
+    id: 'dtu-delhi',
     name: 'Delhi Technological University (DTU)',
-    shortName: 'DTU Delhi',
-    location: 'New Delhi, Delhi',
+    shortName: 'DTU',
+    location: 'Delhi, NCR',
     tier: 'Tier 1.5',
-    employabilityRate: 89.8,
-    hiringSuccessRate: 91.2,
-    medianPackage: '₹26.5 LPA',
+    employabilityRate: 89.5,
+    hiringSuccessRate: 91.0,
+    medianPackage: '₹24.0 LPA',
     totalGraduates: 1100,
-    activeCandidatesCount: 160,
-    topDomains: ['Web Engineering', 'Android Development', 'Data Analytics', 'DevOps'],
-    verifiedSkills: ['React.js', 'Node.js', 'Python', 'SQL', 'Docker', 'Git'],
-    topRecruiters: ['Paytm', 'Samsung R&D', 'Adobe', 'Flipkart', 'MakeMyTrip'],
-    accreditation: 'Prestigious 80+ Year Engineering Legacy in NCR',
+    activeCandidatesCount: 104,
+    topDomains: ['Fullstack Web', 'Cloud Infrastructure', 'Fintech', 'Data Analytics'],
+    verifiedSkills: ['JavaScript', 'Python', 'React', 'MongoDB', 'AWS', 'Docker'],
+    topRecruiters: ['Paytm', 'Zomato', 'Microsoft', 'Adobe', 'American Express'],
+    accreditation: 'A++ NAAC · Top Technical State University',
     candidates: [
       {
         id: 'dtu-cand-1',
-        name: 'Priya Gupta',
-        headline: 'Full-Stack Developer · React & Node.js Specialist',
-        email: 'priya.g@dtu.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150',
-        college: 'DTU Delhi',
+        name: 'Tanvi Saxena',
+        headline: 'Cloud & DevOps Enthusiast · Certified AWS Solutions Architect',
+        email: 'tanvi.s@dtu.ac.in',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
+        college: 'DTU',
         collegeTier: 'Tier 1.5',
-        cgpa: 8.7,
-        fitScore: 89,
+        cgpa: 8.6,
+        fitScore: 88,
         matchedCount: 4,
         missingCount: 1,
-        matchedSkills: ['React.js', 'TypeScript', 'Node.js', 'SQL'],
-        missingSkills: ['Go'],
-        highlight: 'Lead Organizer at DTU Major League Hacking',
-        day1Ready: true
-      }
-    ]
-  },
-  {
-    id: 'rvce-bangalore',
-    name: 'RV College of Engineering (RVCE)',
-    shortName: 'RVCE Bengaluru',
-    location: 'Bengaluru, Karnataka',
-    tier: 'Tier 2',
-    employabilityRate: 87.5,
-    hiringSuccessRate: 89.0,
-    medianPackage: '₹22.5 LPA',
-    totalGraduates: 680,
-    activeCandidatesCount: 125,
-    topDomains: ['Bengaluru Startup Ecosystem', 'Cloud Engineering', 'Fullstack', 'QA Automation'],
-    verifiedSkills: ['Java', 'React.js', 'AWS', 'Python', 'PostgreSQL', 'Docker'],
-    topRecruiters: ['PhonePe', 'Cisco', 'Razorpay', 'JPMorgan', 'Intuit'],
-    accreditation: 'Direct Silicon Valley of India Startup Pipeline',
-    candidates: [
-      {
-        id: 'rvce-cand-1',
-        name: 'Siddharth Rao',
-        headline: 'Fullstack & Cloud Associate',
-        email: 'siddharth.r@rvce.edu.in',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
-        college: 'RVCE Bengaluru',
-        collegeTier: 'Tier 2',
-        cgpa: 8.5,
-        fitScore: 87,
-        matchedCount: 4,
-        missingCount: 1,
-        matchedSkills: ['React.js', 'Node.js', 'AWS', 'PostgreSQL'],
-        missingSkills: ['Distributed Systems'],
-        highlight: 'Interned at early-stage Bengaluru Y-Combinator startup',
+        matchedSkills: ['JavaScript', 'React', 'AWS', 'Docker'],
+        missingSkills: ['MongoDB'],
+        highlight: 'Maintains automated CI/CD infrastructure for DTU Technical Society',
         day1Ready: true
       }
     ]
   },
   {
     id: 'vit-vellore',
-    name: 'Vellore Institute of Technology (VIT)',
+    name: 'Vellore Institute of Technology (VIT) Vellore',
     shortName: 'VIT Vellore',
     location: 'Vellore, Tamil Nadu',
     tier: 'Tier 2',
-    employabilityRate: 85.2,
-    hiringSuccessRate: 86.8,
-    medianPackage: '₹19.5 LPA',
-    totalGraduates: 2400,
-    activeCandidatesCount: 210,
-    topDomains: ['Fullstack Web', 'Mobile App Development', 'Cybersecurity', 'Cloud Platforms'],
-    verifiedSkills: ['React.js', 'Java', 'Python', 'MongoDB', 'Docker', 'REST APIs'],
-    topRecruiters: ['Microsoft', 'Infosys Turbo', 'TCS Digital', 'Cognizant GenC Next', 'Dell'],
-    accreditation: 'High-Volume Pre-Screened Talent Engine',
+    employabilityRate: 86.2,
+    hiringSuccessRate: 88.5,
+    medianPackage: '₹18.5 LPA',
+    totalGraduates: 2200,
+    activeCandidatesCount: 156,
+    topDomains: ['Web Development', 'Mobile Apps (Flutter/React Native)', 'Quality Assurance', 'Cybersecurity'],
+    verifiedSkills: ['React', 'Python', 'MySQL', 'Flutter', 'Git', 'Linux'],
+    topRecruiters: ['Cognizant', 'TCS Digital', 'Wipro Turbo', 'Optum', 'Schneider Electric'],
+    accreditation: 'NIRF Rank #11 · Top Private University',
     candidates: [
       {
         id: 'vit-cand-1',
-        name: 'Meera Nair',
-        headline: 'Frontend Engineer & UI/UX Developer',
-        email: 'meera.n@vit.ac.in',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
+        name: 'Arjun Nambiar',
+        headline: 'Mobile & Frontend Developer · 4 Production Play Store Apps',
+        email: 'arjun.n@vitstudent.ac.in',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150',
         college: 'VIT Vellore',
         collegeTier: 'Tier 2',
-        cgpa: 8.6,
-        fitScore: 84,
-        matchedCount: 3,
-        missingCount: 2,
-        matchedSkills: ['React.js', 'TypeScript', 'Node.js'],
-        missingSkills: ['Go', 'Distributed Systems'],
-        highlight: 'Ranked in top 2% of VIT Hackathon 2025',
+        cgpa: 8.8,
+        fitScore: 85,
+        matchedCount: 4,
+        missingCount: 1,
+        matchedSkills: ['React', 'Python', 'Flutter', 'Git'],
+        missingSkills: ['MySQL'],
+        highlight: 'Built college shuttle tracker app with 15,000 active student users',
         day1Ready: false
       }
     ]
   }
 ];
 
-export default function UniversityEmployabilityView({ currentUser, onSelectCandidate, selectedRole }) {
+export default function UniversityEmployabilityView({ currentUser, onInspectCandidate }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTier, setSelectedTier] = useState('all');
   const [minRateFilter, setMinRateFilter] = useState(0);
-  const [selectedDomain, setSelectedDomain] = useState('all');
   const [sortBy, setSortBy] = useState('rate-desc');
-  const [selectedUniversityModal, setSelectedUniversityModal] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState('all');
+  const [expandedUniversityId, setExpandedUniversityId] = useState(null);
   const [invitedCandidateIds, setInvitedCandidateIds] = useState([]);
   const [batchDriveScheduled, setBatchDriveScheduled] = useState([]);
 
-  // Filter & sort logic
-  const filteredUniversities = UNIVERSITIES_DATA.filter(uni => {
-    // Search query
+  // Filtered dataset
+  const filteredUniversities = UNIVERSITIES_DATA.filter((uni) => {
+    if (selectedTier !== 'all' && uni.tier !== selectedTier) return false;
+    if (uni.employabilityRate < minRateFilter) return false;
+    if (selectedDomain !== 'all' && !uni.topDomains.some(d => d.toLowerCase().includes(selectedDomain.toLowerCase()))) {
+      return false;
+    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       const matchName = uni.name.toLowerCase().includes(q) || uni.shortName.toLowerCase().includes(q);
-      const matchLoc = uni.location.toLowerCase().includes(q);
+      const matchLocation = uni.location.toLowerCase().includes(q);
       const matchSkills = uni.verifiedSkills.some(s => s.toLowerCase().includes(q));
-      if (!matchName && !matchLoc && !matchSkills) return false;
-    }
-    // Tier filter
-    if (selectedTier !== 'all' && uni.tier !== selectedTier) {
-      return false;
-    }
-    // Min employability rate
-    if (uni.employabilityRate < minRateFilter) {
-      return false;
-    }
-    // Domain filter
-    if (selectedDomain !== 'all') {
-      const hasDomain = uni.topDomains.some(d => d.toLowerCase().includes(selectedDomain.toLowerCase()));
-      if (!hasDomain) return false;
+      if (!matchName && !matchLocation && !matchSkills) return false;
     }
     return true;
   }).sort((a, b) => {
@@ -393,65 +315,65 @@ export default function UniversityEmployabilityView({ currentUser, onSelectCandi
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-4 animate-in fade-in">
       
       {/* Overview Banner */}
-      <div className="bg-gradient-to-r from-dark-800 via-dark-850 to-dark-800 border-2 border-brand-green/40 rounded-2xl p-6 shadow-glow-green">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green border border-brand-green/30 text-[11px] px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-brand-green" />
-              University Talent Intelligence & Employability Probability
+      <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 shadow-xs">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-800 border border-teal-200 text-[11px] px-2.5 py-0.5 rounded font-mono font-semibold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+              Campus Talent Intelligence & Employability Probability
             </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">
-              Campus Employability & Better Candidates Dashboard
+            <h2 className="text-xl font-heading font-bold text-slate-900 tracking-tight">
+              University Employability & Day-1 Talent Radar
             </h2>
-            <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
-              Target engineering campuses with proven employability rates, benchmarked technical skill bars, and direct access to pre-vetted campus candidates matched to your roles.
+            <p className="text-xs text-slate-600 max-w-2xl font-sans leading-relaxed">
+              Target engineering campuses with proven employability rates, benchmarked technical skill bars, and direct access to pre-vetted campus candidates matched to your open roles.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-dark-900/90 border border-dark-700 p-3.5 rounded-xl w-full lg:w-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full lg:w-auto">
             <div className="text-center px-2">
-              <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Avg Employability</p>
-              <p className="text-2xl font-bold font-sans tracking-wide text-brand-green">{avgEmployabilityRate}%</p>
+              <p className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Avg Employability</p>
+              <p className="text-xl font-heading font-bold text-teal-700">{avgEmployabilityRate}%</p>
             </div>
-            <div className="text-center px-2 border-l border-dark-700">
-              <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Top Campus</p>
-              <p className="text-base font-bold font-sans tracking-wide text-white truncate max-w-[100px]">{topUni.shortName}</p>
+            <div className="text-center px-2 border-l border-slate-200">
+              <p className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Top Campus</p>
+              <p className="text-sm font-heading font-bold text-slate-900 truncate max-w-[90px]">{topUni.shortName}</p>
             </div>
-            <div className="text-center px-2 border-l border-dark-700">
-              <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Vetted Talent</p>
-              <p className="text-2xl font-bold font-sans tracking-wide text-brand-cyan">{totalCampusCandidates}+</p>
+            <div className="text-center px-2 border-l border-slate-200">
+              <p className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Vetted Talent</p>
+              <p className="text-xl font-heading font-bold text-blue-700">{totalCampusCandidates}+</p>
             </div>
-            <div className="text-center px-2 border-l border-dark-700">
-              <p className="text-[10px] font-sans tracking-wide text-slate-400 uppercase">Campuses</p>
-              <p className="text-2xl font-bold font-sans tracking-wide text-white">{totalUniversitiesCount}</p>
+            <div className="text-center px-2 border-l border-slate-200">
+              <p className="text-[10px] font-mono text-slate-500 uppercase font-semibold">Campuses</p>
+              <p className="text-xl font-heading font-bold text-slate-900">{totalUniversitiesCount}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Interactive Controls & Filters Bar */}
-      <div className="card-hr p-4 space-y-4">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      <div className="bg-white border border-slate-200 rounded-lg p-3.5 space-y-3 shadow-xs">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
           
           {/* Search Bar */}
           <div className="relative flex-grow">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search university name, city, or tech skills (e.g., IIT Delhi, Bengaluru, Go)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-dark-850 border border-dark-700 rounded-lg text-sm text-white placeholder-slate-400 focus:outline-none focus:border-brand-green transition-colors"
+              className="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600 transition-colors"
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-2.5 text-slate-400 hover:text-white"
+                className="absolute right-3 top-2 text-slate-400 hover:text-slate-700"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
@@ -460,46 +382,46 @@ export default function UniversityEmployabilityView({ currentUser, onSelectCandi
           <div className="flex flex-wrap items-center gap-2">
             
             {/* Tier Filter */}
-            <div className="flex items-center gap-1.5 bg-dark-850 border border-dark-700 rounded-lg px-2.5 py-1.5">
-              <Filter className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1">
+              <Filter className="w-3 h-3 text-slate-500" />
               <select
                 value={selectedTier}
                 onChange={(e) => setSelectedTier(e.target.value)}
-                className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer"
+                className="bg-transparent text-xs font-medium text-slate-700 focus:outline-none cursor-pointer"
               >
-                <option value="all" className="bg-dark-850 text-white">All Tiers</option>
-                <option value="Tier 1" className="bg-dark-850 text-white">Tier 1 Campuses</option>
-                <option value="Tier 1.5" className="bg-dark-850 text-white">Tier 1.5 Campuses</option>
-                <option value="Tier 2" className="bg-dark-850 text-white">Tier 2 Campuses</option>
+                <option value="all">All Tiers</option>
+                <option value="Tier 1">Tier 1 Campuses</option>
+                <option value="Tier 1.5">Tier 1.5 Campuses</option>
+                <option value="Tier 2">Tier 2 Campuses</option>
               </select>
             </div>
 
             {/* Employability Threshold Filter */}
-            <div className="flex items-center gap-1.5 bg-dark-850 border border-dark-700 rounded-lg px-2.5 py-1.5">
-              <TrendingUp className="w-3.5 h-3.5 text-brand-green" />
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1">
+              <TrendingUp className="w-3 h-3 text-teal-600" />
               <select
                 value={minRateFilter}
                 onChange={(e) => setMinRateFilter(Number(e.target.value))}
-                className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer"
+                className="bg-transparent text-xs font-medium text-slate-700 focus:outline-none cursor-pointer"
               >
-                <option value={0} className="bg-dark-850 text-white">All Rates</option>
-                <option value={85} className="bg-dark-850 text-white">&gt; 85% Employability</option>
-                <option value={90} className="bg-dark-850 text-white">&gt; 90% Employability</option>
-                <option value={95} className="bg-dark-850 text-white">&gt; 95% Top Tier</option>
+                <option value={0}>All Rates</option>
+                <option value={85}>&gt; 85% Employability</option>
+                <option value={90}>&gt; 90% Employability</option>
+                <option value={95}>&gt; 95% Top Tier</option>
               </select>
             </div>
 
             {/* Sort Order */}
-            <div className="flex items-center gap-1.5 bg-dark-850 border border-dark-700 rounded-lg px-2.5 py-1.5">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1">
+              <SlidersHorizontal className="w-3 h-3 text-slate-500" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer"
+                className="bg-transparent text-xs font-medium text-slate-700 focus:outline-none cursor-pointer"
               >
-                <option value="rate-desc" className="bg-dark-850 text-white">Sort: Highest Employability</option>
-                <option value="package-desc" className="bg-dark-850 text-white">Sort: Highest Median Package</option>
-                <option value="candidates-desc" className="bg-dark-850 text-white">Sort: Most Vetted Candidates</option>
+                <option value="rate-desc">Sort: Highest Employability</option>
+                <option value="package-desc">Sort: Highest Median Package</option>
+                <option value="candidates-desc">Sort: Most Vetted Candidates</option>
               </select>
             </div>
 
@@ -507,65 +429,63 @@ export default function UniversityEmployabilityView({ currentUser, onSelectCandi
         </div>
 
         {/* Quick Domain Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-dark-700/60 text-xs">
-          <span className="text-slate-400 font-medium">Domain Focus:</span>
+        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-200 text-xs">
+          <span className="text-slate-500 font-medium">Domain:</span>
           {[
             { id: 'all', label: 'All Specializations' },
             { id: 'Distributed Systems', label: 'Distributed Systems' },
             { id: 'AI & Machine Learning', label: 'AI & ML' },
             { id: 'Fullstack', label: 'Fullstack Web' },
-            { id: 'Cloud', label: 'Cloud Infrastructure' }
+            { id: 'Cloud', label: 'Cloud' }
           ].map(d => (
             <button
               key={d.id}
               onClick={() => setSelectedDomain(d.id)}
-              className={`px-2.5 py-1 rounded-md transition-colors ${
+              className={`px-2 py-0.5 rounded text-xs transition-colors ${
                 selectedDomain === d.id
-                  ? 'bg-brand-green text-dark-900 font-bold shadow-sm'
-                  : 'bg-dark-850 hover:bg-dark-700 text-slate-300 border border-dark-700'
+                  ? 'bg-blue-600 text-white font-medium shadow-2xs'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
               }`}
             >
               {d.label}
             </button>
           ))}
-          <span className="text-slate-500 ml-auto">
-            Showing <strong className="text-white">{filteredUniversities.length}</strong> of {UNIVERSITIES_DATA.length} universities
+          <span className="text-slate-500 ml-auto font-mono text-[11px]">
+            Showing <strong className="text-slate-900">{filteredUniversities.length}</strong> of {UNIVERSITIES_DATA.length} campuses
           </span>
         </div>
       </div>
 
       {/* Universities Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {filteredUniversities.map((uni) => {
           const isDriveScheduled = batchDriveScheduled.includes(uni.id);
 
           return (
             <div 
               key={uni.id}
-              className="card-hr hover:border-brand-green/60 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+              className="bg-white border border-slate-200 rounded-lg p-4 shadow-xs hover:border-blue-400 transition-all duration-200 flex flex-col justify-between group"
             >
               {/* Top Card Section */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 
                 {/* University Header & Employability Badge */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-dark-750 border border-brand-green/40 flex items-center justify-center text-brand-green shadow-sm flex-shrink-0 mt-0.5">
-                      <GraduationCap className="w-6 h-6 text-brand-green" />
+                    <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
+                      <GraduationCap className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-lg text-white group-hover:text-brand-green transition-colors leading-snug">
-                          {uni.name}
-                        </h3>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-slate-400 mt-1">
+                      <h3 className="font-heading font-semibold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                        {uni.name}
+                      </h3>
+                      <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                         <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                          <MapPin className="w-3 h-3 text-slate-400" />
                           {uni.location}
                         </span>
                         <span>•</span>
-                        <span className="px-2 py-0.5 rounded bg-dark-700 border border-dark-600 text-brand-cyan text-[11px] font-semibold">
+                        <span className="px-1.5 py-0.2 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[10px] font-mono font-medium">
                           {uni.tier}
                         </span>
                       </div>
@@ -573,329 +493,161 @@ export default function UniversityEmployabilityView({ currentUser, onSelectCandi
                   </div>
 
                   {/* Employability Probability Gauge */}
-                  <div className="text-right flex-shrink-0 bg-dark-850 border border-dark-700 rounded-xl px-3.5 py-2">
-                    <div className="flex items-center justify-end gap-1.5 text-brand-green">
-                      <TrendingUp className="w-4 h-4 text-brand-green" />
-                      <span className="text-xl font-bold font-sans tracking-wide text-brand-green">
-                        {uni.employabilityRate}%
-                      </span>
+                  <div className="text-right shrink-0 bg-teal-50 border border-teal-200 rounded-lg px-2.5 py-1.5">
+                    <div className="flex items-center justify-end gap-1 text-teal-700 font-heading font-bold text-lg">
+                      <TrendingUp className="w-3.5 h-3.5 text-teal-600" />
+                      {uni.employabilityRate}%
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
-                      Employability Rate
+                    <p className="text-[9px] font-mono text-teal-800 uppercase font-semibold">
+                      Employability
                     </p>
                   </div>
                 </div>
 
                 {/* Progress bar visual for employability rate */}
-                <div className="w-full bg-dark-700 h-2 rounded-full overflow-hidden">
+                <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-gradient-to-r from-brand-cyan to-brand-green rounded-full transition-all duration-500"
+                    className="h-full bg-teal-600 rounded-full transition-all duration-300"
                     style={{ width: `${uni.employabilityRate}%` }}
                   ></div>
                 </div>
 
                 {/* University Metrics Badges */}
-                <div className="grid grid-cols-3 gap-2 bg-dark-850 p-2.5 rounded-lg border border-dark-700 text-xs">
+                <div className="grid grid-cols-3 gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200 text-xs">
                   <div>
-                    <span className="text-[10px] text-slate-400 block uppercase">Median CTC</span>
-                    <span className="font-bold text-white font-sans">{uni.medianPackage}</span>
+                    <span className="text-[10px] font-mono text-slate-400 block uppercase font-medium">Median CTC</span>
+                    <strong className="text-slate-900 text-xs">{uni.medianPackage}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 block uppercase">Placement Fit</span>
-                    <span className="font-bold text-emerald-400 font-sans">{uni.hiringSuccessRate}%</span>
+                    <span className="text-[10px] font-mono text-slate-400 block uppercase font-medium">Placement Rate</span>
+                    <strong className="text-teal-700 text-xs">{uni.hiringSuccessRate}%</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 block uppercase">Vetted Talent Pool</span>
-                    <span className="font-bold text-brand-cyan font-sans">{uni.activeCandidatesCount} Available</span>
+                    <span className="text-[10px] font-mono text-slate-400 block uppercase font-medium">Active Talent</span>
+                    <strong className="text-blue-700 text-xs">{uni.activeCandidatesCount} Candidates</strong>
                   </div>
                 </div>
 
-                {/* Verified Skills */}
+                {/* Verified Skills Cloud */}
                 <div>
-                  <p className="text-[11px] font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
-                    Core Technical Strengths & Verified Skills:
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {uni.verifiedSkills.map(skill => (
-                      <span key={skill} className="badge-matched text-[10px]">
-                        ✓ {skill}
+                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block mb-1 font-semibold">
+                    Core Campus Skill Strengths:
+                  </span>
+                  <div className="flex flex-wrap gap-1">
+                    {uni.verifiedSkills.map((sk) => (
+                      <span key={sk} className="badge-matched text-[11px] py-0.5 px-2">
+                        {sk}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                {/* "Better Candidates for Company" Spotlight */}
-                <div className="border-t border-dark-700/80 pt-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                      <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                      Top Matched Candidates from {uni.shortName}:
-                    </span>
-                    <span className="text-[10px] text-brand-green font-semibold">
-                      {uni.candidates.length} Recommended
-                    </span>
-                  </div>
-
-                  <div className="space-y-2">
-                    {uni.candidates.map(cand => {
-                      const isInvited = invitedCandidateIds.includes(cand.id);
-
-                      return (
-                        <div 
-                          key={cand.id}
-                          className="bg-dark-850 border border-dark-700 hover:border-dark-600 rounded-xl p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-colors"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <img 
-                              src={cand.avatar} 
-                              alt={cand.name} 
-                              className="w-9 h-9 rounded-full object-cover border border-brand-green/40"
-                            />
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <span className="font-bold text-white text-xs">{cand.name}</span>
-                                <span className="bg-brand-green/10 text-brand-green text-[10px] font-bold px-1.5 py-0.5 rounded border border-brand-green/30">
-                                  {cand.fitScore}% Fit
-                                </span>
-                                {cand.day1Ready && (
-                                  <span className="bg-emerald-950/60 text-emerald-400 text-[9px] font-bold px-1 py-0.5 rounded">
-                                    Day-1 Ready
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">
-                                {cand.cgpa} CGPA • {cand.highlight}
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                            <button
-                              onClick={() => onSelectCandidate && onSelectCandidate(cand)}
-                              className="btn-outline-green text-[10px] py-1 px-2.5 flex items-center gap-1"
-                            >
-                              <Eye className="w-3 h-3" />
-                              View Profile
-                            </button>
-
-                            <button
-                              onClick={(e) => handleSendInterviewInvite(cand, e)}
-                              disabled={isInvited}
-                              className={`text-[10px] font-semibold py-1 px-2.5 rounded-lg flex items-center gap-1 transition-all ${
-                                isInvited
-                                  ? 'bg-emerald-900/60 text-emerald-300 border border-emerald-500/40 cursor-default'
-                                  : 'bg-brand-green hover:bg-brand-darkgreen text-dark-900 shadow-sm'
-                              }`}
-                            >
-                              {isInvited ? (
-                                <>
-                                  <CheckCircle2 className="w-3 h-3" /> Invited
-                                </>
-                              ) : (
-                                <>
-                                  <Send className="w-3 h-3" /> Invite
-                                </>
-                              )}
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                {/* Top Recruiters */}
+                <div className="text-xs text-slate-500 font-sans">
+                  <span className="font-medium text-slate-700">Frequent Day-1 Recruiters:</span>{' '}
+                  {uni.topRecruiters.join(', ')}
                 </div>
 
               </div>
 
-              {/* Bottom Card Actions */}
-              <div className="pt-4 mt-4 border-t border-dark-700/70 flex items-center justify-between gap-3">
+              {/* Bottom Card Actions & Candidate Preview Drawer */}
+              <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
                 <button
-                  onClick={() => setSelectedUniversityModal(uni)}
-                  className="text-xs text-brand-green hover:text-white font-semibold flex items-center gap-1.5 transition-colors"
+                  type="button"
+                  onClick={() => setExpandedUniversityId(expandedUniversityId === uni.id ? null : uni.id)}
+                  className="text-xs font-sans text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
                 >
-                  Inspect Campus Talent Pipeline <ArrowRight className="w-3.5 h-3.5" />
+                  <Users className="w-3.5 h-3.5" />
+                  {expandedUniversityId === uni.id 
+                    ? 'Hide Pre-Vetted Candidates' 
+                    : `View ${uni.candidates.length} Matched Candidates`}
                 </button>
 
-                <button
-                  onClick={(e) => handleScheduleDrive(uni.id, e)}
-                  disabled={isDriveScheduled}
-                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${
-                    isDriveScheduled
-                      ? 'bg-dark-700 text-slate-400 border border-dark-600 cursor-default'
-                      : 'btn-secondary text-xs'
-                  }`}
-                >
-                  {isDriveScheduled ? '✓ Campus Drive Requested' : 'Schedule Campus Hiring'}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={(e) => handleScheduleDrive(uni.id, e)}
+                    disabled={isDriveScheduled}
+                    className={`text-xs px-2.5 py-1 rounded-md font-medium transition-all ${
+                      isDriveScheduled
+                        ? 'bg-teal-50 text-teal-700 border border-teal-200'
+                        : 'btn-secondary py-1'
+                    }`}
+                  >
+                    {isDriveScheduled ? 'Drive Request Sent ✓' : 'Request Campus Drive'}
+                  </button>
+                </div>
               </div>
+
+              {/* Expanded Candidates Drawer */}
+              {expandedUniversityId === uni.id && (
+                <div className="mt-3 pt-3 border-t border-slate-200 space-y-2.5 animate-in fade-in">
+                  <span className="text-[10px] font-mono text-slate-500 uppercase font-semibold block">
+                    Pre-Vetted Day-1 Campus Candidates:
+                  </span>
+
+                  {uni.candidates.map((cand) => {
+                    const isInvited = invitedCandidateIds.includes(cand.id);
+
+                    return (
+                      <div 
+                        key={cand.id}
+                        className="p-3 rounded-lg bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <img 
+                            src={cand.avatar} 
+                            alt={cand.name}
+                            className="w-9 h-9 rounded-full object-cover border border-slate-200" 
+                          />
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <h5 className="font-heading font-semibold text-xs text-slate-900">{cand.name}</h5>
+                              <span className="text-[10px] font-mono px-1.5 rounded bg-teal-50 text-teal-700 border border-teal-200 font-semibold">
+                                {cand.fitScore}% Fit
+                              </span>
+                              {cand.day1Ready && (
+                                <span className="text-[10px] font-mono text-blue-700 bg-blue-50 px-1 rounded border border-blue-200">
+                                  Day-1 Ready
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-slate-500">{cand.headline}</p>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {cand.matchedSkills.slice(0, 3).map(s => (
+                                <span key={s} className="badge-matched text-[10px] py-0 px-1">
+                                  {s}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                          <button
+                            type="button"
+                            onClick={(e) => handleSendInterviewInvite(cand, e)}
+                            disabled={isInvited}
+                            className={`text-xs px-2.5 py-1 rounded font-medium transition-all ${
+                              isInvited
+                                ? 'bg-teal-50 text-teal-700 border border-teal-200'
+                                : 'btn-primary py-1'
+                            }`}
+                          >
+                            <Send className="w-3 h-3" />
+                            {isInvited ? 'Invite Sent ✓' : 'Send Invite'}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
             </div>
           );
         })}
       </div>
-
-      {filteredUniversities.length === 0 && (
-        <div className="card-hr p-12 text-center text-slate-400 space-y-3">
-          <GraduationCap className="w-10 h-10 mx-auto text-slate-500" />
-          <h3 className="text-base font-bold text-white">No Universities Match Your Filters</h3>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto">
-            Try adjusting your search keyword, lowering the minimum employability rate threshold, or selecting "All Tiers".
-          </p>
-          <button
-            onClick={() => {
-              setSearchQuery('');
-              setSelectedTier('all');
-              setMinRateFilter(0);
-              setSelectedDomain('all');
-            }}
-            className="btn-primary text-xs mx-auto mt-2"
-          >
-            Reset All Filters
-          </button>
-        </div>
-      )}
-
-      {/* University Drill-Down Modal */}
-      {selectedUniversityModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-dark-800 border border-dark-600 w-full max-w-3xl rounded-2xl p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            
-            <button 
-              onClick={() => setSelectedUniversityModal(null)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-dark-700 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-start gap-4 pb-4 border-b border-dark-700">
-              <div className="w-14 h-14 rounded-xl bg-dark-750 border border-brand-green/40 flex items-center justify-center text-brand-green">
-                <GraduationCap className="w-8 h-8" />
-              </div>
-              <div>
-                <span className="text-[11px] font-sans tracking-wide text-brand-cyan uppercase font-bold">
-                  {selectedUniversityModal.tier} • {selectedUniversityModal.accreditation}
-                </span>
-                <h3 className="text-2xl font-bold text-white mt-0.5">{selectedUniversityModal.name}</h3>
-                <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5" />
-                  {selectedUniversityModal.location} • {selectedUniversityModal.totalGraduates} Annual Tech Graduates
-                </p>
-              </div>
-            </div>
-
-            {/* In-Depth Analytics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5">
-              <div className="bg-dark-850 border border-dark-700 p-3 rounded-xl text-center">
-                <span className="text-[10px] text-slate-400 uppercase block font-semibold">Employability Rate</span>
-                <span className="text-2xl font-bold font-sans text-brand-green">{selectedUniversityModal.employabilityRate}%</span>
-              </div>
-              <div className="bg-dark-850 border border-dark-700 p-3 rounded-xl text-center">
-                <span className="text-[10px] text-slate-400 uppercase block font-semibold">Median Placement</span>
-                <span className="text-2xl font-bold font-sans text-white">{selectedUniversityModal.medianPackage}</span>
-              </div>
-              <div className="bg-dark-850 border border-dark-700 p-3 rounded-xl text-center">
-                <span className="text-[10px] text-slate-400 uppercase block font-semibold">Interview Clearance</span>
-                <span className="text-2xl font-bold font-sans text-emerald-400">{selectedUniversityModal.hiringSuccessRate}%</span>
-              </div>
-              <div className="bg-dark-850 border border-dark-700 p-3 rounded-xl text-center">
-                <span className="text-[10px] text-slate-400 uppercase block font-semibold">Day-1 Candidates</span>
-                <span className="text-2xl font-bold font-sans text-brand-cyan">{selectedUniversityModal.activeCandidatesCount}</span>
-              </div>
-            </div>
-
-            {/* Top Recruiters Already Hiring Here */}
-            <div className="mb-5">
-              <p className="text-xs font-bold text-slate-300 uppercase mb-2">Top Day-1 Recruiters at {selectedUniversityModal.shortName}:</p>
-              <div className="flex flex-wrap gap-2">
-                {selectedUniversityModal.topRecruiters.map(rec => (
-                  <span key={rec} className="px-3 py-1 rounded-lg bg-dark-850 border border-dark-700 text-xs font-semibold text-white">
-                    🏢 {rec}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Candidate Roster from this University */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-bold text-white text-sm">
-                  Available Pre-Screened Candidates ({selectedUniversityModal.candidates.length})
-                </h4>
-                <span className="text-xs text-slate-400">Directly matched to your company criteria</span>
-              </div>
-
-              <div className="space-y-3">
-                {selectedUniversityModal.candidates.map(cand => {
-                  const isInvited = invitedCandidateIds.includes(cand.id);
-
-                  return (
-                    <div 
-                      key={cand.id}
-                      className="bg-dark-850 border border-dark-700 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-                    >
-                      <div className="flex items-center gap-3">
-                        <img 
-                          src={cand.avatar} 
-                          alt={cand.name} 
-                          className="w-12 h-12 rounded-full object-cover border border-brand-green"
-                        />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-bold text-white text-sm">{cand.name}</span>
-                            <span className="bg-brand-green/10 text-brand-green text-xs font-bold px-2 py-0.5 rounded border border-brand-green/30">
-                              {cand.fitScore}% Fit
-                            </span>
-                          </div>
-                          <p className="text-xs text-slate-300 mt-0.5">{cand.headline}</p>
-                          <p className="text-[11px] text-slate-400 mt-1 font-mono">{cand.email} • {cand.cgpa} CGPA</p>
-                          
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {cand.matchedSkills.map(s => (
-                              <span key={s} className="badge-matched text-[9px]">✓ {s}</span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex sm:flex-col gap-2 w-full sm:w-auto">
-                        <button
-                          onClick={() => {
-                            setSelectedUniversityModal(null);
-                            if (onSelectCandidate) onSelectCandidate(cand);
-                          }}
-                          className="btn-outline-green text-xs py-1.5 px-3 flex-1 sm:flex-none justify-center"
-                        >
-                          Deep Dive
-                        </button>
-                        <button
-                          onClick={(e) => handleSendInterviewInvite(cand, e)}
-                          disabled={isInvited}
-                          className={`text-xs font-bold py-1.5 px-3 rounded-lg flex-1 sm:flex-none flex items-center justify-center gap-1.5 ${
-                            isInvited
-                              ? 'bg-emerald-900/60 text-emerald-300 border border-emerald-500/40 cursor-default'
-                              : 'btn-primary'
-                          }`}
-                        >
-                          {isInvited ? '✓ Invited' : 'Send Invite'}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-dark-700 flex justify-end gap-3">
-              <button
-                onClick={() => setSelectedUniversityModal(null)}
-                className="btn-secondary text-xs"
-              >
-                Close
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
 
     </div>
   );

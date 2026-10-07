@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingHero from './components/LandingHero';
+import LoginPage from './components/LoginPage';
 import DeveloperDashboard from './components/DeveloperPortal/DeveloperDashboard';
 import CompanyDashboard from './components/CompanyPortal/CompanyDashboard';
 import DeveloperOnboardingModal from './components/DeveloperPortal/DeveloperOnboardingModal';
@@ -59,6 +60,8 @@ export default function App() {
             const parsed = JSON.parse(saved);
             if (parsed.uid === user.uid) {
               setCurrentUser(parsed);
+              // Make sure we sync in background if role is already known
+              api.syncFirebaseUser(user, parsed.role, parsed).catch(console.error);
             } else {
               setCurrentUser(null);
             }
@@ -107,6 +110,11 @@ export default function App() {
 
     setCurrentUser(userObj);
 
+    // Sync to Firestore immediately upon role selection
+    if (auth.currentUser && auth.currentUser.uid === userData.uid) {
+      api.syncFirebaseUser(auth.currentUser, role, userObj).catch(console.error);
+    }
+
     // If developer, prompt onboarding classification modal
     if (role === 'developer') {
       setIsOnboardingOpen(true);
@@ -145,11 +153,11 @@ export default function App() {
   };
 
   if (authLoading) {
-    return <div className="min-h-screen bg-dark-900 flex items-center justify-center text-brand-green">Loading...</div>;
+    return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-blue-600 font-medium">Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-brand-green selection:text-black">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
       
       {/* Top Navigation Bar */}
       <Navbar
@@ -162,13 +170,26 @@ export default function App() {
       />
 
       {/* Main App Content View */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
         <Routes>
           <Route 
             path="/" 
             element={
               !currentUser ? (
                 <LandingHero
+                  onSelectRole={handleSelectRole}
+                />
+              ) : (
+                <Navigate to={`/${currentUser.role}`} replace />
+              )
+            } 
+          />
+
+          <Route 
+            path="/login" 
+            element={
+              !currentUser ? (
+                <LoginPage
                   onSelectRole={handleSelectRole}
                 />
               ) : (
