@@ -4,7 +4,7 @@ import {
   Target, Zap, Compass, ChevronDown, Map, Globe, 
   BarChart, Building2, UserCircle, Users,
   X, Mail, Send, Cpu, Crosshair, ArrowUpRight, FileEdit,
-  Search, Briefcase, CheckCircle2, FileText, Award, Code
+  Search, Briefcase, CheckCircle2, FileText, Award, Code, Sparkles
 } from 'lucide-react';
 
 export function CareerImpactBanner() {
