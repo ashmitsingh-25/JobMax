@@ -23,6 +23,7 @@ import {
   Square
 } from 'lucide-react';
 import { api } from '../../services/api';
+import { calculateOnCampusReport } from '../../services/placementEngine';
 import confetti from 'canvas-confetti';
 import CompanyDetailModal from './CompanyDetailModal';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../core/accordion';
@@ -48,7 +49,7 @@ export default function OnCampusView({
   const [records, setRecords] = useState([]);
   const [isLoadingRecords, setIsLoadingRecords] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [analysisReport, setAnalysisReport] = useState(null);
+  const [analysisReport, setAnalysisReport] = useState(() => calculateOnCampusReport(currentUser, selectedCollegeId));
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [selectedCompanyDetail, setSelectedCompanyDetail] = useState(null);
   
@@ -91,11 +92,14 @@ export default function OnCampusView({
     setIsAnalyzing(true);
     try {
       const res = await api.analyzeOnCampus(currentUser, selectedCollegeId);
-      if (res && res.success) {
+      if (res && res.success && res.report) {
         setAnalysisReport(res.report);
+      } else {
+        setAnalysisReport(calculateOnCampusReport(currentUser, selectedCollegeId));
       }
     } catch (err) {
       console.error("Analysis error:", err);
+      setAnalysisReport(calculateOnCampusReport(currentUser, selectedCollegeId));
     } finally {
       setIsAnalyzing(false);
     }

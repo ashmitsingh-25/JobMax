@@ -27,11 +27,11 @@ export default function ResumeUploadModal({ isOpen, onClose, onSkillsExtracted }
       if (activeMode === 'upload' && file) {
         const formData = new FormData();
         formData.append('resumeFile', file);
-        res = await api.uploadResume(formData);
+        res = await api.uploadResume(formData, { file });
       } else if (activeMode === 'paste' && pasteText.trim()) {
         const formData = new FormData();
         formData.append('resumeText', pasteText);
-        res = await api.uploadResume(formData);
+        res = await api.uploadResume(formData, { pasteText });
       } else {
         setErrorMessage('Please provide a resume file or paste your resume text.');
         setIsLoading(false);
