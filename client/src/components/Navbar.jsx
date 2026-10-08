@@ -49,17 +49,14 @@ export default function Navbar({
           <div className="flex items-center gap-5 sm:gap-6">
             <div 
               onClick={() => navigate('/')}
-              className="flex items-center gap-2.5 cursor-pointer group select-none"
+              className="flex items-center gap-2 cursor-pointer group select-none"
             >
-              <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-mono font-bold shadow-xs group-hover:bg-blue-700 transition-colors">
-                <Terminal className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-lg bg-white border border-blue-200 text-blue-600 flex items-center justify-center font-mono font-bold text-sm shadow-xs group-hover:border-blue-300 transition-colors">
+                &gt;_
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center">
                 <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors font-heading">
                   Job<span className="text-blue-600">Max</span>
-                </span>
-                <span className="text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">
-                  SaaS
                 </span>
               </div>
             </div>
@@ -213,10 +210,10 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={() => window.dispatchEvent(new CustomEvent('trigger-auth', { detail: { role: 'developer' } }))}
-                  className="btn-primary text-xs"
+                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors border border-slate-300 hover:border-slate-400 shadow-xs"
                 >
-                  <span>Sign In</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Login</span>
+                  <ArrowRight className="w-4 h-4 text-slate-400" />
                 </button>
               </div>
             )}

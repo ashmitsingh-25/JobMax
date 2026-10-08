@@ -3,6 +3,7 @@ import {
   Code, 
   Building2, 
   Sparkles, 
+  CheckCircle2,
   ArrowRight, 
   Zap, 
   Lock, 
@@ -26,7 +27,7 @@ import {
 
 export default function LandingHero({ onSelectRole }) {
   const [activeTab, setActiveTab] = useState('developer'); // 'developer' or 'company'
-  const [authMode, setAuthMode] = useState('select'); // 'select', 'login', 'signup'
+  const [authMode, setAuthMode] = useState('select'); // 'select', 'role-selection', 'login', 'signup'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedRoleForAuth, setSelectedRoleForAuth] = useState('developer');
@@ -43,7 +44,13 @@ export default function LandingHero({ onSelectRole }) {
     window.addEventListener('popstate', handlePopState);
     
     const handleTriggerAuth = (e) => {
-      handleStartAuth(e.detail?.role || 'developer');
+      const targetRole = e.detail?.role;
+      if (targetRole === 'role-selection') {
+        setAuthMode('role-selection');
+        window.history.pushState({ auth: true }, '');
+      } else {
+        handleStartAuth(targetRole || 'developer');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     window.addEventListener('trigger-auth', handleTriggerAuth);
@@ -138,156 +145,127 @@ export default function LandingHero({ onSelectRole }) {
 
   return (
     <>
-    <div className="relative overflow-hidden py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <div className="relative overflow-hidden pt-16 sm:pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      {/* Background Matrix & Subtle Dot Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-70 pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/3 right-10 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header Hero Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/90 px-3 py-0.5 rounded-md mb-3 shadow-xs">
+        <div className="text-center max-w-4xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/90 text-blue-600 px-4 py-1.5 rounded-full mb-8 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span className="font-mono text-xs text-blue-800 font-semibold tracking-wide">
-              INTELLIGENT SKILL-GAP & VERIFIED TALENT ENGINE
+            <span className="text-xs font-semibold tracking-wide uppercase text-blue-600">
+              INTELLIGENT SKILL-GAP ENGINE
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-3 max-w-3xl mx-auto leading-tight text-center font-heading">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-8 max-w-4xl mx-auto leading-[1.12] sm:leading-[1.15] text-center font-heading">
             Don't Just Hire Resumes. <br className="hidden sm:block" />
-            Hire <span className="text-blue-600">Verified Skills</span>.
+            Hire <span className="text-blue-600">Real Skills</span>.
           </h1>
 
-          <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4 font-normal">
-            JobMax connects high-growth companies with pre-verified developers through automated skill gap radar, real performance metrics, and multi-model machine learning analytics.
+          <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-12">
+            JobMax connects companies with talented professionals through performance-based hiring, real-world projects, and intelligent career matching.
           </p>
-
-          {/* Quick Stats Row */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-1.5 px-3.5 rounded-lg bg-white border border-slate-200 shadow-xs text-xs font-mono text-slate-600">
-            <span className="flex items-center gap-1.5"><strong className="text-slate-900 font-bold">26,000+</strong> Developers</span>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <span className="flex items-center gap-1.5"><strong className="text-teal-700 font-bold">94.2%</strong> Skill Accuracy</span>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <span className="flex items-center gap-1.5"><strong className="text-blue-700 font-bold">500+</strong> Tech Recruiters</span>
-          </div>
-        </div>
-
-        {/* 1-Click Fast Demo Profile Selector */}
-        <div className="text-center mb-6">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-lg shadow-xs text-xs font-mono text-slate-600">
-            <span className="flex items-center gap-1.5 text-slate-800 font-semibold mr-1">
-              <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-              1-Click Demo Profiles:
-            </span>
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('user-fresher-1')}
-              className="hover:text-blue-600 hover:bg-slate-50 px-2 py-0.5 rounded transition-colors text-slate-600"
-            >
-              🎓 Fresher (IIT Delhi)
-            </button>
-            <span className="text-slate-300">·</span>
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('user-fresher-2')}
-              className="hover:text-blue-600 hover:bg-slate-50 px-2 py-0.5 rounded transition-colors text-slate-600"
-            >
-              💼 Fresher (BITS Off-Campus)
-            </button>
-            <span className="text-slate-300">·</span>
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('user-exp-1')}
-              className="hover:text-blue-600 hover:bg-slate-50 px-2 py-0.5 rounded transition-colors text-slate-600"
-            >
-              🚀 SDE II (Swiggy 4 YoE)
-            </button>
-            <span className="text-slate-300">·</span>
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('user-company-1')}
-              className="hover:text-blue-700 hover:bg-blue-50 text-blue-600 font-semibold px-2 py-0.5 rounded transition-colors"
-            >
-              🏢 Recruiter (Microsoft)
-            </button>
-          </div>
         </div>
 
         {/* Auth Modal / Direct Role Selection View */}
         {authMode === 'select' ? (
           <div>
-            {/* Interactive Bento Role Card */}
+            {/* Interactive Role Selector */}
             <InView
               variants={{
-                hidden: { opacity: 0, y: 15 },
+                hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <div className="max-w-xl mx-auto bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-sm text-center relative z-10 mb-12">
-                <p className="text-xs text-slate-500 font-mono mb-5 uppercase tracking-wider font-semibold">
-                  SELECT YOUR WORKSPACE TO BEGIN
+              <div className="max-w-3xl mx-auto mb-16 animate-in fade-in zoom-in-95">
+                <p className="text-xs text-slate-400 mb-4 uppercase tracking-widest font-bold text-center">
+                  GET STARTED AS A...
                 </p>
                 
-                <div className="flex flex-col sm:flex-row items-center gap-3 justify-center mb-6">
-                  <button 
-                    type="button"
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {/* Developer Card */}
+                  <div 
                     onClick={() => setActiveTab('developer')}
-                    className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3 rounded-md text-sm font-semibold transition-all w-full sm:w-auto ${
-                      activeTab === 'developer' 
-                        ? 'bg-teal-50 text-teal-800 border-2 border-teal-600 shadow-xs' 
-                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                    className={`cursor-pointer transition-all duration-200 rounded-2xl p-6 border text-left relative overflow-hidden group ${
+                      activeTab === 'developer'
+                        ? 'border-blue-500 bg-blue-50/20 shadow-sm'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
                     }`}
                   >
-                    <span className="text-lg">👨‍💻</span> Developer & Candidate
-                  </button>
-                  
-                  <button 
-                    type="button"
+                    {activeTab === 'developer' && (
+                      <div className="absolute top-5 right-5 text-blue-600">
+                        <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
+                      </div>
+                    )}
+                    <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-colors ${
+                      activeTab === 'developer' ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-500 group-hover:text-slate-700'
+                    }`}>
+                      <Code className="w-5 h-5" />
+                    </div>
+                    <h3 className={`text-xl font-bold mb-1 transition-colors ${activeTab === 'developer' ? 'text-slate-900' : 'text-slate-800'}`}>
+                      Developer
+                    </h3>
+                    <p className="text-sm text-slate-500">
+                      Analyze skills and build your career path
+                    </p>
+                  </div>
+
+                  {/* Company Card */}
+                  <div 
                     onClick={() => setActiveTab('company')}
-                    className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3 rounded-md text-sm font-semibold transition-all w-full sm:w-auto ${
-                      activeTab === 'company' 
-                        ? 'bg-blue-50 text-blue-800 border-2 border-blue-600 shadow-xs' 
-                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                    className={`cursor-pointer transition-all duration-200 rounded-2xl p-6 border text-left relative overflow-hidden group ${
+                      activeTab === 'company'
+                        ? 'border-blue-500 bg-blue-50/20 shadow-sm'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
                     }`}
                   >
-                    <span className="text-lg">🏢</span> Company & Recruiter
-                  </button>
+                    {activeTab === 'company' && (
+                      <div className="absolute top-5 right-5 text-blue-600">
+                        <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
+                      </div>
+                    )}
+                    <div className={`w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-colors ${
+                      activeTab === 'company' ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-500 group-hover:text-slate-700'
+                    }`}>
+                      <Building2 className="w-5 h-5" />
+                    </div>
+                    <h3 className={`text-xl font-bold mb-1 transition-colors ${activeTab === 'company' ? 'text-slate-900' : 'text-slate-800'}`}>
+                      Company
+                    </h3>
+                    <p className="text-sm text-slate-400">
+                      Discover and evaluate top talent
+                    </p>
+                  </div>
                 </div>
 
-                {activeTab === 'developer' ? (
-                  <div>
-                    <p className="text-slate-600 text-sm mb-5 leading-relaxed">
-                      Benchmark your technical stack against real FAANG & Tier-1 bars, run automated gap analysis, and receive direct company proposals.
-                    </p>
-                    <button 
-                      type="button"
-                      onClick={() => handleStartAuth('developer')}
-                      className="w-full bg-teal-700 hover:bg-teal-800 text-white font-medium px-5 py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2 shadow-xs group"
-                    >
-                      <span>Access Developer Portal</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="text-slate-600 text-sm mb-5 leading-relaxed">
-                      Screen candidate skill gaps with ML models, compare on/off-campus batches, forecast salary expectations, and hire with confidence.
-                    </p>
-                    <button 
-                      type="button"
-                      onClick={() => handleStartAuth('company')}
-                      className="w-full btn-primary px-5 py-3 text-sm flex items-center justify-center gap-2 group"
-                    >
-                      <span>Access Recruiter Workspace</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-                  </div>
-                )}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-white border border-slate-200 rounded-2xl p-5 px-6 shadow-xs">
+                  <p className="text-slate-600 text-sm max-w-sm">
+                    {activeTab === 'developer' 
+                      ? "Analyze your skills, identify gaps, and build a focused career roadmap."
+                      : "Discover, compare, and evaluate talent using hiring intelligence."}
+                  </p>
+                  
+                  <button 
+                    onClick={() => handleStartAuth(activeTab)}
+                    className="flex-shrink-0 font-bold px-6 py-3 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2 group bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+                  >
+                    {activeTab === 'developer' ? 'Analyze My Skills' : 'Find Top Talent'} 
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
               </div>
             </InView>
 
-            {/* Hiring Partners Carousel */}
-            <div className="mt-10 text-center">
-              <p className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-5">
-                Engineers & Recruiters From Top Tech Companies
+            {/* Recruiters Carousel */}
+            <div className="mt-16 text-center">
+              <p className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-6">
+                Recruiters from top tech companies hire through our engine
               </p>
               <InView
                 variants={{
@@ -296,7 +274,7 @@ export default function LandingHero({ onSelectRole }) {
                 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
               >
-                <div className="py-4 px-6 rounded-lg bg-white border border-slate-200 shadow-xs max-w-4xl mx-auto">
+                <div className="py-4 px-6 rounded-xl bg-white border border-slate-200 shadow-xs max-w-4xl mx-auto">
                   <InfiniteSlider gap={56} speed={30}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-[24px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" className="h-[22px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
@@ -310,66 +288,109 @@ export default function LandingHero({ onSelectRole }) {
               </InView>
             </div>
           </div>
+        ) : authMode === 'role-selection' ? (
+          /* Role Selection Modal Screen */
+          <div className="max-w-md mx-auto bg-white border border-slate-200 rounded-2xl p-8 shadow-sm animate-in fade-in zoom-in-95 relative mt-8 mb-16">
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-2 font-heading">Choose your account</h2>
+            <p className="text-slate-500 text-center mb-8 text-sm">Select how you want to continue.</p>
+
+            <div className="flex flex-col gap-4">
+              <button 
+                onClick={() => handleStartAuth('developer')}
+                className="w-full bg-slate-50 border border-slate-200 hover:border-blue-500 hover:bg-blue-50/30 rounded-xl p-5 text-left transition-all group flex items-center justify-between shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-2.5 mb-1">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                      <Code className="w-4 h-4" />
+                    </div>
+                    <h3 className="text-slate-900 font-semibold text-base group-hover:text-blue-600 transition-colors">Developer</h3>
+                  </div>
+                  <p className="text-slate-500 text-sm pl-10.5">For students and professionals</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+              </button>
+
+              <button 
+                onClick={() => handleStartAuth('company')}
+                className="w-full bg-slate-50 border border-slate-200 hover:border-blue-500 hover:bg-blue-50/30 rounded-xl p-5 text-left transition-all group flex items-center justify-between shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-2.5 mb-1">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                      <Building2 className="w-4 h-4" />
+                    </div>
+                    <h3 className="text-slate-900 font-semibold text-base group-hover:text-blue-600 transition-colors">Company</h3>
+                  </div>
+                  <p className="text-slate-500 text-sm pl-10.5">For recruiters and hiring teams</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+              </button>
+            </div>
+
+            <button
+              onClick={() => setAuthMode('select')}
+              className="mt-6 w-full py-2.5 text-slate-500 hover:text-slate-800 transition-colors text-sm font-medium"
+            >
+              Cancel
+            </button>
+          </div>
         ) : (
-          /* Authentication Screen - Clean Light B2B */
-          <div className="max-w-md mx-auto bg-white border border-slate-200 rounded-lg p-6 sm:p-7 shadow-sm animate-in fade-in relative">
+          /* Authentication Screen */
+          <div className="max-w-md mx-auto bg-white border border-slate-200 rounded-2xl p-8 shadow-sm animate-in fade-in zoom-in-95 relative mt-6 mb-16">
             <button
               type="button"
               onClick={() => setAuthMode('select')}
-              className="absolute top-4 left-4 p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-md transition-colors flex items-center gap-1.5 text-xs font-medium"
+              className="absolute top-4 left-4 p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1 text-xs font-medium"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> Back
             </button>
             
-            <div className="text-center mb-5 mt-2">
-              <div className={`inline-flex items-center gap-2 px-2.5 py-0.5 rounded text-xs font-mono font-semibold mb-2 ${
-                selectedRoleForAuth === 'developer'
-                  ? 'bg-teal-50 border border-teal-200 text-teal-800'
-                  : 'bg-blue-50 border border-blue-200 text-blue-800'
-              }`}>
+            <div className="text-center mb-6 mt-3">
+              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-full text-xs font-semibold text-blue-700 mb-3">
                 {selectedRoleForAuth === 'developer' ? (
                   <>
-                    <Code className="w-3.5 h-3.5" />
-                    Developer Portal Access
+                    <Code className="w-3.5 h-3.5 text-blue-600" />
+                    Developer Portal
                   </>
                 ) : (
                   <>
-                    <Building2 className="w-3.5 h-3.5" />
-                    Company Workspace Access
+                    <Building2 className="w-3.5 h-3.5 text-blue-600" />
+                    Company Portal
                   </>
                 )}
               </div>
-              <h2 className="text-xl font-bold text-slate-900 font-heading">
+              <h2 className="text-2xl font-bold text-slate-900 font-heading">
                 {authMode === 'login' ? 'Welcome Back' : 'Create an Account'}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5 font-mono">
-                Single secure login with role-based dashboard access
+              <p className="text-xs text-slate-500 mt-1">
+                Single secure login with role-based access
               </p>
             </div>
 
             {/* Error Banner */}
             {authError && (
-              <div className="mb-4 p-2.5 rounded-md bg-rose-50 border border-rose-200 text-rose-800 text-xs">
+              <div className="mb-4 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs">
                 ⚠️ {authError}
               </div>
             )}
 
             {/* OAuth Quick Actions */}
-            <div className="grid grid-cols-2 gap-2.5 mb-4">
+            <div className="grid grid-cols-2 gap-3 mb-5">
               <button
                 onClick={() => handleOAuthLogin('GitHub')}
                 type="button"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+                className="flex items-center justify-center gap-2 border border-slate-200 rounded-xl py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
               >
-                <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <svg className="w-4 h-4 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 GitHub
               </button>
               <button
                 onClick={() => handleOAuthLogin('Google')}
                 type="button"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors shadow-xs"
+                className="flex items-center justify-center gap-2 border border-slate-200 rounded-xl py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -381,16 +402,16 @@ export default function LandingHero({ onSelectRole }) {
               </button>
             </div>
 
-            <div className="relative flex py-1 items-center mb-4">
+            <div className="relative flex py-2 items-center mb-5">
               <div className="flex-grow border-t border-slate-200"></div>
-              <span className="flex-shrink mx-3 text-[10px] text-slate-400 font-mono uppercase">or email credentials</span>
+              <span className="flex-shrink mx-3 text-[11px] text-slate-400 font-medium uppercase tracking-wider">or continue with email</span>
               <div className="flex-grow border-t border-slate-200"></div>
             </div>
 
             {/* Email Form */}
-            <form onSubmit={handleFormSubmit} className="space-y-3">
+            <form onSubmit={handleFormSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-mono text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   {selectedRoleForAuth === 'company' ? 'Work Email' : 'Email Address'}
                 </label>
                 <div className="relative">
@@ -407,7 +428,7 @@ export default function LandingHero({ onSelectRole }) {
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-slate-700 mb-1">Password</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Password</label>
                 <div className="relative">
                   <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   <input
@@ -424,17 +445,13 @@ export default function LandingHero({ onSelectRole }) {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full font-medium py-2.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2 text-white shadow-xs ${
-                  selectedRoleForAuth === 'developer' 
-                    ? 'bg-teal-700 hover:bg-teal-800' 
-                    : 'bg-blue-600 hover:bg-blue-700'
-                }`}
+                className="w-full font-bold py-3 rounded-xl text-sm transition-all flex items-center justify-center gap-2 mt-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
               >
                 <span>{loading ? 'Authenticating...' : 'Continue to Dashboard'}</span>
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
 
-              <div className="flex items-center justify-between text-xs text-slate-500 pt-2 font-mono">
+              <div className="flex items-center justify-between text-xs text-slate-500 pt-3">
                 <button
                   type="button"
                   onClick={() => setAuthMode('select')}
