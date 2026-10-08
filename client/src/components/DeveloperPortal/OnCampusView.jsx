@@ -420,11 +420,14 @@ export default function OnCampusView({
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Verified Strengths:
                 </span>
-                {analysisReport.matchedSkills.map((sk, sIdx) => (
-                  <span key={sIdx} className="badge-matched text-xs">
-                    ✓ {sk}
-                  </span>
-                ))}
+                {analysisReport.matchedSkills.map((sk, sIdx) => {
+                  const skName = typeof sk === 'string' ? sk : (sk?.name || '');
+                  return (
+                    <span key={sIdx} className="badge-matched text-xs">
+                      ✓ {skName}
+                    </span>
+                  );
+                })}
               </div>
             )}
 
@@ -699,11 +702,14 @@ export default function OnCampusView({
                     <div className="space-y-1">
                       {comp.matchedSkills && comp.matchedSkills.length > 0 && (
                         <div className="flex flex-wrap gap-1">
-                          {comp.matchedSkills.slice(0, 2).map((ms, msIdx) => (
-                            <span key={msIdx} className="badge-matched text-[9px]">
-                              ✓ {ms}
-                            </span>
-                          ))}
+                          {comp.matchedSkills.slice(0, 2).map((ms, msIdx) => {
+                            const msName = typeof ms === 'string' ? ms : (ms?.name || '');
+                            return (
+                              <span key={msIdx} className="badge-matched text-[9px]">
+                                ✓ {msName}
+                              </span>
+                            );
+                          })}
                         </div>
                       )}
 

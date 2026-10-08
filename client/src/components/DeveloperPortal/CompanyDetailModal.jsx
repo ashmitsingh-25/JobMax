@@ -98,11 +98,14 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {matchedList.length > 0 ? (
-                  matchedList.map((m, idx) => (
-                    <span key={idx} className="badge-matched text-[11px]">
-                      ✓ {m?.name || m}
-                    </span>
-                  ))
+                  matchedList.map((m, idx) => {
+                    const mName = typeof m === 'string' ? m : (m?.name || '');
+                    return (
+                      <span key={idx} className="badge-matched text-[11px]">
+                        ✓ {mName}
+                      </span>
+                    );
+                  })
                 ) : (
                   <span className="text-xs text-slate-400 font-sans tracking-wide">No direct matches yet</span>
                 )}
@@ -117,11 +120,14 @@ export default function CompanyDetailModal({ isOpen, onClose, companyRecord, cur
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {missingList.length > 0 ? (
-                  missingList.map((m, idx) => (
-                    <span key={idx} className="badge-missing text-[11px]">
-                      ✗ {m?.name || m} ({m?.frequency || 80}%)
-                    </span>
-                  ))
+                  missingList.map((m, idx) => {
+                    const mName = typeof m === 'string' ? m : (m?.name || '');
+                    return (
+                      <span key={idx} className="badge-missing text-[11px]">
+                        ✗ {mName} ({m?.frequency || 80}%)
+                      </span>
+                    );
+                  })
                 ) : (
                   <span className="text-xs text-teal-700 font-sans tracking-wide font-medium">Ready to clear all rounds!</span>
                 )}
