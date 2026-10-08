@@ -34,6 +34,7 @@ export default function LandingHero({ onSelectRole }) {
   const [activeModal, setActiveModal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -263,26 +264,46 @@ export default function LandingHero({ onSelectRole }) {
             </InView>
 
             {/* Recruiters Carousel */}
-            <div className="mt-16 text-center">
-              <p className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-6">
-                Recruiters from top tech companies hire through our engine
+            <div className="mt-14 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-8">
+                RECRUITERS FROM TOP TECH COMPANIES HIRE THROUGH OUR ENGINE
               </p>
               <InView
                 variants={{
                   hidden: { opacity: 0, y: 10 },
                   visible: { opacity: 1, y: 0 },
                 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               >
-                <div className="py-4 px-6 rounded-xl bg-white border border-slate-200 shadow-xs max-w-4xl mx-auto">
-                  <InfiniteSlider gap={56} speed={30}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-[24px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" className="h-[22px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-[22px] w-auto object-contain mt-1 opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" className="h-[20px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" className="h-[20px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/atlassian/0052CC" alt="Atlassian" className="h-[20px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-[24px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                <div className="relative group cursor-pointer max-w-5xl mx-auto" onMouseLeave={() => setSelectedCompany(null)}>
+                  <InfiniteSlider gap={48} speed={30}>
+                    {[
+                      { name: 'Google', src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', className: 'h-[30px]' },
+                      { name: 'Microsoft', src: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg', className: 'h-[28px]' },
+                      { name: 'Amazon', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', className: 'h-[28px] mt-2' },
+                      { name: 'Netflix', src: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', className: 'h-[26px]' },
+                      { name: 'Meta', src: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg', className: 'h-[24px]' },
+                      { name: 'Atlassian', src: 'https://cdn.simpleicons.org/atlassian/0052CC', className: 'h-[26px]' },
+                      { name: 'Stripe', src: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg', className: 'h-[30px]' }
+                    ].map((company) => (
+                      <div 
+                        key={company.name}
+                        onClick={() => setSelectedCompany(company.name)}
+                        className={`transition-all duration-300 ease-out flex items-center justify-center p-2 rounded-xl ${
+                          selectedCompany === company.name 
+                            ? 'scale-125 z-20' 
+                            : selectedCompany 
+                              ? 'opacity-20 scale-90 blur-[1px]' 
+                              : 'opacity-100 hover:scale-110'
+                        }`}
+                      >
+                        <img 
+                          src={company.src} 
+                          alt={company.name} 
+                          className={`${company.className} w-auto object-contain transition-all duration-300 drop-shadow-sm`} 
+                        />
+                      </div>
+                    ))}
                   </InfiniteSlider>
                 </div>
               </InView>

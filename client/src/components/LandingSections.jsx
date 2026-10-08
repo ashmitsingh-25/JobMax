@@ -17,7 +17,7 @@ export function CareerImpactBanner() {
         }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm overflow-hidden relative flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-white border-2 border-blue-200/80 rounded-3xl p-6 md:p-8 shadow-sm overflow-hidden relative flex flex-col md:flex-row items-center justify-between gap-8">
           
           <div className="absolute top-0 right-0 w-80 h-80 bg-blue-50/50 rounded-full blur-3xl pointer-events-none"></div>
 
