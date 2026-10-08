@@ -1,9 +1,9 @@
-// Base URL: use relative /api which Vite proxies to backend, with fallback
 import { ecosystemApi } from './mockEcosystem';
 import { db } from '../firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { calculateOnCampusReport, FULL_PLACEMENT_RECORDS } from './placementEngine';
-import { parseResumePayload } from './resumeParser';
+import { calculatePlacementReadiness, extractSkillsFromTextClient } from './predictionEngine.js';
+import { parseResumePayload } from './resumeParser.js';
+
 const getBaseUrl = () => {
   try {
     const custom = typeof window !== "undefined" ? localStorage.getItem('jobmax_backend_url') : null;
@@ -207,9 +207,9 @@ export const FALLBACK_COLLEGES = [
   { id: "other", name: "All India / Custom College Pool", location: "National", tier: "General" }
 ];
 
-export const FALLBACK_PLACEMENT_RECORDS = FULL_PLACEMENT_RECORDS;
+export { FALLBACK_PLACEMENT_RECORDS } from './predictionEngine.js';
 
-export const FALLBACK_ONCAMPUS_REPORT = calculateOnCampusReport(FALLBACK_DEMO_USERS[0], "iit-delhi");
+export const FALLBACK_ONCAMPUS_REPORT = calculatePlacementReadiness(FALLBACK_DEMO_USERS[0], { collegeId: "iit-delhi" });
 
 
 export const api = {
@@ -504,56 +504,47 @@ export const api = {
         }
       }
     } catch (e) {
-      console.warn("uploadResume fallback to client engine:", e);
+      console.warn("uploadResume network error, extracting client-side:", e);
     }
+    
+    // Client-side extraction fallback supporting both text and uploaded file payload
     return await parseResumePayload(formData, context);
   },
 
-  analyzeOnCampus: async (studentProfile, collegeId) => {
+  analyzeOnCampus: async (studentProfile, collegeId = "iit-delhi", targetRole = null) => {
     try {
       const res = await fetch(buildUrl("/developer/analyze-oncampus"), {
         method: "POST",
         headers: getAuthHeaders({ "Content-Type": "application/json", 'x-user-role': studentProfile?.role || 'developer' }),
-        body: JSON.stringify({ studentProfile, collegeId })
+        body: JSON.stringify({ studentProfile, collegeId, targetRole })
       });
       if (res.ok) {
         const data = await res.json();
         if (data && data.report) return data;
       }
     } catch (e) {
-      console.warn("analyzeOnCampus fallback to client engine:", e);
+      console.warn("analyzeOnCampus network error, computing dynamic report locally:", e);
     }
     return {
       success: true,
-      report: calculateOnCampusReport(studentProfile, collegeId)
+      report: calculatePlacementReadiness(studentProfile, { collegeId, targetType: "on-campus", targetRole })
     };
   },
 
-  analyzeOffCampus: async (studentProfile) => {
+  analyzeOffCampus: async (studentProfile, targetRole = null) => {
     try {
       const res = await fetch(buildUrl("/developer/analyze-offcampus"), {
         method: "POST",
         headers: getAuthHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ studentProfile })
+        body: JSON.stringify({ studentProfile, targetRole })
       });
       if (res.ok) return await res.json();
     } catch (e) {
-      console.warn("analyzeOffCampus fallback:", e);
+      console.warn("analyzeOffCampus network error, computing dynamic report locally:", e);
     }
     return {
       success: true,
-      report: {
-        marketFitPercentage: 74,
-        marketVerdict: "Competitive in 74% of entry SDE openings",
-        criticalMarketGaps: [
-          { name: "Docker & Containerization", marketDemandFrequency: 82 },
-          { name: "System Design Fundamentals", marketDemandFrequency: 75 }
-        ],
-        companiesToTargetFirst: [
-          { company: "Razorpay", fit: 84, ctc: "₹18 - 26 LPA" },
-          { company: "Zepto", fit: 76, ctc: "₹24 - 34 LPA" }
-        ]
-      }
+      report: calculatePlacementReadiness(studentProfile, { targetType: "off-campus", targetRole })
     };
   },
 

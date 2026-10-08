@@ -1,6 +1,4 @@
-import { HISTORICAL_PLACEMENT_RECORDS } from "../data/placementRecords.js";
-import { OFF_CAMPUS_JOB_POSTINGS } from "../data/jobPostings.js";
-import { SKILLS_TAXONOMY, ALL_SKILLS_FLAT } from "../data/skillsTaxonomy.js";
+import { SKILLS_TAXONOMY, ALL_SKILLS_FLAT } from '../data/skillsTaxonomy.js';
 
 /**
  * Curated knowledge base for skill roadmap generation
@@ -126,21 +124,6 @@ const SKILL_ROADMAP_KNOWLEDGE = {
       { name: "LeetCode Database Questions", url: "https://leetcode.com/problemset/database/" }
     ]
   },
-  "SQL Query Optimization": {
-    theme: "SQL Query Tuning, Indexing & Database Performance",
-    why: "Highly demanded by FinTech and high-scale companies like Goldman Sachs, Razorpay, and Stripe.",
-    focus: ["Index selection: Clustered vs Non-Clustered & Covering Indexes", "Execution plan analysis using EXPLAIN / EXPLAIN ANALYZE", "Partitioning strategies (Range, Hash, List)", "Connection pooling and connection starvation avoidance"],
-    outcome: "Diagnose database query bottlenecks and implement 10x latency reductions using indexes and caching.",
-    deliverables: [
-      "Analyze and optimize 5 query execution plans on PostgreSQL / MySQL",
-      "Benchmark response time improvements with indexed vs unindexed filters",
-      "Document indexing best practices cheatsheet"
-    ],
-    resources: [
-      { name: "PostgreSQL Documentation on Performance", url: "https://www.postgresql.org/docs/current/performance-tips.html" },
-      { name: "High Performance MySQL Reference", url: "https://www.oreilly.com/library/view/high-performance-mysql/9781492080503/" }
-    ]
-  },
   "Object-Oriented Programming": {
     theme: "Object-Oriented Design & Clean Architecture Patterns",
     why: "Tested rigorously in Microsoft, Amazon, and Cisco technical and LLD interview rounds.",
@@ -155,173 +138,15 @@ const SKILL_ROADMAP_KNOWLEDGE = {
       { name: "Refactoring Guru - Design Patterns", url: "https://refactoring.guru/design-patterns" },
       { name: "Head First Design Patterns Summary", url: "https://github.com/bethrobson/Head-First-Design-Patterns" }
     ]
-  },
-  "Computer Networks": {
-    theme: "Computer Networks & Web Protocol Internals",
-    why: "Fundamental knowledge required by distributed systems teams, cloud providers, and networking companies like Cisco.",
-    focus: ["OSI 7-Layer Model & TCP/IP stack", "TCP 3-Way Handshake, Flow Control & Congestion Control", "HTTP/1.1 vs HTTP/2 vs HTTP/3 & WebSocket mechanics", "DNS Resolution flow, TLS/SSL handshake & Subnetting basics"],
-    outcome: "Articulate network latency bottlenecks, packet lifecycle, and socket connections with technical rigor.",
-    deliverables: [
-      "Build a simple multithreaded socket chat server in C++/Go/Python",
-      "Inspect live HTTP/2 and TLS traffic packets using Wireshark / DevTools",
-      "Complete mock interview on 'What happens when you type a URL in your browser?'"
-    ],
-    resources: [
-      { name: "Computer Networking: A Top-Down Approach", url: "https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm" },
-      { name: "Julia Evans Networking Zines", url: "https://jvns.ca/" }
-    ]
-  },
-  "Docker & Containerization": {
-    theme: "Containerization, Docker & Environment Reproducibility",
-    why: "Industry standard for packaging modern cloud services and microservices.",
-    focus: ["Docker daemon, containers vs virtual machines", "Multi-stage Dockerfiles for minimal production images", "Docker Compose for multi-container local microservices", "Container networking, bind mounts & persistent volumes"],
-    outcome: "Containerize any full-stack application and run reliable multi-service stacks with single-command setup.",
-    deliverables: [
-      "Write multi-stage Dockerfile reducing image size by >60%",
-      "Compose stack with App, PostgreSQL database, and Redis cache",
-      "Publish verified container image to Docker Hub with GitHub Actions CI"
-    ],
-    resources: [
-      { name: "Docker Official Get Started Tutorial", url: "https://docs.docker.com/get-started/" },
-      { name: "Docker Best Practices Guide", url: "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" }
-    ]
-  },
-  "Microservices Architecture": {
-    theme: "Microservices Architecture & Event-Driven Systems",
-    why: "Top demanded competency for tier-1 tech products (Swiggy, Zomato, Uber, Zepto).",
-    focus: ["Monolith to Microservices decomposition patterns", "API Gateway, Service Discovery & Circuit Breakers", "Inter-service communication: synchronous REST/gRPC vs asynchronous messaging", "Distributed transactions: Saga Pattern vs Two-Phase Commit"],
-    outcome: "Design resilient microservices architectures with decoupled communications and zero single points of failure.",
-    deliverables: [
-      "Implement two interacting services using Redis Queue or Kafka events",
-      "Add Circuit Breaker pattern with fallback responses",
-      "Draft complete architecture RFC document with trade-offs"
-    ],
-    resources: [
-      { name: "Microservices.io Patterns Catalog", url: "https://microservices.io/" },
-      { name: "Building Microservices by Sam Newman", url: "https://samnewman.io/books/building_microservices/" }
-    ]
   }
 };
 
 /**
- * Generate a dynamic fallback roadmap topic for any skill in the taxonomy
- */
-function getSkillRoadmapDetails(skillName, recruiterCount, topCompanies) {
-  if (SKILL_ROADMAP_KNOWLEDGE[skillName]) {
-    return SKILL_ROADMAP_KNOWLEDGE[skillName];
-  }
-
-  // Find category from taxonomy if available
-  const match = ALL_SKILLS_FLAT.find(s => s.name.toLowerCase() === skillName.toLowerCase());
-  const category = match ? match.category : "Technical Proficiency";
-
-  const companyListStr = topCompanies.length > 0 ? topCompanies.slice(0, 2).join(" and ") : "Tier-1 Tech Recruiters";
-
-  return {
-    theme: `${skillName} Mastery & Practical Application`,
-    why: `Demanded by ${recruiterCount > 0 ? recruiterCount + ' target recruiter placements' : 'key industry roles'} including ${companyListStr} to evaluate technical depth in ${category}.`,
-    focus: [
-      `Core fundamentals, syntax patterns, and best practices in ${skillName}`,
-      `Practical hands-on implementation & debugging edge cases`,
-      `Integration with backend services and production architectures`,
-      `Performance benchmarking and architectural trade-offs`
-    ],
-    outcome: `Demonstrate verified proficiency in ${skillName} through working project deliverables and interview discussions.`,
-    deliverables: [
-      `Build and commit a functional feature module utilizing ${skillName}`,
-      `Write unit tests covering edge cases for ${skillName} integrations`,
-      `Review top 25 high-frequency technical interview questions on ${skillName}`
-    ],
-    resources: [
-      { name: `${skillName} Official Documentation`, url: "https://developer.mozilla.org" },
-      { name: "HackerRank Technical Preparation Kit", url: "https://www.hackerrank.com/interview/interview-preparation-kit" }
-    ]
-  };
-}
-
-/**
- * AI Bot #1: Placement Readiness Analyzer
- * Performs weighted cross-referencing between student skills/profile and recruiter/market demand.
- * Guaranteed 100% dynamic, explainable, and grounded in real candidate and company data.
- */
-export function analyzePlacementReadiness(studentProfile, options = {}) {
-  const {
-    collegeId = "iit-delhi",
-    targetType = "on-campus", // "on-campus" or "off-campus"
-    targetRole = null
-  } = options;
-
-  // 1. Normalize student skills safely
-  const rawSkills = studentProfile.skills || [];
-  const studentSkills = new Set(
-    rawSkills.map(s => (typeof s === "string" ? s : s?.name || "").toLowerCase().trim()).filter(Boolean)
-  );
-
-  // 2. Select benchmark recruiter pool
-  let recruiterPool = [];
-  if (targetType === "on-campus") {
-    recruiterPool = HISTORICAL_PLACEMENT_RECORDS.filter(
-      r => r.collegeId === collegeId || collegeId === "other"
-    );
-    if (recruiterPool.length === 0) {
-      recruiterPool = HISTORICAL_PLACEMENT_RECORDS;
-    }
-  } else {
-    // Off-campus aggregate from real job postings
-    recruiterPool = OFF_CAMPUS_JOB_POSTINGS.map(job => ({
-      id: job.id,
-      company: job.company,
-      companyLogo: job.companyLogo,
-      role: job.role,
-      ctcBand: job.ctcBand,
-      cgpaCutoff: 7.0,
-      demandedSkills: job.requiredSkills.map(s => ({
-        name: s.name,
-        frequency: s.mandatory ? 92 : 70,
-        mandatory: s.mandatory,
-        category: s.category
-      }))
-    }));
-  }
-
-  // Filter or weight by targetRole if explicitly requested
-  if (targetRole && targetRole !== "all") {
-    const roleFiltered = recruiterPool.filter(r => 
-      r.role.toLowerCase().includes(targetRole.toLowerCase()) ||
-      targetRole.toLowerCase().includes(r.role.toLowerCase())
-    );
-    if (roleFiltered.length > 0) {
-      recruiterPool = roleFiltered;
-    }
-  }
-
-  // 3. Compute aggregate skill demand across this recruiter pool
-  const demandFrequencyMap = {};
-  const mandatoryCountMap = {};
-  const companiesPerSkillMap = {};
-
-  recruiterPool.forEach(rec => {
-    (rec.demandedSkills || []).forEach(skill => {
-      const canonical = skill.name;
-      demandFrequencyMap[canonical] = (demandFrequencyMap[canonical] || 0) + (skill.frequency || 75);
-      if (skill.mandatory) {
-        mandatoryCountMap[canonical] = (mandatoryCountMap[canonical] || 0) + 1;
-      }
-      if (!companiesPerSkillMap[canonical]) {
-        companiesPerSkillMap[canonical] = [];
-      }
-      if (!companiesPerSkillMap[canonical].includes(rec.company)) {
-        companiesPerSkillMap[canonical].push(rec.company);
-      }
-    });
-  });
-
-/**
  * Token-safe and alias-aware skill match
  */
-function isSkillMatch(candidateSkill, targetSkillName) {
-  const c = candidateSkill.toLowerCase().trim();
-  const t = targetSkillName.toLowerCase().trim();
+export function isSkillMatch(candidateSkill, targetSkillName) {
+  const c = (candidateSkill || "").toLowerCase().trim();
+  const t = (targetSkillName || "").toLowerCase().trim();
   if (!c || !t) return false;
   if (c === t) return true;
 
@@ -332,7 +157,7 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     if (taxMatch.aliases && taxMatch.aliases.some(a => a.toLowerCase() === c)) return true;
   }
 
-  // Word boundary match for compound phrases (min 3 chars to prevent false positives like 'os', 'c', 'go')
+  // Word boundary match for compound phrases (min 4 chars to prevent false positives like 'os', 'c', 'go')
   if (c.length >= 4 && t.length >= 4) {
     const escapedC = c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`(?:^|[^a-zA-Z0-9_+#.])${escapedC}(?:$|[^a-zA-Z0-9_+#.])`, 'i');
@@ -346,13 +171,155 @@ function isSkillMatch(candidateSkill, targetSkillName) {
   return false;
 }
 
-  // 4. Identify matched vs missing skills
+export const FALLBACK_PLACEMENT_RECORDS = [
+  {
+    id: "rec-1",
+    collegeId: "iit-delhi",
+    company: "Google",
+    companyLogo: "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100&auto=format&fit=crop&q=60",
+    role: "Software Development Engineer (SDE-1)",
+    ctcBand: "₹45.0 - 52.0 LPA",
+    baseSalary: "₹24 LPA",
+    visitFrequency: "Every Year (Day 1 Recruiter)",
+    hiringBatch: "2025 - 2026",
+    cgpaCutoff: 8.0,
+    rounds: [
+      { name: "Online Coding Assessment", description: "2 Hard LeetCode style algorithmic problems (90 mins)" },
+      { name: "Technical Interview 1", description: "Trees, Graphs & Dynamic Programming optimization" },
+      { name: "Technical Interview 2", description: "Advanced Data Structures, Concurrency & Low Level Design" },
+      { name: "Googliness & Leadership", description: "Behavioral, team collaboration & problem-solving mindset" }
+    ],
+    demandedSkills: [
+      { name: "Data Structures & Algorithms", frequency: 98, mandatory: true },
+      { name: "Dynamic Programming", frequency: 92, mandatory: true },
+      { name: "Graph Algorithms", frequency: 88, mandatory: true },
+      { name: "C++", frequency: 85, mandatory: false },
+      { name: "Java", frequency: 80, mandatory: false },
+      { name: "System Design Fundamentals", frequency: 72, mandatory: true },
+      { name: "Operating Systems", frequency: 78, mandatory: false }
+    ],
+    recommendedProjects: [
+      "Distributed Key-Value Store with Raft Consensus",
+      "High-Throughput Multithreaded Web Server in C++/Go",
+      "Real-Time Collaborative Code Editor with WebSockets"
+    ]
+  },
+  {
+    id: "rec-2",
+    collegeId: "iit-delhi",
+    company: "Microsoft",
+    companyLogo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60",
+    role: "Software Engineer (Core Platform)",
+    ctcBand: "₹42.0 - 48.0 LPA",
+    baseSalary: "₹20 LPA",
+    visitFrequency: "Every Year (Day 1)",
+    hiringBatch: "2025 - 2026",
+    cgpaCutoff: 7.5,
+    rounds: [
+      { name: "Codility OA", description: "3 Algorithmic problems (Arrays, Strings, Dynamic Programming)" },
+      { name: "DSA & Problem Solving", description: "Binary Trees, Heaps, Graph BFS/DFS" },
+      { name: "Object Oriented Design", description: "Design an elevator system / parking lot with Clean OOP" },
+      { name: "Director / Fitment Round", description: "Resume deep dive, architectural choices, core OS concepts" }
+    ],
+    demandedSkills: [
+      { name: "Data Structures & Algorithms", frequency: 95, mandatory: true },
+      { name: "Object-Oriented Programming", frequency: 90, mandatory: true },
+      { name: "Tree Algorithms", frequency: 88, mandatory: true },
+      { name: "C++", frequency: 82, mandatory: false },
+      { name: "Operating Systems", frequency: 82, mandatory: true },
+      { name: "Database Management Systems", frequency: 80, mandatory: true }
+    ],
+    recommendedProjects: [
+      "Extensible Plugin-Based Task Scheduling Engine",
+      "Low-Level Cache Simulator (LRU/LFU) with Thread Safety",
+      "Cloud-Native File Storage Service with Azure Blob/S3 integration"
+    ]
+  },
+  {
+    id: "rec-3",
+    collegeId: "bits-pilani",
+    company: "Atlassian",
+    companyLogo: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&auto=format&fit=crop&q=60",
+    role: "Graduate Software Engineer (Backend)",
+    ctcBand: "₹48.0 - 55.0 LPA",
+    baseSalary: "₹25 LPA",
+    visitFrequency: "Every Year (Day 1)",
+    hiringBatch: "2025 - 2026",
+    cgpaCutoff: 7.8,
+    rounds: [
+      { name: "Karat Coding Screen", description: "DSA, String Manipulation, and Code Debugging" },
+      { name: "System Coding & Concurrency", description: "Live multithreaded component implementation" },
+      { name: "Values & Craft", description: "Open company no bullshit, team fitment" }
+    ],
+    demandedSkills: [
+      { name: "Data Structures & Algorithms", frequency: 94, mandatory: true },
+      { name: "Java", frequency: 90, mandatory: true },
+      { name: "RESTful API Design", frequency: 88, mandatory: true },
+      { name: "Spring Boot", frequency: 82, mandatory: false },
+      { name: "PostgreSQL", frequency: 78, mandatory: false }
+    ],
+    recommendedProjects: [
+      "Real-Time Issue Tracker with WebSockets and Redis Queue",
+      "Distributed Rate Limiter Middleware in Java/Go"
+    ]
+  }
+];
+
+/**
+ * Client-side dynamic placement readiness analyzer
+ * Computes exact same multi-factor explainable score and roadmap from user profile data.
+ */
+export function calculatePlacementReadiness(studentProfile, options = {}) {
+  const {
+    collegeId = "iit-delhi",
+    targetType = "on-campus",
+    targetRole = null,
+    recruiterPoolOverride = null
+  } = options;
+
+  const rawSkills = studentProfile?.skills || [];
+  const studentSkills = new Set(
+    rawSkills.map(s => (typeof s === "string" ? s : s?.name || "").toLowerCase().trim()).filter(Boolean)
+  );
+
+  let recruiterPool = recruiterPoolOverride || FALLBACK_PLACEMENT_RECORDS.filter(
+    r => r.collegeId === collegeId || collegeId === "other"
+  );
+  if (!recruiterPool || recruiterPool.length === 0) {
+    recruiterPool = FALLBACK_PLACEMENT_RECORDS;
+  }
+
+  if (targetRole && targetRole !== "all") {
+    const roleFiltered = recruiterPool.filter(r => 
+      r.role.toLowerCase().includes(targetRole.toLowerCase()) ||
+      targetRole.toLowerCase().includes(r.role.toLowerCase())
+    );
+    if (roleFiltered.length > 0) recruiterPool = roleFiltered;
+  }
+
+  const demandFrequencyMap = {};
+  const mandatoryCountMap = {};
+  const companiesPerSkillMap = {};
+
+  recruiterPool.forEach(rec => {
+    (rec.demandedSkills || []).forEach(skill => {
+      const canonical = skill.name;
+      demandFrequencyMap[canonical] = (demandFrequencyMap[canonical] || 0) + (skill.frequency || 75);
+      if (skill.mandatory) {
+        mandatoryCountMap[canonical] = (mandatoryCountMap[canonical] || 0) + 1;
+      }
+      if (!companiesPerSkillMap[canonical]) companiesPerSkillMap[canonical] = [];
+      if (!companiesPerSkillMap[canonical].includes(rec.company)) {
+        companiesPerSkillMap[canonical].push(rec.company);
+      }
+    });
+  });
+
   const matchedSkills = [];
   const missingSkills = [];
 
   Object.entries(demandFrequencyMap).forEach(([skillName, aggregateFreq]) => {
     const isMatched = Array.from(studentSkills).some(s => isSkillMatch(s, skillName));
-
     const poolLen = recruiterPool.length || 1;
     const isMandatory = (mandatoryCountMap[skillName] || 0) >= Math.max(1, Math.floor(poolLen * 0.35));
     const marketDemandFrequency = Math.min(99, Math.round((aggregateFreq / (poolLen * 100)) * 100));
@@ -365,26 +332,20 @@ function isSkillMatch(candidateSkill, targetSkillName) {
       companiesRequiring: companiesPerSkillMap[skillName] || []
     };
 
-    if (isMatched) {
-      matchedSkills.push(item);
-    } else {
-      missingSkills.push(item);
-    }
+    if (isMatched) matchedSkills.push(item);
+    else missingSkills.push(item);
   });
 
-  // Sort missing skills: Mandatory first, then market demand descending
   missingSkills.sort((a, b) => {
     if (a.isMandatory !== b.isMandatory) return b.isMandatory ? 1 : -1;
     return b.marketDemandFrequency - a.marketDemandFrequency;
   });
 
-  // Sort matched skills: Mandatory first, then market demand descending
   matchedSkills.sort((a, b) => {
     if (a.isMandatory !== b.isMandatory) return b.isMandatory ? 1 : -1;
     return b.marketDemandFrequency - a.marketDemandFrequency;
   });
 
-  // 5. Compute Mathematical Multi-Factor Readiness Score (0 - 100)
   // Factor 1: Mandatory Skill Clearance (45% weight)
   const totalMandatorySkills = Object.values(mandatoryCountMap).filter(c => c >= Math.max(1, Math.floor(recruiterPool.length * 0.35))).length || 1;
   const matchedMandatoryCount = matchedSkills.filter(s => s.isMandatory).length;
@@ -396,52 +357,40 @@ function isSkillMatch(candidateSkill, targetSkillName) {
   const coverageScoreComponent = Math.min(25, (matchedFreqSum / totalPossibleFreq) * 25);
 
   // Factor 3: Academic / CGPA Alignment (10% weight)
-  let academicScoreComponent = 7.5; // neutral baseline
-  const candidateCgpa = parseFloat(studentProfile.cgpa);
+  let academicScoreComponent = 7.5;
+  const candidateCgpa = parseFloat(studentProfile?.cgpa);
   if (!isNaN(candidateCgpa) && candidateCgpa > 0) {
-    if (candidateCgpa >= 8.0) {
-      academicScoreComponent = 10;
-    } else if (candidateCgpa >= 7.5) {
-      academicScoreComponent = 8.5;
-    } else if (candidateCgpa >= 7.0) {
-      academicScoreComponent = 7.0;
-    } else if (candidateCgpa >= 6.0) {
-      academicScoreComponent = 5.5;
-    } else {
-      academicScoreComponent = 4.0;
-    }
+    if (candidateCgpa >= 8.0) academicScoreComponent = 10;
+    else if (candidateCgpa >= 7.5) academicScoreComponent = 8.5;
+    else if (candidateCgpa >= 7.0) academicScoreComponent = 7.0;
+    else if (candidateCgpa >= 6.0) academicScoreComponent = 5.5;
+    else academicScoreComponent = 4.0;
   }
 
   // Factor 4: Practical Project Portfolio (10% weight)
-  const projectsCount = studentProfile.projectsCompleted !== undefined
+  const projectsCount = studentProfile?.projectsCompleted !== undefined
     ? Number(studentProfile.projectsCompleted)
-    : (Array.isArray(studentProfile.projects) ? studentProfile.projects.length : (rawSkills.length >= 7 ? 3 : 2));
+    : (Array.isArray(studentProfile?.projects) ? studentProfile.projects.length : (rawSkills.length >= 7 ? 3 : 2));
   let projectScoreComponent = 3.0;
-  if (projectsCount >= 3) {
-    projectScoreComponent = 10;
-  } else if (projectsCount === 2) {
-    projectScoreComponent = 7.5;
-  } else if (projectsCount === 1) {
-    projectScoreComponent = 5.0;
-  }
+  if (projectsCount >= 3) projectScoreComponent = 10;
+  else if (projectsCount === 2) projectScoreComponent = 7.5;
+  else if (projectsCount === 1) projectScoreComponent = 5.0;
 
   // Factor 5: Profile Breadth & Competitive Coding (10% weight)
   let profileBreadthComponent = 0;
   if (rawSkills.length >= 8) profileBreadthComponent += 4;
   else if (rawSkills.length >= 4) profileBreadthComponent += 2.5;
 
-  if (studentProfile.githubUsername) profileBreadthComponent += 3;
-  if (studentProfile.contestRating && Number(studentProfile.contestRating) >= 1400) profileBreadthComponent += 3;
-  else if (studentProfile.contestsParticipated && Number(studentProfile.contestsParticipated) > 0) profileBreadthComponent += 2;
+  if (studentProfile?.githubUsername) profileBreadthComponent += 3;
+  if (studentProfile?.contestRating && Number(studentProfile.contestRating) >= 1400) profileBreadthComponent += 3;
+  else if (studentProfile?.contestsParticipated && Number(studentProfile.contestsParticipated) > 0) profileBreadthComponent += 2;
   else profileBreadthComponent += 1.5;
 
   profileBreadthComponent = Math.min(10, profileBreadthComponent);
 
-  // Final Overall Readiness Score
   const rawReadinessScore = mandatoryScoreComponent + coverageScoreComponent + academicScoreComponent + projectScoreComponent + profileBreadthComponent;
   const overallReadinessScore = Math.min(98, Math.max(15, Math.round(rawReadinessScore)));
 
-  // Readiness Tier
   let readinessTier = "High Profile Readiness";
   let readinessTierColor = "text-brand-green";
   if (overallReadinessScore < 55) {
@@ -452,10 +401,7 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     readinessTierColor = "text-amber-400";
   }
 
-  // 6. Generate Explainability Breakdown ("Based on:")
   const explainabilityFactors = [];
-
-  // Positives
   if (matchedMandatoryCount > 0) {
     const topMatched = matchedSkills.filter(s => s.isMandatory).slice(0, 3).map(s => s.name).join(", ");
     explainabilityFactors.push({
@@ -484,14 +430,13 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     });
   }
 
-  if (studentProfile.contestRating && Number(studentProfile.contestRating) >= 1400) {
+  if (studentProfile?.contestRating && Number(studentProfile.contestRating) >= 1400) {
     explainabilityFactors.push({
       type: "strength",
       text: `Active competitive programming rating (${studentProfile.contestRating}) proves problem-solving speed`
     });
   }
 
-  // Gaps / Areas to improve
   const criticalMissing = missingSkills.filter(s => s.isMandatory);
   if (criticalMissing.length > 0) {
     const gapNames = criticalMissing.slice(0, 2).map(s => s.name).join(" and ");
@@ -501,8 +446,7 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     });
   }
 
-  const hasSystemDesignGap = missingSkills.some(s => s.name.toLowerCase().includes("system design"));
-  if (hasSystemDesignGap) {
+  if (missingSkills.some(s => s.name.toLowerCase().includes("system design"))) {
     explainabilityFactors.push({
       type: "gap",
       text: "Limited System Design & High-Concurrency architecture exposure for target roles"
@@ -516,7 +460,6 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     });
   }
 
-  // 7. Dynamic Company Fit Breakdown (Ranked by Compatibility)
   const companyFitBreakdown = recruiterPool.map(rec => {
     const required = rec.demandedSkills || [];
     let matchCount = 0;
@@ -538,15 +481,12 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     });
 
     let rawFit = totalWeight > 0 ? (matchCount / totalWeight) * 100 : 50;
-
-    // Adjust for CGPA cutoff if candidate CGPA is strictly below cutoff
     if (!isNaN(candidateCgpa) && candidateCgpa > 0 && rec.cgpaCutoff && candidateCgpa < rec.cgpaCutoff) {
       const penalty = Math.min(18, Math.round((rec.cgpaCutoff - candidateCgpa) * 12));
       rawFit = Math.max(10, rawFit - penalty);
     }
 
     const fitPercentage = Math.min(99, Math.max(10, Math.round(rawFit)));
-
     let tierLabel = "Strong Fit";
     let tierColor = "text-emerald-400";
     if (fitPercentage < 50) {
@@ -572,51 +512,21 @@ function isSkillMatch(candidateSkill, targetSkillName) {
     };
   });
 
-  // Sort companies descending by fit percentage
   companyFitBreakdown.sort((a, b) => b.fitPercentage - a.fitPercentage);
 
-  // 8. Generate Personalized 6-Week Action Plan (Roadmap)
-  const actionPlan = generatePersonalizedActionPlan(missingSkills, matchedSkills, studentProfile, recruiterPool);
-
-  // Critical gaps to close (top 3)
-  const criticalPriorityGaps = missingSkills.filter(s => s.isMandatory).slice(0, 4);
-  const topGapsToClose = criticalPriorityGaps.length > 0 ? criticalPriorityGaps : missingSkills.slice(0, 3);
-  const secondaryGaps = missingSkills.filter(s => !topGapsToClose.includes(s)).slice(0, 6);
-
-  return {
-    overallReadinessScore,
-    readinessTier,
-    readinessTierColor,
-    explainabilityFactors,
-    targetType,
-    targetRole: targetRole || (recruiterPool[0] ? recruiterPool[0].role : "Software Development Engineer (SDE-1)"),
-    totalRecruitersAnalyzed: recruiterPool.length,
-    matchedSkills,
-    missingSkills,
-    criticalPriorityGaps: topGapsToClose,
-    topGapsToClose,
-    secondaryGaps,
-    companyFitBreakdown,
-    actionPlan,
-    summaryReport: generateExecutiveSummary(overallReadinessScore, topGapsToClose, companyFitBreakdown)
-  };
-}
-
-/**
- * Generate structured, personalized 6-Week Action Plan based on actual identified gaps
- */
-function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, recruiterPool) {
-  const poolCount = recruiterPool.length || 1;
   const topGaps = missingSkills.slice(0, 3);
-
-  // If candidate has 3 or more gaps, map top 3 gaps to Weeks 1-2, 3-4, 5-6
-  // If fewer than 3 gaps, supplement logically with Advanced Design and Mock Interview Rounds
   const phases = [];
 
-  // Phase 1 (Weeks 1 - 2)
   if (topGaps.length >= 1) {
     const gap1 = topGaps[0];
-    const details1 = getSkillRoadmapDetails(gap1.name, gap1.companiesRequiring?.length || poolCount, gap1.companiesRequiring || []);
+    const details1 = SKILL_ROADMAP_KNOWLEDGE[gap1.name] || {
+      theme: `${gap1.name} Mastery & Core Principles`,
+      why: `Demanded by target recruiters including ${(gap1.companiesRequiring || []).slice(0, 2).join(' and ') || 'top tech recruiters'} to evaluate technical depth.`,
+      focus: [`Fundamental syntax, core concepts & patterns in ${gap1.name}`, "Practical problem-solving implementation", "Debugging edge cases and optimization"],
+      outcome: `Achieve verified fluency in ${gap1.name} under timed assessment conditions.`,
+      deliverables: [`Solve 20 high-frequency ${gap1.name} problems`, `Build 1 functional module using ${gap1.name}`, "Take 1 timed mock assessment"],
+      resources: [{ name: "HackerRank Practice Kit", url: "https://hackerrank.com" }]
+    };
     phases.push({
       phaseNumber: 1,
       week: "Weeks 1 - 2",
@@ -629,7 +539,6 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
       suggestedResources: details1.resources
     });
   } else {
-    // 0 gaps: Focus on advanced speed & edge cases
     phases.push({
       phaseNumber: 1,
       week: "Weeks 1 - 2",
@@ -650,10 +559,16 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
     });
   }
 
-  // Phase 2 (Weeks 3 - 4)
   if (topGaps.length >= 2) {
     const gap2 = topGaps[1];
-    const details2 = getSkillRoadmapDetails(gap2.name, gap2.companiesRequiring?.length || poolCount, gap2.companiesRequiring || []);
+    const details2 = SKILL_ROADMAP_KNOWLEDGE[gap2.name] || {
+      theme: `${gap2.name} Acceleration & Integration`,
+      why: `Key prerequisite for senior product interviews and high-volume clearance rounds.`,
+      focus: [`Advanced patterns in ${gap2.name}`, "Integration with scalable architectures", "Performance benchmarking and design trade-offs"],
+      outcome: `Master production-grade application of ${gap2.name}.`,
+      deliverables: [`Implement end-to-end component with ${gap2.name}`, "Complete 15 scenario questions", "Review design trade-offs"],
+      resources: [{ name: "Striver SDE Sheet", url: "https://takeuforward.org" }]
+    };
     phases.push({
       phaseNumber: 2,
       week: "Weeks 3 - 4",
@@ -666,8 +581,6 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
       suggestedResources: details2.resources
     });
   } else {
-    // Low-Level Design & Concurrency
-    const lldDetails = SKILL_ROADMAP_KNOWLEDGE["System Design Fundamentals"];
     phases.push({
       phaseNumber: 2,
       week: "Weeks 3 - 4",
@@ -681,14 +594,20 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
         "Implement a multithreaded Token Bucket rate limiter",
         "Practice 2 peer mock design interviews"
       ],
-      resources: lldDetails.resources
+      resources: [{ name: "Refactoring Guru Design Patterns", url: "https://refactoring.guru" }]
     });
   }
 
-  // Phase 3 (Weeks 5 - 6)
   if (topGaps.length >= 3) {
     const gap3 = topGaps[2];
-    const details3 = getSkillRoadmapDetails(gap3.name, gap3.companiesRequiring?.length || poolCount, gap3.companiesRequiring || []);
+    const details3 = SKILL_ROADMAP_KNOWLEDGE[gap3.name] || {
+      theme: `${gap3.name} Mastery & Capstone Integration`,
+      why: `Unlocks comprehensive clearance across full-loop interview rounds.`,
+      focus: [`System integration with ${gap3.name}`, "Failure modes and latency analysis", "Mock interview discussions"],
+      outcome: `Confidently justify architectural choices involving ${gap3.name}.`,
+      deliverables: [`Deploy capstone showcasing ${gap3.name}`, "Add unit test suite with >80% coverage", "Complete 2 peer mock interviews"],
+      resources: [{ name: "HackerRank Interview Prep Kit", url: "https://hackerrank.com" }]
+    };
     phases.push({
       phaseNumber: 3,
       week: "Weeks 5 - 6",
@@ -701,7 +620,6 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
       suggestedResources: details3.resources
     });
   } else {
-    // Full-Loop Mock Rounds & Behavioral STAR Mastery
     phases.push({
       phaseNumber: 3,
       week: "Weeks 5 - 6",
@@ -722,22 +640,136 @@ function generatePersonalizedActionPlan(missingSkills, matchedSkills, profile, r
     });
   }
 
-  return phases;
+  const criticalPriorityGaps = missingSkills.filter(s => s.isMandatory).slice(0, 4);
+  const topGapsToClose = criticalPriorityGaps.length > 0 ? criticalPriorityGaps : missingSkills.slice(0, 3);
+  const secondaryGaps = missingSkills.filter(s => !topGapsToClose.includes(s)).slice(0, 6);
+
+  const topCompany = companyFitBreakdown[0] ? companyFitBreakdown[0].company : "Top Tech Recruiter";
+  const topGapsNames = topGapsToClose.slice(0, 2).map(s => s.name).join(" and ");
+
+  let summaryReport = "";
+  if (overallReadinessScore >= 80) {
+    summaryReport = `Your profile shows strong job readiness (${overallReadinessScore}%) with high alignment across campus recruiter rubrics. You are currently well-positioned for Day-1 recruiters like ${topCompany}. Elevate your profile by closing final gaps in ${topGapsNames || "advanced system design"}.`;
+  } else if (overallReadinessScore >= 60) {
+    summaryReport = `Your profile demonstrates solid fundamentals (${overallReadinessScore}% readiness). Closing targeted gaps in ${topGapsNames || "core algorithms and database internals"} will elevate your fit for tier-1 recruiters like ${topCompany} within 4 to 6 weeks.`;
+  } else {
+    summaryReport = `Your profile readiness is currently in the foundational tier (${overallReadinessScore}%). Follow the personalized 6-week roadmap focusing on ${topGapsNames || "Core DSA & Database Systems"} to build mandatory clearance for technical rounds.`;
+  }
+
+  return {
+    overallReadinessScore,
+    readinessTier,
+    readinessTierColor,
+    explainabilityFactors,
+    targetType,
+    targetRole: targetRole || (recruiterPool[0] ? recruiterPool[0].role : "Software Development Engineer (SDE-1)"),
+    totalRecruitersAnalyzed: recruiterPool.length,
+    matchedSkills,
+    missingSkills,
+    criticalPriorityGaps: topGapsToClose,
+    topGapsToClose,
+    secondaryGaps,
+    companyFitBreakdown,
+    actionPlan: phases,
+    summaryReport
+  };
 }
 
 /**
- * Generate human-readable executive summary grounded in actual user score and gaps
+ * Client-side resume skill & metadata extractor for fallback mode
  */
-function generateExecutiveSummary(score, topGaps, companyFits) {
-  const topCompany = companyFits[0] ? companyFits[0].company : "Top Tech Recruiter";
-  const topGapsNames = topGaps.slice(0, 2).map(s => s.name).join(" and ");
-
-  if (score >= 80) {
-    return `Your profile shows strong job readiness (${score}%) with high alignment across campus recruiter rubrics. You are currently well-positioned for Day-1 recruiters like ${topCompany}. Elevate your profile by closing final gaps in ${topGapsNames || "advanced system design"}.`;
-  } else if (score >= 60) {
-    return `Your profile demonstrates solid fundamentals (${score}% readiness). Closing targeted gaps in ${topGapsNames || "core algorithms and database internals"} will elevate your fit for tier-1 recruiters like ${topCompany} within 4 to 6 weeks.`;
-  } else {
-    return `Your profile readiness is currently in the foundational tier (${score}%). Follow the personalized 6-week roadmap focusing on ${topGapsNames || "Core DSA & Database Systems"} to build mandatory clearance for technical rounds.`;
+export function extractSkillsFromTextClient(rawText) {
+  if (!rawText || typeof rawText !== "string") {
+    return { extractedSkills: [], totalSkillsCount: 0, metadata: {} };
   }
-}
 
+  const normalized = rawText.toLowerCase();
+  const matchedSet = new Set();
+
+  ALL_SKILLS_FLAT.forEach(skill => {
+    const canonical = skill.name.toLowerCase();
+    const escaped = canonical.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(?:^|[^a-zA-Z0-9_+#.])${escaped}(?:$|[^a-zA-Z0-9_+#.])`, 'i');
+
+    let isMatch = regex.test(normalized);
+    if (!isMatch && skill.aliases) {
+      for (const alias of skill.aliases) {
+        const escAlias = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regA = new RegExp(`(?:^|[^a-zA-Z0-9_+#.])${escAlias}(?:$|[^a-zA-Z0-9_+#.])`, 'i');
+        if (regA.test(normalized)) {
+          isMatch = true;
+          break;
+        }
+      }
+    }
+
+    if (isMatch) matchedSet.add(skill.name);
+  });
+
+  const metadata = {
+    detectedCgpa: null,
+    detectedYoE: 0,
+    detectedName: null,
+    detectedCollege: null,
+    detectedCollegeId: null,
+    detectedDegree: null,
+    detectedGithub: null,
+    detectedProjectsCount: 0
+  };
+
+  const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  for (let i = 0; i < Math.min(4, lines.length); i++) {
+    const line = lines[i];
+    if (line.length > 2 && line.length < 40 && !/[@:/\\0-9+()&]/.test(line) && !/resume|profile|skills/i.test(line)) {
+      const words = line.split(/\s+/);
+      if (words.length >= 2 && words.length <= 4 && words.every(w => /^[A-Z][a-zA-Z.'-]*$/.test(w))) {
+        metadata.detectedName = line;
+        break;
+      }
+    }
+  }
+
+  const cgpaMatch = rawText.match(/(?:cgpa|gpa|pointer)\s*[:=-]?\s*([0-9]+(?:\.[0-9]+)?)/i);
+  if (cgpaMatch && parseFloat(cgpaMatch[1])) {
+    const val = parseFloat(cgpaMatch[1]);
+    metadata.detectedCgpa = val <= 4.0 ? parseFloat((val * 2.5).toFixed(1)) : (val <= 10 ? val : parseFloat((val / 10).toFixed(1)));
+  }
+
+  const expMatch = rawText.match(/([0-9]+(?:\.[0-9]+)?)\+?\s*(?:years?|yrs?)(?:\s+of)?\s+(?:experience|exp)/i);
+  if (expMatch && parseFloat(expMatch[1])) {
+    metadata.detectedYoE = parseFloat(expMatch[1]);
+  }
+
+  const githubMatch = rawText.match(/(?:github\.com\/|@)([a-zA-Z0-9_-]+)/i);
+  if (githubMatch && githubMatch[1] && !/com|http|org/i.test(githubMatch[1])) {
+    metadata.detectedGithub = githubMatch[1];
+  }
+
+  if (/iit\s*delhi/i.test(rawText)) {
+    metadata.detectedCollege = "Indian Institute of Technology (IIT) Delhi";
+    metadata.detectedCollegeId = "iit-delhi";
+  } else if (/bits\s*pilani/i.test(rawText)) {
+    metadata.detectedCollege = "BITS Pilani";
+    metadata.detectedCollegeId = "bits-pilani";
+  } else if (/nit\s*trichy/i.test(rawText)) {
+    metadata.detectedCollege = "NIT Trichy";
+    metadata.detectedCollegeId = "nit-trichy";
+  } else if (/dtu/i.test(rawText)) {
+    metadata.detectedCollege = "Delhi Technological University (DTU)";
+    metadata.detectedCollegeId = "dtu";
+  } else if (/vit/i.test(rawText)) {
+    metadata.detectedCollege = "Vellore Institute of Technology (VIT)";
+    metadata.detectedCollegeId = "vit-vellore";
+  }
+
+  const degreeMatch = rawText.match(/\b(B\.Tech|B\.E\.|M\.Tech|M\.E\.|B\.S\.|M\.S\.|BCA|MCA)\b/i);
+  if (degreeMatch) metadata.detectedDegree = degreeMatch[0];
+
+  metadata.detectedProjectsCount = matchedSet.size >= 8 ? 3 : 2;
+
+  return {
+    extractedSkills: Array.from(matchedSet),
+    totalSkillsCount: matchedSet.size,
+    metadata
+  };
+}

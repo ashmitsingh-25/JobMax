@@ -127,8 +127,16 @@ export default function App() {
     const updated = {
       ...currentUser,
       skills: newSkills,
+      ...(metadata?.detectedName && { name: metadata.detectedName }),
       ...(metadata?.detectedCgpa && { cgpa: metadata.detectedCgpa }),
-      ...(metadata?.detectedYoE && { yearsOfExperience: metadata.detectedYoE })
+      ...(metadata?.detectedYoE !== undefined && { yearsOfExperience: metadata.detectedYoE }),
+      ...(metadata?.detectedCollege && { college: metadata.detectedCollege }),
+      ...(metadata?.detectedCollegeId && { collegeId: metadata.detectedCollegeId }),
+      ...(metadata?.detectedDegree && { degree: metadata.detectedDegree }),
+      ...(metadata?.detectedGithub && { githubUsername: metadata.detectedGithub }),
+      ...(metadata?.detectedProjectsCount !== undefined && { projectsCompleted: metadata.detectedProjectsCount }),
+      lastResumeParsedAt: new Date().toISOString(),
+      resumeMetadata: metadata || currentUser.resumeMetadata
     };
     setCurrentUser(updated);
   };

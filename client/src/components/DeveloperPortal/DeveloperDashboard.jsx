@@ -58,9 +58,11 @@ export default function DeveloperDashboard({
   };
 
   // Callback from AI Resume Extractor
-  const handleSkillsExtracted = (extractedSkills, metadata) => {
-    const merged = Array.from(new Set([...currentUser.skills, ...extractedSkills]));
-    onUpdateUserSkills(merged, metadata);
+  const handleSkillsExtracted = (extractedSkills, metadata, options = { replace: true }) => {
+    const skillsToApply = options?.replace === false
+      ? Array.from(new Set([...(currentUser.skills || []), ...extractedSkills]))
+      : extractedSkills;
+    onUpdateUserSkills(skillsToApply, metadata);
   };
 
   return (
@@ -86,6 +88,12 @@ export default function DeveloperDashboard({
                 }`}>
                   {currentUser?.track === 'fresher' ? 'College Fresher' : 'Experienced Engineer'}
                 </span>
+                {currentUser?.lastResumeParsedAt && (
+                  <span className="font-sans tracking-wide text-[11px] bg-emerald-950/70 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                    Resume Synced
+                  </span>
+                )}
               </div>
               <p className="text-xs text-slate-500 mt-1">
                 {currentUser?.college || currentUser?.currentCompany || "Developer Profile"} 

@@ -44,14 +44,14 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
 
   // Run AI Off-Campus Analysis
   useEffect(() => {
-    if (currentUser && currentUser.skills) {
-      api.analyzeOffCampus(currentUser).then(res => {
+    if (currentUser && currentUser.skills && currentUser.skills.length > 0) {
+      api.analyzeOffCampus(currentUser, currentUser?.targetRole || "Full Stack / Product Engineer").then(res => {
         if (res && res.success) {
           setAnalysisReport(res.report);
         }
       });
     }
-  }, [currentUser?.skills]);
+  }, [currentUser?.skills, currentUser?.targetRole, currentUser?.cgpa, currentUser?.projects, currentUser?.lastResumeParsedAt]);
 
   const filteredJobs = jobs.filter(j => 
     selectedDomain === 'all' || (j?.domain && j.domain.toLowerCase().includes(selectedDomain.toLowerCase()))
@@ -180,11 +180,14 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
                   <div className="space-y-1">
                     <p className="text-[10px] font-mono text-slate-400 uppercase">Matched Core:</p>
                     <div className="flex flex-wrap gap-1">
-                      {comp.matchedSkills.slice(0, 2).map(ms => (
-                        <span key={ms} className="badge-matched text-[10px]">
-                          ✓ {ms}
-                        </span>
-                      ))}
+                      {comp.matchedSkills.slice(0, 2).map((ms, msIdx) => {
+                        const msName = typeof ms === 'string' ? ms : (ms?.name || '');
+                        return (
+                          <span key={msIdx} className="badge-matched text-[10px]">
+                            ✓ {msName}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

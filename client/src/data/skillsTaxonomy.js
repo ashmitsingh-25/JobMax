@@ -62,3 +62,6 @@ export const SKILLS_TAXONOMY = {
     { name: "Git & Version Control", aliases: ["git", "github", "gitlab", "branching", "pull requests"], tier: "fundamental", weight: 0.8 }
   ]
 };
+
+export const ALL_SKILLS_FLAT = Object.values(SKILLS_TAXONOMY).flat();
+
