@@ -62,7 +62,7 @@ router.post("/upload-resume", upload.single("resumeFile"), async (req, res) => {
 // 2. AI Bot #1: On-Campus Placement Readiness Analyzer
 router.post("/analyze-oncampus", (req, res) => {
   try {
-    const { studentProfile, collegeId = "iit-delhi" } = req.body;
+    const { studentProfile, collegeId = "iit-delhi", targetRole = null } = req.body;
 
     if (!studentProfile || !studentProfile.skills) {
       return res.status(400).json({ success: false, message: "Student skills profile is required" });
@@ -70,7 +70,8 @@ router.post("/analyze-oncampus", (req, res) => {
 
     const report = analyzePlacementReadiness(studentProfile, {
       collegeId,
-      targetType: "on-campus"
+      targetType: "on-campus",
+      targetRole
     });
 
     res.json({
@@ -86,14 +87,15 @@ router.post("/analyze-oncampus", (req, res) => {
 // 3. AI Bot #1 (Off-Campus Variant): Market Placement Readiness Analyzer
 router.post("/analyze-offcampus", (req, res) => {
   try {
-    const { studentProfile } = req.body;
+    const { studentProfile, targetRole = null } = req.body;
 
     if (!studentProfile || !studentProfile.skills) {
       return res.status(400).json({ success: false, message: "Student skills profile is required" });
     }
 
     const report = analyzePlacementReadiness(studentProfile, {
-      targetType: "off-campus"
+      targetType: "off-campus",
+      targetRole
     });
 
     res.json({

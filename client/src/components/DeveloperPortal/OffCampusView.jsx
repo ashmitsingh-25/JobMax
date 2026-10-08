@@ -44,14 +44,14 @@ export default function OffCampusView({ currentUser, onOpenResumeModal }) {
 
   // Run AI Off-Campus Analysis
   useEffect(() => {
-    if (currentUser && currentUser.skills) {
-      api.analyzeOffCampus(currentUser).then(res => {
+    if (currentUser && currentUser.skills && currentUser.skills.length > 0) {
+      api.analyzeOffCampus(currentUser, currentUser?.targetRole || "Full Stack / Product Engineer").then(res => {
         if (res && res.success) {
           setAnalysisReport(res.report);
         }
       });
     }
-  }, [currentUser?.skills]);
+  }, [currentUser?.skills, currentUser?.targetRole, currentUser?.cgpa, currentUser?.projects, currentUser?.lastResumeParsedAt]);
 
   const filteredJobs = jobs.filter(j => 
     selectedDomain === 'all' || (j?.domain && j.domain.toLowerCase().includes(selectedDomain.toLowerCase()))

@@ -1,7 +1,7 @@
-// Base URL: use relative /api which Vite proxies to backend, with fallback
 import { ecosystemApi } from './mockEcosystem';
 import { db } from '../firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { calculatePlacementReadiness, extractSkillsFromTextClient } from './predictionEngine.js';
 const getBaseUrl = () => {
   try {
     const custom = typeof window !== "undefined" ? localStorage.getItem('jobmax_backend_url') : null;
@@ -205,170 +205,10 @@ export const FALLBACK_COLLEGES = [
   { id: "other", name: "All India / Custom College Pool", location: "National", tier: "General" }
 ];
 
-export const FALLBACK_PLACEMENT_RECORDS = [
-  {
-    id: "rec-1",
-    collegeId: "iit-delhi",
-    company: "Google",
-    companyLogo: "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100&auto=format&fit=crop&q=60",
-    role: "Software Development Engineer (SDE-1)",
-    ctcBand: "₹45.0 - 52.0 LPA",
-    baseSalary: "₹24 LPA",
-    visitFrequency: "Every Year (Day 1 Recruiter)",
-    hiringBatch: "2025 - 2026",
-    cgpaCutoff: 8.0,
-    rounds: [
-      { name: "Online Coding Assessment", description: "2 Hard LeetCode style algorithmic problems (90 mins)" },
-      { name: "Technical Interview 1", description: "Trees, Graphs & Dynamic Programming optimization" },
-      { name: "Technical Interview 2", description: "Advanced Data Structures, Concurrency & Low Level Design" },
-      { name: "Googliness & Leadership", description: "Behavioral, team collaboration & problem-solving mindset" }
-    ],
-    demandedSkills: [
-      { name: "Data Structures & Algorithms", frequency: 98, mandatory: true },
-      { name: "Dynamic Programming", frequency: 92, mandatory: true },
-      { name: "Graph Algorithms", frequency: 88, mandatory: true },
-      { name: "C++", frequency: 85, mandatory: false },
-      { name: "Java", frequency: 80, mandatory: false },
-      { name: "System Design Fundamentals", frequency: 72, mandatory: true },
-      { name: "Operating Systems", frequency: 78, mandatory: false }
-    ],
-    recommendedProjects: [
-      "Distributed Key-Value Store with Raft Consensus",
-      "High-Throughput Multithreaded Web Server in C++/Go",
-      "Real-Time Collaborative Code Editor with WebSockets"
-    ]
-  },
-  {
-    id: "rec-2",
-    collegeId: "iit-delhi",
-    company: "Microsoft",
-    companyLogo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60",
-    role: "Software Engineer (Core Platform)",
-    ctcBand: "₹42.0 - 48.0 LPA",
-    baseSalary: "₹20 LPA",
-    visitFrequency: "Every Year (Day 1)",
-    hiringBatch: "2025 - 2026",
-    cgpaCutoff: 7.5,
-    rounds: [
-      { name: "Codility OA", description: "3 Algorithmic problems (Arrays, Strings, Dynamic Programming)" },
-      { name: "DSA & Problem Solving", description: "Binary Trees, Heaps, Graph BFS/DFS" },
-      { name: "Object Oriented Design", description: "Design an elevator system / parking lot with Clean OOP" },
-      { name: "Director / Fitment Round", description: "Resume deep dive, architectural choices, core OS concepts" }
-    ],
-    demandedSkills: [
-      { name: "Data Structures & Algorithms", frequency: 95, mandatory: true },
-      { name: "Object-Oriented Programming", frequency: 90, mandatory: true },
-      { name: "Tree Algorithms", frequency: 88, mandatory: true },
-      { name: "C++", frequency: 82, mandatory: false },
-      { name: "Operating Systems", frequency: 82, mandatory: true },
-      { name: "Database Management Systems", frequency: 80, mandatory: true }
-    ],
-    recommendedProjects: [
-      "Extensible Plugin-Based Task Scheduling Engine",
-      "Low-Level Cache Simulator (LRU/LFU) with Thread Safety",
-      "Cloud-Native File Storage Service with Azure Blob/S3 integration"
-    ]
-  },
-  {
-    id: "rec-3",
-    collegeId: "bits-pilani",
-    company: "Atlassian",
-    companyLogo: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&auto=format&fit=crop&q=60",
-    role: "Graduate Software Engineer (Backend)",
-    ctcBand: "₹48.0 - 55.0 LPA",
-    baseSalary: "₹25 LPA",
-    visitFrequency: "Every Year (Day 1)",
-    hiringBatch: "2025 - 2026",
-    cgpaCutoff: 7.8,
-    rounds: [
-      { name: "Karat Coding Screen", description: "DSA, String Manipulation, and Code Debugging" },
-      { name: "System Coding & Concurrency", description: "Live multithreaded component implementation" },
-      { name: "Values & Craft", description: "Open company no bullshit, team fitment" }
-    ],
-    demandedSkills: [
-      { name: "Data Structures & Algorithms", frequency: 94, mandatory: true },
-      { name: "Java", frequency: 90, mandatory: true },
-      { name: "RESTful API Design", frequency: 88, mandatory: true },
-      { name: "Spring Boot", frequency: 82, mandatory: false },
-      { name: "PostgreSQL", frequency: 78, mandatory: false }
-    ],
-    recommendedProjects: [
-      "Real-Time Issue Tracker with WebSockets and Redis Queue",
-      "Distributed Rate Limiter Middleware in Java/Go"
-    ]
-  }
-];
+export { FALLBACK_PLACEMENT_RECORDS } from './predictionEngine.js';
 
-export const FALLBACK_ONCAMPUS_REPORT = {
-  overallReadinessScore: 78,
-  summaryReport: "You have a solid foundation (78% match), but closing gaps in Dynamic Programming and Graph Algorithms will elevate your fit for tier-1 recruiters like Microsoft within 4 to 6 weeks.",
-  totalRecruitersAnalyzed: 5,
-  matchedSkills: ["Data Structures & Algorithms", "C++", "Java", "Object-Oriented Programming", "Operating Systems"],
-  missingSkills: ["Dynamic Programming", "Graph Algorithms", "System Design Fundamentals"],
-  topGapsToClose: [
-    { name: "Dynamic Programming", marketDemandFrequency: 92, category: "Algorithms" },
-    { name: "Graph Algorithms", marketDemandFrequency: 88, category: "Algorithms" },
-    { name: "System Design Fundamentals", marketDemandFrequency: 75, category: "Design" }
-  ],
-  companyFitBreakdown: [
-    {
-      companyId: "google",
-      company: "Google",
-      companyLogo: "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=100&auto=format&fit=crop&q=60",
-      role: "Software Development Engineer (SDE-1)",
-      ctcBand: "₹45.0 - 52.0 LPA",
-      cgpaCutoff: 8.0,
-      fitPercentage: 82,
-      tierLabel: "Strong Fit",
-      tierColor: "text-brand-green",
-      matchedSkills: [{ name: "Data Structures & Algorithms" }, { name: "Java" }, { name: "Operating Systems" }],
-      missingSkills: [{ name: "Dynamic Programming", frequency: 92 }]
-    },
-    {
-      companyId: "microsoft",
-      company: "Microsoft",
-      companyLogo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60",
-      role: "Software Engineer (Core Platform)",
-      ctcBand: "₹42.0 - 48.0 LPA",
-      cgpaCutoff: 7.5,
-      fitPercentage: 75,
-      tierLabel: "Target Gap",
-      tierColor: "text-amber-400",
-      matchedSkills: [{ name: "C++" }, { name: "Object-Oriented Programming" }],
-      missingSkills: [{ name: "Tree Algorithms", frequency: 88 }]
-    }
-  ],
-  actionPlan: [
-    {
-      week: "Weeks 1 - 2",
-      theme: "Core Problem Solving & Graph Mastery",
-      focusAreas: ["Graph BFS/DFS & Dijkstra's Algorithm", "2D Dynamic Programming Patterns"],
-      deliverables: ["Solve 25 LeetCode Mediums on Graphs & DP", "Implement Min-Heap and Disjoint Set Union from scratch"],
-      suggestedResources: [
-        { name: "NeetCode 150 - Advanced Graphs", url: "https://neetcode.io" },
-        { name: "Striver SDE Sheet - DP Patterns", url: "https://takeuforward.org" }
-      ]
-    },
-    {
-      week: "Weeks 3 - 4",
-      theme: "Low-Level Design & Concurrency",
-      focusAreas: ["Clean Object-Oriented Design (SOLID)", "Multithreading & Concurrency primitives"],
-      deliverables: ["Design & Code Parking Lot System with Thread Safety", "Mock Interview on LRU Cache & Rate Limiter"],
-      suggestedResources: [
-        { name: "Refactoring Guru - Design Patterns", url: "https://refactoring.guru" }
-      ]
-    },
-    {
-      week: "Weeks 5 - 6",
-      theme: "Company Mock Rounds & Speed Optimization",
-      focusAreas: ["Timed OA Simulations", "Behavioral Leadership Stories (STAR format)"],
-      deliverables: ["Take 3 timed OA simulations", "Draft 5 STAR behavioral stories"],
-      suggestedResources: [
-        { name: "HackerRank Interview Prep Kit", url: "https://hackerrank.com" }
-      ]
-    }
-  ]
-};
+
+export const FALLBACK_ONCAMPUS_REPORT = calculatePlacementReadiness(FALLBACK_DEMO_USERS[0], { collegeId: "iit-delhi" });
 
 export const api = {
   ...ecosystemApi,
@@ -657,55 +497,54 @@ export const api = {
       });
       if (res.ok) return await res.json();
     } catch (e) {
-      console.warn("uploadResume fallback:", e);
+      console.warn("uploadResume network error, extracting client-side:", e);
     }
+    
+    // Client-side extraction fallback
+    let resumeText = "";
+    if (formData && typeof formData.get === 'function') {
+      resumeText = formData.get('resumeText') || "";
+    }
+    const extracted = extractSkillsFromTextClient(resumeText);
     return {
       success: true,
-      extractedSkills: ["React.js", "JavaScript", "TypeScript", "Node.js", "SQL", "Git & Version Control"],
-      yearsOfExperience: 2,
-      cgpa: 8.5
+      extractedSkills: extracted.extractedSkills,
+      totalSkillsCount: extracted.totalSkillsCount,
+      metadata: extracted.metadata
     };
   },
 
-  analyzeOnCampus: async (studentProfile, collegeId) => {
+  analyzeOnCampus: async (studentProfile, collegeId = "iit-delhi", targetRole = null) => {
     try {
       const res = await fetch(buildUrl("/developer/analyze-oncampus"), {
         method: "POST",
         headers: getAuthHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ studentProfile, collegeId })
+        body: JSON.stringify({ studentProfile, collegeId, targetRole })
       });
       if (res.ok) return await res.json();
     } catch (e) {
-      console.warn("analyzeOnCampus fallback:", e);
+      console.warn("analyzeOnCampus network error, computing dynamic report locally:", e);
     }
-    return { success: true, report: FALLBACK_ONCAMPUS_REPORT };
+    return {
+      success: true,
+      report: calculatePlacementReadiness(studentProfile, { collegeId, targetType: "on-campus", targetRole })
+    };
   },
 
-  analyzeOffCampus: async (studentProfile) => {
+  analyzeOffCampus: async (studentProfile, targetRole = null) => {
     try {
       const res = await fetch(buildUrl("/developer/analyze-offcampus"), {
         method: "POST",
         headers: getAuthHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ studentProfile })
+        body: JSON.stringify({ studentProfile, targetRole })
       });
       if (res.ok) return await res.json();
     } catch (e) {
-      console.warn("analyzeOffCampus fallback:", e);
+      console.warn("analyzeOffCampus network error, computing dynamic report locally:", e);
     }
     return {
       success: true,
-      report: {
-        marketFitPercentage: 74,
-        marketVerdict: "Competitive in 74% of entry SDE openings",
-        criticalMarketGaps: [
-          { name: "Docker & Containerization", marketDemandFrequency: 82 },
-          { name: "System Design Fundamentals", marketDemandFrequency: 75 }
-        ],
-        companiesToTargetFirst: [
-          { company: "Razorpay", fit: 84, ctc: "₹18 - 26 LPA" },
-          { company: "Zepto", fit: 76, ctc: "₹24 - 34 LPA" }
-        ]
-      }
+      report: calculatePlacementReadiness(studentProfile, { targetType: "off-campus", targetRole })
     };
   },
 
